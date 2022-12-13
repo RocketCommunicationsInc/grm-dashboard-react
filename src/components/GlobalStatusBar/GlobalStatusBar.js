@@ -20,6 +20,16 @@ const GlobalStatusBar = () => {
   const [commsAlerts, setCommsAlerts] = useState(0);
   const [facilitiesStatus, setFacilitiesStatus] = useState('normal');
   const [facilitiesAlerts, setFacilitiesAlerts] = useState(0);
+  const [ucaCount, setUcaCount] = useState(0);
+
+  const timeInterval = setInterval(() => {
+    clearInterval(timeInterval);
+    if (ucaCount >= 100) {
+      setUcaCount(0);
+    } else {
+      setUcaCount(ucaCount + 1);
+    }
+  }, 1000);
 
   return (
     <RuxGlobalStatusBar
@@ -48,7 +58,7 @@ const GlobalStatusBar = () => {
         <RuxMonitoringProgressIcon
           className="status-indicators__indicator"
           label="UCA"
-          progress={50}
+          progress={ucaCount}
         />
         <RuxMonitoringIcon
           className="status-indicators__indicator"
