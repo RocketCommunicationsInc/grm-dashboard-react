@@ -1,0 +1,21 @@
+.status-indicators {
+  white-space: nowrap;
+}
+
+.status-indicators__indicator {
+  width: 108px;
+  margin: 0 auto;
+  padding: 0 10px;
+}
+
+rux-global-status-bar {
+  height: 120px;
+}
+
+rux-global-status-bar::part(container) {
+  padding-top: 20px;
+}
+
+.global-status-menu-icon {
+  cursor: pointer;
+}
