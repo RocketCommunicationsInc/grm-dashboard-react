@@ -12,14 +12,18 @@ import {
 import './GlobalStatusBar.scss';
 
 const GlobalStatusBar = () => {
+  /* eslint-disable no-unused-vars */
+  const [swStatus, setSwStatus] = useState('normal');
+  const [swAlerts, setSwAlerts] = useState(10);
   const [rfStatus, setRfStatus] = useState('normal');
-  const [rfAlerts, setRfAlerts] = useState(0);
+  const [rfAlerts, setRfAlerts] = useState(10);
   const [digitalStatus, setDigitalStatus] = useState('normal');
-  const [digitalAlerts, setDigitalAlerts] = useState(0);
+  const [digitalAlerts, setDigitalAlerts] = useState(10);
   const [commsStatus, setCommsStatus] = useState('normal');
-  const [commsAlerts, setCommsAlerts] = useState(0);
+  const [commsAlerts, setCommsAlerts] = useState(10);
   const [facilitiesStatus, setFacilitiesStatus] = useState('normal');
-  const [facilitiesAlerts, setFacilitiesAlerts] = useState(0);
+  const [facilitiesAlerts, setFacilitiesAlerts] = useState(10);
+  /* eslint-enable no-unused-vars */
   const [ucaCount, setUcaCount] = useState(0);
 
   const timeInterval = setInterval(() => {
@@ -64,6 +68,8 @@ const GlobalStatusBar = () => {
           className="status-indicators__indicator"
           icon="processor"
           label="Software"
+          status={swStatus}
+          notifications={swAlerts}
         />
         <RuxMonitoringIcon
           className="status-indicators__indicator"
