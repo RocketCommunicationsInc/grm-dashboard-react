@@ -1,9 +1,10 @@
 import './App.scss';
+import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 
 function App() {
   return (
     <>
-      <h1>GRM Dashboard</h1>
+      <GlobalStatusBar />
     </>
   );
 }
