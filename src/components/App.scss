@@ -1,7 +1,7 @@
 .Dashboard-grid {
   display: grid;
   height: calc(100vh - 7.5rem);
-  padding: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-6);
   gap: var(--spacing-3);
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 3.75rem 2fr 1fr;
@@ -18,8 +18,6 @@
 
   &__tabs-bar {
     grid-area: tabs-bar;
-    background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px inset;
   }
 
   &__right-top-panel {
