@@ -30,7 +30,7 @@ const App = () => {
         </section>
         <section className='Dashboard-grid__right-bottom-panel'>
           {tab === 'Contacts' ? (
-            <div>Contacts Right Bottom Panel Component Here</div>
+            <ContactsSummaryPanel />
           ) : (
             <div>Equipment Right Bottom Panel Component Here</div>
           )}

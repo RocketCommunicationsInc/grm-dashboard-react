@@ -1,76 +1,86 @@
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Bar } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
   BarElement,
-  Title,
-  Tooltip,
   Legend,
 } from 'chart.js';
-import { Bar } from 'react-chartjs-2';
 
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import './ContactsSummaryPanel.scss';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
 
 const randomIntBetween = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 };
 
-const ContactsSummaryPanel = () => (
-  <>
-    <PanelHeader heading='Contacts Summary' />
-    <div className='ContactsSummaryPanel__chart-wrapper'>
-      <Bar
-        options={{
-          maintainAspectRatio: false,
-          scales: {
-            x: {
-              stacked: true,
+const ContactsSummaryPanel = () => {
+  const hours = new Array(12).fill(new Date().getHours());
+  const labels = hours.map((h, i) => {
+    const hour = h + i > 23 ? h + i - 24 : h + i;
+    return hour + ':00';
+  });
+
+  return (
+    <>
+      <PanelHeader heading='Contacts Summary' />
+      <div className='ContactsSummaryPanel__chart-wrapper'>
+        <Bar
+          plugins={[ChartDataLabels]}
+          options={{
+            maintainAspectRatio: false,
+            plugins: {
+              datalabels: {
+                color: 'white',
+                formatter: (val) => (val > 1 ? val : ''),
+              },
+              legend: { align: 'end' },
             },
-            y: {
-              stacked: true,
+            scales: {
+              x: {
+                grid: { color: '#1c3f5e' },
+                stacked: true,
+                ticks: { color: 'white', padding: 4 },
+              },
+              y: {
+                grid: { color: '#1c3f5e' },
+                stacked: true,
+                ticks: { color: 'white', padding: 8 },
+              },
             },
-          },
-        }}
-        data={{
-          labels,
-          datasets: [
-            {
-              label: 'Dataset 1',
-              data: labels.map(() => randomIntBetween(1, 1000)),
-              backgroundColor: 'rgb(255, 99, 132)',
-            },
-            {
-              label: 'Dataset 2',
-              data: labels.map(() => randomIntBetween(1, 1000)),
-              backgroundColor: 'rgb(75, 192, 192)',
-            },
-            {
-              label: 'Dataset 3',
-              data: labels.map(() => randomIntBetween(1, 1000)),
-              backgroundColor: 'rgb(53, 162, 235)',
-            },
-            {
-              label: 'Dataset 4',
-              data: labels.map(() => randomIntBetween(1, 1000)),
-              backgroundColor: 'rgb(53, 62, 150)',
-            },
-          ],
-        }}
-      />
-    </div>
-  </>
-);
+          }}
+          data={{
+            labels,
+            datasets: [
+              {
+                label: 'In Progress',
+                data: labels.map(() => randomIntBetween(0, 20)),
+                backgroundColor: '#4dacff',
+              },
+              {
+                label: 'Issues',
+                data: labels.map(() => randomIntBetween(0, 20)),
+                backgroundColor: '#00c7cb',
+              },
+              {
+                label: 'Planned',
+                data: labels.map(() => randomIntBetween(0, 20)),
+                backgroundColor: '#a1e9eb',
+              },
+              {
+                label: 'Completed',
+                data: labels.map(() => randomIntBetween(0, 20)),
+                backgroundColor: '#938bdb',
+              },
+            ],
+          }}
+        />
+      </div>
+    </>
+  );
+};
 
 export default ContactsSummaryPanel;
