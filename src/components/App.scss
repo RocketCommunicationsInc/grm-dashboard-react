@@ -4,7 +4,7 @@
   padding: var(--spacing-4) var(--spacing-6);
   gap: var(--spacing-3);
   grid-template-columns: 1fr 2fr;
-  grid-template-rows: 3.75rem 2fr 1fr;
+  grid-template-rows: 3.75rem 50% 1fr;
   grid-template-areas:
     'left-panel tabs-bar'
     'left-panel right-top-panel'
@@ -13,7 +13,7 @@
   &__left-panel {
     grid-area: left-panel;
     background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px inset;
+    box-shadow: var(--container-color-border) 0 0 0 1px;
   }
 
   &__tabs-bar {
@@ -23,12 +23,12 @@
   &__right-top-panel {
     grid-area: right-top-panel;
     background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px inset;
+    box-shadow: var(--container-color-border) 0 0 0 1px;
   }
 
   &__right-bottom-panel {
     grid-area: right-bottom-panel;
     background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px inset;
+    box-shadow: var(--container-color-border) 0 0 0 1px;
   }
 }
