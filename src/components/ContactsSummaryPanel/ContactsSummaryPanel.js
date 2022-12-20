@@ -27,7 +27,7 @@ const ContactsSummaryPanel = () => {
   return (
     <>
       <PanelHeader heading='Contacts Summary' />
-      <div className='ContactsSummaryPanel__chart-wrapper'>
+      <div className='Contacts-summary-panel__chart-wrapper'>
         <Bar
           plugins={[ChartDataLabels]}
           options={{
@@ -35,18 +35,19 @@ const ContactsSummaryPanel = () => {
             plugins: {
               datalabels: {
                 color: 'white',
-                formatter: (val) => (val > 1 ? val : ''),
+                formatter: (val) => (val > 3 ? val : ''),
+                font: { size: 16, weight: 700 },
               },
-              legend: { align: 'end' },
+              legend: { align: 'end', labels: { color: 'white' } },
             },
             scales: {
               x: {
-                grid: { color: '#1c3f5e' },
+                grid: { display: false },
                 stacked: true,
-                ticks: { color: 'white', padding: 4 },
+                ticks: { color: 'white' },
               },
               y: {
-                grid: { color: '#1c3f5e' },
+                grid: { color: '#1c3f5e', drawTicks: false },
                 stacked: true,
                 ticks: { color: 'white', padding: 8 },
               },
@@ -58,22 +59,22 @@ const ContactsSummaryPanel = () => {
               {
                 label: 'In Progress',
                 data: labels.map(() => randomIntBetween(0, 20)),
-                backgroundColor: '#4dacff',
+                backgroundColor: '#938bdb',
               },
               {
                 label: 'Issues',
                 data: labels.map(() => randomIntBetween(0, 20)),
-                backgroundColor: '#00c7cb',
+                backgroundColor: '#4dacff',
               },
               {
                 label: 'Planned',
                 data: labels.map(() => randomIntBetween(0, 20)),
-                backgroundColor: '#a1e9eb',
+                backgroundColor: '#00c7cb',
               },
               {
                 label: 'Completed',
                 data: labels.map(() => randomIntBetween(0, 20)),
-                backgroundColor: '#938bdb',
+                backgroundColor: '#a1e9eb',
               },
             ],
           }}
