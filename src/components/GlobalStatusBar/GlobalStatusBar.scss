@@ -1,26 +1,7 @@
-.status-indicators {
-  white-space: nowrap;
-}
-
-.status-indicators__indicator {
-  width: 108px;
-  margin: 0 auto;
-  padding: 0 10px;
-
-  &:nth-child(2) {
-    border-right: 1px solid var(--clockBorderColor, rgb(40, 63, 88));
-    margin-right: 30px;
+.Global-status-bar {
+  &__status-indicators {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-2);
   }
-}
-
-rux-global-status-bar {
-  height: 120px;
-}
-
-.global-status-menu-icon {
-  cursor: pointer;
-}
-
-rux-monitoring-progress-icon::part(monitoring-label) {
-  margin-top: 0.25rem;
 }

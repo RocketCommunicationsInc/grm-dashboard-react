@@ -37,18 +37,14 @@ const GlobalStatusBar = () => {
 
   return (
     <RuxGlobalStatusBar
-      app-domain="GRM"
-      app-name="Dashboard"
-      username="J. Smith"
+      className='Global-status-bar'
+      app-domain='GRM'
+      app-name='Dashboard'
+      username='J. Smith'
     >
-      <div slot="left-side">
-        <RuxPopUp id="grm-popup-menu" placement="bottom-start">
-          <RuxIcon
-            className="global-status-menu-icon"
-            icon="apps"
-            aria-controls="grm-popup-menu"
-            slot="trigger"
-          />
+      <div slot='left-side'>
+        <RuxPopUp id='grm-popup-menu' placement='bottom-start'>
+          <RuxIcon icon='apps' aria-controls='grm-popup-menu' slot='trigger' />
           <RuxMenuItem>GRM Dashboard</RuxMenuItem>
           <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
           <RuxMenuItem>GRM Schedule</RuxMenuItem>
@@ -58,44 +54,35 @@ const GlobalStatusBar = () => {
         </RuxPopUp>
       </div>
       <RuxClock />
-      <div className="status-indicators" slot="right-side">
-        <RuxMonitoringProgressIcon
-          className="status-indicators__indicator"
-          label="UCA"
-          progress={ucaCount}
-        />
+      <div className='Global-status-bar__status-indicators' slot='right-side'>
+        <RuxMonitoringProgressIcon label='UCA' progress={ucaCount} />
         <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="processor"
-          label="Software"
+          icon='processor'
+          label='Software'
           status={swStatus}
           notifications={swAlerts}
         />
         <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="antenna"
-          label="RF"
+          icon='antenna'
+          label='RF'
           status={rfStatus}
           notifications={rfAlerts}
         />
         <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="processor-alt"
-          label="Digital"
+          icon='processor-alt'
+          label='Digital'
           status={digitalStatus}
           notifications={digitalAlerts}
         />
         <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="antenna-transmit"
-          label="Comms"
+          icon='antenna-transmit'
+          label='Comms'
           status={commsStatus}
           notifications={commsAlerts}
         />
         <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="antenna-receive"
-          label="Facilities"
+          icon='antenna-receive'
+          label='Facilities'
           status={facilitiesStatus}
           notifications={facilitiesAlerts}
         />
