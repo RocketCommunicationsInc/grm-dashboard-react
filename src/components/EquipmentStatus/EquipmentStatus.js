@@ -74,25 +74,26 @@ const EquipmentStatus = () => {
 
   return (
     <>
-      <div className="grid-zone-wrap">
-        <div className="grid-zone__label">Current Equipment Status</div>
-        <div className="grid-zone__content">
-          <div className="parent">
-            <div className="legend">
-              <div className="legendItem">
-                <span className="key-dot idle"></span>Idle
+      <div className='grid-zone-wrap'>
+        <div className='grid-zone__label'>Current Equipment Status</div>
+        <div className='grid-zone__content'>
+          <div className='parent'>
+            <div className='legend'>
+              <div className='legendItem'>
+                <span className='key-dot idle'></span>Idle
               </div>
-              <div className="legendItem">
-                <span className="key-dot busy"></span>Busy
+              <div className='legendItem'>
+                <span className='key-dot busy'></span>Busy
               </div>
-              <div className="legendItem">
-                <span className="key-dot inoperable"></span>Inoperable
+              <div className='legendItem'>
+                <span className='key-dot inoperable'></span>Inoperable
               </div>
             </div>
 
-            <div className="chart-container">
+            <div className='chart-container'>
               <div>
                 <Doughnut
+                  className='doughnut-chart'
                   options={options}
                   plugins={[ChartDataLabels]}
                   data={{
@@ -106,11 +107,12 @@ const EquipmentStatus = () => {
                   }}
                 />
 
-                <p className="chartLabel">RF</p>
+                <p className='chartLabel'>RF</p>
               </div>
 
               <div>
                 <Doughnut
+                  className='doughnut-chart'
                   plugins={[ChartDataLabels]}
                   options={options}
                   data={{
@@ -124,11 +126,12 @@ const EquipmentStatus = () => {
                   }}
                 />
 
-                <p className="chartLabel">Comms</p>
+                <p className='chartLabel'>Comms</p>
               </div>
 
               <div>
                 <Doughnut
+                  className='doughnut-chart'
                   plugins={[ChartDataLabels]}
                   options={options}
                   data={{
@@ -142,11 +145,12 @@ const EquipmentStatus = () => {
                   }}
                 />
 
-                <p className="chartLabel">Digital</p>
+                <p className='chartLabel'>Digital</p>
               </div>
 
               <div>
                 <Doughnut
+                  className='doughnut-chart'
                   plugins={[ChartDataLabels]}
                   options={options}
                   data={{
@@ -160,7 +164,7 @@ const EquipmentStatus = () => {
                   }}
                 />
 
-                <p className="chartLabel">Facilities</p>
+                <p className='chartLabel'>Facilities</p>
               </div>
             </div>
           </div>

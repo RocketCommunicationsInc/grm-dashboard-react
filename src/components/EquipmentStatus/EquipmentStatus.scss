@@ -15,6 +15,7 @@
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-evenly;
+  overflow-y: scroll;
 }
 
 .legend {
@@ -49,7 +50,8 @@
 }
 
 .grid-zone__content {
-  overflow: hidden;
+  height: 20rem;
+  overflow-y: auto;
   display: flex;
   flex-flow: column;
   flex-grow: 1;
@@ -114,18 +116,23 @@ path.slice {
 }
 
 .chart-container {
-  position: relative;
-  height: 40vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: row;
-  flex-flow: nowrap;
+  height: 14.5rem;
+  display: grid;
+  grid-template-columns: repeat(4, 12rem);
+  gap: var(--spacing-3);
+  align-items: center;
   justify-content: space-evenly;
-  padding: 1rem;
+  padding: var(--spacing-0) var(--spacing-4);
 }
 
 .chartLabel {
-  margin-left: 40%;
+  margin-left: 42%;
+}
+
+.doughnut-chart {
+  width: 12.5rem;
+  align-items: center;
+  gap: var(--spacing-6);
 }
 
 .chartTitle {
@@ -175,7 +182,6 @@ path.slice {
   background: #1d2f41;
   border: 1px solid rgba(255, 255, 255, 0.2);
   margin-bottom: 1rem;
-  overflow: hidden;
 }
 
 .grid-zone__content.maintenance-jobs {
