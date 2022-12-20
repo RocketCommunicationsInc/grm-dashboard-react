@@ -2,6 +2,7 @@ import { RuxTab, RuxTabs } from '@astrouxds/react';
 
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import './App.scss';
+import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 
 const App = () => {
   return (
@@ -16,7 +17,9 @@ const App = () => {
           </RuxTabs>
         </nav>
         <section className='Dashboard-grid__right-top-panel'></section>
-        <section className='Dashboard-grid__right-bottom-panel'></section>
+        <section className='Dashboard-grid__right-bottom-panel'>
+          <ContactsSummaryPanel />
+        </section>
       </main>
     </>
   );
