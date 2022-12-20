@@ -113,7 +113,10 @@ path.slice {
   stroke-width: 2px;
 }
 
-.pieCharts {
+.chart-container {
+  position: relative;
+  height: 40vh;
+  width: 100vw;
   display: flex;
   flex-direction: row;
   flex-flow: nowrap;
@@ -121,16 +124,8 @@ path.slice {
   padding: 1rem;
 }
 
-.pieCharts .divider {
-  height: inherit;
-  width: 1px;
-  padding: 1rem;
-}
-.pieCharts .divider:after {
-  border-left: 1px solid rgba(255, 255, 255, 0.25);
-  height: 80%;
-  display: block;
-  content: '';
+.chartLabel {
+  margin-left: 40%;
 }
 
 .chartTitle {
