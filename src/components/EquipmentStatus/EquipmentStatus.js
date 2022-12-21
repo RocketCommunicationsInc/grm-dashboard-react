@@ -92,79 +92,80 @@ const EquipmentStatus = () => {
 
             <div className='chart-container'>
               <div>
-                <Doughnut
-                  className='doughnut-chart'
-                  options={options}
-                  plugins={[ChartDataLabels]}
-                  data={{
-                    datasets: [
-                      {
-                        data: chartData[0],
-                        backgroundColor: backgroundColors,
-                        borderWidth: 0,
-                      },
-                    ],
-                  }}
-                />
-
-                <p className='chartLabel'>RF</p>
+                <div className='doughnut-container'>
+                  <Doughnut
+                    options={options}
+                    plugins={[ChartDataLabels]}
+                    data={{
+                      datasets: [
+                        {
+                          data: chartData[0],
+                          backgroundColor: backgroundColors,
+                          borderWidth: 0,
+                        },
+                      ],
+                    }}
+                  />
+                  <div className='divider'></div>
+                  <p className='rf'>RF</p>
+                </div>
               </div>
 
               <div>
-                <Doughnut
-                  className='doughnut-chart'
-                  plugins={[ChartDataLabels]}
-                  options={options}
-                  data={{
-                    datasets: [
-                      {
-                        data: chartData[1],
-                        backgroundColor: backgroundColors,
-                        borderWidth: 0,
-                      },
-                    ],
-                  }}
-                />
-
-                <p className='chartLabel'>Comms</p>
+                <div className='doughnut-container'>
+                  <Doughnut
+                    plugins={[ChartDataLabels]}
+                    options={options}
+                    data={{
+                      datasets: [
+                        {
+                          data: chartData[1],
+                          backgroundColor: backgroundColors,
+                          borderWidth: 0,
+                        },
+                      ],
+                    }}
+                  />
+                  <div className='divider'></div>
+                  <p className='comms'>Comms</p>
+                </div>
               </div>
-
               <div>
-                <Doughnut
-                  className='doughnut-chart'
-                  plugins={[ChartDataLabels]}
-                  options={options}
-                  data={{
-                    datasets: [
-                      {
-                        data: chartData[2],
-                        backgroundColor: backgroundColors,
-                        borderWidth: 0,
-                      },
-                    ],
-                  }}
-                />
-
-                <p className='chartLabel'>Digital</p>
+                <div className='doughnut-container'>
+                  <Doughnut
+                    plugins={[ChartDataLabels]}
+                    options={options}
+                    data={{
+                      datasets: [
+                        {
+                          data: chartData[2],
+                          backgroundColor: backgroundColors,
+                          borderWidth: 0,
+                        },
+                      ],
+                    }}
+                  />
+                  <div className='divider'></div>
+                  <p className='digital'>Digital</p>
+                </div>
               </div>
-
               <div>
-                <Doughnut
-                  className='doughnut-chart'
-                  plugins={[ChartDataLabels]}
-                  options={options}
-                  data={{
-                    datasets: [
-                      {
-                        data: chartData[3],
-                        backgroundColor: backgroundColors,
-                        borderWidth: 0,
-                      },
-                    ],
-                  }}
-                />
-
-                <p className='chartLabel'>Facilities</p>
+                <div className='doughnut-container'>
+                  <Doughnut
+                    plugins={[ChartDataLabels]}
+                    options={options}
+                    data={{
+                      datasets: [
+                        {
+                          data: chartData[3],
+                          backgroundColor: backgroundColors,
+                          borderWidth: 0,
+                        },
+                      ],
+                    }}
+                  />
+                </div>
+                <p className='facilities'>Facilities</p>
               </div>
             </div>
           </div>

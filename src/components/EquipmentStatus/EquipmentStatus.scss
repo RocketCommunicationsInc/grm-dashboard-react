@@ -15,7 +15,7 @@
   flex-direction: column;
   flex-grow: 1;
   justify-content: space-evenly;
-  overflow-y: scroll;
+  overflow-y: auto;
 }
 
 .legend {
@@ -62,37 +62,6 @@
   flex-direction: row;
   flex-grow: 1;
 }
-.rf {
-  font-size: 24px;
-  margin-left: 190px;
-  margin-right: 40px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.comms {
-  font-size: 24px;
-  margin-left: 300px;
-  margin-right: 40px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.digital {
-  font-size: 24px;
-  margin-left: 270px;
-  margin-right: 45px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-.facilities {
-  font-size: 24px;
-  margin-left: 265px;
-  margin-right: 40px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
 
 .arc text {
   text-anchor: middle;
@@ -116,23 +85,56 @@ path.slice {
 }
 
 .chart-container {
-  height: 14.5rem;
+  height: 20rem;
   display: grid;
-  grid-template-columns: repeat(4, 12rem);
+  grid-template-columns: repeat(4, 13rem);
+  gap: var(--spacing-8);
+  align-items: center;
+  justify-content: space-evenly;
+  padding: var(--spacing-0) var(--spacing-8);
+}
+
+.doughnut-container {
+  display: grid;
+  grid-template-columns: repeat(2, 7rem);
   gap: var(--spacing-3);
   align-items: center;
   justify-content: space-evenly;
-  padding: var(--spacing-0) var(--spacing-4);
+  padding: var(--spacing-0) var(--spacing-5);
 }
 
-.chartLabel {
-  margin-left: 42%;
+.divider {
+  height: 10rem;
+  width: 1px;
+  padding-left: 6.5rem;
 }
 
-.doughnut-chart {
-  width: 12.5rem;
-  align-items: center;
-  gap: var(--spacing-6);
+.rf {
+  margin-left: 80%;
+  font-size: 20px;
+}
+
+.comms {
+  margin-left: 65%;
+  font-size: 20px;
+}
+
+.digital {
+  margin-left: 70%;
+  font-size: 20px;
+}
+
+.facilities {
+  margin-left: 25%;
+  margin-top: 5%;
+  font-size: 20px;
+}
+
+.divider:after {
+  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  height: 100%;
+  display: block;
+  content: '';
 }
 
 .chartTitle {
