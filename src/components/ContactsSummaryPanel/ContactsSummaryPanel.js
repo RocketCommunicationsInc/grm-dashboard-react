@@ -32,6 +32,7 @@ const ContactsSummaryPanel = () => {
           plugins={[ChartDataLabels]}
           options={{
             maintainAspectRatio: false,
+            animation: false,
             plugins: {
               datalabels: {
                 color: 'white',
