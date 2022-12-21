@@ -2,6 +2,11 @@
   &__status-indicators {
     align-items: center;
     display: flex;
-    gap: var(--spacing-2);
+    gap: var(--spacing-4);
+
+    :nth-child(2) {
+      border-right: var(--border-width-xs) solid var(--color-text-secondary);
+      padding-right: var(--spacing-6);
+    }
   }
 }

@@ -1,6 +1,7 @@
 .Dashboard-grid {
   display: grid;
-  height: calc(100vh - 7.5rem);
+  // Screen height minus the height of the Global Status Bar
+  height: calc(100vh - 6rem);
   padding: var(--spacing-4) var(--spacing-6);
   gap: var(--spacing-3);
   grid-template-columns: 1fr 2fr;

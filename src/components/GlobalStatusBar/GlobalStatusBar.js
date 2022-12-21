@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   RuxClock,
   RuxGlobalStatusBar,
   RuxIcon,
+  RuxMenu,
   RuxMenuItem,
   RuxMenuItemDivider,
   RuxMonitoringIcon,
@@ -26,14 +27,17 @@ const GlobalStatusBar = () => {
   /* eslint-enable no-unused-vars */
   const [ucaCount, setUcaCount] = useState(0);
 
-  const timeInterval = setInterval(() => {
-    clearInterval(timeInterval);
-    if (ucaCount >= 100) {
-      setUcaCount(0);
-    } else {
-      setUcaCount(ucaCount + 1);
-    }
-  }, 1000);
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      setUcaCount((prev) => {
+        if (prev >= 100) return 0;
+        return prev + 1;
+      });
+      return () => {
+        clearTimeout(timeInterval);
+      };
+    }, 1000);
+  }, []);
 
   return (
     <RuxGlobalStatusBar
@@ -45,12 +49,14 @@ const GlobalStatusBar = () => {
       <div slot='left-side'>
         <RuxPopUp id='grm-popup-menu' placement='bottom-start'>
           <RuxIcon icon='apps' aria-controls='grm-popup-menu' slot='trigger' />
-          <RuxMenuItem>GRM Dashboard</RuxMenuItem>
-          <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
-          <RuxMenuItem>GRM Schedule</RuxMenuItem>
-          <RuxMenuItemDivider />
-          <RuxMenuItem>Preferences...</RuxMenuItem>
-          <RuxMenuItem>Sign Out...</RuxMenuItem>
+          <RuxMenu>
+            <RuxMenuItem>GRM Dashboard</RuxMenuItem>
+            <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
+            <RuxMenuItem>GRM Schedule</RuxMenuItem>
+            <RuxMenuItemDivider />
+            <RuxMenuItem>Preferences...</RuxMenuItem>
+            <RuxMenuItem>Sign Out...</RuxMenuItem>
+          </RuxMenu>
         </RuxPopUp>
       </div>
       <RuxClock />
