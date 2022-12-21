@@ -16,7 +16,7 @@ const EquipmentStatus = () => {
 
   const [chartData, setChartData] = useState(initialDonutChartData);
 
-  const backgroundColors = ['#4dacff', '#3ed2d6', '#786dd3'];
+  const backgroundColors = ['#3ed2d6', '#4dacff', '#786dd3'];
 
   const options = {
     plugins: {
