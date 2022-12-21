@@ -2,7 +2,6 @@
 
 * {
   box-sizing: border-box;
-  margin: var(--spacing-0);
 }
 
 h2 {
@@ -10,6 +9,7 @@ h2 {
   font-size: var(--font-heading-2-font-size);
   letter-spacing: var(--font-heading-2-letter-spacing);
   line-height: var(--font-heading-2-line-height);
+  margin: var(--spacing-0);
 }
 
 p {
@@ -17,4 +17,5 @@ p {
   font-size: var(--font-body-1-font-size);
   letter-spacing: var(--font-body-1-letter-spacing);
   line-height: var(--font-body-1-line-height);
+  margin: var(--spacing-0);
 }
