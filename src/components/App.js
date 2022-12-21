@@ -3,6 +3,7 @@ import { RuxTab, RuxTabs } from '@astrouxds/react';
 import EquipmentStatus from './EquipmentStatus/EquipmentStatus';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import './App.scss';
+import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 
 const App = () => {
   const [tab, setTab] = useState('Contacts');
@@ -31,7 +32,7 @@ const App = () => {
         </section>
         <section className='Dashboard-grid__right-bottom-panel'>
           {tab === 'Contacts' ? (
-            <div>Contacts Right Bottom Panel Component Here</div>
+            <ContactsSummaryPanel />
           ) : (
             <div>Equipment Right Bottom Panel Component Here</div>
           )}
