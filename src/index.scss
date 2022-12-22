@@ -1,7 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&family=Roboto:wght@200;300;400;500;600;800&display=swap');
+@import '@astrouxds/ag-grid-theme/dist/main.css';
 
 * {
   box-sizing: border-box;
+}
+
+h1 {
+  font-weight: var(--font-heading-1-font-weight);
+  font-size: var(--font-heading-1-font-size);
+  letter-spacing: var(--font-heading-1-letter-spacing);
+  line-height: var(--font-heading-1-line-height);
   margin: var(--spacing-0);
 }
 
@@ -10,6 +18,7 @@ h2 {
   font-size: var(--font-heading-2-font-size);
   letter-spacing: var(--font-heading-2-letter-spacing);
   line-height: var(--font-heading-2-line-height);
+  margin: var(--spacing-0);
 }
 
 p {
@@ -17,4 +26,13 @@ p {
   font-size: var(--font-body-1-font-size);
   letter-spacing: var(--font-body-1-letter-spacing);
   line-height: var(--font-body-1-line-height);
+  margin: var(--spacing-0);
 }
+
+rux-table-header-cell {
+  display: flex;
+  align-items: center;
+}
+
+// rux-table-cell {
+// }

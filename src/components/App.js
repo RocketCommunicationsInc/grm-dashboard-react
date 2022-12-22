@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { RuxTab, RuxTabs } from '@astrouxds/react';
 
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
-import './App.scss';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
+import AlertsPanel from './AlertsPanel/AlertsPanel';
+import './App.scss';
 
 const App = () => {
   const [tab, setTab] = useState('Contacts');
@@ -13,7 +14,7 @@ const App = () => {
       <GlobalStatusBar />
       <main className='Dashboard-grid'>
         <aside className='Dashboard-grid__left-panel'>
-          Alerts Left Panel Component Here
+          <AlertsPanel />
         </aside>
         <nav className='Dashboard-grid__tabs-bar'>
           <RuxTabs small onRuxselected={(e) => setTab(e.detail.innerText)}>
