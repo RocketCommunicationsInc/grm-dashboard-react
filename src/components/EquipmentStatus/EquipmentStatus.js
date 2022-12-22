@@ -16,7 +16,7 @@ const EquipmentStatus = () => {
 
   const [chartData, setChartData] = useState(initialDonutChartData);
 
-  const backgroundColors = ['#3ed2d6', '#4dacff', '#786dd3'];
+  const backgroundColors = ['#00c7cb', '#938bdb', '#4dacff'];
 
   const options = {
     plugins: {
@@ -66,6 +66,7 @@ const EquipmentStatus = () => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
+  // App updates every 30 seconds
   useEffect(() => {
     setInterval(function () {
       updateChart();

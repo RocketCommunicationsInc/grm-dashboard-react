@@ -38,15 +38,15 @@
 }
 
 .busy {
-  background: #4dacff;
+  background: #938bdb;
 }
 
 .idle {
-  background: #3ed2d6;
+  background: #00c7cb;
 }
 
 .inoperable {
-  background: #786dd3;
+  background: #4dacff;
 }
 
 .grid-zone__content {
@@ -88,10 +88,10 @@ path.slice {
   height: 20rem;
   display: grid;
   grid-template-columns: repeat(4, 13rem);
-  gap: var(--spacing-8);
+  gap: var(--spacing-3);
   align-items: center;
   justify-content: space-evenly;
-  padding: var(--spacing-0) var(--spacing-8);
+  padding: var(--spacing-0) var(--spacing-4);
 }
 
 .doughnut-container {
