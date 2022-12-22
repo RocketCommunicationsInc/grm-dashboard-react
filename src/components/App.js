@@ -25,9 +25,7 @@ const App = () => {
           {tab === 'Contacts' ? (
             <div>Contacts Right Top Panel Component Here</div>
           ) : (
-            <div>
-              <EquipmentStatus />
-            </div>
+            <EquipmentStatus />
           )}
         </section>
         <section className='Dashboard-grid__right-bottom-panel'>

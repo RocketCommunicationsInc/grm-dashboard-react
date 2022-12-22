@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import './EquipmentStatus.scss';
+import PanelHeader from '../../common/PanelHeader/PanelHeader';
 
 ChartJS.register(ArcElement);
 
@@ -21,10 +22,7 @@ const EquipmentStatus = () => {
   const options = {
     plugins: {
       datalabels: {
-        color: (ctx) => {
-          if (ctx.dataIndex === 0) return 'black';
-          return 'white';
-        },
+        color: 'white',
         font: {
           size: 14,
           weight: 700,
@@ -76,7 +74,7 @@ const EquipmentStatus = () => {
   return (
     <>
       <div className='grid-zone-wrap'>
-        <div className='grid-zone__label'>Current Equipment Status</div>
+        <PanelHeader heading='Current Equipment Status' />
         <div className='grid-zone__content'>
           <div className='parent'>
             <div className='legend'>
@@ -108,8 +106,8 @@ const EquipmentStatus = () => {
                     }}
                   />
                   <div className='divider'></div>
-                  <p className='rf'>RF</p>
                 </div>
+                <p className='rf'>RF</p>
               </div>
 
               <div>
@@ -128,8 +126,8 @@ const EquipmentStatus = () => {
                     }}
                   />
                   <div className='divider'></div>
-                  <p className='comms'>Comms</p>
                 </div>
+                <p className='comms'>Comms</p>
               </div>
               <div>
                 <div className='doughnut-container'>
@@ -147,8 +145,8 @@ const EquipmentStatus = () => {
                     }}
                   />
                   <div className='divider'></div>
-                  <p className='digital'>Digital</p>
                 </div>
+                <p className='digital'>Digital</p>
               </div>
               <div>
                 <div className='doughnut-container'>
