@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   RuxClock,
   RuxGlobalStatusBar,
   RuxIcon,
+  RuxMenu,
   RuxMenuItem,
   RuxMenuItemDivider,
   RuxMonitoringIcon,
@@ -11,94 +12,93 @@ import {
 } from '@astrouxds/react';
 import './GlobalStatusBar.scss';
 
+const icons = [
+  {
+    id: 1,
+    icon: 'processor',
+    label: 'Software',
+    status: 'normal',
+    notifications: 10,
+  },
+  {
+    id: 2,
+    icon: 'antenna',
+    label: 'RF',
+    status: 'normal',
+    notifications: 10,
+  },
+  {
+    id: 3,
+    icon: 'processor-alt',
+    label: 'Digital',
+    status: 'normal',
+    notifications: 10,
+  },
+  {
+    id: 4,
+    icon: 'antenna-transmit',
+    label: 'Comms',
+    status: 'normal',
+    notifications: 10,
+  },
+  {
+    id: 5,
+    icon: 'antenna-receive',
+    label: 'Facilities',
+    status: 'normal',
+    notifications: 10,
+  },
+];
+
 const GlobalStatusBar = () => {
-  /* eslint-disable no-unused-vars */
-  const [swStatus, setSwStatus] = useState('normal');
-  const [swAlerts, setSwAlerts] = useState(10);
-  const [rfStatus, setRfStatus] = useState('normal');
-  const [rfAlerts, setRfAlerts] = useState(10);
-  const [digitalStatus, setDigitalStatus] = useState('normal');
-  const [digitalAlerts, setDigitalAlerts] = useState(10);
-  const [commsStatus, setCommsStatus] = useState('normal');
-  const [commsAlerts, setCommsAlerts] = useState(10);
-  const [facilitiesStatus, setFacilitiesStatus] = useState('normal');
-  const [facilitiesAlerts, setFacilitiesAlerts] = useState(10);
-  /* eslint-enable no-unused-vars */
   const [ucaCount, setUcaCount] = useState(0);
 
-  const timeInterval = setInterval(() => {
-    clearInterval(timeInterval);
-    if (ucaCount >= 100) {
-      setUcaCount(0);
-    } else {
-      setUcaCount(ucaCount + 1);
-    }
-  }, 1000);
+  useEffect(() => {
+    const timeInterval = setInterval(() => {
+      setUcaCount((prev) => {
+        if (prev >= 100) return 0;
+        return prev + 1;
+      });
+
+      return () => {
+        clearTimeout(timeInterval);
+      };
+    }, 1000);
+  }, []);
 
   return (
     <RuxGlobalStatusBar
-      app-domain="GRM"
-      app-name="Dashboard"
-      username="J. Smith"
+      className='Global-status-bar'
+      app-domain='GRM'
+      app-name='Dashboard'
+      username='J. Smith'
     >
-      <div slot="left-side">
-        <RuxPopUp id="grm-popup-menu" placement="bottom-start">
+      <div slot='left-side'>
+        <RuxPopUp id='grm-popup-menu' placement='bottom-start'>
           <RuxIcon
-            className="global-status-menu-icon"
-            icon="apps"
-            aria-controls="grm-popup-menu"
-            slot="trigger"
+            icon='apps'
+            aria-controls='grm-popup-menu'
+            slot='trigger'
+            size='2rem'
           />
-          <RuxMenuItem>GRM Dashboard</RuxMenuItem>
-          <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
-          <RuxMenuItem>GRM Schedule</RuxMenuItem>
-          <RuxMenuItemDivider />
-          <RuxMenuItem>Preferences...</RuxMenuItem>
-          <RuxMenuItem>Sign Out...</RuxMenuItem>
+          <RuxMenu>
+            <RuxMenuItem>GRM Dashboard</RuxMenuItem>
+            <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
+            <RuxMenuItem>GRM Schedule</RuxMenuItem>
+            <RuxMenuItemDivider />
+            <RuxMenuItem>Preferences...</RuxMenuItem>
+            <RuxMenuItem>Sign Out...</RuxMenuItem>
+          </RuxMenu>
         </RuxPopUp>
       </div>
+
       <RuxClock />
-      <div className="status-indicators" slot="right-side">
-        <RuxMonitoringProgressIcon
-          className="status-indicators__indicator"
-          label="UCA"
-          progress={ucaCount}
-        />
-        <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="processor"
-          label="Software"
-          status={swStatus}
-          notifications={swAlerts}
-        />
-        <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="antenna"
-          label="RF"
-          status={rfStatus}
-          notifications={rfAlerts}
-        />
-        <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="processor-alt"
-          label="Digital"
-          status={digitalStatus}
-          notifications={digitalAlerts}
-        />
-        <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="antenna-transmit"
-          label="Comms"
-          status={commsStatus}
-          notifications={commsAlerts}
-        />
-        <RuxMonitoringIcon
-          className="status-indicators__indicator"
-          icon="antenna-receive"
-          label="Facilities"
-          status={facilitiesStatus}
-          notifications={facilitiesAlerts}
-        />
+
+      <div className='Global-status-bar__status-indicators' slot='right-side'>
+        <RuxMonitoringProgressIcon label='UCA' progress={ucaCount} />
+        {icons.map((icon) => (
+          <RuxMonitoringIcon {...icon} key={icon.id} />
+        ))}
       </div>
     </RuxGlobalStatusBar>
   );
