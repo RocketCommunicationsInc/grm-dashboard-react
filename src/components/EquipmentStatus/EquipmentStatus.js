@@ -66,23 +66,23 @@ const EquipmentStatus = () => {
   return (
     <>
       <PanelHeader heading='Current Equipment Status' />
-      <div className='equipment-status'>
-        <div className='legend'>
-          <div className='legendItem'>
+      <div className='Equipment-status__parent'>
+        <div className='Equipment-status__legend'>
+          <div className='Equipment-status__legendItem'>
             <span className='key-dot idle'></span>Idle
           </div>
-          <div className='legendItem'>
+          <div className='Equipment-status__legendItem'>
             <span className='key-dot busy'></span>Busy
           </div>
-          <div className='legendItem'>
+          <div className='Equipment-status__legendItem'>
             <span className='key-dot inoperable'></span>Inoperable
           </div>
         </div>
-        <div className='chart-container'>
+        <div className='Equipment-status__chart-container'>
           {chartData.map((data, index) => {
             return (
               <>
-                <div key={data} className='Equipment-status-doughnut-wrapper'>
+                <div key={data} className='Equipment-status__doughnut-wrapper'>
                   <Doughnut
                     options={{
                       maintainAspectRatio: false,
@@ -109,11 +109,11 @@ const EquipmentStatus = () => {
                       ],
                     }}
                   />
-                  <p className='chartName'>{names[index]}</p>
+                  <p className='Equipment-status__chartName'>{names[index]}</p>
                 </div>
 
                 {index < chartData.length - 1 ? (
-                  <div className='divider'></div>
+                  <div className='Equipment-status__divider'></div>
                 ) : (
                   ''
                 )}
