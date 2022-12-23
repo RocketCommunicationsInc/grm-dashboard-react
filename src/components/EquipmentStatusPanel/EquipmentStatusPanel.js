@@ -2,7 +2,7 @@ import { Chart as ChartJS, ArcElement } from 'chart.js';
 import React, { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import './EquipmentStatus.scss';
+import './EquipmentStatusPanel.scss';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 
 ChartJS.register(ArcElement);
@@ -58,7 +58,6 @@ const EquipmentStatus = () => {
     }, 30000);
 
     return () => {
-      console.log('Unmounted');
       clearInterval(interval);
     };
   }, [updateChart]);
@@ -82,7 +81,10 @@ const EquipmentStatus = () => {
           {chartData.map((data, index) => {
             return (
               <>
-                <div key={data} className='Equipment-status__doughnut-wrapper'>
+                <div
+                  key={data}
+                  className='Equipment-status__doughnut-container'
+                >
                   <Doughnut
                     options={{
                       maintainAspectRatio: false,
