@@ -18,20 +18,7 @@ const EquipmentStatus = () => {
   const [chartData, setChartData] = useState(initialDonutChartData);
 
   const backgroundColors = ['#00c7cb', '#938bdb', '#4dacff'];
-
-  const options = {
-    plugins: {
-      datalabels: {
-        color: 'white',
-        font: {
-          size: 14,
-          weight: 700,
-          lineHeight: 20,
-        },
-        formatter: (value) => value + '%',
-      },
-    },
-  };
+  const names = ['RF', 'Comms', 'Digital', 'Facilities'];
 
   const updateChart = () => {
     const random = getRandomData();
@@ -66,108 +53,73 @@ const EquipmentStatus = () => {
 
   // App updates every 30 seconds
   useEffect(() => {
-    setInterval(function () {
+    const interval = setInterval(function () {
       updateChart();
     }, 30000);
-  }, []);
+
+    return () => {
+      console.log('Unmounted');
+      clearInterval(interval);
+    };
+  }, [updateChart]);
 
   return (
     <>
-      <div className='grid-zone-wrap'>
-        <PanelHeader heading='Current Equipment Status' />
-        <div className='grid-zone__content'>
-          <div className='parent'>
-            <div className='legend'>
-              <div className='legendItem'>
-                <span className='key-dot idle'></span>Idle
-              </div>
-              <div className='legendItem'>
-                <span className='key-dot busy'></span>Busy
-              </div>
-              <div className='legendItem'>
-                <span className='key-dot inoperable'></span>Inoperable
-              </div>
-            </div>
-
-            <div className='chart-container'>
-              <div>
-                <div className='doughnut-container'>
-                  <Doughnut
-                    options={options}
-                    plugins={[ChartDataLabels]}
-                    data={{
-                      datasets: [
-                        {
-                          data: chartData[0],
-                          backgroundColor: backgroundColors,
-                          borderWidth: 0,
-                        },
-                      ],
-                    }}
-                  />
-                  <div className='divider'></div>
-                </div>
-                <p className='rf'>RF</p>
-              </div>
-
-              <div>
-                <div className='doughnut-container'>
-                  <Doughnut
-                    plugins={[ChartDataLabels]}
-                    options={options}
-                    data={{
-                      datasets: [
-                        {
-                          data: chartData[1],
-                          backgroundColor: backgroundColors,
-                          borderWidth: 0,
-                        },
-                      ],
-                    }}
-                  />
-                  <div className='divider'></div>
-                </div>
-                <p className='comms'>Comms</p>
-              </div>
-              <div>
-                <div className='doughnut-container'>
-                  <Doughnut
-                    plugins={[ChartDataLabels]}
-                    options={options}
-                    data={{
-                      datasets: [
-                        {
-                          data: chartData[2],
-                          backgroundColor: backgroundColors,
-                          borderWidth: 0,
-                        },
-                      ],
-                    }}
-                  />
-                  <div className='divider'></div>
-                </div>
-                <p className='digital'>Digital</p>
-              </div>
-              <div>
-                <div className='doughnut-container'>
-                  <Doughnut
-                    plugins={[ChartDataLabels]}
-                    options={options}
-                    data={{
-                      datasets: [
-                        {
-                          data: chartData[3],
-                          backgroundColor: backgroundColors,
-                          borderWidth: 0,
-                        },
-                      ],
-                    }}
-                  />
-                </div>
-                <p className='facilities'>Facilities</p>
-              </div>
-            </div>
+      <PanelHeader heading='Current Equipment Status' />
+      <div className='equipment-status'>
+        <div className='legend'>
+          <div className='legendItem'>
+            <span className='key-dot idle'></span>Idle
           </div>
+          <div className='legendItem'>
+            <span className='key-dot busy'></span>Busy
+          </div>
+          <div className='legendItem'>
+            <span className='key-dot inoperable'></span>Inoperable
+          </div>
+        </div>
+        <div className='chart-container'>
+          {chartData.map((data, index) => {
+            return (
+              <>
+                <div key={data} className='Equipment-status-doughnut-wrapper'>
+                  <Doughnut
+                    options={{
+                      maintainAspectRatio: false,
+                      plugins: {
+                        datalabels: {
+                          color: 'white',
+                          font: {
+                            size: 14,
+                            weight: 700,
+                            lineHeight: 20,
+                          },
+                          formatter: (value) => value + '%',
+                        },
+                      },
+                    }}
+                    plugins={[ChartDataLabels]}
+                    data={{
+                      datasets: [
+                        {
+                          data: data,
+                          backgroundColor: backgroundColors,
+                          borderWidth: 0,
+                        },
+                      ],
+                    }}
+                  />
+                  <p className='chartName'>{names[index]}</p>
+                </div>
+
+                {index < chartData.length - 1 ? (
+                  <div className='divider'></div>
+                ) : (
+                  ''
+                )}
+              </>
+            );
+          })}
         </div>
       </div>
     </>

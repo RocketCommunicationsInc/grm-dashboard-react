@@ -1,15 +1,30 @@
-.parent {
+.equipment-status {
+  height: calc(100% - 5rem);
+  padding: var(--spacing-4);
+}
+
+.chart-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  justify-content: space-evenly, center;
+}
+
+.Equipment-status-doughnut-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  overflow-y: auto;
+  align-items: center;
+  width: 80%;
+  height: 80%;
 }
 
 .legend {
   font-size: 14px;
   display: flex;
   flex-flow: row nowrap;
-  padding: 1rem 1rem 1rem;
+  justify-content: flex-end;
 }
 
 .legendItem {
@@ -19,9 +34,9 @@
 
 .key-dot {
   display: inline-block;
-  height: 10px;
+  height: 13px;
   margin-right: 0.5em;
-  width: 10px;
+  width: 40px;
 }
 
 .busy {
@@ -36,67 +51,17 @@
   background: #4dacff;
 }
 
-.grid-zone__content {
-  overflow-y: auto;
-  display: flex;
-  flex-flow: column;
+.chartName {
+  margin-top: 1rem;
 }
-
-.chart-container {
-  display: grid;
-  grid-template-columns: repeat(4, 12rem);
-  gap: var(--spacing-3);
-  align-items: center;
-  justify-content: space-evenly;
-  padding: var(--spacing-0) var(--spacing-0);
-}
-
-.doughnut-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-6);
-}
-
 .divider {
   height: 11rem;
   width: 1px;
-  margin-left: 0.5rem;
 }
 
 .divider:after {
-  border-left: 1px solid rgba(255, 255, 255, 0.25);
+  border-left: 1px solid #2b659b;
   height: 100%;
   display: block;
   content: '';
-}
-
-.rf {
-  margin-left: 45%;
-  margin-top: 5%;
-  font-size: 20px;
-}
-
-.comms {
-  margin-left: 35%;
-  margin-top: 5%;
-  font-size: 20px;
-}
-
-.digital {
-  margin-left: 35%;
-  margin-top: 5%;
-  font-size: 20px;
-}
-
-.facilities {
-  margin-left: 30%;
-  margin-top: 5%;
-  font-size: 20px;
-}
-
-.grid-zone-wrap {
-  height: 100%;
-  background: #1d2f41;
-  border: 1px solid rgba(255, 255, 255, 0.2);
 }
