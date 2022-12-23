@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&family=Roboto:wght@200;300;400;500;600;800&display=swap');
-@import '@astrouxds/ag-grid-theme/dist/main.css';
 
 * {
   box-sizing: border-box;
@@ -28,11 +27,3 @@ p {
   line-height: var(--font-body-1-line-height);
   margin: var(--spacing-0);
 }
-
-rux-table-header-cell {
-  display: flex;
-  align-items: center;
-}
-
-// rux-table-cell {
-// }
