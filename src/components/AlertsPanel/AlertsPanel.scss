@@ -17,4 +17,9 @@
     display: flex;
     gap: var(--spacing-4);
   }
+
+  &__table {
+    height: calc(100vh - 200px);
+    overflow: auto;
+  }
 }

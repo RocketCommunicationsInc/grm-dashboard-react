@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { RuxCheckbox, RuxOption, RuxSelect, RuxStatus } from '@astrouxds/react';
 import {
   createColumnHelper,
@@ -8,7 +8,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import data from '../../data/contacts.json';
+import contacts from '../../data/contacts.json';
 import './AlertsPanel.scss';
 
 const severities = [
@@ -50,10 +50,11 @@ const columns = [
 ];
 
 const AlertsPanel = () => {
+  const data = useMemo(() => contacts.slice(0, 100), []);
   const [sorting, setSorting] = useState([]);
 
   const table = useReactTable({
-    data: data.slice(0, 100),
+    data,
     columns,
     state: {
       sorting,
@@ -64,7 +65,7 @@ const AlertsPanel = () => {
   });
 
   return (
-    <>
+    <div className='Alerts-panel'>
       <div className='Alerts-panel__header'>
         <div className='Alerts-panel__alerts'>
           <h1>60</h1>
@@ -85,49 +86,51 @@ const AlertsPanel = () => {
         </div>
       </div>
 
-      <table>
-        <thead>
-          {table.getHeaderGroups().map((headerGroup) => (
-            <tr key={headerGroup.id}>
-              {headerGroup.headers.map((header) => (
-                <th key={header.id}>
-                  {header.isPlaceholder ? null : (
-                    <div
-                      {...{
-                        className: header.column.getCanSort()
-                          ? 'cursor-pointer select-none'
-                          : '',
-                        onClick: header.column.getToggleSortingHandler(),
-                      }}
-                    >
-                      {flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
-                      {{
-                        asc: ' 🔼',
-                        desc: ' 🔽',
-                      }[header.column.getIsSorted()] ?? null}
-                    </div>
-                  )}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </thead>
-        <tbody>
-          {table.getRowModel().rows.map((row) => (
-            <tr key={row.id}>
-              {row.getVisibleCells().map((cell) => (
-                <td key={cell.id}>
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </>
+      <div className='Alerts-panel__table'>
+        <table>
+          <thead>
+            {table.getHeaderGroups().map((headerGroup) => (
+              <tr key={headerGroup.id}>
+                {headerGroup.headers.map((header) => (
+                  <th key={header.id}>
+                    {header.isPlaceholder ? null : (
+                      <div
+                        {...{
+                          className: header.column.getCanSort()
+                            ? 'cursor-pointer select-none'
+                            : '',
+                          onClick: header.column.getToggleSortingHandler(),
+                        }}
+                      >
+                        {flexRender(
+                          header.column.columnDef.header,
+                          header.getContext()
+                        )}
+                        {{
+                          asc: ' 🔼',
+                          desc: ' 🔽',
+                        }[header.column.getIsSorted()] ?? null}
+                      </div>
+                    )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody>
+            {table.getRowModel().rows.map((row) => (
+              <tr key={row.id}>
+                {row.getVisibleCells().map((cell) => (
+                  <td key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 };
 

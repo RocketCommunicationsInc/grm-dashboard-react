@@ -4,6 +4,10 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow: hidden;
+}
+
 h1 {
   font-weight: var(--font-heading-1-font-weight);
   font-size: var(--font-heading-1-font-size);
