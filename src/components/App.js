@@ -4,6 +4,7 @@ import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import AlertsPanel from './AlertsPanel/AlertsPanel';
+import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
 import './App.scss';
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
         </nav>
         <section className='Dashboard-grid__right-top-panel'>
           {tab === 'Contacts' ? (
-            <div>Contacts Right Top Panel Component Here</div>
+            <CurrentContactsPanel />
           ) : (
             <EquipmentStatusPanel />
           )}
