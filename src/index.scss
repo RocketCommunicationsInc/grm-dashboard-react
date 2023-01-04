@@ -4,18 +4,6 @@
   box-sizing: border-box;
 }
 
-body {
-  overflow: hidden;
-}
-
-h1 {
-  font-weight: var(--font-heading-1-font-weight);
-  font-size: var(--font-heading-1-font-size);
-  letter-spacing: var(--font-heading-1-letter-spacing);
-  line-height: var(--font-heading-1-line-height);
-  margin: var(--spacing-0);
-}
-
 h2 {
   font-weight: var(--font-heading-2-font-weight);
   font-size: var(--font-heading-2-font-size);

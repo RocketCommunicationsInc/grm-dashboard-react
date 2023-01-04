@@ -1,0 +1,60 @@
+.Equipment-status {
+  &__parent {
+    height: calc(100% - 3.75rem);
+    padding: var(--spacing-4);
+    position: relative;
+  }
+
+  &__chart-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 100%;
+    gap: var(--spacing-6);
+  }
+
+  &__doughnut-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80%;
+    gap: var(--spacing-4);
+  }
+
+  &__legend {
+    font-size: var(--font-size-sm);
+    display: flex;
+    position: absolute;
+    right: var(--spacing-4);
+    gap: var(--spacing-4);
+  }
+
+  &__legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+  }
+
+  &__divider {
+    height: 60%;
+    width: 1px;
+    border-left: 1px solid var(--color-background-base-selected);
+  }
+
+  &__key-dot {
+    height: 0.75rem;
+    width: 2.5rem;
+  }
+}
+
+#busy {
+  background: var(--color-palette-purple-400);
+}
+
+#idle {
+  background: var(--color-palette-teal-500);
+}
+
+#inoperable {
+  background: var(--color-palette-brightblue-500);
+}
