@@ -84,6 +84,7 @@ const EquipmentStatus = () => {
             <Fragment key={label}>
               <div className='Equipment-status__doughnut-container'>
                 <Doughnut
+                  className='Equipment-status__doughnut-chart'
                   options={{
                     maintainAspectRatio: false,
                     plugins: {
@@ -109,7 +110,7 @@ const EquipmentStatus = () => {
                     ],
                   }}
                 />
-                <p className='Equipment-status__chartName'>{label}</p>
+                <p>{label}</p>
               </div>
 
               {index < chart.length - 1 && (
