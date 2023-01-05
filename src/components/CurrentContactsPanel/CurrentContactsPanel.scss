@@ -27,4 +27,21 @@
     display: flex;
     gap: var(--spacing-4);
   }
+
+  th {
+    text-align: left;
+  }
+
+  td {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .state-step {
+    text-transform: capitalize;
+    &.failed {
+      font-weight: var(--font-control-body-1-bold-font-weight);
+      color: var(--color-status-serious);
+    }
+  }
 }
