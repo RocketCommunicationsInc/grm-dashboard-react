@@ -1,14 +1,8 @@
-import { useMemo, useState } from 'react';
-import { RuxCheckbox, RuxOption, RuxSelect, RuxStatus } from '@astrouxds/react';
-import {
-  createColumnHelper,
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
+import { RuxButton, RuxIcon, RuxOption, RuxSelect } from '@astrouxds/react';
+import { flexRender } from '@tanstack/react-table';
 
-import contacts from '../../data/contacts.json';
+import useAlertsPanel from './useAlertsPanel';
+import AlertsPanelItem from './AlertsPanelItem';
 import './AlertsPanel.scss';
 
 const severities = [
@@ -25,60 +19,31 @@ const categories = [
   { label: 'Spacecraft', value: 'spacecraft' },
 ];
 
-const columnHelper = createColumnHelper();
-
-const columns = [
-  columnHelper.accessor('_id', {
-    header: <RuxCheckbox />,
-    cell: <RuxCheckbox />,
-    enableSorting: false,
-  }),
-  columnHelper.accessor('contactStatus', {
-    header: 'Severity',
-    cell: (info) => <RuxStatus status={info.getValue()} />,
-  }),
-  columnHelper.accessor('contactId', {
-    header: 'Alert ID',
-    enableSorting: true,
-  }),
-  columnHelper.accessor('contactStep', {
-    header: 'Category',
-  }),
-  columnHelper.accessor('contactBeginTimestamp', {
-    header: 'Time',
-  }),
-];
-
 const AlertsPanel = () => {
-  const data = useMemo(() => contacts.slice(0, 100), []);
-  const [sorting, setSorting] = useState([]);
-
-  const table = useReactTable({
-    data,
-    columns,
-    state: {
-      sorting,
-    },
-    onSortingChange: setSorting,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-  });
+  const {
+    getHeaderGroups,
+    handleAction,
+    handleCategory,
+    handleSeverity,
+    isDisabled,
+    rows,
+  } = useAlertsPanel();
 
   return (
     <div className='Alerts-panel'>
       <div className='Alerts-panel__header'>
         <div className='Alerts-panel__alerts'>
-          <h1>60</h1>
+          <h1>{rows.length}</h1>
           <p>Active Alerts</p>
         </div>
 
         <div className='Alerts-panel__selections'>
-          <RuxSelect label='Severity' size='small'>
+          <RuxSelect label='Severity' size='small' onRuxchange={handleSeverity}>
             {severities.map(({ label, value }) => (
               <RuxOption key={label} label={label} value={value} />
             ))}
           </RuxSelect>
-          <RuxSelect label='Category' size='small'>
+          <RuxSelect label='Category' size='small' onRuxchange={handleCategory}>
             {categories.map(({ label, value }) => (
               <RuxOption key={label} label={label} value={value} />
             ))}
@@ -86,49 +51,37 @@ const AlertsPanel = () => {
         </div>
       </div>
 
-      <div className='Alerts-panel__table'>
-        <table>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {header.isPlaceholder ? null : (
-                      <div
-                        {...{
-                          className: header.column.getCanSort()
-                            ? 'cursor-pointer select-none'
-                            : '',
-                          onClick: header.column.getToggleSortingHandler(),
-                        }}
-                      >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                        {{
-                          asc: ' 🔼',
-                          desc: ' 🔽',
-                        }[header.column.getIsSorted()] ?? null}
-                      </div>
-                    )}
-                  </th>
-                ))}
-              </tr>
-            ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      {getHeaderGroups().map(({ headers, id }) => (
+        <div key={id} className='Alerts-panel__heading'>
+          {headers.map(({ id, column, getContext }) => (
+            <div
+              key={id}
+              onClick={column.getToggleSortingHandler()}
+              className={column.getCanSort() ? 'Alerts-panel__sort' : undefined}
+            >
+              <div>{flexRender(column.columnDef.header, getContext())}</div>
+              {{
+                asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
+                desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
+              }[column.getIsSorted()] ?? null}
+            </div>
+          ))}
+        </div>
+      ))}
+
+      <ul className='Alerts-panel__list'>
+        {rows.map((row) => (
+          <AlertsPanelItem key={row.id} row={row} />
+        ))}
+      </ul>
+
+      <div className='Alerts-panel__actions'>
+        <RuxButton disabled={isDisabled} secondary onClick={handleAction}>
+          Dismiss
+        </RuxButton>
+        <RuxButton disabled={isDisabled} onClick={handleAction}>
+          Acknowledge
+        </RuxButton>
       </div>
     </div>
   );
