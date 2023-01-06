@@ -4,7 +4,8 @@
     justify-content: space-between;
     align-items: center;
     padding: var(--spacing-4);
-    background-color: var(--color-background-base-header);
+    padding-top: var(--spacing-0);
+    background-color: var(--color-background-surface-header);
   }
 
   &__group {
@@ -28,17 +29,35 @@
     gap: var(--spacing-4);
   }
 
-  th {
-    text-align: left;
+  &__heading {
+    background-color: var(--color-background-surface-header);
+    border-top: 1px solid var(--color-background-base-default);
+    padding: var(--spacing-2);
+    padding-right: var(--spacing-6);
+    box-shadow: var(--shadow-overlay);
   }
 
-  td {
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  &__heading,
+  li {
+    display: grid;
+    grid-template-columns: 1.25rem 4rem 3rem 2fr repeat(2, 1fr);
+    align-items: center;
+  }
+
+  &__sort {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+  }
+
+  &__list {
+    overflow-y: scroll;
+    height: calc(100vh - 44.4rem);
   }
 
   .state-step {
     text-transform: capitalize;
+
     &.failed {
       font-weight: var(--font-control-body-1-bold-font-weight);
       color: var(--color-status-serious);
