@@ -5,11 +5,14 @@ import '@astrouxds/astro-web-components/dist/astro-web-components/astro-web-comp
 import reportWebVitals from './reportWebVitals';
 import App from './components/App';
 import './index.scss';
+import AppProvider from './providers/AppProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <AppProvider>
+      <App />
+    </AppProvider>
   </React.StrictMode>
 );
 
