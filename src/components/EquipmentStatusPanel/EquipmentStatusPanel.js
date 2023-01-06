@@ -86,7 +86,6 @@ const EquipmentStatus = () => {
                 <Doughnut
                   className='Equipment-status__doughnut-chart'
                   options={{
-                    maintainAspectRatio: false,
                     plugins: {
                       datalabels: {
                         color: 'white',
