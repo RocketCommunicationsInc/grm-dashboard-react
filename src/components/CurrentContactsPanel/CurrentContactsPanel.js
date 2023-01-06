@@ -1,13 +1,13 @@
 import { useMemo, useState } from 'react';
-import { RuxOption, RuxSelect, RuxStatus } from '@astrouxds/react';
+import { RuxIcon, RuxOption, RuxSelect } from '@astrouxds/react';
 import {
-  createColumnHelper,
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
+import columnDefs from './CurrentContactsColumns';
 import contacts from '../../data/contacts.json';
 import './CurrentContactsPanel.scss';
 
@@ -17,60 +17,10 @@ const statuses = [
   { label: 'Failed', value: 'failed' },
 ];
 
-const columnHelper = createColumnHelper();
-
-const columnDefs = [
-  columnHelper.accessor('contactStatus', {
-    header: null,
-    cell: (info) => <RuxStatus status={info.getValue()} />,
-  }),
-  columnHelper.accessor('contactName', {
-    header: 'Name',
-  }),
-  columnHelper.accessor('contactGround', {
-    header: 'GS',
-  }),
-  columnHelper.accessor('contactEquipment', {
-    header: 'Equipment String',
-  }),
-  columnHelper.accessor('contactState', {
-    header: 'Status',
-    cell: (info) => {
-      const state = info.getValue();
-      const step = info.row.original.contactStep;
-      return (
-        <div
-          className={`state-step ${state}`}
-        >{`${state} (Step: ${step})`}</div>
-      );
-    },
-  }),
-  columnHelper.accessor('contactBeginTimestamp', {
-    header: 'AOS - LOS',
-    cell: (info) => {
-      const aos = formatReadableTime(info.getValue());
-      const los = formatReadableTime(info.row.original.contactEndTimestamp);
-      return `${aos} - ${los}`;
-    },
-  }),
-];
-
-function formatReadableTime(timestamp) {
-  // assumes timestamp is a UTC Epoch
-  const time = new Date(timestamp);
-
-  return new Date(time).toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  });
-}
-
 const CurrentContactsPanel = () => {
   const [sorting, setSorting] = useState([]);
 
-  const data = useMemo(() => contacts.slice(0, 4), []);
+  const data = useMemo(() => contacts, []);
   const columns = useMemo(() => columnDefs, []);
   const table = useReactTable({
     data,
@@ -116,48 +66,39 @@ const CurrentContactsPanel = () => {
           </div>
         </div>
 
-        <table>
-          <thead>
-            {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
-                {headerGroup.headers.map((header) => (
-                  <th key={header.id}>
-                    {header.isPlaceholder ? null : (
-                      <div
-                        {...{
-                          className: header.column.getCanSort()
-                            ? 'cursor-pointer select-none'
-                            : '',
-                          onClick: header.column.getToggleSortingHandler(),
-                        }}
-                      >
-                        {flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
-                        {{
-                          asc: ' 🔼',
-                          desc: ' 🔽',
-                        }[header.column.getIsSorted()] ?? null}
-                      </div>
-                    )}
-                  </th>
-                ))}
-              </tr>
+        {table.getHeaderGroups().map(({ headers, id }) => (
+          <div key={id} className='Current-contacts-panel__heading'>
+            {headers.map(({ id, column, getContext }) => (
+              <div
+                key={id}
+                onClick={column.getToggleSortingHandler()}
+                className={
+                  column.getCanSort()
+                    ? 'Current-contacts-panel__sort'
+                    : undefined
+                }
+              >
+                <div>{flexRender(column.columnDef.header, getContext())}</div>
+                {{
+                  asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
+                  desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
+                }[column.getIsSorted()] ?? null}
+              </div>
             ))}
-          </thead>
-          <tbody>
-            {table.getRowModel().rows.map((row) => (
-              <tr key={row.id}>
-                {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id}>
-                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                  </td>
-                ))}
-              </tr>
-            ))}
-          </tbody>
-        </table>
+          </div>
+        ))}
+
+        <ul className='Current-contacts-panel__list'>
+          {table.getRowModel().rows.map(({ id, getVisibleCells }) => (
+            <li key={id}>
+              {getVisibleCells().map(({ id, column, getContext }) => (
+                <div key={id}>
+                  {flexRender(column.columnDef.cell, getContext())}
+                </div>
+              ))}
+            </li>
+          ))}
+        </ul>
       </div>
     </>
   );
