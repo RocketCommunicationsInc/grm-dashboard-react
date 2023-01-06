@@ -1,17 +1,9 @@
-import { useMemo, useState } from 'react';
 import { RuxIcon, RuxOption, RuxSelect } from '@astrouxds/react';
-import {
-  flexRender,
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
+import { flexRender } from '@tanstack/react-table';
 
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
+import useCurrentContactsPanel from './useCurrentContactsPanel';
 import CurrentContactsPanelItem from './CurrentContactsPaneltem';
-
-import columnDefs from './CurrentContactsPanelColumns';
-import contacts from '../../data/contacts.json';
 import './CurrentContactsPanel.scss';
 
 const statuses = [
@@ -21,20 +13,14 @@ const statuses = [
 ];
 
 const CurrentContactsPanel = () => {
-  const [sorting, setSorting] = useState([]);
-
-  const data = useMemo(() => contacts, []);
-  const columns = useMemo(() => columnDefs, []);
-  const table = useReactTable({
-    data,
-    columns,
-    state: {
-      sorting,
-    },
-    onSortingChange: setSorting,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-  });
+  const {
+    getHeaderGroups,
+    handleStatus,
+    numFailed,
+    numExecuting,
+    totalContacts,
+    rows,
+  } = useCurrentContactsPanel();
 
   return (
     <>
@@ -44,24 +30,20 @@ const CurrentContactsPanel = () => {
         <div className='Current-contacts-panel__header'>
           <div className='Current-contacts-panel__group'>
             <div className='Current-contacts-panel__contacts'>
-              <h1>{data.length}</h1>
+              <h1>{totalContacts}</h1>
               <p>Contacts</p>
             </div>
             <div className='Current-contacts-panel__contacts failed'>
-              <h1>
-                {data.filter((row) => row.contactState === 'failed').length}
-              </h1>
+              <h1>{numFailed}</h1>
               <p>Failed</p>
             </div>
             <div className='Current-contacts-panel__contacts'>
-              <h1>
-                {data.filter((row) => row.contactState === 'executing').length}
-              </h1>
+              <h1>{numExecuting}</h1>
               <p>Executing</p>
             </div>
           </div>
           <div className='Current-contacts-panel__selections'>
-            <RuxSelect label='Status' size='small'>
+            <RuxSelect label='Status' size='small' onRuxchange={handleStatus}>
               {statuses.map(({ label, value }) => (
                 <RuxOption key={label} label={label} value={value} />
               ))}
@@ -69,7 +51,7 @@ const CurrentContactsPanel = () => {
           </div>
         </div>
 
-        {table.getHeaderGroups().map(({ headers, id }) => (
+        {getHeaderGroups().map(({ headers, id }) => (
           <div key={id} className='Current-contacts-panel__heading'>
             {headers.map(({ id, column, getContext }) => (
               <div
@@ -92,7 +74,7 @@ const CurrentContactsPanel = () => {
         ))}
 
         <ul className='Current-contacts-panel__list'>
-          {table.getRowModel().rows.map((row) => (
+          {rows.map((row) => (
             <CurrentContactsPanelItem key={row.id} row={row} />
           ))}
         </ul>
