@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import {
   RuxClock,
   RuxGlobalStatusBar,
@@ -12,59 +11,10 @@ import {
 } from '@astrouxds/react';
 import './GlobalStatusBar.scss';
 
-const icons = [
-  {
-    id: 1,
-    icon: 'processor',
-    label: 'Software',
-    status: 'normal',
-    notifications: 10,
-  },
-  {
-    id: 2,
-    icon: 'antenna',
-    label: 'RF',
-    status: 'normal',
-    notifications: 10,
-  },
-  {
-    id: 3,
-    icon: 'processor-alt',
-    label: 'Digital',
-    status: 'normal',
-    notifications: 10,
-  },
-  {
-    id: 4,
-    icon: 'antenna-transmit',
-    label: 'Comms',
-    status: 'normal',
-    notifications: 10,
-  },
-  {
-    id: 5,
-    icon: 'antenna-receive',
-    label: 'Facilities',
-    status: 'normal',
-    notifications: 10,
-  },
-];
+import { useAppContext } from '../../providers/AppProvider';
 
 const GlobalStatusBar = () => {
-  const [ucaCount, setUcaCount] = useState(0);
-
-  useEffect(() => {
-    const timeInterval = setInterval(() => {
-      setUcaCount((prev) => {
-        if (prev >= 100) return 0;
-        return prev + 1;
-      });
-
-      return () => {
-        clearTimeout(timeInterval);
-      };
-    }, 1000);
-  }, []);
+  const { state } = useAppContext();
 
   return (
     <RuxGlobalStatusBar
@@ -95,9 +45,12 @@ const GlobalStatusBar = () => {
       <RuxClock />
 
       <div className='Global-status-bar__status-indicators' slot='right-side'>
-        <RuxMonitoringProgressIcon label='UCA' progress={ucaCount} />
-        {icons.map((icon) => (
-          <RuxMonitoringIcon {...icon} key={icon.id} />
+        <RuxMonitoringProgressIcon label='UCA' progress={state.ucaCount} />
+        {Object.keys(state.statusIcons).map((key, i) => (
+          <RuxMonitoringIcon
+            {...state.statusIcons[key]}
+            key={state.statusIcons[key].label}
+          />
         ))}
       </div>
     </RuxGlobalStatusBar>
