@@ -55,6 +55,11 @@
     height: calc(100vh - 44.4rem);
   }
 
+  &__details {
+    background-color: var(--color-background-base-default);
+    padding: var(--spacing-4);
+  }
+
   .state-step {
     text-transform: capitalize;
 

@@ -6,7 +6,10 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
+import CurrentContactsPanelItem from './CurrentContactsPaneltem';
+
 import columnDefs from './CurrentContactsPanelColumns';
 import contacts from '../../data/contacts.json';
 import './CurrentContactsPanel.scss';
@@ -89,14 +92,8 @@ const CurrentContactsPanel = () => {
         ))}
 
         <ul className='Current-contacts-panel__list'>
-          {table.getRowModel().rows.map(({ id, getVisibleCells }) => (
-            <li key={id}>
-              {getVisibleCells().map(({ id, column, getContext }) => (
-                <div key={id}>
-                  {flexRender(column.columnDef.cell, getContext())}
-                </div>
-              ))}
-            </li>
+          {table.getRowModel().rows.map((row) => (
+            <CurrentContactsPanelItem key={row.id} row={row} />
           ))}
         </ul>
       </div>
