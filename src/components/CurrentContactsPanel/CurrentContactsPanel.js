@@ -7,7 +7,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
-import columnDefs from './CurrentContactsColumns';
+import columnDefs from './CurrentContactsPanelColumns';
 import contacts from '../../data/contacts.json';
 import './CurrentContactsPanel.scss';
 
