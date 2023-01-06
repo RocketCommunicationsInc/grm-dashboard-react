@@ -1,7 +1,14 @@
 import { Fragment } from 'react';
+import { RuxOption, RuxSelect } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
 import { useDisclosure } from '../../hooks/useDisclosure';
+
+const modes = [
+  { label: 'Manual', value: 'manual' },
+  { label: 'Semi-Automated', value: 'semi' },
+  { label: 'Fully Automated', value: 'fully' },
+];
 
 const CurrentContactsPanelItem = ({ row }) => {
   const { getDisclosureProps, getButtonProps } = useDisclosure();
@@ -17,7 +24,16 @@ const CurrentContactsPanelItem = ({ row }) => {
         className='Current-contacts-panel__details'
         {...getDisclosureProps()}
       >
-        {row.original.contactDetail}
+        <div className='Current-contacts-panel__details--wrapper'>
+          <div>{row.original.contactDetail}</div>
+          <div className='Current-contacts-panel__details--selection'>
+            <RuxSelect label='Command Mode' size='small'>
+              {modes.map(({ label, value }) => (
+                <RuxOption key={label} label={label} value={value} />
+              ))}
+            </RuxSelect>
+          </div>
+        </div>
       </div>
     </Fragment>
   );

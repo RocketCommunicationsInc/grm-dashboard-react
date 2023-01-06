@@ -58,6 +58,18 @@
   &__details {
     background-color: var(--color-background-base-default);
     padding: var(--spacing-4);
+
+    &--wrapper {
+      align-items: flex-start;
+      display: grid;
+      grid-template-columns: 4fr 1fr;
+    }
+
+    &--selection {
+      align-items: flex-start;
+      display: flex;
+      flex-direction: column;
+    }
   }
 
   .state-step {
