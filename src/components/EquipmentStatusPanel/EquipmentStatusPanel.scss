@@ -1,7 +1,7 @@
 .Equipment-status {
   &__parent {
     height: calc(100% - 3.75rem);
-    padding: var(--spacing-4);
+    padding: var(--spacing-6);
     position: relative;
   }
 
@@ -10,22 +10,24 @@
     align-items: center;
     justify-content: space-evenly;
     height: 100%;
-    gap: var(--spacing-6);
+    gap: var(--spacing-2);
   }
 
   &__doughnut-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 80%;
-    gap: var(--spacing-4);
+    justify-content: center;
+    height: 75%;
+    width: 20%;
+    gap: var(--spacing-2);
   }
 
   &__legend {
     font-size: var(--font-size-sm);
     display: flex;
     position: absolute;
-    right: var(--spacing-4);
+    right: var(--spacing-6);
     gap: var(--spacing-4);
   }
 
