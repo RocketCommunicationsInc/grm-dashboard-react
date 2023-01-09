@@ -1,4 +1,3 @@
-import { Fragment } from 'react';
 import { RuxOption, RuxSelect } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
@@ -14,12 +13,12 @@ const CurrentContactsPanelItem = ({ row }) => {
   const { getDisclosureProps, getButtonProps } = useDisclosure();
 
   return (
-    <Fragment key={row.id}>
-      <li {...getButtonProps()}>
+    <li {...getButtonProps()}>
+      <div className='Current-contacts-panel__item'>
         {row.getVisibleCells().map(({ id, column, getContext }) => (
           <div key={id}>{flexRender(column.columnDef.cell, getContext())}</div>
         ))}
-      </li>
+      </div>
       <div
         className='Current-contacts-panel__details'
         {...getDisclosureProps()}
@@ -35,7 +34,7 @@ const CurrentContactsPanelItem = ({ row }) => {
           </div>
         </div>
       </div>
-    </Fragment>
+    </li>
   );
 };
 
