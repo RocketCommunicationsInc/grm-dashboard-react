@@ -35,9 +35,9 @@ const columnDefs = [
       const state = info.getValue();
       const step = info.row.original.contactStep;
       return (
-        <div
-          className={`state-step ${state}`}
-        >{`${state} (Step: ${step})`}</div>
+        <div className={`state-step ${state}`}>
+          {`${state} (Step: ${step})`}
+        </div>
       );
     },
   }),

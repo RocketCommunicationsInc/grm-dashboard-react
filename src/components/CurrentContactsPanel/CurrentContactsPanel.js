@@ -63,7 +63,7 @@ const CurrentContactsPanel = () => {
                     : undefined
                 }
               >
-                <div>{flexRender(column.columnDef.header, getContext())}</div>
+                {flexRender(column.columnDef.header, getContext())}
                 {{
                   asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
                   desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
