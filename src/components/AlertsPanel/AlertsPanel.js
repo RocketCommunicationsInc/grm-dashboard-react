@@ -69,20 +69,26 @@ const AlertsPanel = () => {
         </div>
       ))}
 
-      <ul className='Alerts-panel__list'>
-        {rows.map((row) => (
-          <AlertsPanelItem key={row.id} row={row} />
-        ))}
-      </ul>
+      {rows.length > 0 ? (
+        <>
+          <ul className='Alerts-panel__list'>
+            {rows.map((row) => (
+              <AlertsPanelItem key={row.id} row={row} />
+            ))}
+          </ul>
 
-      <div className='Alerts-panel__actions'>
-        <RuxButton disabled={isDisabled} secondary onClick={handleAction}>
-          Dismiss
-        </RuxButton>
-        <RuxButton disabled={isDisabled} onClick={handleAction}>
-          Acknowledge
-        </RuxButton>
-      </div>
+          <div className='Alerts-panel__actions'>
+            <RuxButton disabled={isDisabled} secondary onClick={handleAction}>
+              Dismiss
+            </RuxButton>
+            <RuxButton disabled={isDisabled} onClick={handleAction}>
+              Acknowledge
+            </RuxButton>
+          </div>
+        </>
+      ) : (
+        <h2 className='Alerts-panel__no-alerts'>No alerts at this time.</h2>
+      )}
     </div>
   );
 };
