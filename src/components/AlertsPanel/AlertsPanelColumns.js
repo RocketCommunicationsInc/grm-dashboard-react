@@ -4,7 +4,7 @@ import { createColumnHelper } from '@tanstack/react-table';
 const columnHelper = createColumnHelper();
 
 const columnDefs = [
-  columnHelper.accessor('_id', {
+  columnHelper.accessor('errorId', {
     enableSorting: false,
     header: ({ table }) => (
       <RuxCheckbox
@@ -23,7 +23,7 @@ const columnDefs = [
       />
     ),
   }),
-  columnHelper.accessor('contactStatus', {
+  columnHelper.accessor('errorSeverity', {
     header: null,
     cell: (info) => (
       <div className='Alerts-panel__status'>
@@ -31,14 +31,17 @@ const columnDefs = [
       </div>
     ),
   }),
-  columnHelper.accessor('contactId', {
-    header: 'Alert ID',
+  columnHelper.accessor('errorMessage', {
+    header: 'Message',
+    cell: (info) => <div className='text'>{info.getValue()}</div>,
   }),
-  columnHelper.accessor('contactStep', {
+  columnHelper.accessor('errorCategory', {
     header: 'Category',
+    cell: (info) => <div className='text'>{info.getValue()}</div>,
   }),
-  columnHelper.accessor('contactBeginTimestamp', {
+  columnHelper.accessor('errorTime', {
     header: 'Time',
+    cell: (info) => <div className='text'>{info.getValue()}</div>,
   }),
 ];
 
