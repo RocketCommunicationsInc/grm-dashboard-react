@@ -1,4 +1,5 @@
 import { flexRender } from '@tanstack/react-table';
+import { Fragment } from 'react';
 
 import { useDisclosure } from '../../hooks/useDisclosure';
 
@@ -9,11 +10,13 @@ const AlertsPanelItem = ({ row }) => {
     <li {...getButtonProps()}>
       <div className='Alerts-panel__item'>
         {row.getVisibleCells().map(({ id, column, getContext }) => (
-          <div key={id}>{flexRender(column.columnDef.cell, getContext())}</div>
+          <Fragment key={id}>
+            {flexRender(column.columnDef.cell, getContext())}
+          </Fragment>
         ))}
       </div>
       <div className='Alerts-panel__details' {...getDisclosureProps()}>
-        {row.original.contactDetail}
+        {row.original.longMessage}
       </div>
     </li>
   );
