@@ -10,7 +10,7 @@ import contacts from '../../data/contacts.json';
 import columnDefs from './AlertsPanelColumns';
 
 const useAlertsPanel = () => {
-  const data = useMemo(() => contacts, []);
+  const data = useMemo(() => contacts.flatMap(({ alerts }) => alerts), []);
   const columns = useMemo(() => columnDefs, []);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
@@ -31,13 +31,13 @@ const useAlertsPanel = () => {
   });
 
   const handleSeverity = (e) => {
-    const severity = getColumn('contactStatus');
+    const severity = getColumn('errorSeverity');
     if (e.target.value === 'all') return severity.setFilterValue('');
     severity.setFilterValue(e.target.value);
   };
 
   const handleCategory = (e) => {
-    const category = getColumn('contactStep');
+    const category = getColumn('errorCategory');
     if (e.target.value === 'all') return category.setFilterValue('');
     category.setFilterValue(e.target.value);
   };
