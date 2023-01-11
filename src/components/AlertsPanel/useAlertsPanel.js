@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useReducer, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
   getCoreRowModel,
   getFilteredRowModel,
@@ -7,19 +7,19 @@ import {
 } from '@tanstack/react-table';
 
 import columnDefs from './AlertsPanelColumns';
-import { initialState } from '../../providers/AppInitialState';
-import { AppReducer } from '../../providers/AppReducer';
-import { timeoutRepeater } from '../../util/util';
-import { getRandomAlert } from '../../data/data';
+import { useAppContext } from '../../providers/AppProvider';
 
 const useAlertsPanel = () => {
+  // paul: this is the simplest way to get state and dispatch
+  const { state, dispatch } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [rowSelection, setRowSelection] = useState({});
   const selectedRows = Object.keys(rowSelection);
   const isDisabled = selectedRows.length === 0;
-  const [state, dispatch] = useReducer(AppReducer, initialState);
+
+  console.log(state.alerts);
 
   const { getColumn, getHeaderGroups, getRowModel } = useReactTable({
     data: state.alerts,
@@ -32,6 +32,8 @@ const useAlertsPanel = () => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
+  // paul: these rows are filtered/sorted ...etc
+  const rows = getRowModel().rows;
 
   const handleSeverity = (e) => {
     const severity = getColumn('errorSeverity');
@@ -46,19 +48,14 @@ const useAlertsPanel = () => {
   };
 
   const handleAction = () => {
+    // paul: the selectedRows is an array of the seleted row indexes
+    const payload = selectedRows.map((rowIndex) => {
+      return rows[rowIndex].original;
+    });
     // brian: i need to send an array of selected alerts as payload
     // but selectedRows is an array of ids. there is also filtering to take in consideration
-    console.log(selectedRows);
-    // dispatch({ type: 'DELETE_ALERTS', payload });
+    dispatch({ type: 'DELETE_ALERTS', payload });
   };
-
-  useEffect(() => {
-    // brian: getRandomAlert seems to be memoized because it's always the same payload
-    const payload = getRandomAlert();
-    return timeoutRepeater(() => {
-      dispatch({ type: 'ADD_ALERT', payload });
-    });
-  }, []);
 
   return {
     getHeaderGroups,
@@ -66,7 +63,7 @@ const useAlertsPanel = () => {
     handleCategory,
     handleSeverity,
     isDisabled,
-    rows: getRowModel().rows,
+    rows,
   };
 };
 

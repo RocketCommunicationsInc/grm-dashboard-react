@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 
 import { AppReducer } from './AppReducer';
 import { initialState } from './AppInitialState';
-import { randInt } from '../util/util';
+import { randInt, timeoutRepeater } from '../util/util';
 
 const AppContext = createContext({});
 
@@ -64,6 +64,12 @@ const AppProvider = ({ children }) => {
       state.statusIcons.facilities.notifications
     );
   }, [state.statusIcons.facilities.notifications]);
+  // paul: i think since we want this to fire on app load I would keep with the rest
+  useEffect(() => {
+    return timeoutRepeater(() => {
+      dispatch({ type: 'ADD_ALERT' });
+    });
+  }, []);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

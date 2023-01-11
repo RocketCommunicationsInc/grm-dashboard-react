@@ -1,3 +1,5 @@
+import { getRandomAlert } from '../data/data';
+
 export const AppReducer = (state, { type, payload }) => {
   switch (type) {
     case 'UPDATE_UCA': {
@@ -52,7 +54,9 @@ export const AppReducer = (state, { type, payload }) => {
         },
       };
     }
-    case 'DELETE_ALERT': {
+    case 'DELETE_ALERTS': {
+      // paul: payload is now an array of seleted rows
+      console.log(payload);
       let index = -1;
       for (let i = 0; i < state.alerts.length; i++) {
         if (state.alerts[i].errorId === payload.errorId) {
@@ -73,7 +77,7 @@ export const AppReducer = (state, { type, payload }) => {
     case 'ADD_ALERT': {
       return {
         ...state,
-        alerts: [...state.alerts, payload],
+        alerts: [...state.alerts, getRandomAlert()],
       };
     }
     default: {
