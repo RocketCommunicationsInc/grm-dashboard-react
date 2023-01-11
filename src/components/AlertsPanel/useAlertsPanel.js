@@ -44,9 +44,13 @@ const useAlertsPanel = () => {
   };
 
   const handleAction = () => {
-    const payload = rows.map((row) => {
-      return row.original.errorId;
+    const payload = Object.keys(rowSelection).map((selectedIndex) => {
+      return rows.find((row) => {
+        // eslint-disable-next-line eqeqeq
+        return row.index == selectedIndex;
+      }).original.errorId;
     });
+
     dispatch({ type: 'DELETE_ALERTS', payload });
     setRowSelection({});
   };
