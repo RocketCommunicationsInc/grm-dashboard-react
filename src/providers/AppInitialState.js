@@ -34,4 +34,6 @@ export const initialState = {
       notifications: randInt(0, 3),
     },
   },
+  contacts: [],
+  alerts: [],
 };

@@ -52,6 +52,30 @@ export const AppReducer = (state, { type, payload }) => {
         },
       };
     }
+    case 'DELETE_ALERT': {
+      let index = -1;
+      for (let i = 0; i < state.alerts.length; i++) {
+        if (state.alerts[i].errorId === payload.errorId) {
+          index = i;
+          break;
+        }
+      }
+
+      if (index > -1) {
+        state.alerts.splice(index, 1);
+      }
+
+      return {
+        ...state,
+        alerts: [...state.alerts],
+      };
+    }
+    case 'ADD_ALERT': {
+      return {
+        ...state,
+        alerts: [...state.alerts, payload],
+      };
+    }
     default: {
       throw new Error(`Unknown type: ${type}`);
     }
