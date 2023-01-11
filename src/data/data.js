@@ -7,8 +7,8 @@ const alertBlueprints = contacts.reduce((alerts, contact) => {
 }, []);
 
 export function getRandomAlert() {
-  console.log('called');
-  let alert = alertBlueprints[randInt(0, alertBlueprints.length)];
-  alert.id = lastAlertId++;
+  let bp = alertBlueprints[randInt(0, alertBlueprints.length - 1)];
+  const alert = Object.assign({}, bp);
+  alert.errorId = lastAlertId++;
   return alert;
 }

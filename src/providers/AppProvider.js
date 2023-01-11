@@ -12,22 +12,6 @@ export const useAppContext = () => useContext(AppContext);
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
-  function statusDispatcher(type, incrementee) {
-    let timeout;
-    function update() {
-      timeout = setTimeout(() => {
-        dispatch({ type, payload: incrementee + 1 });
-        update();
-      }, randInt(1000, 10000));
-    }
-    if (!timeout) {
-      update();
-    }
-    return () => {
-      clearTimeout(timeout);
-    };
-  }
-
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch({ type: 'UPDATE_UCA' });
@@ -39,38 +23,52 @@ const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    return statusDispatcher(
-      'UPDATE_SOFTWARE',
-      state.statusIcons.software.notifications
-    );
+    return timeoutRepeater(() => {
+      dispatch({
+        type: 'UPDATE_SOFTWARE',
+        payload: state.statusIcons.software.notifications + 1,
+      });
+    });
   }, [state.statusIcons.software.notifications]);
   useEffect(() => {
-    return statusDispatcher('UPDATE_RF', state.statusIcons.rf.notifications);
+    return timeoutRepeater(() => {
+      dispatch({
+        type: 'UPDATE_RF',
+        payload: state.statusIcons.rf.notifications + 1,
+      });
+    });
   }, [state.statusIcons.rf.notifications]);
   useEffect(() => {
-    return statusDispatcher(
-      'UPDATE_DIGITAL',
-      state.statusIcons.digital.notifications
-    );
+    return timeoutRepeater(() => {
+      dispatch({
+        type: 'UPDATE_DIGITAL',
+        payload: state.statusIcons.digital.notifications + 1,
+      });
+    });
   }, [state.statusIcons.digital.notifications]);
   useEffect(() => {
-    return statusDispatcher(
-      'UPDATE_COMMS',
-      state.statusIcons.comms.notifications
-    );
+    return timeoutRepeater(() => {
+      dispatch({
+        type: 'UPDATE_COMMS',
+        payload: state.statusIcons.comms.notifications + 1,
+      });
+    });
   }, [state.statusIcons.comms.notifications]);
   useEffect(() => {
-    return statusDispatcher(
-      'UPDATE_FACILITIES',
-      state.statusIcons.facilities.notifications
-    );
+    return timeoutRepeater(() => {
+      dispatch({
+        type: 'UPDATE_FACILITIES',
+        payload: state.statusIcons.facilities.notifications + 1,
+      });
+    });
   }, [state.statusIcons.facilities.notifications]);
-  // paul: i think since we want this to fire on app load I would keep with the rest
   useEffect(() => {
     return timeoutRepeater(() => {
-      dispatch({ type: 'ADD_ALERT', payload: getRandomAlert() });
+      if (state.alerts.length < 20) {
+        dispatch({ type: 'ADD_ALERT', payload: getRandomAlert() });
+      }
     });
-  }, []);
+  }, [state.alerts.length]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>

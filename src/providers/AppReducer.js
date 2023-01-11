@@ -53,23 +53,13 @@ export const AppReducer = (state, { type, payload }) => {
       };
     }
     case 'DELETE_ALERTS': {
-      // paul: payload is now an array of seleted rows
-      console.log(payload);
-      let index = -1;
-      for (let i = 0; i < state.alerts.length; i++) {
-        if (state.alerts[i].errorId === payload.errorId) {
-          index = i;
-          break;
-        }
-      }
-
-      if (index > -1) {
-        state.alerts.splice(index, 1);
-      }
+      const alerts = state.alerts.filter(
+        (alert) => !payload.includes(alert.errorId)
+      );
 
       return {
         ...state,
-        alerts: [...state.alerts],
+        alerts,
       };
     }
     case 'ADD_ALERT': {

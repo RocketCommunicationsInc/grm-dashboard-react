@@ -10,7 +10,6 @@ import columnDefs from './AlertsPanelColumns';
 import { useAppContext } from '../../providers/AppProvider';
 
 const useAlertsPanel = () => {
-  // paul: this is the simplest way to get state and dispatch
   const { state, dispatch } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
   const [sorting, setSorting] = useState([]);
@@ -30,7 +29,6 @@ const useAlertsPanel = () => {
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
   });
-  // paul: these rows are filtered/sorted ...etc
   const rows = getRowModel().rows;
 
   const handleSeverity = (e) => {
@@ -46,13 +44,11 @@ const useAlertsPanel = () => {
   };
 
   const handleAction = () => {
-    // paul: the selectedRows is an array of the seleted row indexes
-    const payload = selectedRows.map((rowIndex) => {
-      return rows[rowIndex].original;
+    const payload = rows.map((row) => {
+      return row.original.errorId;
     });
-    // brian: i need to send an array of selected alerts as payload
-    // but selectedRows is an array of ids. there is also filtering to take in consideration
     dispatch({ type: 'DELETE_ALERTS', payload });
+    setRowSelection({});
   };
 
   return {
