@@ -19,8 +19,6 @@ const useAlertsPanel = () => {
   const selectedRows = Object.keys(rowSelection);
   const isDisabled = selectedRows.length === 0;
 
-  console.log(state.alerts);
-
   const { getColumn, getHeaderGroups, getRowModel } = useReactTable({
     data: state.alerts,
     columns,
