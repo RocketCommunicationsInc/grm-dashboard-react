@@ -14,9 +14,7 @@ const columnDefs = [
       />
     ),
     cell: ({ row }) => (
-      // using rux-checkbox here causes an overflow on the body
-      <input
-        type='checkbox'
+      <RuxCheckbox
         checked={row.getIsSelected()}
         onChange={row.getToggleSelectedHandler()}
         onClick={(e) => e.stopPropagation()}
