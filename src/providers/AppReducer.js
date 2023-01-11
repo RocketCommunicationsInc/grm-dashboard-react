@@ -1,5 +1,3 @@
-import { getRandomAlert } from '../data/data';
-
 export const AppReducer = (state, { type, payload }) => {
   switch (type) {
     case 'UPDATE_UCA': {
@@ -77,7 +75,7 @@ export const AppReducer = (state, { type, payload }) => {
     case 'ADD_ALERT': {
       return {
         ...state,
-        alerts: [...state.alerts, getRandomAlert()],
+        alerts: [...state.alerts, payload],
       };
     }
     default: {

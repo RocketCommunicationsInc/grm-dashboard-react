@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 import { AppReducer } from './AppReducer';
 import { initialState } from './AppInitialState';
 import { randInt, timeoutRepeater } from '../util/util';
+import { getRandomAlert } from '../data/data';
 
 const AppContext = createContext({});
 
@@ -67,7 +68,7 @@ const AppProvider = ({ children }) => {
   // paul: i think since we want this to fire on app load I would keep with the rest
   useEffect(() => {
     return timeoutRepeater(() => {
-      dispatch({ type: 'ADD_ALERT' });
+      dispatch({ type: 'ADD_ALERT', payload: getRandomAlert() });
     });
   }, []);
 
