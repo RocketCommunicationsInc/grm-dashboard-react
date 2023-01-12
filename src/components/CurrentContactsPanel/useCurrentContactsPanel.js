@@ -6,17 +6,17 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import contacts from '../../data/contacts.json';
 import columnDefs from './CurrentContactsPanelColumns';
+import { useAppContext } from '../../providers/AppProvider';
 
 const useCurrentContactsPanel = () => {
-  const data = useMemo(() => contacts, []);
+  const { state } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
 
   const { getColumn, getHeaderGroups, getRowModel } = useReactTable({
-    data,
+    data: state.contacts,
     columns,
     state: { columnFilters, sorting },
     onSortingChange: setSorting,
@@ -35,11 +35,13 @@ const useCurrentContactsPanel = () => {
   return {
     getHeaderGroups,
     handleStatus,
-    numFailed: data.filter((contact) => contact.contactState === 'failed')
-      .length,
-    numExecuting: data.filter((contact) => contact.contactState === 'executing')
-      .length,
-    totalContacts: data.length,
+    numFailed: state.contacts.filter(
+      (contact) => contact.contactState === 'failed'
+    ).length,
+    numExecuting: state.contacts.filter(
+      (contact) => contact.contactState === 'executing'
+    ).length,
+    totalContacts: state.contacts.length,
     rows: getRowModel().rows,
   };
 };

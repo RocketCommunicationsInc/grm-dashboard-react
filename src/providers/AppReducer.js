@@ -68,6 +68,12 @@ export const AppReducer = (state, { type, payload }) => {
         alerts: [...state.alerts, payload],
       };
     }
+    case 'ADD_CONTACT': {
+      return {
+        ...state,
+        contacts: [...state.contacts, payload],
+      };
+    }
     default: {
       throw new Error(`Unknown type: ${type}`);
     }

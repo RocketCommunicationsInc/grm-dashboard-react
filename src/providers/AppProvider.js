@@ -2,8 +2,8 @@ import { createContext, useContext, useEffect, useReducer } from 'react';
 
 import { AppReducer } from './AppReducer';
 import { initialState } from './AppInitialState';
-import { randInt, timeoutRepeater } from '../util/util';
-import { getRandomAlert } from '../data/data';
+import { timeoutRepeater } from '../util/util';
+import { getRandomAlert, getRandomContact } from '../data/data';
 
 const AppContext = createContext({});
 
@@ -69,6 +69,13 @@ const AppProvider = ({ children }) => {
       }
     });
   }, [state.alerts.length]);
+  useEffect(() => {
+    return timeoutRepeater(() => {
+      if (state.contacts.length < 20) {
+        dispatch({ type: 'ADD_CONTACT', payload: getRandomContact() });
+      }
+    });
+  }, [state.contacts.length]);
 
   return (
     <AppContext.Provider value={{ state, dispatch }}>
