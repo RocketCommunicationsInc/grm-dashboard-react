@@ -52,6 +52,28 @@ export const AppReducer = (state, { type, payload }) => {
         },
       };
     }
+    case 'DELETE_ALERTS': {
+      const alerts = state.alerts.filter(
+        (alert) => !payload.includes(alert.errorId)
+      );
+
+      return {
+        ...state,
+        alerts,
+      };
+    }
+    case 'ADD_ALERT': {
+      return {
+        ...state,
+        alerts: [...state.alerts, payload],
+      };
+    }
+    case 'ADD_CONTACT': {
+      return {
+        ...state,
+        contacts: [...state.contacts, payload],
+      };
+    }
     default: {
       throw new Error(`Unknown type: ${type}`);
     }

@@ -1,7 +1,7 @@
 import { randInt } from '../util/util';
 
 export const initialState = {
-  ucaCount: 22,
+  ucaCount: 0,
   statusIcons: {
     software: {
       icon: 'processor',
@@ -34,4 +34,6 @@ export const initialState = {
       notifications: randInt(0, 3),
     },
   },
+  contacts: [],
+  alerts: [],
 };
