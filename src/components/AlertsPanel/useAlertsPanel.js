@@ -44,7 +44,7 @@ const useAlertsPanel = () => {
   };
 
   const handleAction = () => {
-    const payload = Object.keys(rowSelection).map((selectedIndex) => {
+    const payload = selectedRows.map((selectedIndex) => {
       return rows.find((row) => {
         // eslint-disable-next-line eqeqeq
         return row.index == selectedIndex;

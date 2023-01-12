@@ -64,14 +64,14 @@ const AppProvider = ({ children }) => {
   }, [state.statusIcons.facilities.notifications]);
   useEffect(() => {
     return timeoutRepeater(() => {
-      if (state.alerts.length < 20) {
+      if (state.alerts.length < 40) {
         dispatch({ type: 'ADD_ALERT', payload: getRandomAlert() });
       }
     });
   }, [state.alerts.length]);
   useEffect(() => {
     return timeoutRepeater(() => {
-      if (state.contacts.length < 20) {
+      if (state.contacts.length < 40) {
         dispatch({ type: 'ADD_CONTACT', payload: getRandomContact() });
       }
     });
