@@ -1,4 +1,4 @@
-import { RuxCheckbox, RuxStatus } from '@astrouxds/react';
+import { RuxCheckbox, RuxDatetime, RuxStatus } from '@astrouxds/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
 const columnHelper = createColumnHelper();
@@ -39,7 +39,16 @@ const columnDefs = [
   }),
   columnHelper.accessor('errorTime', {
     header: 'Time',
-    cell: (info) => <div className='text'>{info.getValue()}</div>,
+    cell: (info) => (
+      <div className='text'>
+        <RuxDatetime
+          date={new Date(info.getValue())}
+          hour='2-digit'
+          minute='2-digit'
+          second='2-digit'
+        />
+      </div>
+    ),
   }),
 ];
 
