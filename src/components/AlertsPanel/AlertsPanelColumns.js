@@ -16,7 +16,7 @@ const columnDefs = [
     cell: ({ row }) => (
       <RuxCheckbox
         checked={row.getIsSelected()}
-        onChange={row.getToggleSelectedHandler()}
+        onRuxchange={row.getToggleSelectedHandler()}
         onClick={(e) => e.stopPropagation()}
       />
     ),
