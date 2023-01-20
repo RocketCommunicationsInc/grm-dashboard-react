@@ -12,7 +12,7 @@ import { Line } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import './TrendingEquipmentStatusPanel.scss';
-import { RuxCheckbox } from '@astrouxds/react';
+import { RuxSelect, RuxOption } from '@astrouxds/react';
 
 ChartJS.register(
   CategoryScale,
@@ -48,8 +48,6 @@ export const options = {
     y: {
       grid: { color: '#1c3f5e', drawTicks: false },
       ticks: { color: 'white' },
-      // text: '%',
-      // display: true,
     },
     x: {
       ticks: { color: 'white' },
@@ -105,8 +103,15 @@ const TrendingEquipmentStatusPanel = () => {
   console.log(labels);
 
   return (
-    <div className='panel'>
+    <div className='trending-equipment-panel'>
       <PanelHeader heading='Trending Equipment Status' />
+      <div class='trending-equipment-panel__select'>
+        <RuxSelect size='small'>
+          <RuxOption value='Busy' label='Busy'></RuxOption>
+          <RuxOption value='Idle' label='Idle'></RuxOption>
+          <RuxOption value='Inoperable' label='Inoperable'></RuxOption>
+        </RuxSelect>
+      </div>
       <div className='trending-equipment-panel__chart-wrapper'>
         <Line plugins={[ChartDataLabels]} options={options} data={data} />
       </div>

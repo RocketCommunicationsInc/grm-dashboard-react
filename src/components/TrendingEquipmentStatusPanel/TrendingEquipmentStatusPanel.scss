@@ -1,4 +1,13 @@
 .trending-equipment-panel {
+  &__select {
+    width: 200px;
+    display: flex;
+    align-self: flex-end;
+
+    select {
+      border: 2px solid red;
+    }
+  }
   &__chart-wrapper {
     height: calc(100% - 3.75rem);
     padding: var(--spacing-4);
