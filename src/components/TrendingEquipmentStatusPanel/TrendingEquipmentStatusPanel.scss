@@ -1,0 +1,10 @@
+.trending-equipment-panel {
+  &__chart-wrapper {
+    height: calc(100% - 3.75rem);
+    padding: var(--spacing-4);
+
+    canvas {
+      min-height: 250px;
+    }
+  }
+}

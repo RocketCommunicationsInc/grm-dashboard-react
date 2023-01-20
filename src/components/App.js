@@ -4,6 +4,7 @@ import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import AlertsPanel from './AlertsPanel/AlertsPanel';
+import TrendingEquipmentStatusPanel from './TrendingEquipmentStatusPanel/TrendingEquipmentStatusPanel';
 import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
 import './App.scss';
 
@@ -34,7 +35,7 @@ const App = () => {
           {tab === 'Contacts' ? (
             <ContactsSummaryPanel />
           ) : (
-            <div>Equipment Right Bottom Panel Component Here</div>
+            <TrendingEquipmentStatusPanel />
           )}
         </section>
       </main>
