@@ -1,5 +1,6 @@
 import { RuxButton } from '@astrouxds/react';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
+import ContactDetails from './ContactDetails';
 import './AlertDetails.scss';
 
 const AlertDetails = ({ changeView }) => {
@@ -19,7 +20,7 @@ const AlertDetails = ({ changeView }) => {
       </section>
 
       <section className='Alert-details-grid__bottom-panel'>
-        <PanelHeader heading={'Contact Details'} />
+        <ContactDetails />
       </section>
     </div>
   );
