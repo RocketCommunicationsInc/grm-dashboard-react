@@ -1,9 +1,10 @@
+import { RuxButton } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 import { Fragment } from 'react';
 
 import { useDisclosure } from '../../hooks/useDisclosure';
 
-const AlertsPanelItem = ({ row }) => {
+const AlertsPanelItem = ({ row, changeView }) => {
   const { getDisclosureProps, getButtonProps } = useDisclosure();
 
   return (
@@ -17,6 +18,17 @@ const AlertsPanelItem = ({ row }) => {
       </div>
       <div className='Alerts-panel__details' {...getDisclosureProps()}>
         {row.original.longMessage}
+        <br />
+        <br />
+        <div className='Alerts-panel__investigate-button'>
+          <RuxButton
+            onClick={() => {
+              changeView('alertDetailsPage');
+            }}
+          >
+            Investigate
+          </RuxButton>
+        </div>
       </div>
     </li>
   );

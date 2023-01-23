@@ -68,6 +68,11 @@
     padding: var(--spacing-4);
   }
 
+  &__investigate-button {
+    display: flex;
+    justify-content: center;
+  }
+
   &__actions {
     display: flex;
     justify-content: flex-end;
