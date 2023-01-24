@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -60,6 +61,12 @@ const randomIntBetween = (min, max) => {
 };
 
 const TrendingEquipmentStatusPanel = () => {
+  const handleSelect = (evt) => {
+    console.log(evt.srcElement.value);
+    setSelectedOption(evt.srcElement.value);
+  };
+
+  const [selectedOption, setSelectedOption] = useState('Busy');
   const hours = new Array(12).fill(new Date().getHours());
   const labels = hours.map((h, i) => {
     const hour = h + i > 23 ? h + i - 24 : h + i;
@@ -100,13 +107,11 @@ const TrendingEquipmentStatusPanel = () => {
     ],
   };
 
-  console.log(labels);
-
   return (
     <div className='trending-equipment-panel'>
       <PanelHeader heading='Trending Equipment Status' />
-      <div class='trending-equipment-panel__select'>
-        <RuxSelect size='small'>
+      <div className='trending-equipment-panel__select'>
+        <RuxSelect size='small' onRuxchange={handleSelect}>
           <RuxOption value='Busy' label='Busy'></RuxOption>
           <RuxOption value='Idle' label='Idle'></RuxOption>
           <RuxOption value='Inoperable' label='Inoperable'></RuxOption>
