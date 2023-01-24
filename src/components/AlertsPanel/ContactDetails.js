@@ -1,6 +1,7 @@
 import {
   RuxCheckbox,
   RuxInput,
+  RuxMonitoringIcon,
   RuxOption,
   RuxSelect,
   RuxStatus,
@@ -49,11 +50,70 @@ const ContactDetails = () => {
             <RuxCheckbox label='Active' checked />
           </form>
         </section>
-        <section className='equipment-string'>
-          <header>Some equipment string info</header>
+
+        <section className='Contact-details-grid__equipment-string'>
+          <header>Equipment String</header>
+          <form className='equipment-settings'>
+            <RuxSelect label='Configuration' size='small' value='B'>
+              <RuxOption label='Config A' value='A' />
+              <RuxOption label='Config B' value='B' />
+              <RuxOption label='Config C' value='C' />
+            </RuxSelect>
+            <div className='icons-list'>
+              ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
+              ENC123
+            </div>
+            <div className='icons'>
+              <RuxMonitoringIcon status='caution' icon='antenna' label='ANT1' />
+              <RuxMonitoringIcon
+                status='normal'
+                icon='satellite'
+                label='SLWS6'
+              />
+              <RuxMonitoringIcon
+                status='normal'
+                icon='satellite'
+                label='SB7PLD1'
+              />
+              <RuxMonitoringIcon
+                status='normal'
+                icon='satellite'
+                label='RCVR8'
+              />
+              <RuxMonitoringIcon
+                status='normal'
+                icon='satellite'
+                label='MBS1CH2'
+              />
+            </div>
+            <div className='icons'>
+              <RuxMonitoringIcon
+                status='normal'
+                icon='satellite'
+                label='SFEP3CH1'
+              />
+              <RuxMonitoringIcon
+                status='normal'
+                icon='satellite'
+                label='UPS104'
+              />
+              <RuxMonitoringIcon
+                status='normal'
+                icon='satellite'
+                label='VHR1'
+              />
+              <RuxMonitoringIcon
+                status='normal'
+                icon='satellite'
+                label='ENC123'
+              />
+            </div>
+            <hr />
+          </form>
         </section>
+
         <section className='event-log'>
-          <header>Some event log info</header>
+          <header>Event Log</header>
         </section>
       </div>
     </>

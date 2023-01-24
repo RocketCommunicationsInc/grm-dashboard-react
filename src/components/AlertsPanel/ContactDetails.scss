@@ -10,21 +10,43 @@
 
 .Contact-details-grid {
   display: grid;
-  grid-template-columns: 25rem 1fr 1fr;
-  grid-template-areas:
-    'details'
-    'equipment-string'
-    'event-log';
   gap: var(--spacing-4);
+  grid-template-columns: 20rem 2fr 1fr;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
 
   &__details {
-    grid-area: details;
     padding: var(--spacing-4);
+  }
 
-    form {
+  &__equipment-string {
+    header {
+      margin-bottom: var(--spacing-4);
+    }
+
+    .equipment-settings {
+      border: 1px solid var(--container-color-border);
+      min-height: 100%;
+      padding: var(--spacing-4);
+    }
+
+    .icons-list {
+      font-size: 0.85rem;
+    }
+
+    .icons {
       display: flex;
-      flex-direction: column;
-      gap: var(--spacing-4);
+      flex-wrap: wrap;
+    }
+
+    hr {
+      border: none;
+      border-bottom: 1px solid var(--container-color-border);
+      width: 100%;
     }
   }
 }
