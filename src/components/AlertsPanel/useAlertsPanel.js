@@ -51,23 +51,17 @@ const useAlertsPanel = () => {
       }).original.errorId;
     });
 
-    console.log('Hi payload 1', payload);
-
     dispatch({ type: 'DELETE_ALERTS', payload });
     setRowSelection({});
   };
 
   const dismissAcknowledgeAlerts = (row) => {
-    console.log(row);
-
     const payload = rows.map(() => {
       return rows.find((x) => {
         // eslint-disable-next-line eqeqeq
         return x.index == row.index;
       }).original.errorId;
     });
-
-    console.log('Hi payload 2', payload);
 
     dispatch({ type: 'DELETE_ALERTS', payload });
     setRowSelection({});
