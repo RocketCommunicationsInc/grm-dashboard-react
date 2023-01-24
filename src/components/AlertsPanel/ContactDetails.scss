@@ -48,5 +48,11 @@
       border-bottom: 1px solid var(--container-color-border);
       width: 100%;
     }
+
+    .sub-grid {
+      display: grid;
+      gap: var(--spacing-4);
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

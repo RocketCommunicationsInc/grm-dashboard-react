@@ -5,6 +5,7 @@ import {
   RuxOption,
   RuxSelect,
   RuxStatus,
+  RuxTextarea,
 } from '@astrouxds/react';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import './ContactDetails.scss';
@@ -108,7 +109,31 @@ const ContactDetails = () => {
                 label='ENC123'
               />
             </div>
+
             <hr />
+
+            <div className='sub-grid'>
+              <div>
+                <header>ANT1 Details</header>
+
+                <RuxSelect label='Parameter' size='small'>
+                  <RuxOption label='#Value#' />
+                </RuxSelect>
+
+                <RuxSelect label='Parameter' size='small'>
+                  <RuxOption label='#Value#' />
+                </RuxSelect>
+
+                <RuxSelect label='Parameter' size='small'>
+                  <RuxOption label='#Value#' />
+                </RuxSelect>
+
+                <RuxSelect label='Parameter' size='small'>
+                  <RuxOption label='#Value#' />
+                </RuxSelect>
+              </div>
+              <RuxTextarea label='Affected Contacts (0)' size='large' />
+            </div>
           </form>
         </section>
 
