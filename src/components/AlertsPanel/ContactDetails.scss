@@ -1,0 +1,30 @@
+.contact-title {
+  align-items: center;
+  display: flex;
+  padding: var(--spacing-4);
+
+  rux-status {
+    margin-right: 0.75rem;
+  }
+}
+
+.Contact-details-grid {
+  display: grid;
+  grid-template-columns: 25rem 1fr 1fr;
+  grid-template-areas:
+    'details'
+    'equipment-string'
+    'event-log';
+  gap: var(--spacing-4);
+
+  &__details {
+    grid-area: details;
+    padding: var(--spacing-4);
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-4);
+    }
+  }
+}
