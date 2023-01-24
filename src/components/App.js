@@ -11,13 +11,17 @@ import './App.scss';
 const App = () => {
   const [tab, setTab] = useState('Contacts');
   const [currentView, setCurrentView] = useState('main');
+  const [currentRow, setCurrentRow] = useState({});
 
   switch (currentView) {
     case 'alertDetailsPage':
       return (
         <>
           <GlobalStatusBar />
-          <AlertDetails changeView={(view) => setCurrentView(view)} />
+          <AlertDetails
+            changeView={(view) => setCurrentView(view)}
+            currentRow={currentRow}
+          />
         </>
       );
 
@@ -27,7 +31,10 @@ const App = () => {
           <GlobalStatusBar />
           <main className='Dashboard-grid'>
             <aside className='Dashboard-grid__left-panel'>
-              <AlertsPanel changeView={(view) => setCurrentView(view)} />
+              <AlertsPanel
+                changeView={(view) => setCurrentView(view)}
+                setCurrentRow={(row) => setCurrentRow(row)}
+              />
             </aside>
             <nav className='Dashboard-grid__tabs-bar'>
               <RuxTabs small onRuxselected={(e) => setTab(e.detail.innerText)}>
