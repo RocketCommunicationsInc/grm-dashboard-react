@@ -11,6 +11,9 @@ import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import './ContactDetails.scss';
 
 const ContactDetails = () => {
+  const events = [];
+  events.length = 100;
+
   return (
     <>
       <PanelHeader heading='Contact Details' />
@@ -142,8 +145,27 @@ const ContactDetails = () => {
           </form>
         </section>
 
-        <section className='event-log'>
-          <header>Event Log</header>
+        <section className='Contact-details-grid__event-log'>
+          <header>
+            <div>Event Log</div>
+            <RuxInput placeholder='Filter Log' size='small' />
+          </header>
+
+          <div className='log-container'>
+            <div className='log-header'>
+              <div>Time</div>
+              <div>Event</div>
+            </div>
+
+            <ul className='log-list'>
+              {events.fill('This is an event').map((event, i) => (
+                <li key={i}>
+                  <div>HH:MM:SS</div>
+                  <div>{event}</div>
+                </li>
+              ))}
+            </ul>
+          </div>
         </section>
       </div>
     </>

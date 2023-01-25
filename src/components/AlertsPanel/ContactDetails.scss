@@ -11,9 +11,9 @@
 .Contact-details-grid {
   display: grid;
   gap: var(--spacing-4);
-  grid-template-columns: 20rem 2fr 1fr;
+  grid-template-columns: 15rem 2fr 2fr;
   height: calc(100% - 7.5rem);
-  overflow-y: auto;
+  overflow-y: scroll;
 
   form {
     display: flex;
@@ -54,6 +54,46 @@
       display: grid;
       gap: var(--spacing-4);
       grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  &__event-log {
+    header {
+      align-items: center;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-4);
+    }
+
+    .log-container {
+      border: 1px solid var(--color-background-base-default);
+    }
+
+    .log-header {
+      align-items: center;
+      display: grid;
+      gap: var(--spacing-2);
+      grid-template-columns: 2fr 3fr;
+
+      background-color: var(--color-background-surface-header);
+      border-top: 1px solid var(--color-background-base-default);
+      padding: var(--spacing-2);
+      padding-right: var(--spacing-6);
+      box-shadow: var(--shadow-overlay);
+      height: 2.625rem;
+    }
+
+    .log-list {
+      height: calc(10 * 2.225rem);
+      overflow-y: scroll;
+
+      li {
+        align-items: center;
+        display: grid;
+        gap: var(--spacing-2);
+        grid-template-columns: 2fr 3fr;
+        padding: var(--spacing-2);
+      }
     }
   }
 }
