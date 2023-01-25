@@ -9,6 +9,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import annotationPlugin from 'chartjs-plugin-annotation';
 import { Line } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
@@ -22,7 +23,8 @@ ChartJS.register(
   LineElement,
   Title,
   Tooltip,
-  Legend
+  Legend,
+  annotationPlugin
 );
 
 export const options = {
@@ -30,6 +32,18 @@ export const options = {
   maintainAspectRatio: false,
   animation: false,
   plugins: {
+    annotation: {
+      annotations: {
+        line1: {
+          type: 'line',
+          yMin: 90,
+          yMax: 90,
+          borderColor: 'white',
+          borderWidth: 2,
+          borderDash: [2],
+        },
+      },
+    },
     datalabels: {
       color: 'white',
       formatter: (val) => (val = ''),
