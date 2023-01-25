@@ -1,7 +1,7 @@
 .Alert-details-grid {
   display: grid;
   // Screen height minus the height of the Global Status Bar
-  height: calc(100vh - 6rem);
+  height: calc(100vh - 7rem);
   padding: var(--spacing-4) var(--spacing-6);
   gap: var(--spacing-3);
   grid-template-rows: 45% 55%;
@@ -31,24 +31,30 @@
     padding: var(--spacing-4);
   }
 
-  &__container {
+  &__sub-grid {
     width: 100%;
     height: calc(100% - 8rem);
-    overflow: auto;
     display: grid;
-    grid-template-columns: 20% 30% 50%;
+    grid-template-columns: 25% 25% 50%;
   }
 
   &__general-details {
     padding: 0.5rem 0.9375rem;
+    overflow: auto;
   }
 
   &__description {
     padding: 0.5rem 0.9375rem;
+    overflow: auto;
   }
 
   &__affected-contacts {
     padding: 0.5rem 0.9375rem;
+    overflow: auto;
+  }
+
+  &__input {
+    padding-bottom: 1rem;
   }
 
   &__table-container {
@@ -56,9 +62,15 @@
     box-shadow: 0 0.5rem 1.25rem var(--color-background-base-default);
   }
 
-  &__table-heading {
+  &__heading {
     padding-bottom: 0.3rem;
     font-weight: var(--font-heading-4-font-weight);
     font-size: var(--font-heading-4-font-size);
+  }
+
+  &__description-text {
+    padding: 0.5rem;
+    background-color: var(--color-background-base-header);
+    font-weight: var(--font-heading-4-font-weight);
   }
 }
