@@ -11,7 +11,7 @@
 .Contact-details-grid {
   display: grid;
   gap: var(--spacing-4);
-  grid-template-columns: 15rem 2fr 2fr;
+  grid-template-columns: 2fr 3fr 3fr;
   height: calc(100% - 7.5rem);
   overflow-y: scroll;
 
@@ -21,8 +21,15 @@
     gap: var(--spacing-4);
   }
 
+  rux-select,
+  rux-input::part(form-field) {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
   &__details {
-    padding: var(--spacing-4);
+    padding-left: var(--spacing-4);
   }
 
   &__equipment-string {
@@ -58,6 +65,8 @@
   }
 
   &__event-log {
+    padding-right: var(--spacing-4);
+
     header {
       align-items: center;
       display: flex;

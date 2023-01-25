@@ -123,19 +123,19 @@ const ContactDetails = () => {
               <div>
                 <header>ANT1 Details</header>
 
-                <RuxSelect label='Parameter' size='small'>
+                <RuxSelect label='Param' size='small'>
                   <RuxOption label='#Value#' />
                 </RuxSelect>
 
-                <RuxSelect label='Parameter' size='small'>
+                <RuxSelect label='Param' size='small'>
                   <RuxOption label='#Value#' />
                 </RuxSelect>
 
-                <RuxSelect label='Parameter' size='small'>
+                <RuxSelect label='Param' size='small'>
                   <RuxOption label='#Value#' />
                 </RuxSelect>
 
-                <RuxSelect label='Parameter' size='small'>
+                <RuxSelect label='Param' size='small'>
                   <RuxOption label='#Value#' />
                 </RuxSelect>
               </div>
@@ -148,7 +148,7 @@ const ContactDetails = () => {
         <section className='Contact-details-grid__event-log'>
           <header>
             <div>Event Log</div>
-            <RuxInput placeholder='Filter Log' size='small' />
+            <RuxInput placeholder='Filter Log' size='small' label='&nbsp;' />
           </header>
 
           <div className='log-container'>
@@ -160,7 +160,7 @@ const ContactDetails = () => {
             <ul className='log-list'>
               {events.fill('This is an event').map((event, i) => (
                 <li key={i}>
-                  <div>HH:MM:SS</div>
+                  <div>YYYY DDD HH:MM:SS</div>
                   <div>{event}</div>
                 </li>
               ))}
