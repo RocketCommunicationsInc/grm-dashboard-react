@@ -12,6 +12,8 @@
   display: grid;
   gap: var(--spacing-4);
   grid-template-columns: 20rem 2fr 1fr;
+  height: calc(100% - 7.5rem);
+  overflow-y: auto;
 
   form {
     display: flex;
@@ -30,7 +32,6 @@
 
     .equipment-settings {
       border: 1px solid var(--container-color-border);
-      min-height: 100%;
       padding: var(--spacing-4);
     }
 

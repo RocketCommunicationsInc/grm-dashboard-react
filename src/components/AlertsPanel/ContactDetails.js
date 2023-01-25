@@ -14,6 +14,7 @@ const ContactDetails = () => {
   return (
     <>
       <PanelHeader heading='Contact Details' />
+
       <h2 className='contact-title'>
         <RuxStatus status='serious' />
         77125 PUMA-C 5429
@@ -54,6 +55,7 @@ const ContactDetails = () => {
 
         <section className='Contact-details-grid__equipment-string'>
           <header>Equipment String</header>
+
           <form className='equipment-settings'>
             <RuxSelect label='Configuration' size='small' value='B'>
               <RuxOption label='Config A' value='A' />
@@ -64,6 +66,7 @@ const ContactDetails = () => {
               ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
               ENC123
             </div>
+
             <div className='icons'>
               <RuxMonitoringIcon status='caution' icon='antenna' label='ANT1' />
               <RuxMonitoringIcon
@@ -87,6 +90,7 @@ const ContactDetails = () => {
                 label='MBS1CH2'
               />
             </div>
+
             <div className='icons'>
               <RuxMonitoringIcon
                 status='normal'
@@ -132,6 +136,7 @@ const ContactDetails = () => {
                   <RuxOption label='#Value#' />
                 </RuxSelect>
               </div>
+
               <RuxTextarea label='Affected Contacts (0)' size='large' />
             </div>
           </form>
