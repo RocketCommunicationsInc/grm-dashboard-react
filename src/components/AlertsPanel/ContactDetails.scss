@@ -122,4 +122,11 @@
       }
     }
   }
+  footer {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: flex-end;
+    padding: var(--spacing-4);
+  }
 }

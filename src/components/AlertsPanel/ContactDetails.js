@@ -1,4 +1,5 @@
 import {
+  RuxButton,
   RuxCheckbox,
   RuxInput,
   RuxMonitoringIcon,
@@ -191,6 +192,13 @@ const ContactDetails = () => {
             </ul>
           </div>
         </section>
+
+        <div></div>
+        <div></div>
+        <footer>
+          <RuxButton secondary>Cancel</RuxButton>
+          <RuxButton>Modify</RuxButton>
+        </footer>
       </div>
     </>
   );
