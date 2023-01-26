@@ -26,33 +26,53 @@ const ContactDetails = () => {
       <div className='Contact-details-grid'>
         <section className='Contact-details-grid__details'>
           <form>
-            <RuxSelect label='Priority' size='small' value='medium'>
+            <RuxSelect label='Priority' size='small' disabled value='medium'>
               <RuxOption label='Low' value='low' />
               <RuxOption label='Medium' value='medium' />
               <RuxOption label='High' value='high' />
             </RuxSelect>
 
-            <RuxInput label='State' value='Upcoming' size='small' />
+            <RuxInput label='State' value='Upcoming' disabled size='small' />
 
-            <RuxInput label='IRON' value='77125' size='small' />
+            <RuxInput label='IRON' value='77125' disabled size='small' />
 
-            <RuxInput label='Ground Station' value='PUMA-C' size='small' />
+            <RuxInput
+              label='Ground Station'
+              value='PUMA-C'
+              disabled
+              size='small'
+            />
 
-            <RuxInput label='REV' value='5429' size='small' />
+            <RuxInput label='REV' value='5429' disabled size='small' />
 
-            <RuxInput label='DOY' value='25' size='small' />
+            <RuxInput label='DOY' value='25' disabled size='small' />
 
-            <RuxInput label='Start Time' value='HH:MM:SS' size='small' />
+            <RuxInput
+              label='Start Time'
+              value='HH:MM:SS'
+              disabled
+              size='small'
+            />
 
-            <RuxInput label='AOS' value='HH:MM:SS' size='small' />
+            <RuxInput label='AOS' value='HH:MM:SS' disabled size='small' />
 
-            <RuxInput label='LOS' value='HH:MM:SS' size='small' />
+            <RuxInput label='LOS' value='HH:MM:SS' disabled size='small' />
 
-            <RuxInput label='Stop Time' value='HH:MM:SS' size='small' />
+            <RuxInput
+              label='Stop Time'
+              value='HH:MM:SS'
+              disabled
+              size='small'
+            />
 
-            <RuxInput label='Command Mode' value='Automated' size='small' />
+            <RuxInput
+              label='Command Mode'
+              value='Automated'
+              disabled
+              size='small'
+            />
 
-            <RuxCheckbox label='Active' checked />
+            <RuxCheckbox label='Active' checked disabled />
           </form>
         </section>
 
@@ -60,7 +80,7 @@ const ContactDetails = () => {
           <header>Equipment String</header>
 
           <form className='equipment-settings'>
-            <RuxSelect label='Configuration' size='small' value='B'>
+            <RuxSelect label='Configuration' size='small' disabled value='B'>
               <RuxOption label='Config A' value='A' />
               <RuxOption label='Config B' value='B' />
               <RuxOption label='Config C' value='C' />
@@ -123,21 +143,10 @@ const ContactDetails = () => {
               <div>
                 <header>ANT1 Details</header>
 
-                <RuxSelect label='Param' size='small'>
-                  <RuxOption label='#Value#' />
-                </RuxSelect>
-
-                <RuxSelect label='Param' size='small'>
-                  <RuxOption label='#Value#' />
-                </RuxSelect>
-
-                <RuxSelect label='Param' size='small'>
-                  <RuxOption label='#Value#' />
-                </RuxSelect>
-
-                <RuxSelect label='Param' size='small'>
-                  <RuxOption label='#Value#' />
-                </RuxSelect>
+                <RuxInput label='Param' value='#Value#' disabled size='small' />
+                <RuxInput label='Param' value='#Value#' disabled size='small' />
+                <RuxInput label='Param' value='#Value#' disabled size='small' />
+                <RuxInput label='Param' value='#Value#' disabled size='small' />
               </div>
 
               <RuxTextarea label='Affected Contacts (0)' size='large' />
@@ -148,7 +157,7 @@ const ContactDetails = () => {
         <section className='Contact-details-grid__event-log'>
           <header>
             <div>Event Log</div>
-            <RuxInput placeholder='Filter Log' size='small' label='&nbsp;' />
+            <RuxInput placeholder='Filter Log' size='small' label=' ' />
           </header>
 
           <div className='log-container'>

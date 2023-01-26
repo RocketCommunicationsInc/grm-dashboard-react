@@ -34,7 +34,7 @@
 
   &__equipment-string {
     header {
-      margin-bottom: var(--spacing-4);
+      margin-bottom: 1.625rem;
     }
 
     .equipment-settings {
@@ -68,7 +68,7 @@
     padding-right: var(--spacing-4);
 
     header {
-      align-items: center;
+      align-items: flex-start;
       display: flex;
       justify-content: space-between;
       margin-bottom: var(--spacing-4);
@@ -85,7 +85,6 @@
       grid-template-columns: 2fr 3fr;
 
       background-color: var(--color-background-surface-header);
-      border-top: 1px solid var(--color-background-base-default);
       padding: var(--spacing-2);
       padding-right: var(--spacing-6);
       box-shadow: var(--shadow-overlay);
@@ -93,7 +92,7 @@
     }
 
     .log-list {
-      height: calc(10 * 2.225rem);
+      height: calc(8 * 2.225rem);
       overflow-y: scroll;
 
       li {
