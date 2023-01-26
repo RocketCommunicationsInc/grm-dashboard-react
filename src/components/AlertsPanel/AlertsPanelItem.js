@@ -1,3 +1,4 @@
+import { RuxButton } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 import { Fragment } from 'react';
 
@@ -17,6 +18,12 @@ const AlertsPanelItem = ({ row }) => {
       </div>
       <div className='Alerts-panel__details' {...getDisclosureProps()}>
         {row.original.longMessage}
+
+        <div className='Alerts-panel__investigate-button'>
+          <RuxButton onClick={() => console.log(row.original.errorId)}>
+            Investigate
+          </RuxButton>
+        </div>
       </div>
     </li>
   );
