@@ -23,8 +23,7 @@ const AlertsPanelItem = ({ row, changeView, setCurrentRow }) => {
       </div>
       <div className='Alerts-panel__details' {...getDisclosureProps()}>
         {row.original.longMessage}
-        <br />
-        <br />
+
         <div className='Alerts-panel__investigate-button'>
           <RuxButton
             onClick={() => {

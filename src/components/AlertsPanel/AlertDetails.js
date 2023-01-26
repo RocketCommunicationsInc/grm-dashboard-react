@@ -5,13 +5,17 @@ import {
   RuxTableRow,
   RuxTableCell,
   RuxInput,
+  RuxTableHeader,
 } from '@astrouxds/react';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import useAlertsPanel from './useAlertsPanel';
+import { capitalize } from '../../util/util';
+import { formatReadableTime } from '../../util/util';
 import './AlertDetails.scss';
 
 const AlertDetails = ({ changeView, currentRow }) => {
   const { dismissAcknowledgeAlerts } = useAlertsPanel();
+  console.log(currentRow);
 
   const handleClick = (page, currentRow) => {
     dismissAcknowledgeAlerts(currentRow);
@@ -27,58 +31,78 @@ const AlertDetails = ({ changeView, currentRow }) => {
             <RuxInput
               className='Alert-details__input'
               label='Severity'
-              value='Critical'
+              value={capitalize(currentRow.original.errorSeverity)}
               readonly={true}
             />
 
             <RuxInput
               className='Alert-details__input'
               label='Alert ID'
-              value='Alert 123'
+              value={currentRow.original.errorMessage.split(' - ')[0]}
               readonly={true}
             />
 
             <RuxInput
               className='Alert-details__input'
               label='Category'
-              value='CatABC'
+              value={capitalize(currentRow.original.errorCategory)}
               readonly={true}
             />
 
             <RuxInput
               className='Alert-details__input'
               label='Time'
-              value='07:12:23'
+              value={formatReadableTime(currentRow.original.errorTime)}
               readonly={true}
             />
           </div>
-          <div className='Alert-details__description'>
+          <div className='Alert-details__description-container'>
             <p className='Alert-details__heading'>Description</p>
             <div className='Alert-details__description-text'>
-              Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum
-              dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem
-              ipsum dolor Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor
-              Lorem ipsum dolor Lorem ipsum dolor Lorem ipsum dolor...
+              {currentRow.original.longMessage}
+              <br />
+              <br />
+              Lorem sit incididunt id occaecat irure. Lorem sit incididunt id
+              occaecat irure. Lorem sit incididunt id occaecat irure. Lorem sit
+              incididunt id occaecat irure. Lorem sit incididunt id occaecat
+              irure. Lorem sit incididunt id occaecat irure. Lorem sit
+              incididunt id occaecat irure. Lorem sit incididunt id occaecat
+              irure.
             </div>
           </div>
           <div className='Alert-details__affected-contacts'>
-            <p className='Alert-details__heading'>Affected Contacts (##)</p>
+            <p className='Alert-details__heading'>Affected Contacts</p>
 
             <div className='Alert-details__table-container'>
               <RuxTable>
+                <RuxTableHeader>
+                  <RuxTableRow>
+                    <RuxTableCell>Iron</RuxTableCell>
+                    <RuxTableCell>GS</RuxTableCell>
+                    <RuxTableCell>REV</RuxTableCell>
+                  </RuxTableRow>
+                </RuxTableHeader>
                 <RuxTableBody>
                   <RuxTableRow>
-                    <RuxTableCell>Iron GS</RuxTableCell>
+                    <RuxTableCell>1</RuxTableCell>
+                    <RuxTableCell>1234</RuxTableCell>
+                    <RuxTableCell>12</RuxTableCell>
                   </RuxTableRow>
                   <RuxTableRow>
-                    <RuxTableCell>Iron GS</RuxTableCell>
+                    <RuxTableCell>2</RuxTableCell>
+                    <RuxTableCell>1234</RuxTableCell>
+                    <RuxTableCell>12</RuxTableCell>
                   </RuxTableRow>
 
                   <RuxTableRow>
-                    <RuxTableCell>Iron GS</RuxTableCell>
+                    <RuxTableCell>3</RuxTableCell>
+                    <RuxTableCell>1234</RuxTableCell>
+                    <RuxTableCell>12</RuxTableCell>
                   </RuxTableRow>
                   <RuxTableRow>
-                    <RuxTableCell>Iron GS</RuxTableCell>
+                    <RuxTableCell>4</RuxTableCell>
+                    <RuxTableCell>1234</RuxTableCell>
+                    <RuxTableCell>12</RuxTableCell>
                   </RuxTableRow>
                 </RuxTableBody>
               </RuxTable>
