@@ -5,7 +5,6 @@ import {
   RuxOption,
   RuxSelect,
   RuxStatus,
-  RuxTextarea,
 } from '@astrouxds/react';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import './ContactDetails.scss';
@@ -149,7 +148,23 @@ const ContactDetails = () => {
                 <RuxInput label='Param' value='#Value#' disabled size='small' />
               </div>
 
-              <RuxTextarea label='Affected Contacts (0)' size='large' />
+              <div className='affected-contacts'>
+                <header>Affected Contacts (##)</header>
+                <ul>
+                  <li>
+                    <div>IRON#</div> <div>GS####</div> <div>REV##</div>
+                  </li>
+                  <li>
+                    <div>IRON#</div> <div>GS####</div> <div>REV##</div>
+                  </li>
+                  <li>
+                    <div>IRON#</div> <div>GS####</div> <div>REV##</div>
+                  </li>
+                  <li>
+                    <div>IRON#</div> <div>GS####</div> <div>REV##</div>
+                  </li>
+                </ul>
+              </div>
             </div>
           </form>
         </section>

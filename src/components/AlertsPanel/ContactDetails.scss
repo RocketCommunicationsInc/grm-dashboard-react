@@ -62,6 +62,24 @@
       gap: var(--spacing-4);
       grid-template-columns: 1fr 1fr;
     }
+
+    .affected-contacts {
+      ul {
+        border: 1px solid var(--color-background-base-default);
+      }
+
+      li {
+        align-items: center;
+        display: grid;
+        gap: var(--spacing-2);
+        grid-template-columns: repeat(3, 1fr);
+        padding: var(--spacing-2);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
   }
 
   &__event-log {
