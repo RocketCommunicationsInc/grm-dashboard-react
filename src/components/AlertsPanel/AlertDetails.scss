@@ -28,6 +28,12 @@
     height: calc(100% - 7.5rem);
     display: grid;
     grid-template-columns: 25rem 1fr 1fr;
+
+    rux-input::part(form-field) {
+      align-items: center;
+      display: grid;
+      grid-template-columns: 30% 70%;
+    }
   }
 
   &__general-details {
