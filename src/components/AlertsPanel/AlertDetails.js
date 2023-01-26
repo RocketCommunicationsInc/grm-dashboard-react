@@ -1,12 +1,4 @@
-import {
-  RuxButton,
-  RuxTable,
-  RuxTableBody,
-  RuxTableRow,
-  RuxTableCell,
-  RuxInput,
-  RuxTableHeader,
-} from '@astrouxds/react';
+import { RuxButton, RuxInput } from '@astrouxds/react';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import useAlertsPanel from './useAlertsPanel';
 import { capitalize } from '../../util/util';
@@ -74,38 +66,28 @@ const AlertDetails = ({ changeView, currentRow }) => {
             <p className='Alert-details__heading'>Affected Contacts</p>
 
             <div className='Alert-details__table-container'>
-              <RuxTable>
-                <RuxTableHeader>
-                  <RuxTableRow>
-                    <RuxTableCell>Iron</RuxTableCell>
-                    <RuxTableCell>GS</RuxTableCell>
-                    <RuxTableCell>REV</RuxTableCell>
-                  </RuxTableRow>
-                </RuxTableHeader>
-                <RuxTableBody>
-                  <RuxTableRow>
-                    <RuxTableCell>1</RuxTableCell>
-                    <RuxTableCell>1234</RuxTableCell>
-                    <RuxTableCell>12</RuxTableCell>
-                  </RuxTableRow>
-                  <RuxTableRow>
-                    <RuxTableCell>2</RuxTableCell>
-                    <RuxTableCell>1234</RuxTableCell>
-                    <RuxTableCell>12</RuxTableCell>
-                  </RuxTableRow>
+              <div className='Alert-details__table-heading-container'>
+                <div className='Alert-details__table-heading'>
+                  Iron (number)
+                </div>
+                <div className='Alert-details__table-heading'>GS (number)</div>
+                <div className='Alert-details__table-heading'>REV (number)</div>
+              </div>
 
-                  <RuxTableRow>
-                    <RuxTableCell>3</RuxTableCell>
-                    <RuxTableCell>1234</RuxTableCell>
-                    <RuxTableCell>12</RuxTableCell>
-                  </RuxTableRow>
-                  <RuxTableRow>
-                    <RuxTableCell>4</RuxTableCell>
-                    <RuxTableCell>1234</RuxTableCell>
-                    <RuxTableCell>12</RuxTableCell>
-                  </RuxTableRow>
-                </RuxTableBody>
-              </RuxTable>
+              <ul className='Alert-details__table-rows'>
+                <li>
+                  <div>1</div> <div>1234</div> <div>12</div>
+                </li>
+                <li>
+                  <div>2</div> <div>1234</div> <div>12</div>
+                </li>
+                <li>
+                  <div>3</div> <div>1234</div> <div>12</div>
+                </li>
+                <li>
+                  <div>4</div> <div>1234</div> <div>12</div>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
