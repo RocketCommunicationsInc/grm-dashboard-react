@@ -1,11 +1,18 @@
 import { useState } from 'react';
 import { RuxTab, RuxTabs } from '@astrouxds/react';
-import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
-import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
+import BreadcrumbNav from './BreadcrumbNav/BreadcrumbNav';
 import AlertsPanel from './AlertsPanel/AlertsPanel';
 import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
+import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
+import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import './App.scss';
+
+const links = [
+  { href: '/', title: 'Dashboard' },
+  { href: '/alerts/123', title: 'Alert 123 Details' },
+  // { href: '/alerts/123/jobs', title: 'Jobs' },
+];
 
 const App = () => {
   const [tab, setTab] = useState('Contacts');
@@ -13,6 +20,7 @@ const App = () => {
   return (
     <>
       <GlobalStatusBar />
+      <BreadcrumbNav links={links} />
       <main className='Dashboard-grid'>
         <aside className='Dashboard-grid__left-panel'>
           <AlertsPanel />
