@@ -15,7 +15,7 @@ const ContactDetails = () => {
   events.length = 100;
 
   return (
-    <>
+    <div className='contact-details'>
       <PanelHeader heading='Contact Details' />
 
       <h2 className='contact-title'>
@@ -192,15 +192,12 @@ const ContactDetails = () => {
             </ul>
           </div>
         </section>
-
-        <div></div>
-        <div></div>
-        <footer>
-          <RuxButton secondary>Cancel</RuxButton>
-          <RuxButton>Modify</RuxButton>
-        </footer>
       </div>
-    </>
+      <footer>
+        <RuxButton secondary>Cancel</RuxButton>
+        <RuxButton>Modify</RuxButton>
+      </footer>
+    </div>
   );
 };
 
