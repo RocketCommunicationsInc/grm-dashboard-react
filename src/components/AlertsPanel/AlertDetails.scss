@@ -1,10 +1,10 @@
 .Alert-details-grid {
   display: grid;
   // Screen height minus the height of the Global Status Bar
-  height: calc(100vh - 6rem);
+  height: calc(100vh - 6.5rem);
   padding: var(--spacing-4) var(--spacing-6);
   gap: var(--spacing-3);
-  grid-template-rows: 35% 65%;
+  grid-template-rows: 45% 55%;
   grid-template-areas:
     'top-panel'
     'bottom-panel';
@@ -23,11 +23,87 @@
 }
 
 .Alert-details {
+  &__sub-grid {
+    width: 100%;
+    height: calc(100% - 7.5rem);
+    display: grid;
+    grid-template-columns: 25rem 1fr 1fr;
+
+    rux-input::part(form-field) {
+      align-items: center;
+      display: grid;
+      grid-template-columns: 30% 70%;
+    }
+  }
+
+  &__general-details {
+    padding: 0.5rem 0.9375rem;
+    overflow: auto;
+  }
+
+  &__description-container {
+    padding: 0.5rem 0.9375rem;
+    overflow: auto;
+  }
+
+  &__description-text {
+    padding: 0.5rem;
+    background-color: var(--color-background-base-header);
+    font-weight: var(--font-heading-4-font-weight);
+    min-height: 79%;
+    border: 1px solid var(--color-palette-neutral-1000);
+  }
+
+  &__table-heading-container {
+    display: flex;
+  }
+
+  &__table-heading {
+    background-color: var(--color-background-surface-header);
+    border-top: 1px solid var(--color-background-base-default);
+    padding: var(--spacing-2);
+    padding-right: var(--spacing-6);
+    border: 1px solid var(--color-palette-neutral-1000);
+    height: 2.625rem;
+    width: 33.3%;
+  }
+
+  &__affected-contacts {
+    padding: 0.5rem 0.9375rem;
+    overflow: auto;
+
+    ul {
+      border: 1px solid var(--color-background-base-default);
+    }
+
+    li {
+      align-items: center;
+      display: grid;
+      gap: var(--spacing-2);
+      grid-template-columns: repeat(3, 1fr);
+      padding: var(--spacing-2);
+
+      &:last-child {
+        border-bottom: none;
+      }
+    }
+  }
+
+  &__input {
+    padding-bottom: 1rem;
+  }
+
+  &__heading {
+    padding-bottom: 0.3rem;
+    font-weight: var(--font-heading-4-font-weight);
+    font-size: var(--font-heading-4-font-size);
+  }
+
   &__actions {
     display: flex;
     justify-content: flex-end;
-    background-color: var(--color-background-surface-default);
     gap: var(--spacing-2);
     padding: var(--spacing-4);
+    background-color: var(--color-background-base-header);
   }
 }
