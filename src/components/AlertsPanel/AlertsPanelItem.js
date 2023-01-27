@@ -4,8 +4,13 @@ import { Fragment } from 'react';
 
 import { useDisclosure } from '../../hooks/useDisclosure';
 
-const AlertsPanelItem = ({ row }) => {
+const AlertsPanelItem = ({ row, changeView, setCurrentRow }) => {
   const { getDisclosureProps, getButtonProps } = useDisclosure();
+
+  const handleClick = (page, row) => {
+    changeView(page);
+    setCurrentRow(row);
+  };
 
   return (
     <li {...getButtonProps()}>
@@ -20,7 +25,11 @@ const AlertsPanelItem = ({ row }) => {
         {row.original.longMessage}
 
         <div className='Alerts-panel__investigate-button'>
-          <RuxButton onClick={() => console.log(row.original.errorId)}>
+          <RuxButton
+            onClick={() => {
+              handleClick('alertDetailsPage', row);
+            }}
+          >
             Investigate
           </RuxButton>
         </div>

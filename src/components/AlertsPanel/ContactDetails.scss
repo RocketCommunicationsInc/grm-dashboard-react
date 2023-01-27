@@ -1,0 +1,138 @@
+.contact-title {
+  align-items: center;
+  display: flex;
+  padding: var(--spacing-4);
+
+  rux-status {
+    margin-right: 0.75rem;
+  }
+}
+.contact-details {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
+  footer {
+    align-items: center;
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: flex-end;
+    padding: var(--spacing-4);
+  }
+}
+
+.Contact-details-grid {
+  display: grid;
+  flex: 1;
+  gap: var(--spacing-4);
+  grid-template-columns: 2fr 3fr 3fr;
+  overflow-y: scroll;
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  rux-select,
+  rux-input::part(form-field) {
+    align-items: center;
+    display: grid;
+    grid-template-columns: 50% 50%;
+  }
+
+  &__details {
+    padding-left: var(--spacing-4);
+  }
+
+  &__equipment-string {
+    header {
+      margin-bottom: 1.625rem;
+    }
+
+    .equipment-settings {
+      border: 1px solid var(--container-color-border);
+      padding: var(--spacing-4);
+    }
+
+    .icons-list {
+      font-size: 0.85rem;
+    }
+
+    .icons {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    hr {
+      border: none;
+      border-bottom: 1px solid var(--container-color-border);
+      width: 100%;
+    }
+
+    .sub-grid {
+      display: grid;
+      gap: var(--spacing-4);
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .affected-contacts {
+      ul {
+        border: 1px solid var(--color-background-base-default);
+      }
+
+      li {
+        align-items: center;
+        display: grid;
+        gap: var(--spacing-2);
+        grid-template-columns: repeat(3, 1fr);
+        padding: var(--spacing-2);
+
+        &:last-child {
+          border-bottom: none;
+        }
+      }
+    }
+  }
+
+  &__event-log {
+    padding-right: var(--spacing-4);
+
+    header {
+      align-items: flex-start;
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: var(--spacing-4);
+    }
+
+    .log-container {
+      border: 1px solid var(--color-background-base-default);
+    }
+
+    .log-header {
+      align-items: center;
+      display: grid;
+      gap: var(--spacing-2);
+      grid-template-columns: 2fr 3fr;
+
+      background-color: var(--color-background-surface-header);
+      padding: var(--spacing-2);
+      padding-right: var(--spacing-6);
+      box-shadow: var(--shadow-overlay);
+      height: 2.625rem;
+    }
+
+    .log-list {
+      height: calc(8 * 2.225rem);
+      overflow-y: scroll;
+
+      li {
+        align-items: center;
+        display: grid;
+        gap: var(--spacing-2);
+        grid-template-columns: 2fr 3fr;
+        padding: var(--spacing-2);
+      }
+    }
+  }
+}

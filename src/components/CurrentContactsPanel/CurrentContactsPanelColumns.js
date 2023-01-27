@@ -1,17 +1,6 @@
 import { RuxStatus } from '@astrouxds/react';
 import { createColumnHelper } from '@tanstack/react-table';
-
-function formatReadableTime(timestamp) {
-  // assumes timestamp is a UTC Epoch
-  const time = new Date(timestamp);
-
-  return new Date(time).toLocaleTimeString('en-US', {
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
-    hour12: false,
-  });
-}
+import { formatReadableTime } from '../../util/util';
 
 const columnHelper = createColumnHelper();
 
