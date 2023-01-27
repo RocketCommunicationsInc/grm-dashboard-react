@@ -68,6 +68,12 @@
     padding: var(--spacing-4);
   }
 
+  &__investigate-button {
+    padding-top: 1rem;
+    display: flex;
+    justify-content: center;
+  }
+
   &__actions {
     display: flex;
     justify-content: flex-end;
