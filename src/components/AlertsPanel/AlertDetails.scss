@@ -1,44 +1,17 @@
-.Alert-details-grid {
-  display: grid;
-  // Screen height minus the height of the Global Status Bar
-  height: calc(100vh - 6.5rem);
-  padding: var(--spacing-4) var(--spacing-6);
-  gap: var(--spacing-3);
-  grid-template-rows: 45% 55%;
-  grid-template-areas:
-    'top-panel'
-    'bottom-panel';
-
-  &__top-panel {
-    grid-area: top-panel;
-    background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px;
-  }
-
-  &__bottom-panel {
-    grid-area: bottom-panel;
-    background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px;
-  }
-}
-
 .Alert-details {
-  &__sub-grid {
-    width: 100%;
-    height: calc(100% - 7.5rem);
-    display: grid;
-    grid-template-columns: 25rem 1fr 1fr;
-
-    rux-input::part(form-field) {
-      align-items: center;
-      display: grid;
-      grid-template-columns: 30% 70%;
-    }
-  }
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 
   &__general-details {
     padding: 0.5rem 0.9375rem;
     overflow: auto;
+
+    ::part(form-field) {
+      align-items: center;
+      display: grid;
+      grid-template-columns: 30% 70%;
+    }
   }
 
   &__description-container {
