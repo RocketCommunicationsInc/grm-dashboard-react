@@ -1,4 +1,5 @@
 import { RuxButton, RuxInput } from '@astrouxds/react';
+import ContactDetails from './ContactDetails';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import useAlertsPanel from './useAlertsPanel';
 import { capitalize, formatReadableTime } from '../../util/util';
@@ -11,6 +12,7 @@ const AlertDetails = ({ changeView, currentRow }) => {
     dismissAcknowledgeAlerts(currentRow);
     changeView(page);
   };
+
   return (
     <div className='Alert-details-grid'>
       <section className='Alert-details-grid__top-panel'>
@@ -107,7 +109,7 @@ const AlertDetails = ({ changeView, currentRow }) => {
       </section>
 
       <section className='Alert-details-grid__bottom-panel'>
-        <PanelHeader heading={'Contact Details'} />
+        <ContactDetails />
       </section>
     </div>
   );
