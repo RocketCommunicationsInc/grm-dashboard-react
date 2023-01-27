@@ -1,13 +1,11 @@
 import { RuxButton, RuxInput } from '@astrouxds/react';
 import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import useAlertsPanel from './useAlertsPanel';
-import { capitalize } from '../../util/util';
-import { formatReadableTime } from '../../util/util';
+import { capitalize, formatReadableTime } from '../../util/util';
 import './AlertDetails.scss';
 
 const AlertDetails = ({ changeView, currentRow }) => {
   const { dismissAcknowledgeAlerts } = useAlertsPanel();
-  console.log(currentRow);
 
   const handleClick = (page, currentRow) => {
     dismissAcknowledgeAlerts(currentRow);
@@ -24,28 +22,32 @@ const AlertDetails = ({ changeView, currentRow }) => {
               className='Alert-details__input'
               label='Severity'
               value={capitalize(currentRow.original.errorSeverity)}
-              readonly={true}
+              readonly
+              size='small'
             />
 
             <RuxInput
               className='Alert-details__input'
               label='Alert ID'
               value={currentRow.original.errorMessage.split(' - ')[0]}
-              readonly={true}
+              readonly
+              size='small'
             />
 
             <RuxInput
               className='Alert-details__input'
               label='Category'
               value={capitalize(currentRow.original.errorCategory)}
-              readonly={true}
+              readonly
+              size='small'
             />
 
             <RuxInput
               className='Alert-details__input'
               label='Time'
               value={formatReadableTime(currentRow.original.errorTime)}
-              readonly={true}
+              readonly
+              size='small'
             />
           </div>
           <div className='Alert-details__description-container'>
@@ -65,30 +67,26 @@ const AlertDetails = ({ changeView, currentRow }) => {
           <div className='Alert-details__affected-contacts'>
             <p className='Alert-details__heading'>Affected Contacts</p>
 
-            <div className='Alert-details__table-container'>
-              <div className='Alert-details__table-heading-container'>
-                <div className='Alert-details__table-heading'>
-                  Iron (number)
-                </div>
-                <div className='Alert-details__table-heading'>GS (number)</div>
-                <div className='Alert-details__table-heading'>REV (number)</div>
-              </div>
-
-              <ul className='Alert-details__table-rows'>
-                <li>
-                  <div>1</div> <div>1234</div> <div>12</div>
-                </li>
-                <li>
-                  <div>2</div> <div>1234</div> <div>12</div>
-                </li>
-                <li>
-                  <div>3</div> <div>1234</div> <div>12</div>
-                </li>
-                <li>
-                  <div>4</div> <div>1234</div> <div>12</div>
-                </li>
-              </ul>
+            <div className='Alert-details__table-heading-container'>
+              <div className='Alert-details__table-heading'>Iron (number)</div>
+              <div className='Alert-details__table-heading'>GS (number)</div>
+              <div className='Alert-details__table-heading'>REV (number)</div>
             </div>
+
+            <ul className='Alert-details__table-rows'>
+              <li>
+                <div>1</div> <div>1234</div> <div>12</div>
+              </li>
+              <li>
+                <div>2</div> <div>1234</div> <div>12</div>
+              </li>
+              <li>
+                <div>3</div> <div>1234</div> <div>12</div>
+              </li>
+              <li>
+                <div>4</div> <div>1234</div> <div>12</div>
+              </li>
+            </ul>
           </div>
         </div>
         <div className='Alert-details__actions'>
