@@ -1,6 +1,6 @@
 .Alert-details {
   &__general-details {
-    padding: 0.5rem 0.9375rem;
+    padding: var(--spacing-2) var(--spacing-4);
     overflow: auto;
 
     ::part(form-field) {
@@ -11,30 +11,28 @@
   }
 
   &__description-container {
-    padding: 0.5rem 0.9375rem;
+    padding: var(--spacing-2);
     overflow: auto;
   }
 
   &__description-text {
-    padding: 0.5rem;
+    padding: var(--spacing-2);
     background-color: var(--color-background-base-header);
     font-weight: var(--font-heading-4-font-weight);
     min-height: 79%;
-    border: 1px solid var(--color-palette-neutral-1000);
+    border: 1px solid var(--color-background-base-default);
   }
 
   &__affected-contacts {
-    padding: 0.5rem 0.9375rem;
+    padding: var(--spacing-2);
     overflow: auto;
   }
 
   &__input {
-    padding-bottom: 1rem;
+    padding-bottom: var(--spacing-4);
   }
 
   &__heading {
-    padding-bottom: 0.3rem;
-    font-weight: var(--font-heading-4-font-weight);
-    font-size: var(--font-heading-4-font-size);
+    padding-bottom: var(--spacing-1);
   }
 }

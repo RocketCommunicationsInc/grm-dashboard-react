@@ -1,5 +1,5 @@
 .Affected-contacts {
-  border: 1px solid black;
+  border: 1px solid var(--color-background-base-default);
 
   ul {
     border: 1px solid var(--color-background-base-default);
@@ -7,9 +7,6 @@
 
   li {
     align-items: center;
-    display: grid;
-    gap: var(--spacing-2);
-    grid-template-columns: repeat(3, 1fr);
     padding: var(--spacing-2);
 
     &:last-child {

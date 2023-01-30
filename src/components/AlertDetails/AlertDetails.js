@@ -60,22 +60,22 @@ const AlertDetails = ({ currentRow, setPage }) => {
           </div>
 
           <div className='Alert-details__description-container'>
-            <p className='Alert-details__heading'>Description</p>
+            <h4 className='Alert-details__heading'>Description</h4>
             <div className='Alert-details__description-text'>
-              {currentRow.original.longMessage}
-              <br />
-              <br />
-              Lorem sit incididunt id occaecat irure. Lorem sit incididunt id
-              occaecat irure. Lorem sit incididunt id occaecat irure. Lorem sit
-              incididunt id occaecat irure. Lorem sit incididunt id occaecat
-              irure. Lorem sit incididunt id occaecat irure. Lorem sit
-              incididunt id occaecat irure. Lorem sit incididunt id occaecat
-              irure.
+              <p>{currentRow.original.longMessage}.</p>
+              <p>
+                Lorem sit incididunt id occaecat irure. Lorem sit incididunt id
+                occaecat irure. Lorem sit incididunt id occaecat irure. Lorem
+                sit incididunt id occaecat irure. Lorem sit incididunt id
+                occaecat irure. Lorem sit incididunt id occaecat irure. Lorem
+                sit incididunt id occaecat irure. Lorem sit incididunt id
+                occaecat irure.
+              </p>
             </div>
           </div>
 
           <div className='Alert-details__affected-contacts'>
-            <p className='Alert-details__heading'>Affected Contacts</p>
+            <h4 className='Alert-details__heading'>Affected Contacts</h4>
             <AffectedContacts />
           </div>
         </DetailsCommonGrid>
