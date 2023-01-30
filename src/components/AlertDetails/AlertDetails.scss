@@ -6,7 +6,7 @@
     ::part(form-field) {
       align-items: center;
       display: grid;
-      grid-template-columns: 30% 70%;
+      grid-template-columns: 40% 60%;
     }
   }
 
@@ -18,7 +18,6 @@
   &__description-text {
     padding: var(--spacing-2);
     background-color: var(--color-background-base-header);
-    font-weight: var(--font-heading-4-font-weight);
     min-height: 79%;
     border: 1px solid var(--color-background-base-default);
   }
