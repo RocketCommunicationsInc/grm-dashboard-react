@@ -5,3 +5,4 @@ export * from './Panel/PanelBody/PanelBody';
 export * from './Panel/PanelContainer/PanelContainer';
 export * from './Panel/PanelFooter/PanelFooter';
 export * from './Panel/PanelHeader/PanelHeader';
+export * from './Panel/PanelSubContainer/PanelSubContainer';
