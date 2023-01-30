@@ -74,7 +74,7 @@ const AlertDetails = ({ currentRow, setPage }) => {
             </div>
           </div>
 
-          <div>
+          <div className='Alert-details__affected-contacts'>
             <p className='Alert-details__heading'>Affected Contacts</p>
             <AffectedContacts />
           </div>
