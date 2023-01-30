@@ -1,28 +1,4 @@
 .Alert-details {
-  &__general-details {
-    padding: 0.5rem 0.9375rem;
-    overflow: auto;
-
-    ::part(form-field) {
-      align-items: center;
-      display: grid;
-      grid-template-columns: 30% 70%;
-    }
-  }
-
-  &__description-container {
-    padding: 0.5rem 0.9375rem;
-    overflow: auto;
-  }
-
-  &__description-text {
-    padding: 0.5rem;
-    background-color: var(--color-background-base-header);
-    font-weight: var(--font-heading-4-font-weight);
-    min-height: 79%;
-    border: 1px solid var(--color-palette-neutral-1000);
-  }
-
   &__table-heading-container {
     display: flex;
   }
@@ -60,11 +36,11 @@
 
   &__input {
     padding-bottom: 1rem;
-  }
 
-  &__heading {
-    padding-bottom: 0.3rem;
-    font-weight: var(--font-heading-4-font-weight);
-    font-size: var(--font-heading-4-font-size);
+    &::part(form-field) {
+      align-items: center;
+      display: grid;
+      grid-template-columns: 30% 70%;
+    }
   }
 }

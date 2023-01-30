@@ -8,6 +8,7 @@ import {
   PanelContainer,
   PanelFooter,
   PanelHeader,
+  PanelSubContainer,
 } from '../../common';
 import './AlertDetails.scss';
 
@@ -25,7 +26,7 @@ const AlertDetails = ({ currentRow, setPage }) => {
 
       <PanelBody>
         <DetailsCommonGrid>
-          <div className='Alert-details__general-details'>
+          <PanelSubContainer bodyClassName='p-4'>
             <RuxInput
               className='Alert-details__input'
               label='Severity'
@@ -57,22 +58,18 @@ const AlertDetails = ({ currentRow, setPage }) => {
               readonly
               size='small'
             />
-          </div>
+          </PanelSubContainer>
 
-          <div className='Alert-details__description-container'>
-            <p className='Alert-details__heading'>Description</p>
-            <div className='Alert-details__description-text'>
-              {currentRow.original.longMessage}
-              <br />
-              <br />
-              Lorem sit incididunt id occaecat irure. Lorem sit incididunt id
-              occaecat irure. Lorem sit incididunt id occaecat irure. Lorem sit
-              incididunt id occaecat irure. Lorem sit incididunt id occaecat
-              irure. Lorem sit incididunt id occaecat irure. Lorem sit
-              incididunt id occaecat irure. Lorem sit incididunt id occaecat
-              irure.
-            </div>
-          </div>
+          <PanelSubContainer heading='Description' bodyClassName='p-4'>
+            {currentRow.original.longMessage}
+            <br />
+            <br />
+            Lorem sit incididunt id occaecat irure. Lorem sit incididunt id
+            occaecat irure. Lorem sit incididunt id occaecat irure. Lorem sit
+            incididunt id occaecat irure. Lorem sit incididunt id occaecat
+            irure. Lorem sit incididunt id occaecat irure. Lorem sit incididunt
+            id occaecat irure. Lorem sit incididunt id occaecat irure.
+          </PanelSubContainer>
 
           <div className='Alert-details__affected-contacts'>
             <p className='Alert-details__heading'>Affected Contacts</p>
