@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   RuxButton,
   RuxInput,
@@ -11,6 +12,7 @@ import PanelHeader from '../../common/PanelHeader/PanelHeader';
 import './ContactDetails.scss';
 
 const ContactDetails = () => {
+  const [isEditing, setIsEditing] = useState(false);
   const events = [];
   events.length = 100;
 
@@ -41,7 +43,7 @@ const ContactDetails = () => {
       <div className='Contact-details-grid'>
         <section className='Contact-details-grid__details'>
           <form>
-            <DetailsGrid details={generalDetails} isEditing={false} />
+            <DetailsGrid details={generalDetails} isEditing={isEditing} />
           </form>
         </section>
 
@@ -164,7 +166,11 @@ const ContactDetails = () => {
       </div>
       <footer>
         <RuxButton secondary>Cancel</RuxButton>
-        <RuxButton>Modify</RuxButton>
+        {isEditing ? (
+          <RuxButton onClick={() => setIsEditing(false)}>Save</RuxButton>
+        ) : (
+          <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
+        )}
       </footer>
     </div>
   );
