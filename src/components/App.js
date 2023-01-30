@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { RuxTab, RuxTabs } from '@astrouxds/react';
 
+import { BreadcrumbNav } from '../common';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
-import BreadcrumbNav from './BreadcrumbNav/BreadcrumbNav';
-import AlertDetails from './AlertsPanel/AlertDetails';
-import ContactDetails from './AlertsPanel/ContactDetails';
+import AlertDetails from './AlertDetails/AlertDetails';
+import ContactDetails from './ContactDetails/ContactDetails';
 import AlertsPanel from './AlertsPanel/AlertsPanel';
 import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
 import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
@@ -28,10 +28,10 @@ const App = () => {
           <GlobalStatusBar />
           <BreadcrumbNav links={links} />
           <main className='Alert-details-grid'>
-            <section className='Alert-details-grid__top-panel'>
+            <section>
               <AlertDetails setPage={setPage} currentRow={currentRow} />
             </section>
-            <section className='Alert-details-grid__bottom-panel'>
+            <section>
               <ContactDetails />
             </section>
           </main>
