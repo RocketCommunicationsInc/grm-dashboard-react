@@ -111,6 +111,30 @@ const ContactDetails = () => {
       ),
     },
   ];
+
+  const antDetails = [
+    {
+      id: 1,
+      label: 'Parameter',
+      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+    },
+    {
+      id: 2,
+      label: 'Parameter',
+      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+    },
+    {
+      id: 3,
+      label: 'Parameter',
+      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+    },
+    {
+      id: 4,
+      label: 'Parameter',
+      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+    },
+  ];
+
   return (
     <PanelContainer>
       <PanelHeader heading='Contact Details' />
@@ -196,30 +220,7 @@ const ContactDetails = () => {
                 <div>
                   <header>ANT1 Details</header>
 
-                  <RuxInput
-                    label='Param'
-                    value='#Value#'
-                    disabled
-                    size='small'
-                  />
-                  <RuxInput
-                    label='Param'
-                    value='#Value#'
-                    disabled
-                    size='small'
-                  />
-                  <RuxInput
-                    label='Param'
-                    value='#Value#'
-                    disabled
-                    size='small'
-                  />
-                  <RuxInput
-                    label='Param'
-                    value='#Value#'
-                    disabled
-                    size='small'
-                  />
+                  <DetailsGrid details={antDetails} />
                 </div>
 
                 <div className='affected-contacts'>
