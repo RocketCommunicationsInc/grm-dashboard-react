@@ -1,5 +1,4 @@
 import { RuxButton, RuxInput } from '@astrouxds/react';
-
 import { capitalize, formatReadableTime } from '../../util/util';
 import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
 import {
@@ -8,6 +7,7 @@ import {
   PanelContainer,
   PanelFooter,
   PanelHeader,
+  AffectedContacts,
 } from '../../common';
 import './AlertDetails.scss';
 
@@ -74,29 +74,9 @@ const AlertDetails = ({ currentRow, setPage }) => {
             </div>
           </div>
 
-          <div className='Alert-details__affected-contacts'>
+          <div>
             <p className='Alert-details__heading'>Affected Contacts</p>
-
-            <div className='Alert-details__table-heading-container'>
-              <div className='Alert-details__table-heading'>Iron (number)</div>
-              <div className='Alert-details__table-heading'>GS (number)</div>
-              <div className='Alert-details__table-heading'>REV (number)</div>
-            </div>
-
-            <ul className='Alert-details__table-rows'>
-              <li>
-                <div>1</div> <div>1234</div> <div>12</div>
-              </li>
-              <li>
-                <div>2</div> <div>1234</div> <div>12</div>
-              </li>
-              <li>
-                <div>3</div> <div>1234</div> <div>12</div>
-              </li>
-              <li>
-                <div>4</div> <div>1234</div> <div>12</div>
-              </li>
-            </ul>
+            <AffectedContacts />
           </div>
         </DetailsCommonGrid>
       </PanelBody>

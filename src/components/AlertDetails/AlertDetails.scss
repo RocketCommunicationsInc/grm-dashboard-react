@@ -23,39 +23,9 @@
     border: 1px solid var(--color-palette-neutral-1000);
   }
 
-  &__table-heading-container {
-    display: flex;
-  }
-
-  &__table-heading {
-    background-color: var(--color-background-surface-header);
-    border-top: 1px solid var(--color-background-base-default);
-    padding: var(--spacing-2);
-    padding-right: var(--spacing-6);
-    border: 1px solid var(--color-palette-neutral-1000);
-    height: 2.625rem;
-    width: 33.3%;
-  }
-
   &__affected-contacts {
     padding: 0.5rem 0.9375rem;
     overflow: auto;
-
-    ul {
-      border: 1px solid var(--color-background-base-default);
-    }
-
-    li {
-      align-items: center;
-      display: grid;
-      gap: var(--spacing-2);
-      grid-template-columns: repeat(3, 1fr);
-      padding: var(--spacing-2);
-
-      &:last-child {
-        border-bottom: none;
-      }
-    }
   }
 
   &__input {
