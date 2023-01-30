@@ -1,5 +1,6 @@
+import { setClassName } from '../../../util';
 import './PanelBody.scss';
 
-export const PanelBody = ({ children }) => (
-  <div className='Panel-body'>{children}</div>
+export const PanelBody = ({ children, className }) => (
+  <div className={setClassName('Panel-body', className)}>{children}</div>
 );

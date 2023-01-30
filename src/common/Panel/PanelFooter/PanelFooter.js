@@ -1,5 +1,8 @@
+import { setClassName } from '../../../util';
 import './PanelFooter.scss';
 
-export const PanelFooter = ({ children }) => (
-  <footer className='Panel-footer'>{children}</footer>
+export const PanelFooter = ({ children, className }) => (
+  <footer className={setClassName('Panel-footer', className)}>
+    {children}
+  </footer>
 );
