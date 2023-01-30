@@ -1,7 +1,7 @@
 import { Fragment } from 'react';
 import './BreadcrumbNav.scss';
 
-const BreadcrumbNav = ({ links }) => (
+export const BreadcrumbNav = ({ links }) => (
   <nav className='Breadcrumb-nav'>
     {links.map(({ href, title }, i) => {
       const last = links.length === i + 1;
@@ -21,5 +21,3 @@ const BreadcrumbNav = ({ links }) => (
     })}
   </nav>
 );
-
-export default BreadcrumbNav;
