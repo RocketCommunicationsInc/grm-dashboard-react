@@ -1,40 +1,50 @@
 import { useState } from 'react';
 import { RuxTab, RuxTabs } from '@astrouxds/react';
-import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
+
+import { BreadcrumbNav } from '../common';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
-import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
+import AlertDetails from './AlertDetails/AlertDetails';
+import ContactDetails from './ContactDetails/ContactDetails';
 import AlertsPanel from './AlertsPanel/AlertsPanel';
-import AlertDetails from './AlertsPanel/AlertDetails';
 import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
+import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
+import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import './App.scss';
+
+const links = [
+  { href: '/', title: 'Dashboard' },
+  { href: '/alerts/123', title: 'Alert 123 Details' },
+];
 
 const App = () => {
   const [tab, setTab] = useState('Contacts');
-  const [currentView, setCurrentView] = useState('main');
+  const [page, setPage] = useState('dashboard');
   const [currentRow, setCurrentRow] = useState({});
 
-  switch (currentView) {
-    case 'alertDetailsPage':
+  switch (page) {
+    case 'alert-details':
       return (
         <>
           <GlobalStatusBar />
-          <AlertDetails
-            changeView={(view) => setCurrentView(view)}
-            currentRow={currentRow}
-          />
+          <BreadcrumbNav links={links} />
+          <main className='Alert-details-grid'>
+            <section>
+              <AlertDetails setPage={setPage} currentRow={currentRow} />
+            </section>
+            <section>
+              <ContactDetails />
+            </section>
+          </main>
         </>
       );
 
-    default:
+    case 'dashboard':
       return (
         <>
           <GlobalStatusBar />
           <main className='Dashboard-grid'>
             <aside className='Dashboard-grid__left-panel'>
-              <AlertsPanel
-                changeView={(view) => setCurrentView(view)}
-                setCurrentRow={(row) => setCurrentRow(row)}
-              />
+              <AlertsPanel setPage={setPage} setCurrentRow={setCurrentRow} />
             </aside>
             <nav className='Dashboard-grid__tabs-bar'>
               <RuxTabs small onRuxselected={(e) => setTab(e.detail.innerText)}>
@@ -59,6 +69,9 @@ const App = () => {
           </main>
         </>
       );
+
+    default:
+      throw new Error(`Unhandled page case: ${page}`);
   }
 };
 

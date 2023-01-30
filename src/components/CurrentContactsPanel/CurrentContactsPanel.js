@@ -1,7 +1,7 @@
 import { RuxIcon, RuxOption, RuxSelect } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
-import PanelHeader from '../../common/PanelHeader/PanelHeader';
+import { PanelHeader } from '../../common';
 import useCurrentContactsPanel from './useCurrentContactsPanel';
 import CurrentContactsPanelItem from './CurrentContactsPaneltem';
 import './CurrentContactsPanel.scss';

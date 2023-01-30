@@ -1,0 +1,6 @@
+.Details-common-grid {
+  display: grid;
+  height: 100%;
+  gap: var(--spacing-3);
+  grid-template-columns: 2fr 3fr 3fr;
+}

@@ -1,24 +1,30 @@
 import { RuxButton, RuxInput } from '@astrouxds/react';
-import ContactDetails from './ContactDetails';
-import PanelHeader from '../../common/PanelHeader/PanelHeader';
-import useAlertsPanel from './useAlertsPanel';
+
 import { capitalize, formatReadableTime } from '../../util/util';
+import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
+import {
+  DetailsCommonGrid,
+  PanelBody,
+  PanelContainer,
+  PanelFooter,
+  PanelHeader,
+} from '../../common';
 import './AlertDetails.scss';
 
-const AlertDetails = ({ changeView, currentRow }) => {
+const AlertDetails = ({ currentRow, setPage }) => {
   const { dismissAcknowledgeAlerts } = useAlertsPanel();
 
-  const handleClick = (page, currentRow) => {
+  const handleClick = () => {
     dismissAcknowledgeAlerts(currentRow);
-    changeView(page);
+    setPage('dashboard');
   };
 
   return (
-    <div className='Alert-details-grid'>
-      <section className='Alert-details-grid__top-panel'>
-        <PanelHeader heading={'Alert Details'} />
+    <PanelContainer>
+      <PanelHeader heading='Alert Details' />
 
-        <div className='Alert-details__sub-grid'>
+      <PanelBody>
+        <DetailsCommonGrid>
           <div className='Alert-details__general-details'>
             <RuxInput
               className='Alert-details__input'
@@ -52,6 +58,7 @@ const AlertDetails = ({ changeView, currentRow }) => {
               size='small'
             />
           </div>
+
           <div className='Alert-details__description-container'>
             <p className='Alert-details__heading'>Description</p>
             <div className='Alert-details__description-text'>
@@ -66,6 +73,7 @@ const AlertDetails = ({ changeView, currentRow }) => {
               irure.
             </div>
           </div>
+
           <div className='Alert-details__affected-contacts'>
             <p className='Alert-details__heading'>Affected Contacts</p>
 
@@ -90,28 +98,16 @@ const AlertDetails = ({ changeView, currentRow }) => {
               </li>
             </ul>
           </div>
-        </div>
-        <div className='Alert-details__actions'>
-          <RuxButton
-            size='small'
-            secondary
-            onClick={() => handleClick('main', currentRow)}
-          >
-            Dismiss
-          </RuxButton>
-          <RuxButton
-            size='small'
-            onClick={() => handleClick('main', currentRow)}
-          >
-            Acknowledge
-          </RuxButton>
-        </div>
-      </section>
+        </DetailsCommonGrid>
+      </PanelBody>
 
-      <section className='Alert-details-grid__bottom-panel'>
-        <ContactDetails />
-      </section>
-    </div>
+      <PanelFooter>
+        <RuxButton secondary onClick={handleClick}>
+          Dismiss
+        </RuxButton>
+        <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
+      </PanelFooter>
+    </PanelContainer>
   );
 };
 
