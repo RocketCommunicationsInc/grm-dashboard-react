@@ -47,10 +47,14 @@ p {
   margin: var(--spacing-0);
 }
 
-.Details__common-grid {
-  display: grid;
-  flex: 1;
-  gap: var(--spacing-3);
-  grid-template-columns: 2fr 3fr 3fr;
-  overflow: auto;
+.p-4 {
+  padding: var(--spacing-4);
+}
+
+.flex-end {
+  justify-content: flex-end;
+}
+
+.space-between {
+  justify-content: space-between;
 }
