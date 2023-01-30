@@ -8,7 +8,7 @@ import {
   Legend,
 } from 'chart.js';
 
-import PanelHeader from '../../common/PanelHeader/PanelHeader';
+import { PanelHeader } from '../../common';
 import './ContactsSummaryPanel.scss';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);

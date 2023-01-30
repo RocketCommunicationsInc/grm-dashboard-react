@@ -2,8 +2,9 @@ import { Chart as ChartJS, ArcElement } from 'chart.js';
 import { Fragment, useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+
+import { PanelHeader } from '../../common';
 import './EquipmentStatusPanel.scss';
-import PanelHeader from '../../common/PanelHeader/PanelHeader';
 
 ChartJS.register(ArcElement);
 
