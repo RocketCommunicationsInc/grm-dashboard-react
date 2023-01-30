@@ -1,6 +1,6 @@
+import { useState } from 'react';
 import {
   RuxButton,
-  RuxCheckbox,
   RuxInput,
   RuxMonitoringIcon,
   RuxOption,
@@ -10,6 +10,7 @@ import {
 
 import {
   DetailsCommonGrid,
+  DetailsGrid,
   HStack,
   PanelBody,
   PanelContainer,
@@ -19,8 +20,24 @@ import {
 import './ContactDetails.scss';
 
 const ContactDetails = () => {
+  const [isEditing, setIsEditing] = useState(false);
   const events = [];
   events.length = 100;
+
+  const generalDetails = [
+    { label: 'Priority', value: 'Medium', options: ['Low', 'Medium', 'High'] },
+    { label: 'State', value: 'Upcoming' },
+    { label: 'IRON', value: '77125' },
+    { label: 'Ground Station', value: 'PUMA-C' },
+    { label: 'REV', value: '5429' },
+    { label: 'DOY', value: '27' },
+    { label: 'Start Time', value: 'HH:MM:SS' },
+    { label: 'AOS', value: 'HH:MM:SS' },
+    { label: 'LOS', value: 'HH:MM:SS' },
+    { label: 'Stop Time', value: 'HH:MM:SS' },
+    { label: 'Command Mode', value: 'Automated' },
+    { label: 'Active', value: 'true' },
+  ];
 
   return (
     <PanelContainer>
@@ -35,53 +52,7 @@ const ContactDetails = () => {
         <DetailsCommonGrid className='Contact-details-grid'>
           <section className='Contact-details-grid__details'>
             <form>
-              <RuxSelect label='Priority' size='small' disabled value='medium'>
-                <RuxOption label='Low' value='low' />
-                <RuxOption label='Medium' value='medium' />
-                <RuxOption label='High' value='high' />
-              </RuxSelect>
-
-              <RuxInput label='State' value='Upcoming' disabled size='small' />
-
-              <RuxInput label='IRON' value='77125' disabled size='small' />
-
-              <RuxInput
-                label='Ground Station'
-                value='PUMA-C'
-                disabled
-                size='small'
-              />
-
-              <RuxInput label='REV' value='5429' disabled size='small' />
-
-              <RuxInput label='DOY' value='25' disabled size='small' />
-
-              <RuxInput
-                label='Start Time'
-                value='HH:MM:SS'
-                disabled
-                size='small'
-              />
-
-              <RuxInput label='AOS' value='HH:MM:SS' disabled size='small' />
-
-              <RuxInput label='LOS' value='HH:MM:SS' disabled size='small' />
-
-              <RuxInput
-                label='Stop Time'
-                value='HH:MM:SS'
-                disabled
-                size='small'
-              />
-
-              <RuxInput
-                label='Command Mode'
-                value='Automated'
-                disabled
-                size='small'
-              />
-
-              <RuxCheckbox label='Active' checked disabled />
+              <DetailsGrid details={generalDetails} isEditing={isEditing} />
             </form>
           </section>
 
@@ -186,16 +157,16 @@ const ContactDetails = () => {
                   <header>Affected Contacts (##)</header>
                   <ul>
                     <li>
-                      <div>IRON#</div> <div>GS####</div> <div>REV##</div>
+                      <span>IRON#</span> <span>GS####</span> <span>REV##</span>
                     </li>
                     <li>
-                      <div>IRON#</div> <div>GS####</div> <div>REV##</div>
+                      <span>IRON#</span> <span>GS####</span> <span>REV##</span>
                     </li>
                     <li>
-                      <div>IRON#</div> <div>GS####</div> <div>REV##</div>
+                      <span>IRON#</span> <span>GS####</span> <span>REV##</span>
                     </li>
                     <li>
-                      <div>IRON#</div> <div>GS####</div> <div>REV##</div>
+                      <span>IRON#</span> <span>GS####</span> <span>REV##</span>
                     </li>
                   </ul>
                 </div>
@@ -230,7 +201,11 @@ const ContactDetails = () => {
 
       <PanelFooter>
         <RuxButton secondary>Cancel</RuxButton>
-        <RuxButton>Modify</RuxButton>
+        {isEditing ? (
+          <RuxButton onClick={() => setIsEditing(false)}>Save</RuxButton>
+        ) : (
+          <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
+        )}
       </PanelFooter>
     </PanelContainer>
   );

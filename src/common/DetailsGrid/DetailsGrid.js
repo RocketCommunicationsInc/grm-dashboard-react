@@ -1,6 +1,6 @@
 import { RuxInput, RuxOption, RuxSelect } from '@astrouxds/react';
 
-const DetailsGrid = ({ details, isEditing }) => {
+export const DetailsGrid = ({ details, isEditing }) => {
   if (isEditing) {
     return (
       <>
@@ -42,5 +42,3 @@ const DetailsGrid = ({ details, isEditing }) => {
     </>
   );
 };
-
-export default DetailsGrid;
