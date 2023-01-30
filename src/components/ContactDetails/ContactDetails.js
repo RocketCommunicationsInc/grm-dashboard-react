@@ -96,6 +96,21 @@ const ContactDetails = () => {
     },
   ];
 
+  const configDetails = [
+    {
+      id: 1,
+      label: 'Configuration',
+      node: isEditing ? (
+        <RuxSelect value='B' size='small' label=''>
+          <RuxOption value='A' label='Config A' />
+          <RuxOption value='B' label='Config B' />
+          <RuxOption value='C' label='Config C' />
+        </RuxSelect>
+      ) : (
+        <RuxInput value='Config B' size='small' readonly />
+      ),
+    },
+  ];
   return (
     <PanelContainer>
       <PanelHeader heading='Contact Details' />
@@ -117,11 +132,8 @@ const ContactDetails = () => {
             <header>Equipment String</header>
 
             <form className='equipment-settings'>
-              <RuxSelect label='Configuration' size='small' disabled value='B'>
-                <RuxOption label='Config A' value='A' />
-                <RuxOption label='Config B' value='B' />
-                <RuxOption label='Config C' value='C' />
-              </RuxSelect>
+              <DetailsGrid details={configDetails} />
+
               <div className='icons-list'>
                 ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
                 ENC123
