@@ -5,13 +5,6 @@
     gap: var(--spacing-4);
   }
 
-  rux-select,
-  rux-input::part(form-field) {
-    align-items: center;
-    display: grid;
-    grid-template-columns: 40% 60%;
-  }
-
   &__details {
     padding-left: var(--spacing-4);
   }

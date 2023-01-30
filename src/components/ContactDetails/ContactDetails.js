@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import {
   RuxButton,
+  RuxCheckbox,
   RuxInput,
   RuxMonitoringIcon,
   RuxOption,
@@ -25,18 +26,74 @@ const ContactDetails = () => {
   events.length = 100;
 
   const generalDetails = [
-    { label: 'Priority', value: 'Medium', options: ['Low', 'Medium', 'High'] },
-    { label: 'State', value: 'Upcoming' },
-    { label: 'IRON', value: '77125' },
-    { label: 'Ground Station', value: 'PUMA-C' },
-    { label: 'REV', value: '5429' },
-    { label: 'DOY', value: '27' },
-    { label: 'Start Time', value: 'HH:MM:SS' },
-    { label: 'AOS', value: 'HH:MM:SS' },
-    { label: 'LOS', value: 'HH:MM:SS' },
-    { label: 'Stop Time', value: 'HH:MM:SS' },
-    { label: 'Command Mode', value: 'Automated' },
-    { label: 'Active', value: 'true' },
+    {
+      id: 1,
+      label: 'Priority',
+      node: isEditing ? (
+        <RuxSelect value='Medium' size='small' label=''>
+          <RuxOption value='Low' label='Low' />
+          <RuxOption value='Medium' label='Medium' />
+          <RuxOption value='High' label='High' />
+        </RuxSelect>
+      ) : (
+        <RuxInput value='Medium' size='small' readonly />
+      ),
+    },
+    {
+      id: 2,
+      label: 'State',
+      node: <RuxInput value='Upcoming' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 3,
+      label: 'IRON',
+      node: <RuxInput value='77125' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 4,
+      label: 'Ground Station',
+      node: <RuxInput value='PUMA-C' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 5,
+      label: 'REV',
+      node: <RuxInput value='5429' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 6,
+      label: 'DOY',
+      node: <RuxInput value='27' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 7,
+      label: 'Start Time',
+      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 8,
+      label: 'AOS',
+      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 9,
+      label: 'LOS',
+      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 10,
+      label: 'Stop Time',
+      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 11,
+      label: 'Command Mode',
+      node: <RuxInput value='Automated' readonly={!isEditing} size='small' />,
+    },
+    {
+      id: 12,
+      label: 'Active',
+      node: <RuxCheckbox checked disabled={!isEditing} />,
+    },
   ];
 
   return (
@@ -52,7 +109,7 @@ const ContactDetails = () => {
         <DetailsCommonGrid className='Contact-details-grid'>
           <section className='Contact-details-grid__details'>
             <form>
-              <DetailsGrid details={generalDetails} isEditing={isEditing} />
+              <DetailsGrid details={generalDetails} />
             </form>
           </section>
 
