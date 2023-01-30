@@ -1,0 +1,7 @@
+.Panel-container {
+  background-color: var(--color-background-surface-default);
+  box-shadow: var(--container-color-border) 0 0 0 1px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

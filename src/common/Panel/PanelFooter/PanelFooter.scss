@@ -1,0 +1,8 @@
+.Panel-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--spacing-3);
+  background-color: var(--color-background-surface-header);
+  padding: var(--spacing-4);
+}
