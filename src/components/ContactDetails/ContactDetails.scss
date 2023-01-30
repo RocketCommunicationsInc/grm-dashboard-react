@@ -1,33 +1,4 @@
-.contact-title {
-  align-items: center;
-  display: flex;
-  padding: var(--spacing-4);
-
-  rux-status {
-    margin-right: 0.75rem;
-  }
-}
-.contact-details {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-
-  footer {
-    align-items: center;
-    display: flex;
-    gap: var(--spacing-4);
-    justify-content: flex-end;
-    padding: var(--spacing-4);
-  }
-}
-
 .Contact-details-grid {
-  display: grid;
-  flex: 1;
-  gap: var(--spacing-4);
-  grid-template-columns: 2fr 3fr 3fr;
-  overflow-y: scroll;
-
   form {
     display: flex;
     flex-direction: column;
