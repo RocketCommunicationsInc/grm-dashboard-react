@@ -12,7 +12,7 @@ import {
 import annotationPlugin from 'chartjs-plugin-annotation';
 import { Line } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
-import PanelHeader from '../../common/PanelHeader/PanelHeader';
+import { PanelHeader } from '../../common';
 import './TrendingEquipmentStatusPanel.scss';
 import { RuxSelect, RuxOption } from '@astrouxds/react';
 
