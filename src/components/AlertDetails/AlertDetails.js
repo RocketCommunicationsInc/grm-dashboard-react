@@ -1,5 +1,4 @@
 import { RuxButton, RuxInput } from '@astrouxds/react';
-
 import { capitalize, formatReadableTime } from '../../util/util';
 import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
 import {
@@ -8,9 +7,40 @@ import {
   PanelContainer,
   PanelFooter,
   PanelHeader,
+  AffectedContacts,
   PanelSubContainer,
 } from '../../common';
 import './AlertDetails.scss';
+
+const contacts = [
+  {
+    contactId: 'afafeaf',
+    contactName: 77125,
+    contactGround: 'PUMA-A',
+    contactSatellite: '5429',
+  },
+
+  {
+    contactId: 'afafeafaa',
+    contactName: 77126,
+    contactGround: 'PUMA-B',
+    contactSatellite: '5430',
+  },
+
+  {
+    contactId: 'afafeafbbb',
+    contactName: 77127,
+    contactGround: 'PUMA-C',
+    contactSatellite: '5431',
+  },
+
+  {
+    contactId: 'afafeafccc',
+    contactName: 77128,
+    contactGround: 'PUMA-D',
+    contactSatellite: '5432',
+  },
+];
 
 const AlertDetails = ({ currentRow, setPage }) => {
   const { dismissAcknowledgeAlerts } = useAlertsPanel();
@@ -26,7 +56,7 @@ const AlertDetails = ({ currentRow, setPage }) => {
 
       <PanelBody>
         <DetailsCommonGrid>
-          <PanelSubContainer bodyClassName='p-4'>
+          <PanelSubContainer>
             <RuxInput
               className='Alert-details__input'
               label='Severity'
@@ -60,41 +90,20 @@ const AlertDetails = ({ currentRow, setPage }) => {
             />
           </PanelSubContainer>
 
-          <PanelSubContainer heading='Description' bodyClassName='p-4'>
-            {currentRow.original.longMessage}
-            <br />
-            <br />
-            Lorem sit incididunt id occaecat irure. Lorem sit incididunt id
-            occaecat irure. Lorem sit incididunt id occaecat irure. Lorem sit
-            incididunt id occaecat irure. Lorem sit incididunt id occaecat
-            irure. Lorem sit incididunt id occaecat irure. Lorem sit incididunt
-            id occaecat irure. Lorem sit incididunt id occaecat irure.
+          <PanelSubContainer heading='Description'>
+            <p>{currentRow.original.longMessage}.</p>
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
           </PanelSubContainer>
 
-          <div className='Alert-details__affected-contacts'>
-            <p className='Alert-details__heading'>Affected Contacts</p>
-
-            <div className='Alert-details__table-heading-container'>
-              <div className='Alert-details__table-heading'>Iron (number)</div>
-              <div className='Alert-details__table-heading'>GS (number)</div>
-              <div className='Alert-details__table-heading'>REV (number)</div>
-            </div>
-
-            <ul className='Alert-details__table-rows'>
-              <li>
-                <div>1</div> <div>1234</div> <div>12</div>
-              </li>
-              <li>
-                <div>2</div> <div>1234</div> <div>12</div>
-              </li>
-              <li>
-                <div>3</div> <div>1234</div> <div>12</div>
-              </li>
-              <li>
-                <div>4</div> <div>1234</div> <div>12</div>
-              </li>
-            </ul>
-          </div>
+          <AffectedContacts contacts={contacts} />
         </DetailsCommonGrid>
       </PanelBody>
 

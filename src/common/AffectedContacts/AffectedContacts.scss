@@ -1,0 +1,13 @@
+.Affected-contacts {
+  ul {
+    border: 1px solid var(--color-background-base-default);
+  }
+
+  li {
+    padding: var(--spacing-2);
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}

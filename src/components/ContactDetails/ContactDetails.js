@@ -17,8 +17,39 @@ import {
   PanelContainer,
   PanelFooter,
   PanelHeader,
+  AffectedContacts,
 } from '../../common';
 import './ContactDetails.scss';
+
+const contacts = [
+  {
+    contactId: 'afafeaf',
+    contactName: 77125,
+    contactGround: 'PUMA-A',
+    contactSatellite: '5429',
+  },
+
+  {
+    contactId: 'afafeafaa',
+    contactName: 77126,
+    contactGround: 'PUMA-B',
+    contactSatellite: '5430',
+  },
+
+  {
+    contactId: 'afafeafbbb',
+    contactName: 77127,
+    contactGround: 'PUMA-C',
+    contactSatellite: '5431',
+  },
+
+  {
+    contactId: 'afafeafccc',
+    contactName: 77128,
+    contactGround: 'PUMA-D',
+    contactSatellite: '5432',
+  },
+];
 
 const ContactDetails = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -206,23 +237,7 @@ const ContactDetails = () => {
                   <DetailsGrid details={antDetails} />
                 </div>
 
-                <div className='affected-contacts'>
-                  <header>Affected Contacts (##)</header>
-                  <ul>
-                    <li>
-                      <span>IRON#</span> <span>GS####</span> <span>REV##</span>
-                    </li>
-                    <li>
-                      <span>IRON#</span> <span>GS####</span> <span>REV##</span>
-                    </li>
-                    <li>
-                      <span>IRON#</span> <span>GS####</span> <span>REV##</span>
-                    </li>
-                    <li>
-                      <span>IRON#</span> <span>GS####</span> <span>REV##</span>
-                    </li>
-                  </ul>
-                </div>
+                <AffectedContacts contacts={contacts} />
               </div>
             </form>
           </section>

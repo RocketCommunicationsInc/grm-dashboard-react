@@ -2,14 +2,12 @@ import { setClassName } from '../../../util';
 import './PanelSubContainer.scss';
 
 export const PanelSubContainer = (props) => {
-  const { children, bodyClassName, containerClassName, heading } = props;
+  const { children, className, heading } = props;
 
   return (
-    <div className={setClassName('Panel-sub-container', containerClassName)}>
+    <div className={setClassName('Panel-sub-container', className)}>
       {heading && <h3>{heading}</h3>}
-      <div className={setClassName('Panel-sub-container__body', bodyClassName)}>
-        {children}
-      </div>
+      <div className='Panel-sub-container__body'>{children}</div>
     </div>
   );
 };
