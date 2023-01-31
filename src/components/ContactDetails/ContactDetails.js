@@ -27,7 +27,6 @@ const ContactDetails = () => {
 
   const generalDetails = [
     {
-      id: 1,
       label: 'Priority',
       node: isEditing ? (
         <RuxSelect value='Medium' size='small' label=''>
@@ -40,57 +39,46 @@ const ContactDetails = () => {
       ),
     },
     {
-      id: 2,
       label: 'State',
       node: <RuxInput value='Upcoming' readonly={!isEditing} size='small' />,
     },
     {
-      id: 3,
       label: 'IRON',
       node: <RuxInput value='77125' readonly={!isEditing} size='small' />,
     },
     {
-      id: 4,
       label: 'Ground Station',
       node: <RuxInput value='PUMA-C' readonly={!isEditing} size='small' />,
     },
     {
-      id: 5,
       label: 'REV',
       node: <RuxInput value='5429' readonly={!isEditing} size='small' />,
     },
     {
-      id: 6,
       label: 'DOY',
       node: <RuxInput value='27' readonly={!isEditing} size='small' />,
     },
     {
-      id: 7,
       label: 'Start Time',
       node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
     },
     {
-      id: 8,
       label: 'AOS',
       node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
     },
     {
-      id: 9,
       label: 'LOS',
       node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
     },
     {
-      id: 10,
       label: 'Stop Time',
       node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
     },
     {
-      id: 11,
       label: 'Command Mode',
       node: <RuxInput value='Automated' readonly={!isEditing} size='small' />,
     },
     {
-      id: 12,
       label: 'Active',
       node: <RuxCheckbox checked disabled={!isEditing} />,
     },
@@ -98,7 +86,6 @@ const ContactDetails = () => {
 
   const configDetails = [
     {
-      id: 1,
       label: 'Configuration',
       node: isEditing ? (
         <RuxSelect value='B' size='small' label=''>
@@ -114,22 +101,18 @@ const ContactDetails = () => {
 
   const antDetails = [
     {
-      id: 1,
       label: 'Parameter',
       node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
     },
     {
-      id: 2,
       label: 'Parameter',
       node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
     },
     {
-      id: 3,
       label: 'Parameter',
       node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
     },
     {
-      id: 4,
       label: 'Parameter',
       node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
     },

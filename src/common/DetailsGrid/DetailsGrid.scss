@@ -1,11 +1,6 @@
 .Details-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-2);
-
-  &__item {
-    align-items: flex-start;
-    display: grid;
-    grid-template-columns: 40% 60%;
-  }
+  align-items: flex-start;
+  display: grid;
+  gap: var(--spacing-2) var(--spacing-0);
+  grid-template-columns: 40% 60%;
 }
