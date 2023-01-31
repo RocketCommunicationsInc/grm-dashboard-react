@@ -19,7 +19,7 @@ const categories = [
   { label: 'Spacecraft', value: 'spacecraft' },
 ];
 
-const AlertsPanel = () => {
+const AlertsPanel = ({ setCurrentRow, setPage }) => {
   const {
     getHeaderGroups,
     handleAction,
@@ -73,7 +73,12 @@ const AlertsPanel = () => {
         <>
           <ul className='Alerts-panel__list'>
             {rows.map((row) => (
-              <AlertsPanelItem key={row.id} row={row} />
+              <AlertsPanelItem
+                key={row.id}
+                row={row}
+                setCurrentRow={setCurrentRow}
+                setPage={setPage}
+              />
             ))}
           </ul>
 

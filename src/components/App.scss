@@ -33,3 +33,12 @@
     box-shadow: var(--container-color-border) 0 0 0 1px;
   }
 }
+
+.Alert-details-grid {
+  display: grid;
+  // Screen height minus the height of the GlobalStatusBar & BreadcrumbNav
+  height: calc(100vh - 10.1875rem);
+  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
+  gap: var(--spacing-3);
+  grid-template-rows: minmax(16rem, 45%) minmax(20rem, 1fr);
+}
