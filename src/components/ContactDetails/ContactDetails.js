@@ -15,6 +15,8 @@ import {
   PanelContainer,
   PanelFooter,
   PanelHeader,
+  AffectedContacts,
+  PanelSubContainer,
 } from '../../common';
 import './ContactDetails.scss';
 
@@ -182,23 +184,12 @@ const ContactDetails = () => {
                   />
                 </div>
 
-                <div className='affected-contacts'>
-                  <header>Affected Contacts (##)</header>
-                  <ul>
-                    <li>
-                      <div>IRON#</div> <div>GS####</div> <div>REV##</div>
-                    </li>
-                    <li>
-                      <div>IRON#</div> <div>GS####</div> <div>REV##</div>
-                    </li>
-                    <li>
-                      <div>IRON#</div> <div>GS####</div> <div>REV##</div>
-                    </li>
-                    <li>
-                      <div>IRON#</div> <div>GS####</div> <div>REV##</div>
-                    </li>
-                  </ul>
-                </div>
+                <PanelSubContainer
+                  heading='Affected Contacts'
+                  bodyClassName='p-4'
+                >
+                  <AffectedContacts />
+                </PanelSubContainer>
               </div>
             </form>
           </section>

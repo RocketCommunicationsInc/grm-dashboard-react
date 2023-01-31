@@ -72,10 +72,9 @@ const AlertDetails = ({ currentRow, setPage }) => {
             </p>
           </PanelSubContainer>
 
-          <div className='Alert-details__affected-contacts'>
-            <h4 className='Alert-details__heading'>Affected Contacts</h4>
+          <PanelSubContainer heading='Affected Contacts' bodyClassName='p-4'>
             <AffectedContacts />
-          </div>
+          </PanelSubContainer>
         </DetailsCommonGrid>
       </PanelBody>
 
