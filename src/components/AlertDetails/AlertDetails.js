@@ -12,6 +12,36 @@ import {
 } from '../../common';
 import './AlertDetails.scss';
 
+const contacts = [
+  {
+    contactId: 'afafeaf',
+    contactName: 77125,
+    contactGround: 'PUMA-A',
+    contactSatellite: '5429',
+  },
+
+  {
+    contactId: 'afafeafaa',
+    contactName: 77126,
+    contactGround: 'PUMA-B',
+    contactSatellite: '5430',
+  },
+
+  {
+    contactId: 'afafeafbbb',
+    contactName: 77127,
+    contactGround: 'PUMA-C',
+    contactSatellite: '5431',
+  },
+
+  {
+    contactId: 'afafeafccc',
+    contactName: 77128,
+    contactGround: 'PUMA-D',
+    contactSatellite: '5432',
+  },
+];
+
 const AlertDetails = ({ currentRow, setPage }) => {
   const { dismissAcknowledgeAlerts } = useAlertsPanel();
 
@@ -26,7 +56,7 @@ const AlertDetails = ({ currentRow, setPage }) => {
 
       <PanelBody>
         <DetailsCommonGrid>
-          <PanelSubContainer bodyClassName='p-4'>
+          <PanelSubContainer>
             <RuxInput
               className='Alert-details__input'
               label='Severity'
@@ -60,21 +90,20 @@ const AlertDetails = ({ currentRow, setPage }) => {
             />
           </PanelSubContainer>
 
-          <PanelSubContainer heading='Description' bodyClassName='p-4'>
+          <PanelSubContainer heading='Description'>
             <p>{currentRow.original.longMessage}.</p>
             <p>
-              Lorem sit incididunt id occaecat irure. Lorem sit incididunt id
-              occaecat irure. Lorem sit incididunt id occaecat irure. Lorem sit
-              incididunt id occaecat irure. Lorem sit incididunt id occaecat
-              irure. Lorem sit incididunt id occaecat irure. Lorem sit
-              incididunt id occaecat irure. Lorem sit incididunt id occaecat
-              irure.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+              reprehenderit in voluptate velit esse cillum dolore eu fugiat
+              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+              sunt in culpa qui officia deserunt mollit anim id est laborum.
             </p>
           </PanelSubContainer>
 
-          <PanelSubContainer heading='Affected Contacts' bodyClassName='p-4'>
-            <AffectedContacts />
-          </PanelSubContainer>
+          <AffectedContacts contacts={contacts} />
         </DetailsCommonGrid>
       </PanelBody>
 

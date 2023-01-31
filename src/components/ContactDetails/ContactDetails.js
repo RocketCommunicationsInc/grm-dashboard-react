@@ -16,9 +16,38 @@ import {
   PanelFooter,
   PanelHeader,
   AffectedContacts,
-  PanelSubContainer,
 } from '../../common';
 import './ContactDetails.scss';
+
+const contacts = [
+  {
+    contactId: 'afafeaf',
+    contactName: 77125,
+    contactGround: 'PUMA-A',
+    contactSatellite: '5429',
+  },
+
+  {
+    contactId: 'afafeafaa',
+    contactName: 77126,
+    contactGround: 'PUMA-B',
+    contactSatellite: '5430',
+  },
+
+  {
+    contactId: 'afafeafbbb',
+    contactName: 77127,
+    contactGround: 'PUMA-C',
+    contactSatellite: '5431',
+  },
+
+  {
+    contactId: 'afafeafccc',
+    contactName: 77128,
+    contactGround: 'PUMA-D',
+    contactSatellite: '5432',
+  },
+];
 
 const ContactDetails = () => {
   const events = [];
@@ -184,12 +213,7 @@ const ContactDetails = () => {
                   />
                 </div>
 
-                <PanelSubContainer
-                  heading='Affected Contacts'
-                  bodyClassName='p-4'
-                >
-                  <AffectedContacts />
-                </PanelSubContainer>
+                <AffectedContacts contacts={contacts} />
               </div>
             </form>
           </section>
