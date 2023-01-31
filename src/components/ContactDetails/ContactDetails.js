@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   RuxButton,
   RuxCheckbox,
@@ -10,6 +11,7 @@ import {
 
 import {
   DetailsCommonGrid,
+  DetailsGrid,
   HStack,
   PanelBody,
   PanelContainer,
@@ -50,8 +52,102 @@ const contacts = [
 ];
 
 const ContactDetails = () => {
+  const [isEditing, setIsEditing] = useState(false);
   const events = [];
   events.length = 100;
+
+  const generalDetails = [
+    {
+      label: 'Priority',
+      node: isEditing ? (
+        <RuxSelect value='Medium' size='small' label=''>
+          <RuxOption value='Low' label='Low' />
+          <RuxOption value='Medium' label='Medium' />
+          <RuxOption value='High' label='High' />
+        </RuxSelect>
+      ) : (
+        <RuxInput value='Medium' size='small' readonly />
+      ),
+    },
+    {
+      label: 'State',
+      node: <RuxInput value='Upcoming' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'IRON',
+      node: <RuxInput value='77125' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'Ground Station',
+      node: <RuxInput value='PUMA-C' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'REV',
+      node: <RuxInput value='5429' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'DOY',
+      node: <RuxInput value='27' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'Start Time',
+      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'AOS',
+      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'LOS',
+      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'Stop Time',
+      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'Command Mode',
+      node: <RuxInput value='Automated' readonly={!isEditing} size='small' />,
+    },
+    {
+      label: 'Active',
+      node: <RuxCheckbox checked disabled={!isEditing} />,
+    },
+  ];
+
+  const configDetails = [
+    {
+      label: 'Configuration',
+      node: isEditing ? (
+        <RuxSelect value='B' size='small' label=''>
+          <RuxOption value='A' label='Config A' />
+          <RuxOption value='B' label='Config B' />
+          <RuxOption value='C' label='Config C' />
+        </RuxSelect>
+      ) : (
+        <RuxInput value='Config B' size='small' readonly />
+      ),
+    },
+  ];
+
+  const antDetails = [
+    {
+      label: 'Parameter',
+      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+    },
+    {
+      label: 'Parameter',
+      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+    },
+    {
+      label: 'Parameter',
+      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+    },
+    {
+      label: 'Parameter',
+      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+    },
+  ];
 
   return (
     <PanelContainer>
@@ -66,53 +162,7 @@ const ContactDetails = () => {
         <DetailsCommonGrid className='Contact-details-grid'>
           <section className='Contact-details-grid__details'>
             <form>
-              <RuxSelect label='Priority' size='small' disabled value='medium'>
-                <RuxOption label='Low' value='low' />
-                <RuxOption label='Medium' value='medium' />
-                <RuxOption label='High' value='high' />
-              </RuxSelect>
-
-              <RuxInput label='State' value='Upcoming' disabled size='small' />
-
-              <RuxInput label='IRON' value='77125' disabled size='small' />
-
-              <RuxInput
-                label='Ground Station'
-                value='PUMA-C'
-                disabled
-                size='small'
-              />
-
-              <RuxInput label='REV' value='5429' disabled size='small' />
-
-              <RuxInput label='DOY' value='25' disabled size='small' />
-
-              <RuxInput
-                label='Start Time'
-                value='HH:MM:SS'
-                disabled
-                size='small'
-              />
-
-              <RuxInput label='AOS' value='HH:MM:SS' disabled size='small' />
-
-              <RuxInput label='LOS' value='HH:MM:SS' disabled size='small' />
-
-              <RuxInput
-                label='Stop Time'
-                value='HH:MM:SS'
-                disabled
-                size='small'
-              />
-
-              <RuxInput
-                label='Command Mode'
-                value='Automated'
-                disabled
-                size='small'
-              />
-
-              <RuxCheckbox label='Active' checked disabled />
+              <DetailsGrid details={generalDetails} />
             </form>
           </section>
 
@@ -120,11 +170,8 @@ const ContactDetails = () => {
             <header>Equipment String</header>
 
             <form className='equipment-settings'>
-              <RuxSelect label='Configuration' size='small' disabled value='B'>
-                <RuxOption label='Config A' value='A' />
-                <RuxOption label='Config B' value='B' />
-                <RuxOption label='Config C' value='C' />
-              </RuxSelect>
+              <DetailsGrid details={configDetails} />
+
               <div className='icons-list'>
                 ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
                 ENC123
@@ -187,30 +234,7 @@ const ContactDetails = () => {
                 <div>
                   <header>ANT1 Details</header>
 
-                  <RuxInput
-                    label='Param'
-                    value='#Value#'
-                    disabled
-                    size='small'
-                  />
-                  <RuxInput
-                    label='Param'
-                    value='#Value#'
-                    disabled
-                    size='small'
-                  />
-                  <RuxInput
-                    label='Param'
-                    value='#Value#'
-                    disabled
-                    size='small'
-                  />
-                  <RuxInput
-                    label='Param'
-                    value='#Value#'
-                    disabled
-                    size='small'
-                  />
+                  <DetailsGrid details={antDetails} />
                 </div>
 
                 <AffectedContacts contacts={contacts} />
@@ -245,7 +269,11 @@ const ContactDetails = () => {
 
       <PanelFooter>
         <RuxButton secondary>Cancel</RuxButton>
-        <RuxButton>Modify</RuxButton>
+        {isEditing ? (
+          <RuxButton onClick={() => setIsEditing(false)}>Save</RuxButton>
+        ) : (
+          <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
+        )}
       </PanelFooter>
     </PanelContainer>
   );
