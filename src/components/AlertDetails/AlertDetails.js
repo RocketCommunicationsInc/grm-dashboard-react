@@ -2,12 +2,13 @@ import { RuxButton, RuxInput } from '@astrouxds/react';
 import { capitalize, formatReadableTime } from '../../util/util';
 import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
 import {
+  AffectedContacts,
   DetailsCommonGrid,
+  DetailsGrid,
   PanelBody,
   PanelContainer,
   PanelFooter,
   PanelHeader,
-  AffectedContacts,
   PanelSubContainer,
 } from '../../common';
 import './AlertDetails.scss';
@@ -50,6 +51,52 @@ const AlertDetails = ({ currentRow, setPage }) => {
     setPage('dashboard');
   };
 
+  const alertGeneralDetails = [
+    {
+      label: 'Severity',
+      node: (
+        <RuxInput
+          value={capitalize(currentRow.original.errorSeverity)}
+          readonly
+          size='small'
+        />
+      ),
+    },
+
+    {
+      label: 'Alert ID',
+      node: (
+        <RuxInput
+          value={currentRow.original.errorMessage.split(' - ')[0]}
+          readonly
+          size='small'
+        />
+      ),
+    },
+
+    {
+      label: 'Category',
+      node: (
+        <RuxInput
+          value={capitalize(currentRow.original.errorCategory)}
+          readonly
+          size='small'
+        />
+      ),
+    },
+
+    {
+      label: 'Time',
+      node: (
+        <RuxInput
+          value={formatReadableTime(currentRow.original.errorTime)}
+          readonly
+          size='small'
+        />
+      ),
+    },
+  ];
+
   return (
     <PanelContainer>
       <PanelHeader heading='Alert Details' />
@@ -57,37 +104,7 @@ const AlertDetails = ({ currentRow, setPage }) => {
       <PanelBody>
         <DetailsCommonGrid>
           <PanelSubContainer>
-            <RuxInput
-              className='Alert-details__input'
-              label='Severity'
-              value={capitalize(currentRow.original.errorSeverity)}
-              readonly
-              size='small'
-            />
-
-            <RuxInput
-              className='Alert-details__input'
-              label='Alert ID'
-              value={currentRow.original.errorMessage.split(' - ')[0]}
-              readonly
-              size='small'
-            />
-
-            <RuxInput
-              className='Alert-details__input'
-              label='Category'
-              value={capitalize(currentRow.original.errorCategory)}
-              readonly
-              size='small'
-            />
-
-            <RuxInput
-              className='Alert-details__input'
-              label='Time'
-              value={formatReadableTime(currentRow.original.errorTime)}
-              readonly
-              size='small'
-            />
+            <DetailsGrid details={alertGeneralDetails} />
           </PanelSubContainer>
 
           <PanelSubContainer heading='Description'>
