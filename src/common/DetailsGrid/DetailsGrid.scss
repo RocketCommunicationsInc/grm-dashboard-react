@@ -1,0 +1,6 @@
+.Details-grid {
+  align-items: flex-start;
+  display: grid;
+  gap: var(--spacing-2) var(--spacing-0);
+  grid-template-columns: 40% 60%;
+}
