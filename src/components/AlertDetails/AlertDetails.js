@@ -11,7 +11,6 @@ import {
   PanelHeader,
   PanelSubContainer,
 } from '../../common';
-import './AlertDetails.scss';
 
 const contacts = [
   {
