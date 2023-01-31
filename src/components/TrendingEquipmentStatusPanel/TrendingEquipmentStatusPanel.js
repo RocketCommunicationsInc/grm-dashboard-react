@@ -27,23 +27,36 @@ ChartJS.register(
   annotationPlugin
 );
 
-export const options = {
+const setOptions = (isAnnotated) => ({
   responsive: true,
   maintainAspectRatio: false,
   animation: false,
   plugins: {
-    annotation: {
-      annotations: {
-        line1: {
-          type: 'line',
-          yMin: 90,
-          yMax: 90,
-          borderColor: 'white',
-          borderWidth: 2,
-          borderDash: [2],
-        },
-      },
-    },
+    annotation: isAnnotated
+      ? {
+          annotations: {
+            line1: {
+              type: 'line',
+              yMin: 90,
+              yMax: 90,
+              borderColor: 'white',
+              borderWidth: 2,
+              borderDash: [2],
+            },
+            label1: {
+              type: 'label',
+              content: 'Usage Threshold',
+              backgroundColor: '#172635',
+              color: 'white',
+              textAlign: 'center',
+              yValue: 80,
+              font: {
+                size: 10,
+              },
+            },
+          },
+        }
+      : undefined,
     datalabels: {
       color: 'white',
       formatter: (val) => (val = ''),
@@ -53,11 +66,6 @@ export const options = {
       },
     },
     legend: { align: 'end', labels: { color: 'white' } },
-    title: {
-      display: true,
-      text: 'Usage Threshold',
-      color: 'white',
-    },
   },
   scales: {
     y: {
@@ -68,7 +76,7 @@ export const options = {
       ticks: { color: 'white' },
     },
   },
-};
+});
 
 const randomIntBetween = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
@@ -122,7 +130,7 @@ const TrendingEquipmentStatusPanel = () => {
   };
 
   return (
-    <div className='trending-equipment-panel'>
+    <>
       <PanelHeader heading='Trending Equipment Status' />
       <div className='trending-equipment-panel__select'>
         <RuxSelect size='small' onRuxchange={handleSelect}>
@@ -132,9 +140,13 @@ const TrendingEquipmentStatusPanel = () => {
         </RuxSelect>
       </div>
       <div className='trending-equipment-panel__chart-wrapper'>
-        <Line plugins={[ChartDataLabels]} options={options} data={data} />
+        <Line
+          plugins={[ChartDataLabels]}
+          options={setOptions(selectedOption === 'Busy')}
+          data={data}
+        />
       </div>
-    </div>
+    </>
   );
 };
 
