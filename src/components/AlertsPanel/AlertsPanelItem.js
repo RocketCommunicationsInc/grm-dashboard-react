@@ -2,14 +2,24 @@ import { Fragment } from 'react';
 import { RuxButton } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
+import { randInt } from '../../util';
+import { randomContact } from '../../data/data';
 import { useDisclosure } from '../../hooks/useDisclosure';
+import { useAppContext } from '../../providers/AppProvider';
 
-const AlertsPanelItem = ({ row, setCurrentRow, setPage }) => {
+const AlertsPanelItem = ({ row }) => {
+  const { state, dispatch } = useAppContext();
   const { getDisclosureProps, getButtonProps } = useDisclosure();
 
-  const handleClick = (page) => {
-    setPage(page);
-    setCurrentRow(row);
+  const handleClick = () => {
+    dispatch({
+      type: 'INVESTIGATE_ALERT',
+      payload: {
+        currentAlert: row.original,
+        currentContact: state.contacts[randInt(0, state.contacts.length - 1)],
+        affectedContacts: Array.from({ length: randInt(2, 6) }, randomContact),
+      },
+    });
   };
 
   return (
@@ -25,9 +35,7 @@ const AlertsPanelItem = ({ row, setCurrentRow, setPage }) => {
         {row.original.longMessage}
 
         <div className='Alerts-panel__investigate-button'>
-          <RuxButton onClick={() => handleClick('alert-details')}>
-            Investigate
-          </RuxButton>
+          <RuxButton onClick={handleClick}>Investigate</RuxButton>
         </div>
       </div>
     </li>
