@@ -25,7 +25,7 @@ const ContactsSummaryPanel = () => {
   });
 
   return (
-    <>
+    <div className='Contacts-summary-panel'>
       <PanelHeader heading='Contacts Summary' />
       <div className='Contacts-summary-panel__chart-wrapper'>
         <Bar
@@ -81,7 +81,7 @@ const ContactsSummaryPanel = () => {
           }}
         />
       </div>
-    </>
+    </div>
   );
 };
 

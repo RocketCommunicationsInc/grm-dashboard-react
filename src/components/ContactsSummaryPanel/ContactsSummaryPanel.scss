@@ -1,6 +1,10 @@
 .Contacts-summary-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   &__chart-wrapper {
-    height: calc(100% - 3.75rem);
+    flex-grow: 1;
     padding: var(--spacing-4);
   }
 }
