@@ -9,12 +9,11 @@ import {
   RuxMonitoringProgressIcon,
   RuxPopUp,
 } from '@astrouxds/react';
+import useGlobalStatusBar from './useGlobarStatusBar';
 import './GlobalStatusBar.scss';
 
-import { useAppContext } from '../../providers/AppProvider';
-
 const GlobalStatusBar = () => {
-  const { state } = useAppContext();
+  const state = useGlobalStatusBar();
 
   return (
     <RuxGlobalStatusBar
@@ -46,7 +45,7 @@ const GlobalStatusBar = () => {
 
       <div className='Global-status-bar__status-indicators' slot='right-side'>
         <RuxMonitoringProgressIcon label='UCA' progress={state.ucaCount} />
-        {Object.keys(state.statusIcons).map((key, i) => (
+        {Object.keys(state.statusIcons).map((key) => (
           <RuxMonitoringIcon
             {...state.statusIcons[key]}
             key={state.statusIcons[key].label}
