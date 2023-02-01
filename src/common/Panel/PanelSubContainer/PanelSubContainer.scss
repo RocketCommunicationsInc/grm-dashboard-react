@@ -11,5 +11,6 @@
     box-shadow: 0 0 0 1px var(--color-border-interactive-muted);
     flex-grow: 1;
     padding: var(--sub-container-body-padding);
+    overflow: auto;
   }
 }
