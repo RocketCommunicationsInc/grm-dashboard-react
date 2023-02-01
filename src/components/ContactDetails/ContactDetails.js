@@ -10,6 +10,7 @@ import {
 } from '@astrouxds/react';
 
 import {
+  AffectedContacts,
   DetailsCommonGrid,
   DetailsGrid,
   HStack,
@@ -17,7 +18,7 @@ import {
   PanelContainer,
   PanelFooter,
   PanelHeader,
-  AffectedContacts,
+  PanelSubContainer,
 } from '../../common';
 import './ContactDetails.scss';
 
@@ -160,24 +161,23 @@ const ContactDetails = () => {
 
       <PanelBody>
         <DetailsCommonGrid className='Contact-details-grid'>
-          <section className='Contact-details-grid__details'>
-            <form>
-              <DetailsGrid details={generalDetails} />
-            </form>
-          </section>
+          <PanelSubContainer>
+            <DetailsGrid details={generalDetails} />
+          </PanelSubContainer>
 
-          <section className='Contact-details-grid__equipment-string'>
-            <header>Equipment String</header>
-
-            <form className='equipment-settings'>
+          <PanelSubContainer
+            heading='Equipment String'
+            className='Contact-details-grid__equipment-string'
+          >
+            <PanelSubContainer className='config-wrapper'>
               <DetailsGrid details={configDetails} />
 
-              <div className='icons-list'>
+              <div>
                 ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
                 ENC123
               </div>
 
-              <div className='icons'>
+              <div>
                 <RuxMonitoringIcon
                   status='caution'
                   icon='antenna'
@@ -205,7 +205,7 @@ const ContactDetails = () => {
                 />
               </div>
 
-              <div className='icons'>
+              <div>
                 <RuxMonitoringIcon
                   status='normal'
                   icon='satellite'
@@ -227,27 +227,21 @@ const ContactDetails = () => {
                   label='ENC123'
                 />
               </div>
+            </PanelSubContainer>
 
-              <hr />
+            <div className='sub-grid'>
+              <PanelSubContainer heading='ANT1 Details'>
+                <DetailsGrid details={antDetails} />
+              </PanelSubContainer>
 
-              <div className='sub-grid'>
-                <div>
-                  <header>ANT1 Details</header>
+              <AffectedContacts contacts={contacts} />
+            </div>
+          </PanelSubContainer>
 
-                  <DetailsGrid details={antDetails} />
-                </div>
-
-                <AffectedContacts contacts={contacts} />
-              </div>
-            </form>
-          </section>
-
-          <section className='Contact-details-grid__event-log'>
-            <header>
-              <div>Event Log</div>
-              <RuxInput placeholder='Filter Log' size='small' label=' ' />
-            </header>
-
+          <PanelSubContainer
+            heading='Event Log'
+            className='Contact-details-grid__event-log'
+          >
             <div className='log-container'>
               <div className='log-header'>
                 <div>Time</div>
@@ -263,7 +257,7 @@ const ContactDetails = () => {
                 ))}
               </ul>
             </div>
-          </section>
+          </PanelSubContainer>
         </DetailsCommonGrid>
       </PanelBody>
 

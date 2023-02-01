@@ -1,6 +1,6 @@
 .Details-grid {
   align-items: flex-start;
   display: grid;
-  gap: var(--spacing-2) var(--spacing-0);
-  grid-template-columns: 40% 60%;
+  gap: var(--spacing-2);
+  grid-template-columns: minmax(7.5rem, 40%) minmax(60%, 1fr);
 }
