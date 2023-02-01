@@ -9,13 +9,10 @@ import {
 } from 'chart.js';
 
 import { PanelHeader } from '../../common';
+import { randInt } from '../../util';
 import './ContactsSummaryPanel.scss';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
-
-const randomIntBetween = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
 
 const ContactsSummaryPanel = () => {
   const hours = new Array(12).fill(new Date().getHours());
@@ -59,22 +56,22 @@ const ContactsSummaryPanel = () => {
             datasets: [
               {
                 label: 'In Progress',
-                data: labels.map(() => randomIntBetween(0, 20)),
+                data: labels.map(() => randInt(0, 20)),
                 backgroundColor: '#938bdb',
               },
               {
                 label: 'Issues',
-                data: labels.map(() => randomIntBetween(0, 20)),
+                data: labels.map(() => randInt(0, 20)),
                 backgroundColor: '#4dacff',
               },
               {
                 label: 'Planned',
-                data: labels.map(() => randomIntBetween(0, 20)),
+                data: labels.map(() => randInt(0, 20)),
                 backgroundColor: '#00c7cb',
               },
               {
                 label: 'Completed',
-                data: labels.map(() => randomIntBetween(0, 20)),
+                data: labels.map(() => randInt(0, 20)),
                 backgroundColor: '#a1e9eb',
               },
             ],
