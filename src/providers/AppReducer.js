@@ -1,57 +1,32 @@
-export const AppReducer = (state, { type, payload }) => {
+export const appReducer = (state, { type, payload }) => {
   switch (type) {
-    case 'UPDATE_UCA': {
-      const ucaCount = state.ucaCount < 100 ? state.ucaCount + 1 : 0;
-      return { ...state, ucaCount };
-    }
-    case 'UPDATE_SOFTWARE': {
+    case 'ADD_ALERT': {
       return {
         ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          software: { ...state.statusIcons.software, notifications: payload },
-        },
+        alerts: [...state.alerts, payload],
       };
     }
-    case 'UPDATE_RF': {
+
+    case 'ADD_CONTACT': {
       return {
         ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          rf: { ...state.statusIcons.rf, notifications: payload },
-        },
+        contacts: [...state.contacts, payload],
       };
     }
-    case 'UPDATE_DIGITAL': {
+
+    case 'DELETE_ALERT': {
+      const errorId = state.currentAlert.errorId;
+
       return {
         ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          digital: { ...state.statusIcons.digital, notifications: payload },
-        },
+        alerts: state.alerts.filter((alert) => alert.errorId !== errorId),
+        page: 'dashboard',
+        currentAlert: null,
+        currentContact: null,
+        affectedContacts: [],
       };
     }
-    case 'UPDATE_COMMS': {
-      return {
-        ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          comms: { ...state.statusIcons.comms, notifications: payload },
-        },
-      };
-    }
-    case 'UPDATE_FACILITIES': {
-      return {
-        ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          facilities: {
-            ...state.statusIcons.facilities,
-            notifications: payload,
-          },
-        },
-      };
-    }
+
     case 'DELETE_ALERTS': {
       const alerts = state.alerts.filter(
         (alert) => !payload.includes(alert.errorId)
@@ -62,20 +37,19 @@ export const AppReducer = (state, { type, payload }) => {
         alerts,
       };
     }
-    case 'ADD_ALERT': {
+
+    case 'INVESTIGATE_ALERT': {
       return {
         ...state,
-        alerts: [...state.alerts, payload],
+        page: 'alert-details',
+        currentAlert: payload.currentAlert,
+        currentContact: payload.currentContact,
+        affectedContacts: payload.affectedContacts,
       };
     }
-    case 'ADD_CONTACT': {
-      return {
-        ...state,
-        contacts: [...state.contacts, payload],
-      };
-    }
+
     default: {
-      throw new Error(`Unknown type: ${type}`);
+      throw new Error(`Unhandled app reducer type: ${type}`);
     }
   }
 };
