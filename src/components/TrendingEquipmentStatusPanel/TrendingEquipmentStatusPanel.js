@@ -130,7 +130,7 @@ const TrendingEquipmentStatusPanel = () => {
   };
 
   return (
-    <>
+    <div className='trending-equipment-panel'>
       <PanelHeader heading='Trending Equipment Status' />
       <div className='trending-equipment-panel__select'>
         <RuxSelect size='small' onRuxchange={handleSelect}>
@@ -146,7 +146,7 @@ const TrendingEquipmentStatusPanel = () => {
           data={data}
         />
       </div>
-    </>
+    </div>
   );
 };
 

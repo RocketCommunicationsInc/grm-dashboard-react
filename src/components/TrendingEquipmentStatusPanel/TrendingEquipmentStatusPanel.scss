@@ -1,11 +1,15 @@
 .trending-equipment-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+
   &__select {
     display: flex;
     flex-direction: row-reverse;
     padding: var(--spacing-4);
   }
   &__chart-wrapper {
-    height: calc(100% - 7.625rem);
+    flex-grow: 1;
     padding: var(--spacing-4);
   }
 }
