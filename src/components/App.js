@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RuxTab, RuxTabs } from '@astrouxds/react';
 
+import { useAppContext } from '../providers/AppProvider';
 import { BreadcrumbNav } from '../common';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import AlertDetails from './AlertDetails/AlertDetails';
@@ -18,10 +19,9 @@ const links = [
 
 const App = () => {
   const [tab, setTab] = useState('Contacts');
-  const [page, setPage] = useState('dashboard');
-  const [currentRow, setCurrentRow] = useState({});
+  const { state } = useAppContext();
 
-  switch (page) {
+  switch (state.page) {
     case 'alert-details':
       return (
         <>
@@ -29,7 +29,7 @@ const App = () => {
           <BreadcrumbNav links={links} />
           <main className='Alert-details-grid'>
             <section>
-              <AlertDetails setPage={setPage} currentRow={currentRow} />
+              <AlertDetails />
             </section>
             <section>
               <ContactDetails />
@@ -44,7 +44,7 @@ const App = () => {
           <GlobalStatusBar />
           <main className='Dashboard-grid'>
             <aside className='Dashboard-grid__left-panel'>
-              <AlertsPanel setPage={setPage} setCurrentRow={setCurrentRow} />
+              <AlertsPanel />
             </aside>
             <nav className='Dashboard-grid__tabs-bar'>
               <RuxTabs small onRuxselected={(e) => setTab(e.detail.innerText)}>
@@ -71,7 +71,7 @@ const App = () => {
       );
 
     default:
-      throw new Error(`Unhandled page case: ${page}`);
+      throw new Error(`Unhandled page case: ${state.page}`);
   }
 };
 
