@@ -1,6 +1,5 @@
 import { initialState } from './AppInitialState';
 
-export const AppReducer = (state, { type, payload }) => {
 export const appReducer = (state, { type, payload }) => {
   switch (type) {
     case 'ADD_ALERT': {
@@ -42,27 +41,15 @@ export const appReducer = (state, { type, payload }) => {
     }
 
     case 'INVESTIGATE_ALERT': {
+      const page = 'alert-details';
+      const errorId = payload.currentAlert.errorId;
+
       return {
         ...state,
         page: 'alert-details',
         currentAlert: payload.currentAlert,
         currentContact: payload.currentContact,
         affectedContacts: payload.affectedContacts,
-      };
-    }
-    case 'ADD_CONTACT': {
-      return {
-        ...state,
-        contacts: [...state.contacts, payload],
-      };
-    }
-
-    case 'INVESTIGATE_ALERT': {
-      const page = 'alert-details';
-      const errorId = payload.currentAlert.errorId;
-
-      return {
-        ...state,
         links: [
           ...state.links,
           { href: `/${page}`, page, title: `Alert ${errorId} Details` },
