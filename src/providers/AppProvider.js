@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
-import { appReducer } from './AppReducer';
-import { initialState } from './AppInitialState';
+import { appReducer } from './appReducer';
+import { initialState } from './appInitialState';
 import { timeoutRepeater } from '../util/util';
 import { getRandomAlert, getRandomContact } from '../data/data';
 
