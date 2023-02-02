@@ -1,6 +1,8 @@
 import { randInt } from '../util/util';
 import contacts from './contacts.json';
 
+export const randomContact = () => contacts[randInt(0, contacts.length - 1)];
+
 let lastAlertId = 1;
 const alertBlueprints = contacts.reduce((alerts, contact) => {
   return alerts.concat(contact.alerts);
@@ -15,7 +17,7 @@ export function getRandomAlert() {
 
 let lastContactId = 1;
 export function getRandomContact() {
-  const bp = contacts[randInt(0, contacts.length - 1)];
+  const bp = randomContact();
   const contact = Object.assign({}, bp);
   delete contact.alerts;
   contact.contactId = lastContactId++;

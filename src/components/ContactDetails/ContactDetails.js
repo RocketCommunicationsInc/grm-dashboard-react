@@ -9,6 +9,7 @@ import {
   RuxStatus,
 } from '@astrouxds/react';
 
+import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
   DetailsCommonGrid,
@@ -22,40 +23,13 @@ import {
 } from '../../common';
 import './ContactDetails.scss';
 
-const contacts = [
-  {
-    contactId: 'afafeaf',
-    contactName: 77125,
-    contactGround: 'PUMA-A',
-    contactSatellite: '5429',
-  },
-
-  {
-    contactId: 'afafeafaa',
-    contactName: 77126,
-    contactGround: 'PUMA-B',
-    contactSatellite: '5430',
-  },
-
-  {
-    contactId: 'afafeafbbb',
-    contactName: 77127,
-    contactGround: 'PUMA-C',
-    contactSatellite: '5431',
-  },
-
-  {
-    contactId: 'afafeafccc',
-    contactName: 77128,
-    contactGround: 'PUMA-D',
-    contactSatellite: '5432',
-  },
-];
-
 const ContactDetails = () => {
+  const { state } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const events = [];
   events.length = 100;
+
+  console.log(state.currentContact);
 
   const generalDetails = [
     {
@@ -234,7 +208,7 @@ const ContactDetails = () => {
                 <DetailsGrid details={antDetails} />
               </PanelSubContainer>
 
-              <AffectedContacts contacts={contacts} />
+              <AffectedContacts contacts={state.affectedContacts} />
             </div>
           </PanelSubContainer>
 
