@@ -1,3 +1,5 @@
+import { initialState } from './AppInitialState';
+
 export const AppReducer = (state, { type, payload }) => {
   switch (type) {
     case 'UPDATE_UCA': {
@@ -72,6 +74,29 @@ export const AppReducer = (state, { type, payload }) => {
       return {
         ...state,
         contacts: [...state.contacts, payload],
+      };
+    }
+
+    case 'INVESTIGATE_ALERT': {
+      const page = 'alert-details';
+      const errorId = payload.currentAlert.errorId;
+
+      return {
+        ...state,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: `Alert Detail ${errorId}` },
+        ],
+      };
+    }
+
+    case 'SET_PAGE': {
+      console.log(payload);
+
+      return {
+        ...state,
+        page: 'dashboard',
+        links: initialState.links,
       };
     }
     default: {
