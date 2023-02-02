@@ -3,11 +3,19 @@ import { RuxButton } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
 import { useDisclosure } from '../../hooks/useDisclosure';
+import { useAppContext } from '../../providers/AppProvider';
 
 const AlertsPanelItem = ({ row, setCurrentRow, setPage }) => {
+  const { dispatch } = useAppContext();
   const { getDisclosureProps, getButtonProps } = useDisclosure();
 
   const handleClick = (page) => {
+    dispatch({
+      type: 'INVESTIGATE_ALERT',
+      payload: {
+        currentAlert: row.original,
+      },
+    });
     setPage(page);
     setCurrentRow(row);
   };
