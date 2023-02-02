@@ -1,4 +1,4 @@
-import { Fragment } from 'react';
+import { RuxBreadcrumb, RuxBreadcrumbItem } from '@astrouxds/react';
 
 import { useAppContext } from '../../providers/AppProvider';
 import './BreadcrumbNav.scss';
@@ -13,25 +13,20 @@ export const BreadcrumbNav = () => {
   };
 
   return (
-    <nav className='Breadcrumb-nav'>
+    <RuxBreadcrumb className='Breadcrumb-nav'>
       {state.links.map(({ href, page, title }, i) => {
-        const last = state.links.length === i + 1;
+        const isLast = state.links.length === i + 1;
 
         return (
-          <Fragment key={href + title}>
-            {!last ? (
-              <>
-                <a href={href} onClick={(e) => handleClick(e, page)}>
-                  {title}
-                </a>
-                <span> / </span>
-              </>
-            ) : (
-              <span>{title}</span>
-            )}
-          </Fragment>
+          <RuxBreadcrumbItem
+            key={page}
+            onClick={handleClick}
+            href={isLast ? undefined : href}
+          >
+            {title}
+          </RuxBreadcrumbItem>
         );
       })}
-    </nav>
+    </RuxBreadcrumb>
   );
 };
