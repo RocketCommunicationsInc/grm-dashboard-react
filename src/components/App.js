@@ -10,6 +10,7 @@ import TrendingEquipmentStatusPanel from './TrendingEquipmentStatusPanel/Trendin
 import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
 import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
+import EquipmentDetailsPanel from './EquipmentDetailsPanel/EquipmentDetailsPanel';
 import './App.scss';
 
 const links = [
@@ -34,6 +35,9 @@ const App = () => {
             </section>
             <section>
               <ContactDetails />
+            </section>
+            <section>
+              <EquipmentDetailsPanel />
             </section>
           </main>
         </>
