@@ -26,6 +26,7 @@ export const appReducer = (state, { type, payload }) => {
         currentAlert: null,
         currentContact: null,
         affectedContacts: [],
+        links: initialState.links,
       };
     }
 
@@ -58,7 +59,8 @@ export const appReducer = (state, { type, payload }) => {
     }
 
     case 'SET_PAGE': {
-      console.log(payload);
+      // add an if check here if you need to set a page besides 'dashboard'
+      // console.log(payload); the payload is the page to set
 
       return {
         ...state,
