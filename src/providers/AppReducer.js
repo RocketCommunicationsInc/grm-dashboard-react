@@ -85,7 +85,7 @@ export const AppReducer = (state, { type, payload }) => {
         ...state,
         links: [
           ...state.links,
-          { href: `/${page}`, page, title: `Alert Detail ${errorId}` },
+          { href: `/${page}`, page, title: `Alert ${errorId} Details` },
         ],
       };
     }
