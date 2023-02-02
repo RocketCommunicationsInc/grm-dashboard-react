@@ -11,6 +11,8 @@ import TrendingEquipmentStatusPanel from './TrendingEquipmentStatusPanel/Trendin
 import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
 import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
+import ContactsList from './ContactsList/ContactsList';
+import ContactsListHeader from './ContactsList/ContactsListHeader';
 import './App.scss';
 
 const App = () => {
@@ -29,6 +31,25 @@ const App = () => {
             </section>
             <section>
               <ContactDetails />
+            </section>
+          </main>
+        </>
+      );
+
+    case 'contacts-list':
+      return (
+        <>
+          <GlobalStatusBar />
+          <BreadcrumbNav />
+          <main className='Contacts-list-panel'>
+            <section className='Contacts-list-panel__container'>
+              <ContactsListHeader />
+
+              <div className='Contacts-list-panel__panels'>
+                <div className='Contacts-list-panel__left-panel'>
+                  <ContactsList />
+                </div>
+              </div>
             </section>
           </main>
         </>

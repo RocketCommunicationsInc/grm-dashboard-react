@@ -1,0 +1,39 @@
+.Contacts-list {
+  overflow: auto;
+  height: calc(100% - 5.25rem);
+
+  &__th-inner {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  table thead tr th:first-child {
+    padding: 0.125rem;
+    width: 0;
+  }
+
+  &__contact-row {
+    td:first-child {
+      padding: 0.125rem;
+      width: 0;
+    }
+
+    &:hover {
+      background-color: var(--color-background-surface-hover);
+      cursor: pointer;
+    }
+
+    &.selected {
+      background-color: var(--color-background-surface-selected);
+
+      td:first-child {
+        background-color: var(--color-background-interactive-default);
+      }
+    }
+  }
+
+  .sorted {
+    color: var(--color-text-interactive-default);
+  }
+}

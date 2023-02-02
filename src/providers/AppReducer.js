@@ -58,6 +58,40 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'INVESTIGATE_CONTACT': {
+      /* Upon clicking/investigating a contact in the Contacts List page, it should take us
+      to a separate Contact Details page, with the Breadcrumb showing
+      "Dashboard / Contact List / Contact Details"
+      */
+      const page = 'contact-details-page';
+      const errorId = payload.currentContact.errorId;
+
+      return {
+        ...state,
+        page: 'contact-details-page',
+        currentContact: payload.currentContact,
+        affectedContacts: payload.affectedContacts,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: `Alert ${errorId} Details` },
+        ],
+      };
+    }
+
+    case 'VIEW_ALL_CONTACTS': {
+      const page = 'contacts-list';
+
+      return {
+        ...state,
+        page: 'contacts-list',
+        contacts: payload.contacts,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: `Contact List` },
+        ],
+      };
+    }
+
     case 'SET_PAGE': {
       // add an if check here if you need to set a page besides 'dashboard'
       // console.log(payload); the payload is the page to set
