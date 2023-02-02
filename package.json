@@ -6,6 +6,7 @@
     "@astrouxds/react": "^7.6.0",
     "@tanstack/react-table": "^8.7.4",
     "chart.js": "^4.1.1",
+    "chartjs-plugin-annotation": "^2.1.2",
     "chartjs-plugin-datalabels": "^2.2.0",
     "react": "^18.2.0",
     "react-chartjs-2": "^5.1.0",

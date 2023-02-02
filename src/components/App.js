@@ -6,6 +6,7 @@ import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import AlertDetails from './AlertDetails/AlertDetails';
 import ContactDetails from './ContactDetails/ContactDetails';
 import AlertsPanel from './AlertsPanel/AlertsPanel';
+import TrendingEquipmentStatusPanel from './TrendingEquipmentStatusPanel/TrendingEquipmentStatusPanel';
 import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
 import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
@@ -63,7 +64,7 @@ const App = () => {
               {tab === 'Contacts' ? (
                 <ContactsSummaryPanel />
               ) : (
-                <div>Equipment Right Bottom Panel Component Here</div>
+                <TrendingEquipmentStatusPanel />
               )}
             </section>
           </main>
