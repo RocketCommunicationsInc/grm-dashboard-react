@@ -1,5 +1,7 @@
 .Details-common-grid {
+  --columns: minmax(22rem, 2fr) minmax(44rem, 4fr) minmax(30rem, 4fr);
+
   display: grid;
   height: 100%;
-  grid-template-columns: 2fr 3fr 3fr;
+  grid-template-columns: var(--columns);
 }

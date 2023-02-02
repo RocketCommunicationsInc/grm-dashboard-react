@@ -55,22 +55,9 @@ const useAlertsPanel = () => {
     setRowSelection({});
   };
 
-  const dismissAcknowledgeAlerts = (row) => {
-    const payload = rows.map(() => {
-      return rows.find((x) => {
-        // eslint-disable-next-line eqeqeq
-        return x.index == row.index;
-      }).original.errorId;
-    });
-
-    dispatch({ type: 'DELETE_ALERTS', payload });
-    setRowSelection({});
-  };
-
   return {
     getHeaderGroups,
     handleAction,
-    dismissAcknowledgeAlerts,
     handleCategory,
     handleSeverity,
     isDisabled,

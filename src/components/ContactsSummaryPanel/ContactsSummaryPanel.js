@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
 import {
@@ -82,4 +83,4 @@ const ContactsSummaryPanel = () => {
   );
 };
 
-export default ContactsSummaryPanel;
+export default memo(ContactsSummaryPanel);
