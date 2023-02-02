@@ -1,3 +1,5 @@
+import { initialState } from './AppInitialState';
+
 export const appReducer = (state, { type, payload }) => {
   switch (type) {
     case 'ADD_ALERT': {
@@ -24,6 +26,7 @@ export const appReducer = (state, { type, payload }) => {
         currentAlert: null,
         currentContact: null,
         affectedContacts: [],
+        links: initialState.links,
       };
     }
 
@@ -39,15 +42,32 @@ export const appReducer = (state, { type, payload }) => {
     }
 
     case 'INVESTIGATE_ALERT': {
+      const page = 'alert-details';
+      const errorId = payload.currentAlert.errorId;
+
       return {
         ...state,
         page: 'alert-details',
         currentAlert: payload.currentAlert,
         currentContact: payload.currentContact,
         affectedContacts: payload.affectedContacts,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: `Alert ${errorId} Details` },
+        ],
       };
     }
 
+    case 'SET_PAGE': {
+      // add an if check here if you need to set a page besides 'dashboard'
+      // console.log(payload); the payload is the page to set
+
+      return {
+        ...state,
+        page: 'dashboard',
+        links: initialState.links,
+      };
+    }
     default: {
       throw new Error(`Unhandled app reducer type: ${type}`);
     }
