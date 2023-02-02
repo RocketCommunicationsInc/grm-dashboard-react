@@ -11,11 +11,6 @@ import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import './App.scss';
 
-const links = [
-  { href: '/', title: 'Dashboard' },
-  { href: '/alerts/123', title: 'Alert 123 Details' },
-];
-
 const App = () => {
   const [tab, setTab] = useState('Contacts');
   const [page, setPage] = useState('dashboard');
@@ -26,7 +21,7 @@ const App = () => {
       return (
         <>
           <GlobalStatusBar />
-          <BreadcrumbNav links={links} />
+          <BreadcrumbNav />
           <main className='Alert-details-grid'>
             <section>
               <AlertDetails setPage={setPage} currentRow={currentRow} />
