@@ -36,4 +36,5 @@ export const initialState = {
   },
   contacts: [],
   alerts: [],
+  links: [{ href: '/', page: 'dashboard', title: 'Dashboard' }],
 };
