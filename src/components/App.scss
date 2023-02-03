@@ -42,28 +42,6 @@
 }
 
 .Contacts-list-panel {
-  height: calc(100vh - 11rem);
-  padding: var(--spacing-4) var(--spacing-6);
-
-  &__container {
-    height: 100%;
-    background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px;
-  }
-
-  &__panels {
-    height: calc(100% - 4.25rem);
-    display: flex;
-  }
-
-  &__left-panel {
-    height: 100%;
-    width: 100%;
-    transition: width 0.2s linear;
-
-    &.isOpen {
-      width: calc(100% - var(--right-panel-width));
-      transition: width 0.3s linear;
-    }
-  }
+  height: calc(100vh - 10.1875rem);
+  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
 }

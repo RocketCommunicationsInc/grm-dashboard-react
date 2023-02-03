@@ -13,6 +13,7 @@ import { randInt } from '../../util';
 import { randomContact } from '../../data/data';
 import { useAppContext } from '../../providers/AppProvider';
 import './ContactsList.scss';
+import { PanelContainer, PanelHeader, PanelBody } from '../../common';
 
 const columnHelper = createColumnHelper();
 
@@ -92,15 +93,15 @@ const columnDefs = [
   }),
 ];
 
-const setColWidth = (index) => {
-  if (index === 0 || index === 1 || index === 2 || index === 4) return 80;
-  if (index === 3) return 140;
-  if (index === 5) return 448;
-  if (index === 6) return 110;
-  if (index === 7) return 70;
-  if (index === 8 || index === 9 || index === 10 || index === 11) return 124;
-  throw new Error('Unhandled col width: ' + index);
-};
+// const setColWidth = (index) => {
+//   if (index === 0 || index === 1 || index === 2 || index === 4) return 80;
+//   if (index === 3) return 140;
+//   if (index === 5) return 448;
+//   if (index === 6) return 110;
+//   if (index === 7) return 70;
+//   if (index === 8 || index === 9 || index === 10 || index === 11) return 124;
+//   throw new Error('Unhandled col width: ' + index);
+// };
 
 const ContactsList = () => {
   const columns = useMemo(() => columnDefs, []);
@@ -125,20 +126,52 @@ const ContactsList = () => {
   };
 
   return (
-    <div className='Contacts-list'>
-      <table>
-        <thead>
+    <PanelContainer>
+      <PanelHeader heading='[State] Contacts 00:00 - 24:00' />
+
+      <PanelBody className='Contacts-list'>
+        <div className='Astro-list'>
           {getHeaderGroups().map(({ headers, id }) => (
-            <tr key={id}>
-              <th />
+            <div className='Astro-list__header-row' key={id}>
               {headers.map(({ id, column, getContext, isPlaceholder }, i) => (
-                <th
-                  className={column.getIsSorted() ? 'sorted' : undefined}
-                  width={setColWidth(i)}
-                  key={id}
-                  onClick={column.getToggleSortingHandler()}
+                <div
+                  style={{
+                    flex:
+                      i === 0
+                        ? 1.2
+                        : i === 1
+                        ? 1
+                        : i === 2
+                        ? 1
+                        : i === 3
+                        ? 1.2
+                        : i === 4
+                        ? 0.8
+                        : i === 5
+                        ? 5
+                        : i === 6
+                        ? 1
+                        : i === 7
+                        ? 1
+                        : i === 8
+                        ? 1
+                        : i === 9
+                        ? 1
+                        : i === 10
+                        ? 1
+                        : i === 11
+                        ? 1
+                        : undefined,
+                  }}
+                  className='Astro-list__header-cell'
                 >
-                  <div className='Contacts-list__th-inner'>
+                  <div
+                    className={classNames({
+                      sorted: column.getIsSorted(),
+                    })}
+                    key={id}
+                    onClick={column.getToggleSortingHandler()}
+                  >
                     <div>
                       {isPlaceholder
                         ? null
@@ -149,32 +182,62 @@ const ContactsList = () => {
                       desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
                     }[column.getIsSorted()] ?? null}
                   </div>
-                </th>
+                </div>
               ))}
-            </tr>
+            </div>
           ))}
-        </thead>
 
-        <tbody>
-          {getRowModel().rows.map(({ id, getVisibleCells, original }) => (
-            <tr
-              key={id}
-              onClick={() => handleSelectContact(original)}
-              className={classNames('Contacts-list__contact-row', {
-                selected: original.contactId === selectedId,
-              })}
-            >
-              <td />
-              {getVisibleCells().map(({ id, column, getContext }, i) => (
-                <td width={setColWidth(i)} key={id}>
-                  {flexRender(column.columnDef.cell, getContext())}
-                </td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+          <ul>
+            {getRowModel().rows.map(({ id, getVisibleCells, original }, i) => (
+              <li
+                key={id}
+                onClick={() => handleSelectContact(original)}
+                className={classNames('Astro-list__row', {
+                  selected: original.contactId === selectedId,
+                })}
+              >
+                {getVisibleCells().map(({ id, column, getContext }, i) => (
+                  <div
+                    style={{
+                      flex:
+                        i === 0
+                          ? 1.2
+                          : i === 1
+                          ? 1
+                          : i === 2
+                          ? 1
+                          : i === 3
+                          ? 1.2
+                          : i === 4
+                          ? 0.8
+                          : i === 5
+                          ? 5
+                          : i === 6
+                          ? 1
+                          : i === 7
+                          ? 1
+                          : i === 8
+                          ? 1
+                          : i === 9
+                          ? 1
+                          : i === 10
+                          ? 1
+                          : i === 11
+                          ? 1
+                          : undefined,
+                    }}
+                    className='Astro-list__cell'
+                    key={id}
+                  >
+                    {flexRender(column.columnDef.cell, getContext())}
+                  </div>
+                ))}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </PanelBody>
+    </PanelContainer>
   );
 };
 
