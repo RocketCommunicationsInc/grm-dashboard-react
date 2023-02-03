@@ -6,16 +6,15 @@ import {
   RuxMonitoringIcon,
   RuxOption,
   RuxSelect,
-  RuxStatus,
 } from '@astrouxds/react';
 
 import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
+  ContactLabel,
   DetailsCommonGrid,
   DetailsGrid,
   EventLog,
-  HStack,
   PanelBody,
   PanelContainer,
   PanelFooter,
@@ -192,10 +191,7 @@ const ContactDetails = () => {
     <PanelContainer>
       <PanelHeader heading='Contact Details' />
 
-      <HStack spacing={3} className='p-4'>
-        <RuxStatus status='serious' />
-        <h2>77125 PUMA-C 5429</h2>
-      </HStack>
+      <ContactLabel contact={contact} />
 
       <PanelBody>
         <DetailsCommonGrid className='Contact-details-grid'>
