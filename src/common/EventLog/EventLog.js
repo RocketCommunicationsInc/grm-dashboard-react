@@ -20,7 +20,7 @@ export const EventLog = memo(({ rowsToShow }) => {
           style={{ maxHeight: `calc(${rowsToShow} * 2.225rem)` }}
         >
           {events.map((event, i) => (
-            <li key={i}>
+            <li key={event.timestamp + i}>
               <RuxDatetime
                 date={new Date(event.timestamp)}
                 hour='2-digit'

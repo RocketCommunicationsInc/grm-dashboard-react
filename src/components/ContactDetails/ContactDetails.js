@@ -22,7 +22,7 @@ import {
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
-import { setHhMmSs } from '../../util/date';
+import { formatReadableTime } from '../../util/util';
 import './ContactDetails.scss';
 
 const ContactDetails = () => {
@@ -35,8 +35,8 @@ const ContactDetails = () => {
       label: 'Priority',
       node: isEditing ? (
         <RuxSelect value={contact.contactPriority} size='small'>
-          {options.priorities.map((option, i) => (
-            <RuxOption key={i} value={option} label={option} />
+          {options.priorities.map((option) => (
+            <RuxOption key={option} value={option} label={option} />
           ))}
         </RuxSelect>
       ) : (
@@ -97,7 +97,7 @@ const ContactDetails = () => {
       label: 'Start Time',
       node: (
         <RuxInput
-          value={setHhMmSs(contact.contactBeginTimestamp)}
+          value={formatReadableTime(contact.contactBeginTimestamp)}
           readonly={!isEditing}
           size='small'
         />
@@ -107,7 +107,7 @@ const ContactDetails = () => {
       label: 'AOS',
       node: (
         <RuxInput
-          value={setHhMmSs(contact.contactAOS)}
+          value={formatReadableTime(contact.contactAOS)}
           readonly={!isEditing}
           size='small'
         />
@@ -117,7 +117,7 @@ const ContactDetails = () => {
       label: 'LOS',
       node: (
         <RuxInput
-          value={setHhMmSs(contact.contactLOS)}
+          value={formatReadableTime(contact.contactLOS)}
           readonly={!isEditing}
           size='small'
         />
@@ -127,7 +127,7 @@ const ContactDetails = () => {
       label: 'Stop Time',
       node: (
         <RuxInput
-          value={setHhMmSs(contact.contactEndTimestamp)}
+          value={formatReadableTime(contact.contactEndTimestamp)}
           readonly={!isEditing}
           size='small'
         />
@@ -137,8 +137,8 @@ const ContactDetails = () => {
       label: 'Command Mode',
       node: isEditing ? (
         <RuxSelect value={contact.contactMode} size='small'>
-          {options.modes.map((option, i) => (
-            <RuxOption key={i} value={option} label={option} />
+          {options.modes.map((option) => (
+            <RuxOption key={option} value={option} label={option} />
           ))}
         </RuxSelect>
       ) : (
