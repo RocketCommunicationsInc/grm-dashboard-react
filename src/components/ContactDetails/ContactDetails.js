@@ -277,7 +277,13 @@ const ContactDetails = () => {
       </PanelBody>
 
       <PanelFooter>
-        <RuxButton secondary>Cancel</RuxButton>
+        <RuxButton
+          secondary
+          disabled={!isEditing}
+          onClick={() => setIsEditing(false)}
+        >
+          Cancel
+        </RuxButton>
         {isEditing ? (
           <RuxButton onClick={() => setIsEditing(false)}>Save</RuxButton>
         ) : (
