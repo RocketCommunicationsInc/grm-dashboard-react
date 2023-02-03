@@ -30,8 +30,6 @@ const ContactDetails = () => {
   const contact = state.currentContact;
   const [isEditing, setIsEditing] = useState(false);
 
-  // console.log(state.currentContact);
-
   const generalDetails = [
     {
       label: 'Priority',
@@ -272,7 +270,7 @@ const ContactDetails = () => {
             </div>
           </PanelSubContainer>
 
-          <EventLog />
+          <EventLog rowsToShow={16} />
         </DetailsCommonGrid>
       </PanelBody>
 
