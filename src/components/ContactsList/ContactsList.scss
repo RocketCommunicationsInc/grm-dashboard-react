@@ -1,23 +1,5 @@
 .Contacts-list {
+  height: 100%;
   overflow: auto;
-  height: calc(100% - 5.25rem);
-
-  .sorted {
-    color: var(--color-text-interactive-default);
-  }
-}
-
-.Astro-list {
-  &__header-row,
-  &__row {
-    display: flex;
-    padding: var(--spacing-2) var(--spacing-4);
-    height: 2.5rem;
-    align-items: center;
-  }
-
-  &__header-row {
-    background-color: var(--color-background-surface-header);
-    box-shadow: var(--shadow-overlay);
-  }
+  background-color: var(--color-background-surface-default);
 }
