@@ -27,7 +27,7 @@ const ContactsSummaryPanel = () => {
 
   const handleClick = () => {
     dispatch({
-      type: 'VIEW_ALL_CONTACTS',
+      type: 'CONTACTS_LIST',
       payload: {
         contacts: state.contacts,
       },

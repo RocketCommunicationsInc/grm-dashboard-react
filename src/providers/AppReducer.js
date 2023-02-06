@@ -64,7 +64,6 @@ export const appReducer = (state, { type, payload }) => {
       "Dashboard / Contact List / Contact Details"
       */
       const page = 'contact-details-page';
-      const errorId = payload.currentContact.errorId;
 
       return {
         ...state,
@@ -73,12 +72,12 @@ export const appReducer = (state, { type, payload }) => {
         affectedContacts: payload.affectedContacts,
         links: [
           ...state.links,
-          { href: `/${page}`, page, title: `Alert ${errorId} Details` },
+          { href: `/${page}`, page, title: `Contact Details` },
         ],
       };
     }
 
-    case 'VIEW_ALL_CONTACTS': {
+    case 'CONTACTS_LIST': {
       const page = 'contacts-list';
 
       return {
@@ -93,8 +92,18 @@ export const appReducer = (state, { type, payload }) => {
     }
 
     case 'SET_PAGE': {
-      // add an if check here if you need to set a page besides 'dashboard'
-      // console.log(payload); the payload is the page to set
+      if (payload === 'contacts-list') {
+        const page = payload;
+
+        return {
+          ...state,
+          page: payload,
+          links: [
+            ...initialState.links,
+            { href: `/${page}`, page, title: `Contact List` },
+          ],
+        };
+      }
 
       return {
         ...state,
