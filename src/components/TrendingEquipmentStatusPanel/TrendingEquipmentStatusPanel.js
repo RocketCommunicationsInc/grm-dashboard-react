@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, memo } from 'react';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -133,4 +133,4 @@ const TrendingEquipmentStatusPanel = () => {
   );
 };
 
-export default TrendingEquipmentStatusPanel;
+export default memo(TrendingEquipmentStatusPanel);

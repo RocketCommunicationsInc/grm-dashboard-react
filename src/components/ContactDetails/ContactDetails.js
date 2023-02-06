@@ -6,83 +6,144 @@ import {
   RuxMonitoringIcon,
   RuxOption,
   RuxSelect,
-  RuxStatus,
 } from '@astrouxds/react';
 
 import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
+  ContactLabel,
   DetailsCommonGrid,
   DetailsGrid,
-  HStack,
+  EventLog,
   PanelBody,
   PanelContainer,
   PanelFooter,
   PanelHeader,
   PanelSubContainer,
 } from '../../common';
+import { options } from '../../data/options';
+import { formatReadableTime } from '../../util/util';
 import './ContactDetails.scss';
 
 const ContactDetails = () => {
   const { state } = useAppContext();
+  const contact = state.currentContact;
   const [isEditing, setIsEditing] = useState(false);
-  const events = [];
-  events.length = 100;
-
-  console.log(state.currentContact);
 
   const generalDetails = [
     {
       label: 'Priority',
       node: isEditing ? (
-        <RuxSelect value='Medium' size='small' label=''>
-          <RuxOption value='Low' label='Low' />
-          <RuxOption value='Medium' label='Medium' />
-          <RuxOption value='High' label='High' />
+        <RuxSelect value={contact.contactPriority} size='small'>
+          {options.priorities.map((option) => (
+            <RuxOption key={option} value={option} label={option} />
+          ))}
         </RuxSelect>
       ) : (
-        <RuxInput value='Medium' size='small' readonly />
+        <RuxInput value={contact.contactPriority} size='small' readonly />
       ),
     },
     {
       label: 'State',
-      node: <RuxInput value='Upcoming' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={contact.contactState}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'IRON',
-      node: <RuxInput value='77125' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={contact.contactName}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'Ground Station',
-      node: <RuxInput value='PUMA-C' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={contact.contactGround}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'REV',
-      node: <RuxInput value='5429' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={contact.contactREV}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'DOY',
-      node: <RuxInput value='27' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={contact.contactDOY}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'Start Time',
-      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={formatReadableTime(contact.contactBeginTimestamp)}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'AOS',
-      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={formatReadableTime(contact.contactAOS)}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'LOS',
-      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={formatReadableTime(contact.contactLOS)}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'Stop Time',
-      node: <RuxInput value='HH:MM:SS' readonly={!isEditing} size='small' />,
+      node: (
+        <RuxInput
+          value={formatReadableTime(contact.contactEndTimestamp)}
+          readonly={!isEditing}
+          size='small'
+        />
+      ),
     },
     {
       label: 'Command Mode',
-      node: <RuxInput value='Automated' readonly={!isEditing} size='small' />,
+      node: isEditing ? (
+        <RuxSelect value={contact.contactMode} size='small'>
+          {options.modes.map((option) => (
+            <RuxOption key={option} value={option} label={option} />
+          ))}
+        </RuxSelect>
+      ) : (
+        <RuxInput value={contact.contactMode} size='small' readonly />
+      ),
     },
     {
       label: 'Active',
@@ -128,10 +189,7 @@ const ContactDetails = () => {
     <PanelContainer>
       <PanelHeader heading='Contact Details' />
 
-      <HStack spacing={3} className='p-4'>
-        <RuxStatus status='serious' />
-        <h2>77125 PUMA-C 5429</h2>
-      </HStack>
+      <ContactLabel contact={contact} />
 
       <PanelBody>
         <DetailsCommonGrid className='Contact-details-grid'>
@@ -212,31 +270,18 @@ const ContactDetails = () => {
             </div>
           </PanelSubContainer>
 
-          <PanelSubContainer
-            heading='Event Log'
-            className='Contact-details-grid__event-log'
-          >
-            <div className='log-container'>
-              <div className='log-header'>
-                <div>Time</div>
-                <div>Event</div>
-              </div>
-
-              <ul className='log-list'>
-                {events.fill('This is an event').map((event, i) => (
-                  <li key={i}>
-                    <div>YYYY DDD HH:MM:SS</div>
-                    <div>{event}</div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </PanelSubContainer>
+          <EventLog rowsToShow={16} />
         </DetailsCommonGrid>
       </PanelBody>
 
       <PanelFooter>
-        <RuxButton secondary>Cancel</RuxButton>
+        <RuxButton
+          secondary
+          disabled={!isEditing}
+          onClick={() => setIsEditing(false)}
+        >
+          Cancel
+        </RuxButton>
         {isEditing ? (
           <RuxButton onClick={() => setIsEditing(false)}>Save</RuxButton>
         ) : (
