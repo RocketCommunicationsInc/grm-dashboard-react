@@ -1,4 +1,5 @@
 export * from './AffectedContacts/AffectedContacts';
+export * from './AstroReactTable/AstroReactTable';
 export * from './BreadcrumbNav/BreadcrumbNav';
 export * from './ContactLabel/ContactLabel';
 export * from './DetailsCommonGrid/DetailsCommonGrid';
