@@ -8,16 +8,24 @@ import {
 import { AstroReactTable } from '../../common';
 import { useAppContext } from '../../providers/AppProvider';
 import { columnDefs } from './ContactsListColumns';
+import { randInt } from '../../util';
+import { randomContact } from '../../data/data';
 import './ContactsList.scss';
 
-const ContactsList = ({ handleAction }) => {
+const ContactsList = () => {
   const columns = useMemo(() => columnDefs, []);
-  const { state } = useAppContext();
+  const { dispatch, state } = useAppContext();
   const selectedId = state.selectedContact?.contactId;
   const handleSelected = (row) => row.contactId === selectedId;
 
   const handleRowClick = (row) => {
-    handleAction('contact-details');
+    dispatch({
+      type: 'INVESTIGATE_CONTACT',
+      payload: {
+        currentContact: row,
+        affectedContacts: Array.from({ length: randInt(2, 6) }, randomContact),
+      },
+    });
   };
 
   const table = useReactTable({

@@ -59,10 +59,6 @@ export const appReducer = (state, { type, payload }) => {
     }
 
     case 'INVESTIGATE_CONTACT': {
-      /* Upon clicking/investigating a contact in the Contacts List page, it should take us
-      to a separate Contact Details page, with the Breadcrumb showing
-      "Dashboard / Contact List / Contact Details"
-      */
       const page = 'contact-details-page';
 
       return {
