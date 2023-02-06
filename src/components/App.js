@@ -34,6 +34,17 @@ const App = () => {
         </>
       );
 
+    case 'contact-details':
+      return (
+        <>
+          <GlobalStatusBar />
+          <BreadcrumbNav />
+          <div className='Contact-details-page'>
+            <ContactDetails />
+          </div>
+        </>
+      );
+
     case 'dashboard':
       return (
         <>
