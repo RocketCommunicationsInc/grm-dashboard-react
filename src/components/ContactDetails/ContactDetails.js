@@ -26,9 +26,12 @@ import { formatReadableTime } from '../../util/util';
 import './ContactDetails.scss';
 
 const ContactDetails = () => {
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const contact = state.currentContact;
   const [isEditing, setIsEditing] = useState(false);
+  const handleClick = () => {
+    dispatch({ type: 'SET_PAGE' });
+  };
 
   const generalDetails = [
     {
@@ -275,11 +278,7 @@ const ContactDetails = () => {
       </PanelBody>
 
       <PanelFooter>
-        <RuxButton
-          secondary
-          disabled={!isEditing}
-          onClick={() => setIsEditing(false)}
-        >
+        <RuxButton secondary onClick={handleClick}>
           Cancel
         </RuxButton>
         {isEditing ? (

@@ -41,6 +41,20 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'DISPLAY_CONTACT_DETAILS': {
+      const page = 'contact-details';
+      return {
+        ...state,
+        page,
+        currentContact: payload.currentContact,
+        affectedContacts: payload.affectedContacts,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: 'Contact Details' },
+        ],
+      };
+    }
+
     case 'INVESTIGATE_ALERT': {
       const page = 'alert-details';
       const errorId = payload.currentAlert.errorId;
