@@ -39,9 +39,9 @@ const App = () => {
         <>
           <GlobalStatusBar />
           <BreadcrumbNav />
-          <div className='Contact-details-page'>
+          <main className='Contact-details-page'>
             <ContactDetails />
-          </div>
+          </main>
         </>
       );
 
