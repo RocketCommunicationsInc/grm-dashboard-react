@@ -9,7 +9,7 @@ const CurrentContactsPanelItem = ({ row }) => {
 
   const handleClick = () => {
     dispatch({
-      type: 'DISPLAY_CONTACT_DETAILS',
+      type: 'INVESTIGATE_CONTACT',
       payload: {
         currentContact: row.original,
         affectedContacts: Array.from({ length: randInt(2, 6) }, randomContact),

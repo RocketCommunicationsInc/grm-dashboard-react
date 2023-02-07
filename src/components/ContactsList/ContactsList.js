@@ -36,7 +36,7 @@ const ContactsList = () => {
   });
 
   return (
-    <div className='Contacts-list'>
+    <div className='Contacts-list-container'>
       <AstroReactTable
         table={table}
         isSortable

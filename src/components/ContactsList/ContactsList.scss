@@ -1,4 +1,10 @@
-.Contacts-list {
+.Contacts-list-panel {
+  // 100vh - (height of global status bar + height of breadcrumb element)
+  height: calc(100vh - 10.25rem);
+  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
+}
+
+.Contacts-list-container {
   height: 100%;
   overflow: auto;
   background-color: var(--color-background-surface-default);

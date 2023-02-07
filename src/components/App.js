@@ -26,7 +26,7 @@ const App = () => {
           <BreadcrumbNav />
           <main className='Alert-details-grid'>
             <AlertDetails />
-            <ContactDetails />={' '}
+            <ContactDetails />
           </main>
         </>
       );
@@ -38,17 +38,6 @@ const App = () => {
           <BreadcrumbNav />
           <main className='Contacts-list-panel'>
             <ContactsList />
-          </main>
-        </>
-      );
-
-    case 'contact-details-page':
-      return (
-        <>
-          <GlobalStatusBar />
-          <BreadcrumbNav />
-          <main className='Contacts-list-panel'>
-            <ContactDetails />
           </main>
         </>
       );
