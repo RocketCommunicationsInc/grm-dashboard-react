@@ -9,5 +9,10 @@
     &:last-child {
       border-bottom: none;
     }
+
+    &:hover {
+      background-color: transparent;
+      cursor: auto;
+    }
   }
 }

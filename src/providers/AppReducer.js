@@ -1,57 +1,35 @@
-export const AppReducer = (state, { type, payload }) => {
+import { initialState } from './AppInitialState';
+
+export const appReducer = (state, { type, payload }) => {
   switch (type) {
-    case 'UPDATE_UCA': {
-      const ucaCount = state.ucaCount < 100 ? state.ucaCount + 1 : 0;
-      return { ...state, ucaCount };
-    }
-    case 'UPDATE_SOFTWARE': {
+    case 'ADD_ALERT': {
       return {
         ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          software: { ...state.statusIcons.software, notifications: payload },
-        },
+        alerts: [...state.alerts, payload],
       };
     }
-    case 'UPDATE_RF': {
+
+    case 'ADD_CONTACT': {
       return {
         ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          rf: { ...state.statusIcons.rf, notifications: payload },
-        },
+        contacts: [...state.contacts, payload],
       };
     }
-    case 'UPDATE_DIGITAL': {
+
+    case 'DELETE_ALERT': {
+      const errorId = state.currentAlert.errorId;
+
       return {
         ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          digital: { ...state.statusIcons.digital, notifications: payload },
-        },
+        alerts: state.alerts.filter((alert) => alert.errorId !== errorId),
+        page: 'dashboard',
+        currentAlert: null,
+        currentContact: null,
+        affectedContacts: [],
+        links: initialState.links,
       };
     }
-    case 'UPDATE_COMMS': {
-      return {
-        ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          comms: { ...state.statusIcons.comms, notifications: payload },
-        },
-      };
-    }
-    case 'UPDATE_FACILITIES': {
-      return {
-        ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          facilities: {
-            ...state.statusIcons.facilities,
-            notifications: payload,
-          },
-        },
-      };
-    }
+
     case 'DELETE_ALERTS': {
       const alerts = state.alerts.filter(
         (alert) => !payload.includes(alert.errorId)
@@ -62,20 +40,36 @@ export const AppReducer = (state, { type, payload }) => {
         alerts,
       };
     }
-    case 'ADD_ALERT': {
+
+    case 'INVESTIGATE_ALERT': {
+      const page = 'alert-details';
+      const errorId = payload.currentAlert.errorId;
+
       return {
         ...state,
-        alerts: [...state.alerts, payload],
+        page: 'alert-details',
+        currentAlert: payload.currentAlert,
+        currentContact: payload.currentContact,
+        affectedContacts: payload.affectedContacts,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: `Alert ${errorId} Details` },
+        ],
       };
     }
-    case 'ADD_CONTACT': {
+
+    case 'SET_PAGE': {
+      // add an if check here if you need to set a page besides 'dashboard'
+      // console.log(payload); the payload is the page to set
+
       return {
         ...state,
-        contacts: [...state.contacts, payload],
+        page: 'dashboard',
+        links: initialState.links,
       };
     }
     default: {
-      throw new Error(`Unknown type: ${type}`);
+      throw new Error(`Unhandled app reducer type: ${type}`);
     }
   }
 };

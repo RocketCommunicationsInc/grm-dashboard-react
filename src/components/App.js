@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { RuxTab, RuxTabs } from '@astrouxds/react';
 
+import { useAppContext } from '../providers/AppProvider';
 import { BreadcrumbNav } from '../common';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import AlertDetails from './AlertDetails/AlertDetails';
@@ -13,25 +14,19 @@ import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import EquipmentDetailsPanel from './EquipmentDetailsPanel/EquipmentDetailsPanel';
 import './App.scss';
 
-const links = [
-  { href: '/', title: 'Dashboard' },
-  { href: '/alerts/123', title: 'Alert 123 Details' },
-];
-
 const App = () => {
   const [tab, setTab] = useState('Contacts');
-  const [page, setPage] = useState('dashboard');
-  const [currentRow, setCurrentRow] = useState({});
+  const { state } = useAppContext();
 
-  switch (page) {
+  switch (state.page) {
     case 'alert-details':
       return (
         <>
           <GlobalStatusBar />
-          <BreadcrumbNav links={links} />
+          <BreadcrumbNav />
           <main className='Alert-details-grid'>
             <section>
-              <AlertDetails setPage={setPage} currentRow={currentRow} />
+              <AlertDetails />
             </section>
             <section>
               <ContactDetails />
@@ -49,7 +44,7 @@ const App = () => {
           <GlobalStatusBar />
           <main className='Dashboard-grid'>
             <aside className='Dashboard-grid__left-panel'>
-              <AlertsPanel setPage={setPage} setCurrentRow={setCurrentRow} />
+              <AlertsPanel />
             </aside>
             <nav className='Dashboard-grid__tabs-bar'>
               <RuxTabs small onRuxselected={(e) => setTab(e.detail.innerText)}>
@@ -76,7 +71,7 @@ const App = () => {
       );
 
     default:
-      throw new Error(`Unhandled page case: ${page}`);
+      throw new Error(`Unhandled page case: ${state.page}`);
   }
 };
 

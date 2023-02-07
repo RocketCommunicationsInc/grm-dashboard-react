@@ -7,8 +7,8 @@ export const AffectedContacts = ({ contacts }) => (
     heading={`Affected Contacts (${contacts.length})`}
   >
     <ul>
-      {contacts.map((c) => (
-        <li key={c.contactId}>
+      {contacts.map((c, i) => (
+        <li key={c.contactId + i}>
           {c.contactName} {c.contactGround} {c.contactSatellite}
         </li>
       ))}

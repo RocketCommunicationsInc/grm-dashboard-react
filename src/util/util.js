@@ -34,3 +34,7 @@ export function timeoutRepeater(callback, minDelay = 1000, maxDelay = 10000) {
     clearTimeout(timeout);
   };
 }
+
+export const randomIndex = (arr) => {
+  return randInt(0, arr.length - 1);
+};

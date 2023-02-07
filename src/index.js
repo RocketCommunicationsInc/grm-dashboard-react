@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client';
 import '@astrouxds/astro-web-components/dist/astro-web-components/astro-web-components.css';
 
 import reportWebVitals from './reportWebVitals';
+import AppProvider from './providers/AppProvider';
 import App from './components/App';
 import './index.scss';
-import AppProvider from './providers/AppProvider';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

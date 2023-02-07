@@ -1,6 +1,6 @@
 import { RuxButton, RuxInput } from '@astrouxds/react';
 import { capitalize, formatReadableTime } from '../../util/util';
-import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
+import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
   DetailsCommonGrid,
@@ -12,50 +12,16 @@ import {
   PanelSubContainer,
 } from '../../common';
 
-const contacts = [
-  {
-    contactId: 'afafeaf',
-    contactName: 77125,
-    contactGround: 'PUMA-A',
-    contactSatellite: '5429',
-  },
-
-  {
-    contactId: 'afafeafaa',
-    contactName: 77126,
-    contactGround: 'PUMA-B',
-    contactSatellite: '5430',
-  },
-
-  {
-    contactId: 'afafeafbbb',
-    contactName: 77127,
-    contactGround: 'PUMA-C',
-    contactSatellite: '5431',
-  },
-
-  {
-    contactId: 'afafeafccc',
-    contactName: 77128,
-    contactGround: 'PUMA-D',
-    contactSatellite: '5432',
-  },
-];
-
-const AlertDetails = ({ currentRow, setPage }) => {
-  const { dismissAcknowledgeAlerts } = useAlertsPanel();
-
-  const handleClick = () => {
-    dismissAcknowledgeAlerts(currentRow);
-    setPage('dashboard');
-  };
+const AlertDetails = () => {
+  const { state, dispatch } = useAppContext();
+  const handleClick = () => dispatch({ type: 'DELETE_ALERT' });
 
   const alertGeneralDetails = [
     {
       label: 'Severity',
       node: (
         <RuxInput
-          value={capitalize(currentRow.original.errorSeverity)}
+          value={capitalize(state.currentAlert.errorSeverity)}
           readonly
           size='small'
         />
@@ -66,7 +32,7 @@ const AlertDetails = ({ currentRow, setPage }) => {
       label: 'Alert ID',
       node: (
         <RuxInput
-          value={currentRow.original.errorMessage.split(' - ')[0]}
+          value={state.currentAlert.errorMessage.split(' - ')[0]}
           readonly
           size='small'
         />
@@ -77,7 +43,7 @@ const AlertDetails = ({ currentRow, setPage }) => {
       label: 'Category',
       node: (
         <RuxInput
-          value={capitalize(currentRow.original.errorCategory)}
+          value={capitalize(state.currentAlert.errorCategory)}
           readonly
           size='small'
         />
@@ -88,7 +54,7 @@ const AlertDetails = ({ currentRow, setPage }) => {
       label: 'Time',
       node: (
         <RuxInput
-          value={formatReadableTime(currentRow.original.errorTime)}
+          value={formatReadableTime(state.currentAlert.errorTime)}
           readonly
           size='small'
         />
@@ -107,19 +73,10 @@ const AlertDetails = ({ currentRow, setPage }) => {
           </PanelSubContainer>
 
           <PanelSubContainer heading='Description'>
-            <p>{currentRow.original.longMessage}.</p>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
-            </p>
+            <p>{state.currentAlert.longMessage}.</p>
           </PanelSubContainer>
 
-          <AffectedContacts contacts={contacts} />
+          <AffectedContacts contacts={state.affectedContacts} />
         </DetailsCommonGrid>
       </PanelBody>
 
