@@ -9,6 +9,7 @@ import {
 
 import { getRandomContact } from '../../data/data';
 import { AstroReactTable, HStack, TwoDigitTime } from '../../common';
+import { useAppActions } from '../../providers/AppProvider';
 
 const columnHelper = createColumnHelper();
 
@@ -36,14 +37,11 @@ const columnDefs = [
 ];
 
 const ContactsSummaryPanelTable = ({ length, title }) => {
+  const { setContactsList, investigateContact } = useAppActions();
+
   const handleViewAll = (e) => {
     e.preventDefault();
-
-    console.log('go to contacts list...');
-  };
-
-  const handleRowClick = (row) => {
-    console.log(row);
+    setContactsList();
   };
 
   const table = useReactTable({
@@ -62,7 +60,11 @@ const ContactsSummaryPanelTable = ({ length, title }) => {
         </a>
       </HStack>
       <div className='Contacts-summary-panel__table-container'>
-        <AstroReactTable table={table} isSortable onRowClick={handleRowClick} />
+        <AstroReactTable
+          table={table}
+          isSortable
+          onRowClick={investigateContact}
+        />
       </div>
     </>
   );
