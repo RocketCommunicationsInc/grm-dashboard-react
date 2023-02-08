@@ -20,7 +20,7 @@ export const BreadcrumbNav = () => {
         return (
           <RuxBreadcrumbItem
             key={page}
-            onClick={(e) => handleClick(e, page)}
+            onClick={isLast ? undefined : (e) => handleClick(e, page)}
             href={isLast ? undefined : href}
           >
             {title}

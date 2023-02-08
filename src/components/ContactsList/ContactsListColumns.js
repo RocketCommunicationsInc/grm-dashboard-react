@@ -1,14 +1,6 @@
-import { RuxDatetime, RuxStatus } from '@astrouxds/react';
+import { RuxStatus } from '@astrouxds/react';
 import { createColumnHelper } from '@tanstack/react-table';
-
-const TwoDigitTime = ({ time }) => (
-  <RuxDatetime
-    date={new Date(time)}
-    hour='2-digit'
-    minute='2-digit'
-    second='2-digit'
-  />
-);
+import { TwoDigitTime } from '../../common';
 
 const columnHelper = createColumnHelper();
 

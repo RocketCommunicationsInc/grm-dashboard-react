@@ -12,12 +12,12 @@ import {
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import './ContactsSummaryPanel.scss';
-import { useAppContext } from '../../providers/AppProvider';
+import { useAppActions } from '../../providers/AppProvider';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
 
 const ContactsSummaryPanel = () => {
-  const { state, dispatch } = useAppContext();
+  const { setContactsList } = useAppActions();
 
   const hours = new Array(12).fill(new Date().getHours());
   const labels = hours.map((h, i) => {
@@ -25,21 +25,12 @@ const ContactsSummaryPanel = () => {
     return hour + ':00';
   });
 
-  const handleClick = () => {
-    dispatch({
-      type: 'CONTACTS_LIST',
-      payload: {
-        contacts: state.contacts,
-      },
-    });
-  };
-
   return (
     <div className='Contacts-summary-panel'>
       <PanelHeader heading='Contacts Summary' />
       <div className='Contacts-summary-panel__chart-wrapper'>
         <Bar
-          onClick={handleClick}
+          onClick={setContactsList}
           plugins={[ChartDataLabels]}
           options={{
             maintainAspectRatio: false,

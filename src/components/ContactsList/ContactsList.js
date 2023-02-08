@@ -6,27 +6,17 @@ import {
 } from '@tanstack/react-table';
 
 import { AstroReactTable } from '../../common';
-import { useAppContext } from '../../providers/AppProvider';
+import { useAppActions, useAppContext } from '../../providers/AppProvider';
 import { columnDefs } from './ContactsListColumns';
-import { randInt } from '../../util';
-import { randomContact } from '../../data/data';
+
 import './ContactsList.scss';
 
 const ContactsList = () => {
   const columns = useMemo(() => columnDefs, []);
-  const { dispatch, state } = useAppContext();
+  const { investigateContact } = useAppActions();
+  const { state } = useAppContext();
   const selectedId = state.selectedContact?.contactId;
   const handleSelected = (row) => row.contactId === selectedId;
-
-  const handleRowClick = (row) => {
-    dispatch({
-      type: 'INVESTIGATE_CONTACT',
-      payload: {
-        currentContact: row,
-        affectedContacts: Array.from({ length: randInt(2, 6) }, randomContact),
-      },
-    });
-  };
 
   const table = useReactTable({
     data: state.contacts,
@@ -40,7 +30,7 @@ const ContactsList = () => {
       <AstroReactTable
         table={table}
         isSortable
-        onRowClick={handleRowClick}
+        onRowClick={investigateContact}
         setIsSelected={handleSelected}
       />
     </div>
