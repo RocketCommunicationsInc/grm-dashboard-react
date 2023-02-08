@@ -41,30 +41,14 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
-    case 'DISPLAY_CONTACT_DETAILS': {
-      const page = 'contact-details';
-      return {
-        ...state,
-        page,
-        currentContact: payload.currentContact,
-        affectedContacts: payload.affectedContacts,
-        links: [
-          ...state.links,
-          { href: `/${page}`, page, title: 'Contact Details' },
-        ],
-      };
-    }
-
     case 'INVESTIGATE_ALERT': {
       const page = 'alert-details';
       const errorId = payload.currentAlert.errorId;
 
       return {
         ...state,
-        page: 'alert-details',
-        currentAlert: payload.currentAlert,
-        currentContact: payload.currentContact,
-        affectedContacts: payload.affectedContacts,
+        ...payload,
+        page,
         links: [
           ...state.links,
           { href: `/${page}`, page, title: `Alert ${errorId} Details` },
@@ -72,9 +56,47 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'INVESTIGATE_CONTACT': {
+      const page = 'contact-details';
+
+      return {
+        ...state,
+        ...payload,
+        page,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: 'Contact Details' },
+        ],
+      };
+    }
+
+    case 'SET_CONTACTS_LIST': {
+      const page = 'contacts-list';
+
+      return {
+        ...state,
+        page,
+        contacts: state.contacts,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: 'Contact List' },
+        ],
+      };
+    }
+
     case 'SET_PAGE': {
-      // add an if check here if you need to set a page besides 'dashboard'
-      // console.log(payload); the payload is the page to set
+      if (payload === 'contacts-list') {
+        const page = payload;
+
+        return {
+          ...state,
+          page,
+          links: [
+            ...initialState.links,
+            { href: `/${page}`, page, title: 'Contact List' },
+          ],
+        };
+      }
 
       return {
         ...state,

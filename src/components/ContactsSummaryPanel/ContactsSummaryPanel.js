@@ -14,6 +14,7 @@ import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
 import './ContactsSummaryPanel.scss';
+import { useAppActions } from '../../providers/AppProvider';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
 
@@ -38,6 +39,8 @@ const initialPopup = {
 
 const ContactsSummaryPanel = () => {
   const [popup, setPopup] = useState(initialPopup);
+  const { setContactsList } = useAppActions();
+
   const { height, left, top, width, open, title, length } = popup;
 
   const datasets = useMemo(() => {
@@ -84,6 +87,7 @@ const ContactsSummaryPanel = () => {
       <div className='Contacts-summary-panel__chart-wrapper'>
         <Bar
           data={{ labels, datasets }}
+          onClick={setContactsList}
           plugins={[ChartDataLabels]}
           options={{
             onClick,
