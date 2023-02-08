@@ -12,4 +12,13 @@
   &__pop-up {
     position: absolute;
   }
+
+  ::part(popup-content) {
+    width: 28rem;
+  }
+
+  &__table-container {
+    max-height: 11rem;
+    overflow: auto;
+  }
 }

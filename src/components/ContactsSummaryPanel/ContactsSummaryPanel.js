@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { RuxPopUp } from '@astrouxds/react';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import { Bar } from 'react-chartjs-2';
@@ -12,6 +12,7 @@ import {
 
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
+import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
 import './ContactsSummaryPanel.scss';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
@@ -21,6 +22,7 @@ const initial = { top: 0, left: 0, width: 0, height: 0, open: false };
 
 const ContactsSummaryPanel = () => {
   const [{ height, left, top, width, open }, setPopup] = useState(initial);
+
   const [progress, issues, planned, completed] = useMemo(() => {
     return Array.from({ length: 4 }, () => randomNumbers(12));
   }, []);
@@ -32,9 +34,9 @@ const ContactsSummaryPanel = () => {
   });
 
   const onClick = (_, elements) => {
-    console.log(elements[0]);
-    if (!elements[0]) return;
-    const { height, width, x, y } = elements[0].element;
+    const element = elements[0]?.element;
+    if (!element) return;
+    const { height, width, x, y } = element;
     setPopup({ open: true, top: y + 16, left: x, width: width / 2, height });
   };
 
@@ -111,19 +113,11 @@ const ContactsSummaryPanel = () => {
         >
           <div slot='trigger' style={{ width, height }} />
 
-          <div style={{ width: 320 }}>
-            {Array(4)
-              .fill('Item')
-              .map((item, i) => (
-                <div key={i}>
-                  {item} {i}
-                </div>
-              ))}
-          </div>
+          <ContactsSummaryPanelTable />
         </RuxPopUp>
       </div>
     </div>
   );
 };
 
-export default ContactsSummaryPanel;
+export default memo(ContactsSummaryPanel);
