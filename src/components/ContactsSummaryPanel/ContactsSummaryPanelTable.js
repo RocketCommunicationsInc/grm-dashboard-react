@@ -35,7 +35,7 @@ const columnDefs = [
   }),
 ];
 
-const ContactsSummaryPanelTable = () => {
+const ContactsSummaryPanelTable = ({ length, title }) => {
   const handleViewAll = (e) => {
     e.preventDefault();
 
@@ -47,7 +47,7 @@ const ContactsSummaryPanelTable = () => {
   };
 
   const table = useReactTable({
-    data: useMemo(() => Array.from({ length: 8 }, getRandomContact), []),
+    data: useMemo(() => Array.from({ length }, getRandomContact), [length]),
     columns: useMemo(() => columnDefs, []),
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -56,7 +56,7 @@ const ContactsSummaryPanelTable = () => {
   return (
     <>
       <HStack className='space-between p-2'>
-        <p>[State] (HH:MM-HH:MM)</p>
+        <p>{title}</p>
         <a href='/contacts-list' onClick={handleViewAll}>
           View All
         </a>

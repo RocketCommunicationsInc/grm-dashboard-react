@@ -18,13 +18,33 @@ import './ContactsSummaryPanel.scss';
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
 
 const randomNumbers = (length) => Array.from({ length }, () => randInt(0, 20));
-const initial = { top: 0, left: 0, width: 0, height: 0, open: false };
+
+const initialDataset = [
+  { label: 'In Progress', backgroundColor: '#938bdb' },
+  { label: 'Issues', backgroundColor: '#4dacff' },
+  { label: 'Planned', backgroundColor: '#00c7cb' },
+  { label: 'Completed', backgroundColor: '#a1e9eb' },
+];
+
+const initialPopup = {
+  top: 0,
+  left: 0,
+  width: 0,
+  height: 0,
+  open: false,
+  title: '',
+  length: 0,
+};
 
 const ContactsSummaryPanel = () => {
-  const [{ height, left, top, width, open }, setPopup] = useState(initial);
+  const [popup, setPopup] = useState(initialPopup);
+  const { height, left, top, width, open, title, length } = popup;
 
-  const [progress, issues, planned, completed] = useMemo(() => {
-    return Array.from({ length: 4 }, () => randomNumbers(12));
+  const datasets = useMemo(() => {
+    return initialDataset.map((dataset) => ({
+      ...dataset,
+      data: randomNumbers(12),
+    }));
   }, []);
 
   const hours = Array(12).fill(new Date().getHours());
@@ -34,10 +54,24 @@ const ContactsSummaryPanel = () => {
   });
 
   const onClick = (_, elements) => {
-    const element = elements[0]?.element;
-    if (!element) return;
-    const { height, width, x, y } = element;
-    setPopup({ open: true, top: y + 16, left: x, width: width / 2, height });
+    const activeElement = elements[0];
+    if (!activeElement) return;
+
+    const {
+      element: { height, width, x, y, $context },
+      datasetIndex,
+      index,
+    } = activeElement;
+
+    setPopup({
+      title: `${datasets[datasetIndex].label} ${labels[index]}`,
+      length: $context.raw,
+      open: true,
+      top: y + 16,
+      left: x,
+      width: width / 2,
+      height,
+    });
   };
 
   const onHover = (evt, ele) => {
@@ -49,6 +83,7 @@ const ContactsSummaryPanel = () => {
       <PanelHeader heading='Contacts Summary' />
       <div className='Contacts-summary-panel__chart-wrapper'>
         <Bar
+          data={{ labels, datasets }}
           plugins={[ChartDataLabels]}
           options={{
             onClick,
@@ -77,31 +112,6 @@ const ContactsSummaryPanel = () => {
               },
             },
           }}
-          data={{
-            labels,
-            datasets: [
-              {
-                label: 'In Progress',
-                data: progress,
-                backgroundColor: '#938bdb',
-              },
-              {
-                label: 'Issues',
-                data: issues,
-                backgroundColor: '#4dacff',
-              },
-              {
-                label: 'Planned',
-                data: planned,
-                backgroundColor: '#00c7cb',
-              },
-              {
-                label: 'Completed',
-                data: completed,
-                backgroundColor: '#a1e9eb',
-              },
-            ],
-          }}
         />
 
         <RuxPopUp
@@ -109,11 +119,11 @@ const ContactsSummaryPanel = () => {
           placement='right-start'
           className='Contacts-summary-panel__pop-up'
           style={{ top, left }}
-          onRuxpopupclosed={() => setPopup(initial)}
+          onRuxpopupclosed={() => setPopup(initialPopup)}
         >
           <div slot='trigger' style={{ width, height }} />
 
-          <ContactsSummaryPanelTable />
+          <ContactsSummaryPanelTable {...{ length, title }} />
         </RuxPopUp>
       </div>
     </div>
