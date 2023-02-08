@@ -12,10 +12,13 @@ import {
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import './ContactsSummaryPanel.scss';
+import { useAppActions } from '../../providers/AppProvider';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
 
 const ContactsSummaryPanel = () => {
+  const { setContactsList } = useAppActions();
+
   const hours = new Array(12).fill(new Date().getHours());
   const labels = hours.map((h, i) => {
     const hour = h + i > 23 ? h + i - 24 : h + i;
@@ -27,6 +30,7 @@ const ContactsSummaryPanel = () => {
       <PanelHeader heading='Contacts Summary' />
       <div className='Contacts-summary-panel__chart-wrapper'>
         <Bar
+          onClick={setContactsList}
           plugins={[ChartDataLabels]}
           options={{
             maintainAspectRatio: false,

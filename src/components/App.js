@@ -11,6 +11,7 @@ import TrendingEquipmentStatusPanel from './TrendingEquipmentStatusPanel/Trendin
 import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
 import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
+import ContactsList from './ContactsList/ContactsList';
 import './App.scss';
 
 const App = () => {
@@ -23,13 +24,20 @@ const App = () => {
         <>
           <GlobalStatusBar />
           <BreadcrumbNav />
-          <main className='Alert-details-grid'>
-            <section>
-              <AlertDetails />
-            </section>
-            <section>
-              <ContactDetails />
-            </section>
+          <main className='Alert-details-page'>
+            <AlertDetails />
+            <ContactDetails />
+          </main>
+        </>
+      );
+
+    case 'contacts-list':
+      return (
+        <>
+          <GlobalStatusBar />
+          <BreadcrumbNav />
+          <main className='Contacts-list-page'>
+            <ContactsList />
           </main>
         </>
       );
@@ -49,24 +57,24 @@ const App = () => {
       return (
         <>
           <GlobalStatusBar />
-          <main className='Dashboard-grid'>
-            <aside className='Dashboard-grid__left-panel'>
+          <main className='Dashboard-page'>
+            <aside className='Dashboard-page__left-panel'>
               <AlertsPanel />
             </aside>
-            <nav className='Dashboard-grid__tabs-bar'>
+            <nav className='Dashboard-page__tabs-bar'>
               <RuxTabs small onRuxselected={(e) => setTab(e.detail.innerText)}>
                 <RuxTab selected={tab === 'Contacts'}>Contacts</RuxTab>
                 <RuxTab selected={tab === 'Equipment'}>Equipment</RuxTab>
               </RuxTabs>
             </nav>
-            <section className='Dashboard-grid__right-top-panel'>
+            <section className='Dashboard-page__right-top-panel'>
               {tab === 'Contacts' ? (
                 <CurrentContactsPanel />
               ) : (
                 <EquipmentStatusPanel />
               )}
             </section>
-            <section className='Dashboard-grid__right-bottom-panel'>
+            <section className='Dashboard-page__right-bottom-panel'>
               {tab === 'Contacts' ? (
                 <ContactsSummaryPanel />
               ) : (

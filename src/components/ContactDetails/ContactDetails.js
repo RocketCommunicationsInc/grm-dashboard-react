@@ -192,9 +192,9 @@ const ContactDetails = () => {
     <PanelContainer>
       <PanelHeader heading='Contact Details' />
 
-      <ContactLabel contact={contact} />
-
       <PanelBody>
+        <ContactLabel contact={contact} />
+
         <DetailsCommonGrid className='Contact-details-grid'>
           <PanelSubContainer>
             <DetailsGrid details={generalDetails} />
