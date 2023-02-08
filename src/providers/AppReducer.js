@@ -68,7 +68,7 @@ export const appReducer = (state, { type, payload }) => {
         affectedContacts: payload.affectedContacts,
         links: [
           ...state.links,
-          { href: `/${page}`, page, title: `Contact Details` },
+          { href: `/${page}`, page, title: 'Contact Details' },
         ],
       };
     }
@@ -82,7 +82,7 @@ export const appReducer = (state, { type, payload }) => {
         contacts: payload.contacts,
         links: [
           ...state.links,
-          { href: `/${page}`, page, title: `Contact List` },
+          { href: `/${page}`, page, title: 'Contact List' },
         ],
       };
     }
@@ -93,10 +93,10 @@ export const appReducer = (state, { type, payload }) => {
 
         return {
           ...state,
-          page: payload,
+          page: page,
           links: [
             ...initialState.links,
-            { href: `/${page}`, page, title: `Contact List` },
+            { href: `/${page}`, page, title: 'Contact List' },
           ],
         };
       }
