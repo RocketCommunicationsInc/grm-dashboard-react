@@ -28,6 +28,7 @@ const App = () => {
           <main className='Alert-details-page'>
             <AlertDetails />
             <ContactDetails />
+            <EquipmentDetailsPanel />
           </main>
         </>
       );
