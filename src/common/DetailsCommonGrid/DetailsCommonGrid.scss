@@ -2,6 +2,5 @@
   --columns: minmax(22rem, 2fr) minmax(44rem, 4fr) minmax(30rem, 4fr);
 
   display: grid;
-  height: 100%;
   grid-template-columns: var(--columns);
 }

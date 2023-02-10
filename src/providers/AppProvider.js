@@ -1,9 +1,15 @@
-import { createContext, useContext, useEffect, useReducer } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useReducer,
+} from 'react';
 
 import { appReducer } from './AppReducer';
 import { initialState } from './AppInitialState';
-import { timeoutRepeater } from '../util/util';
-import { getRandomAlert, getRandomContact } from '../data/data';
+import { randInt, timeoutRepeater } from '../util/util';
+import { getRandomAlert, getRandomContact, randomContact } from '../data/data';
 
 const AppContext = createContext({});
 
@@ -35,3 +41,32 @@ const AppProvider = ({ children }) => {
 };
 
 export default AppProvider;
+
+export const useAppActions = () => {
+  const { dispatch } = useAppContext();
+
+  const investigateContact = useCallback(
+    (row) => {
+      dispatch({
+        type: 'INVESTIGATE_CONTACT',
+        payload: {
+          currentContact: row,
+          affectedContacts: Array.from(
+            { length: randInt(2, 6) },
+            randomContact
+          ),
+        },
+      });
+    },
+    [dispatch]
+  );
+
+  const setContactsList = useCallback(() => {
+    dispatch({ type: 'SET_CONTACTS_LIST' });
+  }, [dispatch]);
+
+  return {
+    investigateContact,
+    setContactsList,
+  };
+};

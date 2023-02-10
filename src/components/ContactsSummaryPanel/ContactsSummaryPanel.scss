@@ -4,7 +4,20 @@
   height: 100%;
 
   &__chart-wrapper {
+    position: relative;
     flex-grow: 1;
     padding: var(--spacing-4);
+  }
+
+  &__pop-up {
+    position: absolute;
+  }
+
+  ::part(popup-content) {
+    width: 28rem;
+  }
+
+  &__table-container {
+    height: 11rem;
   }
 }
