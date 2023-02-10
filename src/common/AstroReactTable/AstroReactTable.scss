@@ -1,16 +1,19 @@
 .Astro-react-table {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
   &__header {
     display: flex;
     background-color: var(--color-background-surface-header);
     border-left: 4px solid transparent;
-    min-width: fit-content;
+    padding-right: 1.1rem;
     font-weight: var(--font-heading-5-font-weight);
     font-size: var(--font-heading-5-font-size);
     letter-spacing: var(--font-heading-5-letter-spacing);
     line-height: var(--font-heading-5-line-height);
     box-shadow: var(--shadow-overlay);
-    position: sticky;
-    top: 0;
+    z-index: 1;
   }
 
   &__sortable,
@@ -31,6 +34,8 @@
   }
 
   &__body {
+    flex: 1;
+    overflow-y: scroll;
     background-color: var(--color-background-surface-default);
   }
 
@@ -38,7 +43,6 @@
     display: flex;
     box-shadow: 0 1px 0 0 var(--color-background-base-default);
     border-left: 4px solid transparent;
-    min-width: fit-content;
 
     &:hover {
       background-color: var(--color-background-surface-hover);
