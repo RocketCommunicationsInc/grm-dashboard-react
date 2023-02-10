@@ -42,10 +42,10 @@ const EquipmentDetailsPanel = () => {
       <PanelBody>
         <DetailsCommonGrid>
           <PanelSubContainer>
-            <div className='segmented-button-group'>
+            <section className='segmented-button-group'>
               <RuxSegmentedButton size='small' data={firstButton} />
               <RuxSegmentedButton size='small' data={secondButton} />
-            </div>
+            </section>
             <DetailsGrid details={equipmentGeneralDetails} />
           </PanelSubContainer>
           <PanelSubContainer heading='Description'>
