@@ -1,4 +1,4 @@
-import { RuxInput } from '@astrouxds/react';
+import { RuxInput, RuxSegmentedButton } from '@astrouxds/react';
 import {
   PanelHeader,
   PanelBody,
@@ -9,32 +9,43 @@ import {
   EventLog,
 } from '../../common';
 import { capitalize } from '../../util';
+import './EquipmentDetailsPanel.scss';
+
+const firstButton = [{ label: 'Online', selected: true }, { label: 'Offline' }];
+const secondButton = [
+  { label: 'Considered', selected: true },
+  { label: 'Deconsidered' },
+];
 
 const EquipmentDetailsPanel = () => {
   const equipmentGeneralDetails = [
     {
       label: 'Status',
-      node: <RuxInput value={capitalize('status..')} readonly size='small' />,
+      node: <RuxInput value={capitalize('active')} readonly size='small' />,
     },
 
     {
       label: 'Type',
-      node: <RuxInput value={'type...'} readonly size='small' />,
+      node: <RuxInput value={'Iron'} readonly size='small' />,
     },
 
     {
       label: 'Category',
-      node: <RuxInput value={'category...'} readonly size='small' />,
+      node: <RuxInput value={'RF'} readonly size='small' />,
     },
   ];
 
   return (
     <PanelContainer>
       <PanelHeader heading='Equipment Details' />
-      <h2>Equipment Name</h2>
+      <h2 className='p-4'>Black FEP 6566</h2>
       <PanelBody>
         <DetailsCommonGrid>
           <PanelSubContainer>
+            <div className='segmented-button-group'>
+              <RuxSegmentedButton data={firstButton} />
+              <RuxSegmentedButton data={secondButton} />
+            </div>
             <DetailsGrid details={equipmentGeneralDetails} />
           </PanelSubContainer>
           <PanelSubContainer heading='Description'>
