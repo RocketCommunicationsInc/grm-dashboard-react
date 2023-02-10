@@ -12,6 +12,7 @@ import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
 import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import ContactsList from './ContactsList/ContactsList';
+import EquipmentDetailsPanel from './EquipmentDetailsPanel/EquipmentDetailsPanel';
 import './App.scss';
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
           <main className='Alert-details-page'>
             <AlertDetails />
             <ContactDetails />
+            <EquipmentDetailsPanel />
           </main>
         </>
       );
