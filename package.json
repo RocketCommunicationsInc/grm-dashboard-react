@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@astrouxds/react": "^7.7.0",
+    "@pcatrocket/egs-mock-api": "/Users/paulcristea/Projects/egs-mock-api",
     "@tanstack/react-table": "^8.7.4",
     "chart.js": "^4.1.1",
     "chartjs-plugin-annotation": "^2.1.2",
