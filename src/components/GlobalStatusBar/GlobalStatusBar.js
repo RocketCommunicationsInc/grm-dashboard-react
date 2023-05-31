@@ -10,7 +10,7 @@ import {
   RuxPopUp,
 } from '@astrouxds/react';
 import useGlobalStatusBar from './useGlobalStatusBar';
-import './GlobalStatusBar.scss';
+import './GlobalStatusBar.css';
 
 const GlobalStatusBar = () => {
   const { statusIcons, ucaCount } = useGlobalStatusBar();
