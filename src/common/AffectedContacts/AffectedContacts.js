@@ -1,5 +1,5 @@
 import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
-import './AffectedContacts.scss';
+import './AffectedContacts.css';
 
 export const AffectedContacts = ({ contacts }) => (
   <PanelSubContainer

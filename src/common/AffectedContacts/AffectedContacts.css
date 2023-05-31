@@ -1,0 +1,16 @@
+.Affected-contacts ul {
+  border: 1px solid var(--color-background-base-default);
+}
+
+.Affected-contacts li {
+  padding: var(--spacing-2);
+}
+
+.Affected-contacts li:last-child {
+  border-bottom: none;
+}
+
+.Affected-contacts li:hover {
+  background-color: transparent;
+  cursor: auto;
+}
