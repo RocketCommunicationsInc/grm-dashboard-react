@@ -1,6 +1,6 @@
 .Dashboard-page {
   display: grid;
-  // Screen height minus the height of the Global Status Bar
+  /* Screen height minus the height of the Global Status Bar */
   height: calc(100vh - 6rem);
   padding: var(--spacing-4) var(--spacing-6);
   gap: var(--spacing-3);
@@ -10,28 +10,28 @@
     'left-panel tabs-bar'
     'left-panel right-top-panel'
     'left-panel right-bottom-panel';
+}
 
-  &__left-panel {
-    grid-area: left-panel;
-    background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px;
-  }
+.Dashboard-page__left-panel {
+  grid-area: left-panel;
+  background-color: var(--color-background-surface-default);
+  box-shadow: var(--container-color-border) 0 0 0 1px;
+}
 
-  &__tabs-bar {
-    grid-area: tabs-bar;
-  }
+.Dashboard-page__tabs-bar {
+  grid-area: tabs-bar;
+}
 
-  &__right-top-panel {
-    grid-area: right-top-panel;
-    background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px;
-  }
+.Dashboard-page__right-top-panel {
+  grid-area: right-top-panel;
+  background-color: var(--color-background-surface-default);
+  box-shadow: var(--container-color-border) 0 0 0 1px;
+}
 
-  &__right-bottom-panel {
-    grid-area: right-bottom-panel;
-    background-color: var(--color-background-surface-default);
-    box-shadow: var(--container-color-border) 0 0 0 1px;
-  }
+.Dashboard-page__right-bottom-panel {
+  grid-area: right-bottom-panel;
+  background-color: var(--color-background-surface-default);
+  box-shadow: var(--container-color-border) 0 0 0 1px;
 }
 
 .Alert-details-page {
@@ -42,7 +42,7 @@
 }
 
 .Contacts-list-page {
-  // 100vh - (height of global status bar + height of breadcrumb element)
+  /* 100vh - (height of global status bar + height of breadcrumb element) */
   height: calc(100vh - 10.25rem);
   padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
 }

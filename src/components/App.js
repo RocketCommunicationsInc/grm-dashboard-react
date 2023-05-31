@@ -13,7 +13,7 @@ import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import ContactsList from './ContactsList/ContactsList';
 import EquipmentDetailsPanel from './EquipmentDetailsPanel/EquipmentDetailsPanel';
-import './App.scss';
+import './App.css';
 
 const App = () => {
   const [tab, setTab] = useState('Contacts');
