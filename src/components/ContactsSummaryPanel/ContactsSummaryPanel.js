@@ -13,7 +13,7 @@ import {
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
-import './ContactsSummaryPanel.scss';
+import './ContactsSummaryPanel.css';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
 
