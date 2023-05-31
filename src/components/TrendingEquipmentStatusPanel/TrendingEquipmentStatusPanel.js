@@ -14,7 +14,7 @@ import { Line } from 'react-chartjs-2';
 import { RuxSelect, RuxOption } from '@astrouxds/react';
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
-import './TrendingEquipmentStatusPanel.scss';
+import './TrendingEquipmentStatusPanel.css';
 
 ChartJS.register(
   CategoryScale,
