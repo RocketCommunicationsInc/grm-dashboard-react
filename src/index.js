@@ -5,7 +5,7 @@ import '@astrouxds/astro-web-components/dist/astro-web-components/astro-web-comp
 import reportWebVitals from './reportWebVitals';
 import AppProvider from './providers/AppProvider';
 import App from './components/App';
-import './index.scss';
+import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
