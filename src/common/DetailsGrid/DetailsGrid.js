@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import './DetailsGrid.scss';
+import './DetailsGrid.css';
 
 export const DetailsGrid = ({ details }) => {
   return (
