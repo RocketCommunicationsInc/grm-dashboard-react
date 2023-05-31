@@ -1,5 +1,5 @@
 import { setClassName } from '../../../util';
-import './PanelHeader.scss';
+import './PanelHeader.css';
 
 export const PanelHeader = ({ className, heading }) => (
   <header className={setClassName('Panel-header', className)}>
