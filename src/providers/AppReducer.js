@@ -1,4 +1,4 @@
-const initialLinks = [{ href: '/', page: 'dashboard', title: 'Dashboard' }];
+import { initialState } from './AppProvider';
 
 export const appReducer = (state, { type, payload }) => {
   switch (type) {
@@ -26,7 +26,7 @@ export const appReducer = (state, { type, payload }) => {
         currentAlert: null,
         currentContact: null,
         affectedContacts: [],
-        links: initialLinks,
+        links: initialState.links,
       };
     }
 
@@ -105,7 +105,7 @@ export const appReducer = (state, { type, payload }) => {
           ...state,
           page,
           links: [
-            ...initialLinks,
+            ...initialState.links,
             { href: `/${page}`, page, title: 'Contact List' },
           ],
         };
@@ -114,7 +114,7 @@ export const appReducer = (state, { type, payload }) => {
       return {
         ...state,
         page: 'dashboard',
-        links: initialLinks,
+        links: initialState.links,
       };
     }
     default: {

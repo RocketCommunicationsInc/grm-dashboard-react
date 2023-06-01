@@ -10,7 +10,7 @@ import { appReducer } from './AppReducer';
 import { randInt, timeoutRepeater } from '../util/util';
 import { getRandomAlert, getRandomContact, randomContact } from '../data/data';
 
-const initialState = {
+export const initialState = {
   contacts: [],
   alerts: [],
   links: [{ href: '/', page: 'dashboard', title: 'Dashboard' }],
