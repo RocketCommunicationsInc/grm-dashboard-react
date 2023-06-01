@@ -1,4 +1,4 @@
-const dashboardLink = { href: '/', page: 'dashboard', title: 'Dashboard' };
+const initialLinks = [{ href: '/', page: 'dashboard', title: 'Dashboard' }];
 
 export const appReducer = (state, { type, payload }) => {
   switch (type) {
@@ -26,7 +26,7 @@ export const appReducer = (state, { type, payload }) => {
         currentAlert: null,
         currentContact: null,
         affectedContacts: [],
-        links: dashboardLink,
+        links: initialLinks,
       };
     }
 
@@ -43,9 +43,9 @@ export const appReducer = (state, { type, payload }) => {
 
     case 'EDIT_CONTACT': {
       const newContacts = state.contacts.map((contact) => {
-        if (contact.id !== payload.id) {
+        if (contact._id !== payload._id) {
           return contact;
-        } else return [...contact, ...payload];
+        } else return { ...contact, ...payload };
       });
 
       return {
@@ -105,7 +105,7 @@ export const appReducer = (state, { type, payload }) => {
           ...state,
           page,
           links: [
-            ...dashboardLink,
+            ...initialLinks,
             { href: `/${page}`, page, title: 'Contact List' },
           ],
         };
@@ -114,7 +114,7 @@ export const appReducer = (state, { type, payload }) => {
       return {
         ...state,
         page: 'dashboard',
-        links: dashboardLink,
+        links: initialLinks,
       };
     }
     default: {

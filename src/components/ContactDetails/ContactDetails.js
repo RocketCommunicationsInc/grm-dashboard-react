@@ -27,10 +27,28 @@ import './ContactDetails.scss';
 
 const ContactDetails = () => {
   const { state, dispatch } = useAppContext();
-  const contact = state.currentContact;
+  // const contact = state.currentContact;
   const [isEditing, setIsEditing] = useState(false);
-  const handleClick = () => {
-    dispatch({ type: 'SET_PAGE' });
+  const [contact, setContact] = useState(state.currentContact);
+
+  const handleCancel = () => {
+    if (isEditing) {
+      setContact(state.currentContact);
+      setIsEditing(false);
+    } else dispatch({ type: 'SET_PAGE' });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsEditing(false);
+    dispatch({ type: 'EDIT_CONTACT', payload: contact });
+  };
+
+  const handleChange = (e) => {
+    setContact((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const generalDetails = [
@@ -53,6 +71,8 @@ const ContactDetails = () => {
           value={contact.contactState}
           readonly={!isEditing}
           size='small'
+          name='contactState'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -63,6 +83,8 @@ const ContactDetails = () => {
           value={contact.contactName}
           readonly={!isEditing}
           size='small'
+          name='contactName'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -192,6 +214,7 @@ const ContactDetails = () => {
     <PanelContainer>
       <PanelHeader heading='Contact Details' />
 
+      {/* <form onSubmit={handleSubmit}> */}
       <PanelBody>
         <ContactLabel contact={contact} />
 
@@ -278,15 +301,16 @@ const ContactDetails = () => {
       </PanelBody>
 
       <PanelFooter>
-        <RuxButton secondary onClick={handleClick}>
+        <RuxButton secondary onClick={handleCancel}>
           Cancel
         </RuxButton>
         {isEditing ? (
-          <RuxButton onClick={() => setIsEditing(false)}>Save</RuxButton>
+          <RuxButton onClick={handleSubmit}>Save</RuxButton>
         ) : (
           <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
         )}
       </PanelFooter>
+      {/* </form> */}
     </PanelContainer>
   );
 };
