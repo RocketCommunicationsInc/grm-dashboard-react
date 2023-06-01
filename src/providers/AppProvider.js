@@ -34,6 +34,7 @@ const AppProvider = ({ children }) => {
       }
     });
   }, [state.alerts.length]);
+
   useEffect(() => {
     return timeoutRepeater(() => {
       if (state.contacts.length < 40) {

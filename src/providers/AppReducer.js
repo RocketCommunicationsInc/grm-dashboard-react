@@ -41,6 +41,19 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'EDIT_CONTACT': {
+      const newContacts = state.contacts.map((contact) => {
+        if (contact.id !== payload.id) {
+          return contact;
+        } else return [...contact, ...payload];
+      });
+
+      return {
+        ...state,
+        contacts: newContacts,
+      };
+    }
+
     case 'INVESTIGATE_ALERT': {
       const page = 'alert-details';
       const errorId = payload.currentAlert.errorId;
