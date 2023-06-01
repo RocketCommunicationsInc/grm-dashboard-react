@@ -11,6 +11,7 @@ const columnDefs = [
         checked={table.getIsAllRowsSelected()}
         onRuxchange={table.getToggleAllRowsSelectedHandler()}
         onClick={(e) => e.stopPropagation()}
+        indeterminate={table.getIsSomeRowsSelected()}
       />
     ),
     cell: ({ row }) => (
