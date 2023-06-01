@@ -1,0 +1,16 @@
+.Contact-details-grid__equipment-string
+  .config-wrapper
+  .Panel-sub-container__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.Contact-details-grid__equipment-string .sub-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.Contact-details-page {
+  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
+}

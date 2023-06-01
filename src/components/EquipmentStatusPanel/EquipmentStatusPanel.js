@@ -4,7 +4,7 @@ import { Doughnut } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import { PanelHeader } from '../../common';
-import './EquipmentStatusPanel.scss';
+import './EquipmentStatusPanel.css';
 
 ChartJS.register(ArcElement);
 

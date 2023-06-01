@@ -2,7 +2,7 @@ import { RuxDatetime } from '@astrouxds/react';
 import { memo } from 'react';
 import { generateEvents } from '../../data/data';
 import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
-import './EventLog.scss';
+import './EventLog.css';
 
 export const EventLog = memo(({ rowsToShow }) => {
   const events = generateEvents();

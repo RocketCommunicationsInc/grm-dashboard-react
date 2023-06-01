@@ -1,7 +1,7 @@
 import { RuxBreadcrumb, RuxBreadcrumbItem } from '@astrouxds/react';
 
 import { useAppContext } from '../../providers/AppProvider';
-import './BreadcrumbNav.scss';
+import './BreadcrumbNav.css';
 
 export const BreadcrumbNav = () => {
   const { state, dispatch } = useAppContext();

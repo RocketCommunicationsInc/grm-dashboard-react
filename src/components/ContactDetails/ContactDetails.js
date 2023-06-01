@@ -23,7 +23,7 @@ import {
 } from '../../common';
 import { options } from '../../data/options';
 import { formatReadableTime } from '../../util/util';
-import './ContactDetails.scss';
+import './ContactDetails.css';
 
 const ContactDetails = () => {
   const { state, dispatch } = useAppContext();

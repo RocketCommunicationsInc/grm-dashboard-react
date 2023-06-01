@@ -1,0 +1,23 @@
+.Contacts-summary-panel {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.Contacts-summary-panel__chart-wrapper {
+  position: relative;
+  flex-grow: 1;
+  padding: var(--spacing-4);
+}
+
+.Contacts-summary-panel__pop-up {
+  position: absolute;
+}
+
+.Contacts-summary-panel::part(popup-content) {
+  width: 28rem;
+}
+
+.Contacts-summary-panel__table-container {
+  height: 11rem;
+}

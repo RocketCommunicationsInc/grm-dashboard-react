@@ -1,5 +1,5 @@
 import { setClassName } from '../../../util';
-import './PanelSubContainer.scss';
+import './PanelSubContainer.css';
 
 export const PanelSubContainer = (props) => {
   const { children, className, heading } = props;

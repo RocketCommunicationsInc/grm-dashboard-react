@@ -9,7 +9,7 @@ import {
   EventLog,
 } from '../../common';
 import { capitalize } from '../../util';
-import './EquipmentDetailsPanel.scss';
+import './EquipmentDetailsPanel.css';
 
 const firstButton = [{ label: 'Online', selected: true }, { label: 'Offline' }];
 const secondButton = [

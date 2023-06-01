@@ -1,5 +1,5 @@
 import { setClassName } from '../../util';
-import './DetailsCommonGrid.scss';
+import './DetailsCommonGrid.css';
 
 export const DetailsCommonGrid = ({ children, className }) => (
   <div className={setClassName('Details-common-grid', className)}>

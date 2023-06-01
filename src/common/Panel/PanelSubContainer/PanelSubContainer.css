@@ -1,0 +1,14 @@
+.Panel-sub-container {
+  background-color: var(--color-background-surface-default);
+  padding: var(--spacing-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+.Panel-sub-container__body {
+  box-shadow: 0 0 0 1px var(--color-border-interactive-muted);
+  flex-grow: 1;
+  padding: var(--spacing-4);
+  overflow: auto;
+}

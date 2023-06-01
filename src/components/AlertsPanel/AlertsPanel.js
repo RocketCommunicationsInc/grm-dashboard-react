@@ -3,7 +3,7 @@ import { flexRender } from '@tanstack/react-table';
 
 import useAlertsPanel from './useAlertsPanel';
 import AlertsPanelItem from './AlertsPanelItem';
-import './AlertsPanel.scss';
+import './AlertsPanel.css';
 
 const severities = [
   { label: 'All', value: 'all' },

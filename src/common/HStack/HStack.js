@@ -1,4 +1,4 @@
-import './HStack.scss';
+import './HStack.css';
 
 export const HStack = ({ children, className, spacing, ...props }) => {
   const hStack = 'H-stack';

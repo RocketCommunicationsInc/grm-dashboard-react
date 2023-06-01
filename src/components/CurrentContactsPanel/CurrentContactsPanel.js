@@ -4,7 +4,7 @@ import { flexRender } from '@tanstack/react-table';
 import { PanelHeader } from '../../common';
 import useCurrentContactsPanel from './useCurrentContactsPanel';
 import CurrentContactsPanelItem from './CurrentContactsPaneltem';
-import './CurrentContactsPanel.scss';
+import './CurrentContactsPanel.css';
 
 const statuses = [
   { label: 'All', value: 'all' },
