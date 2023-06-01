@@ -27,7 +27,6 @@ import './ContactDetails.scss';
 
 const ContactDetails = () => {
   const { state, dispatch } = useAppContext();
-  // const contact = state.currentContact;
   const [isEditing, setIsEditing] = useState(false);
   const [contact, setContact] = useState(state.currentContact);
 
@@ -95,6 +94,8 @@ const ContactDetails = () => {
           value={contact.contactGround}
           readonly={!isEditing}
           size='small'
+          name='contactGround'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -105,6 +106,8 @@ const ContactDetails = () => {
           value={contact.contactREV}
           readonly={!isEditing}
           size='small'
+          name='contactREV'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -115,6 +118,8 @@ const ContactDetails = () => {
           value={contact.contactDOY}
           readonly={!isEditing}
           size='small'
+          name='contactDOY'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -123,7 +128,7 @@ const ContactDetails = () => {
       node: (
         <RuxInput
           value={formatReadableTime(contact.contactBeginTimestamp)}
-          readonly={!isEditing}
+          readonly
           size='small'
         />
       ),
@@ -133,7 +138,7 @@ const ContactDetails = () => {
       node: (
         <RuxInput
           value={formatReadableTime(contact.contactAOS)}
-          readonly={!isEditing}
+          readonly
           size='small'
         />
       ),
@@ -143,7 +148,7 @@ const ContactDetails = () => {
       node: (
         <RuxInput
           value={formatReadableTime(contact.contactLOS)}
-          readonly={!isEditing}
+          readonly
           size='small'
         />
       ),
@@ -153,8 +158,9 @@ const ContactDetails = () => {
       node: (
         <RuxInput
           value={formatReadableTime(contact.contactEndTimestamp)}
-          readonly={!isEditing}
+          readonly
           size='small'
+          // disabled
         />
       ),
     },
@@ -180,13 +186,24 @@ const ContactDetails = () => {
     {
       label: 'Configuration',
       node: isEditing ? (
-        <RuxSelect value='B' size='small' label=''>
-          <RuxOption value='A' label='Config A' />
-          <RuxOption value='B' label='Config B' />
-          <RuxOption value='C' label='Config C' />
+        <RuxSelect
+          value={contact.contactEquipmentConfig}
+          size='small'
+          name='contactEquipmentConfig'
+          onRuxchange={handleChange}
+        >
+          <RuxOption value='Config 1' label='Config 1' />
+          <RuxOption value='Config 2' label='Config 2' />
+          <RuxOption value='Config 3' label='Config 3' />
+          <RuxOption value='Config 4' label='Config 4' />
+          <RuxOption value='Config 5' label='Config 5' />
         </RuxSelect>
       ) : (
-        <RuxInput value='Config B' size='small' readonly />
+        <RuxInput
+          value={contact.contactEquipmentConfig}
+          size='small'
+          readonly
+        />
       ),
     },
   ];
