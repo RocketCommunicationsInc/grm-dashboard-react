@@ -230,7 +230,6 @@ const ContactDetails = () => {
     <PanelContainer>
       <PanelHeader heading='Contact Details' />
 
-      {/* <form onSubmit={handleSubmit}> */}
       <PanelBody>
         <ContactLabel contact={contact} />
 
@@ -326,7 +325,6 @@ const ContactDetails = () => {
           <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
         )}
       </PanelFooter>
-      {/* </form> */}
     </PanelContainer>
   );
 };
