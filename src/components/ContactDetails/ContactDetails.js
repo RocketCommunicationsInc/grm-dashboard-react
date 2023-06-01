@@ -160,7 +160,6 @@ const ContactDetails = () => {
           value={formatReadableTime(contact.contactEndTimestamp)}
           readonly
           size='small'
-          // disabled
         />
       ),
     },
