@@ -1,4 +1,4 @@
-import { initialState } from './AppInitialState';
+import { initialState } from './AppProvider';
 
 export const appReducer = (state, { type, payload }) => {
   switch (type) {
@@ -38,6 +38,19 @@ export const appReducer = (state, { type, payload }) => {
       return {
         ...state,
         alerts,
+      };
+    }
+
+    case 'EDIT_CONTACT': {
+      const newContacts = state.contacts.map((contact) => {
+        if (contact._id !== payload._id) {
+          return contact;
+        } else return { ...contact, ...payload };
+      });
+
+      return {
+        ...state,
+        contacts: newContacts,
       };
     }
 

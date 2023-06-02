@@ -27,10 +27,27 @@ import './ContactDetails.css';
 
 const ContactDetails = () => {
   const { state, dispatch } = useAppContext();
-  const contact = state.currentContact;
   const [isEditing, setIsEditing] = useState(false);
-  const handleClick = () => {
-    dispatch({ type: 'SET_PAGE' });
+  const [contact, setContact] = useState(state.currentContact);
+
+  const handleCancel = () => {
+    if (isEditing) {
+      setContact(state.currentContact);
+      setIsEditing(false);
+    } else dispatch({ type: 'SET_PAGE' });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsEditing(false);
+    dispatch({ type: 'EDIT_CONTACT', payload: contact });
+  };
+
+  const handleChange = (e) => {
+    setContact((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const generalDetails = [
@@ -53,6 +70,8 @@ const ContactDetails = () => {
           value={contact.contactState}
           readonly={!isEditing}
           size='small'
+          name='contactState'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -63,6 +82,8 @@ const ContactDetails = () => {
           value={contact.contactName}
           readonly={!isEditing}
           size='small'
+          name='contactName'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -73,6 +94,8 @@ const ContactDetails = () => {
           value={contact.contactGround}
           readonly={!isEditing}
           size='small'
+          name='contactGround'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -83,6 +106,8 @@ const ContactDetails = () => {
           value={contact.contactREV}
           readonly={!isEditing}
           size='small'
+          name='contactREV'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -93,6 +118,8 @@ const ContactDetails = () => {
           value={contact.contactDOY}
           readonly={!isEditing}
           size='small'
+          name='contactDOY'
+          onRuxinput={handleChange}
         />
       ),
     },
@@ -101,7 +128,7 @@ const ContactDetails = () => {
       node: (
         <RuxInput
           value={formatReadableTime(contact.contactBeginTimestamp)}
-          readonly={!isEditing}
+          readonly
           size='small'
         />
       ),
@@ -111,7 +138,7 @@ const ContactDetails = () => {
       node: (
         <RuxInput
           value={formatReadableTime(contact.contactAOS)}
-          readonly={!isEditing}
+          readonly
           size='small'
         />
       ),
@@ -121,7 +148,7 @@ const ContactDetails = () => {
       node: (
         <RuxInput
           value={formatReadableTime(contact.contactLOS)}
-          readonly={!isEditing}
+          readonly
           size='small'
         />
       ),
@@ -131,7 +158,7 @@ const ContactDetails = () => {
       node: (
         <RuxInput
           value={formatReadableTime(contact.contactEndTimestamp)}
-          readonly={!isEditing}
+          readonly
           size='small'
         />
       ),
@@ -158,13 +185,24 @@ const ContactDetails = () => {
     {
       label: 'Configuration',
       node: isEditing ? (
-        <RuxSelect value='B' size='small' label=''>
-          <RuxOption value='A' label='Config A' />
-          <RuxOption value='B' label='Config B' />
-          <RuxOption value='C' label='Config C' />
+        <RuxSelect
+          value={contact.contactEquipmentConfig}
+          size='small'
+          name='contactEquipmentConfig'
+          onRuxchange={handleChange}
+        >
+          <RuxOption value='Config 1' label='Config 1' />
+          <RuxOption value='Config 2' label='Config 2' />
+          <RuxOption value='Config 3' label='Config 3' />
+          <RuxOption value='Config 4' label='Config 4' />
+          <RuxOption value='Config 5' label='Config 5' />
         </RuxSelect>
       ) : (
-        <RuxInput value='Config B' size='small' readonly />
+        <RuxInput
+          value={contact.contactEquipmentConfig}
+          size='small'
+          readonly
+        />
       ),
     },
   ];
@@ -278,11 +316,11 @@ const ContactDetails = () => {
       </PanelBody>
 
       <PanelFooter>
-        <RuxButton secondary onClick={handleClick}>
+        <RuxButton secondary onClick={handleCancel}>
           Cancel
         </RuxButton>
         {isEditing ? (
-          <RuxButton onClick={() => setIsEditing(false)}>Save</RuxButton>
+          <RuxButton onClick={handleSubmit}>Save</RuxButton>
         ) : (
           <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
         )}

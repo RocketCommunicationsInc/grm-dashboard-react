@@ -7,9 +7,18 @@ import {
 } from 'react';
 
 import { appReducer } from './AppReducer';
-import { initialState } from './AppInitialState';
 import { randInt, timeoutRepeater } from '../util/util';
 import { getRandomAlert, getRandomContact, randomContact } from '../data/data';
+
+export const initialState = {
+  contacts: [],
+  alerts: [],
+  links: [{ href: '/', page: 'dashboard', title: 'Dashboard' }],
+  page: 'dashboard',
+  currentAlert: null,
+  currentContact: null,
+  affectedContacts: [],
+};
 
 const AppContext = createContext({});
 
@@ -25,6 +34,7 @@ const AppProvider = ({ children }) => {
       }
     });
   }, [state.alerts.length]);
+
   useEffect(() => {
     return timeoutRepeater(() => {
       if (state.contacts.length < 40) {

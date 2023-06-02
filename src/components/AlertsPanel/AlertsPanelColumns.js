@@ -11,6 +11,7 @@ const columnDefs = [
         checked={table.getIsAllRowsSelected()}
         onRuxchange={table.getToggleAllRowsSelectedHandler()}
         onClick={(e) => e.stopPropagation()}
+        indeterminate={table.getIsSomeRowsSelected()}
       />
     ),
     cell: ({ row }) => (
@@ -46,6 +47,7 @@ const columnDefs = [
           hour='2-digit'
           minute='2-digit'
           second='2-digit'
+          timeZone='UTC'
         />
       </div>
     ),
