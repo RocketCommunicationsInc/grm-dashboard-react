@@ -1,0 +1,70 @@
+.Alerts-popup {
+  height: 16rem;
+  width: 22rem;
+  position: relative;
+  color: var(--color-palette-neutral-000);
+}
+
+.Alerts-popup__list {
+  overflow-y: scroll;
+  height: calc(100% - 6rem);
+}
+
+.Alerts-popup__alerts {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.Alerts-popup__selections {
+  display: flex;
+}
+
+.Alerts-popup__heading {
+  background-color: var(--color-background-surface-header);
+  padding: var(--spacing-2);
+  box-shadow: var(--shadow-overlay);
+  padding-right: var(--spacing-12);
+  max-height: var(--spacing-6);
+}
+
+.Alerts-popup__heading,
+.Alerts-popup__item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-8);
+}
+
+.Alerts-popup__item {
+  padding: var(--spacing-2);
+}
+
+.Alerts-popup__actions {
+  display: flex;
+  justify-content: flex-end;
+  background-color: var(--color-background-surface-header);
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  position: sticky;
+  bottom: 0;
+}
+
+.Alerts-popup__no-alerts {
+  height: calc(100% - 5.5rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Alerts-popup__heading .Alerts-popup__sort:nth-last-of-type(2) {
+  padding-right: var(--spacing-6);
+}
+
+.Alerts-popup__sort {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0;
+}

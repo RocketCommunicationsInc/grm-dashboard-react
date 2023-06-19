@@ -8,8 +8,12 @@
   gap: var(--spacing-4);
 }
 
-.Global-status-bar__status-indicators :nth-child(2) {
-  border-right: var(--border-width-xs) solid
-    var(--color-background-base-selected);
-  padding-right: var(--spacing-6);
-}
+/* .Global-status-bar__status-indicators :nth-child(3) {
+  border-left: var(--border-width-xs) solid
+    var(--color-background-interactive-default);
+  padding-left: var(--spacing-10);
+} */
+
+/* .Global-status-bar__status-indicators :nth-child(2) {
+  padding-right: var(--spacing-3);
+} */
