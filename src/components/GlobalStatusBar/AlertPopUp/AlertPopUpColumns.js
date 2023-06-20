@@ -5,7 +5,7 @@ const columnHelper = createColumnHelper();
 
 const popUpColumnDefs = [
   columnHelper.accessor('errorId', {
-    enableSorting: true,
+    enableSorting: false,
     header: ({ table }) => (
       <RuxCheckbox
         checked={table.getIsAllRowsSelected()}
@@ -23,6 +23,7 @@ const popUpColumnDefs = [
     ),
   }),
   columnHelper.accessor('errorSeverity', {
+    enableSorting: true,
     header: 'Severity',
     cell: (info) => (
       <div>
@@ -31,10 +32,12 @@ const popUpColumnDefs = [
     ),
   }),
   columnHelper.accessor('errorId', {
+    enableSorting: false,
     header: 'Alert ID',
     cell: (info) => <div>Alert {info.getValue()}</div>,
   }),
   columnHelper.accessor('errorTime', {
+    enableSorting: false,
     header: 'Time',
     cell: (info) => (
       <div>

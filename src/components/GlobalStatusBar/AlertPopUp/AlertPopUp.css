@@ -1,6 +1,6 @@
 .Alerts-popup {
   height: 16rem;
-  width: 22rem;
+  width: 21rem;
   position: relative;
   color: var(--color-palette-neutral-000);
 }
@@ -24,11 +24,18 @@
   background-color: var(--color-background-surface-header);
   padding: var(--spacing-2);
   box-shadow: var(--shadow-overlay);
-  padding-right: var(--spacing-12);
   max-height: var(--spacing-6);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1.8rem;
+  padding-right: -2rem;
 }
 
-.Alerts-popup__heading,
+.Alerts-popup__heading div:nth-of-type(4) {
+  padding-left: var(--spacing-4);
+}
+
 .Alerts-popup__item {
   display: flex;
   flex-direction: row;
@@ -55,10 +62,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.Alerts-popup__heading .Alerts-popup__sort:nth-last-of-type(2) {
-  padding-right: var(--spacing-8);
 }
 
 .Alerts-popup__sort {

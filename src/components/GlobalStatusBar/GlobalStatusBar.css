@@ -8,8 +8,8 @@
   border-left: var(--border-width-xs) solid
     var(--color-background-interactive-default);
   padding-left: var(--spacing-10);
-} */
+}
 
-/* .Global-status-bar__status-indicators :nth-child(2) {
+.Global-status-bar__status-indicators :nth-child(2) {
   padding-right: var(--spacing-3);
 } */
