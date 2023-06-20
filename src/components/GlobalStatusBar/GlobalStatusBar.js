@@ -18,8 +18,8 @@ import AlertsPopUp from './AlertPopUp/AlertPopUp';
 const GlobalStatusBar = () => {
   const { statusIcons, ucaCount } = useGlobalStatusBar();
   const { state } = useAppContext();
-  console.log(state);
-
+  const category = state.alerts.map((alert) => alert.errorCategory);
+  console.log(category.map((category) => category === 'software'));
   return (
     <RuxGlobalStatusBar
       className='Global-status-bar'
@@ -51,9 +51,7 @@ const GlobalStatusBar = () => {
       <div className='Global-status-bar__status-indicators' slot='right-side'>
         <RuxMonitoringProgressIcon label='UCA' progress={ucaCount} />
         <RuxPopUp placement='bottom'>
-          <RuxMenu>
-            <AlertsPopUp />
-          </RuxMenu>
+          <RuxMenu>{category ? <AlertsPopUp /> : null}</RuxMenu>
           <RuxMonitoringIcon
             slot='trigger'
             icon='mission'

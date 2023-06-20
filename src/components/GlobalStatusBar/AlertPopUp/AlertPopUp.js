@@ -6,14 +6,12 @@ import './AlertPopUp.css';
 
 const AlertsPopUp = () => {
   const { getHeaderGroups, handleAction, isDisabled, rows } = useAlertPopUp();
-
   return (
     <div className='Alerts-popup'>
       {getHeaderGroups().map(({ headers }) => (
         <div className='Alerts-popup__heading'>
           {headers.map(({ column, getContext }) => (
             <div
-              // key={index}
               onClick={column.getToggleSortingHandler()}
               className={column.getCanSort() ? 'Alerts-popup__sort' : undefined}
             >
