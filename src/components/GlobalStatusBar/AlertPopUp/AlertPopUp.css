@@ -29,11 +29,14 @@
   flex-direction: row;
   align-items: center;
   gap: 1.8rem;
-  padding-right: -2rem;
 }
 
 .Alerts-popup__heading div:nth-of-type(4) {
   padding-left: var(--spacing-4);
+}
+
+.Alerts-popup__heading div:nth-of-type(2) {
+  width: 3.75rem;
 }
 
 .Alerts-popup__item {
