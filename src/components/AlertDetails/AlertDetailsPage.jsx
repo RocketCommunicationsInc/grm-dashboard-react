@@ -5,11 +5,11 @@ import EquipmentDetailsPanel from '../EquipmentDetailsPanel/EquipmentDetailsPane
 
 const AlertDetailsPage = () => {
   return (
-    <main className='Alert-details-page'>
+    <>
       <AlertDetails />
       <ContactDetails />
       <EquipmentDetailsPanel />
-    </main>
+    </>
   );
 };
 

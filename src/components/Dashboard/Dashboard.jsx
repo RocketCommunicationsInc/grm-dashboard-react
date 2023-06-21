@@ -1,16 +1,16 @@
 import { useState } from 'react';
 import { RuxTab, RuxTabs } from '@astrouxds/react';
-import AlertsPanel from './AlertsPanel/AlertsPanel';
-import TrendingEquipmentStatusPanel from './TrendingEquipmentStatusPanel/TrendingEquipmentStatusPanel';
-import CurrentContactsPanel from './CurrentContactsPanel/CurrentContactsPanel';
-import EquipmentStatusPanel from './EquipmentStatusPanel/EquipmentStatusPanel';
-import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
+import AlertsPanel from '../AlertsPanel/AlertsPanel';
+import TrendingEquipmentStatusPanel from '../TrendingEquipmentStatusPanel/TrendingEquipmentStatusPanel';
+import CurrentContactsPanel from '../CurrentContactsPanel/CurrentContactsPanel';
+import EquipmentStatusPanel from '../EquipmentStatusPanel/EquipmentStatusPanel';
+import ContactsSummaryPanel from '../ContactsSummaryPanel/ContactsSummaryPanel';
 
 const Dashboard = () => {
   const [tab, setTab] = useState('Contacts');
 
   return (
-    <main className='Dashboard-page'>
+    <>
       <aside className='Dashboard-page__left-panel'>
         <AlertsPanel />
       </aside>
@@ -34,7 +34,7 @@ const Dashboard = () => {
           <TrendingEquipmentStatusPanel />
         )}
       </section>
-    </main>
+    </>
   );
 };
 
