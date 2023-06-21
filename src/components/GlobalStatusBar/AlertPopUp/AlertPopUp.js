@@ -6,6 +6,11 @@ import './AlertPopUp.css';
 
 const AlertsPopUp = () => {
   const { getHeaderGroups, handleAction, isDisabled, rows } = useAlertPopUp();
+
+  const category = rows.filter(
+    (row) => row.original.errorCategory === 'software'
+  );
+
   return (
     <div className='Alerts-popup'>
       {getHeaderGroups().map(({ headers }) => (
@@ -25,10 +30,10 @@ const AlertsPopUp = () => {
         </div>
       ))}
 
-      {rows.length > 0 ? (
+      {category.length > 0 ? (
         <>
           <ul className='Alerts-popup__list'>
-            {rows.map((row) => (
+            {category.map((row) => (
               <AlertPopUpItem row={row} />
             ))}
           </ul>

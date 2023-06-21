@@ -18,7 +18,7 @@ const useAlertPopUp = () => {
   const selectedRows = Object.keys(rowSelection);
   const isDisabled = selectedRows.length === 0;
 
-  const { getColumn, getHeaderGroups, getRowModel } = useReactTable({
+  const { getHeaderGroups, getRowModel } = useReactTable({
     data: state.alerts,
     columns,
     state: { columnFilters, sorting, rowSelection },
@@ -30,18 +30,6 @@ const useAlertPopUp = () => {
     getFilteredRowModel: getFilteredRowModel(),
   });
   const rows = getRowModel().rows;
-
-  const handleSeverity = (e) => {
-    const severity = getColumn('errorSeverity');
-    if (e.target.value === 'all') return severity.setFilterValue('');
-    severity.setFilterValue(e.target.value);
-  };
-
-  const handleCategory = (e) => {
-    const category = getColumn('errorCategory');
-    if (e.target.value === 'all') return category.setFilterValue('');
-    category.setFilterValue(e.target.value);
-  };
 
   const handleAction = () => {
     const payload = selectedRows.map((selectedIndex) => {
@@ -58,8 +46,6 @@ const useAlertPopUp = () => {
   return {
     getHeaderGroups,
     handleAction,
-    handleCategory,
-    handleSeverity,
     isDisabled,
     rows,
   };
