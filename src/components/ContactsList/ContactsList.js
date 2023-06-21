@@ -22,7 +22,13 @@ const ContactsList = () => {
   });
 
   return (
-    <AstroReactTable table={table} isSortable onRowClick={investigateContact} />
+    <main className='Contacts-list-page'>
+      <AstroReactTable
+        table={table}
+        isSortable
+        onRowClick={investigateContact}
+      />
+    </main>
   );
 };
 
