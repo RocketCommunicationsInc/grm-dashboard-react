@@ -1,7 +1,7 @@
 import { RuxButton, RuxContainer } from '@astrouxds/react';
 import { useMemo } from 'react';
 import { columnDefs } from './MaintenanceHistoryColumns';
-import { useAppActions, useAppContext } from '../../providers/AppProvider';
+import { useAppContext } from '../../providers/AppProvider';
 import { AstroReactTable } from '../../common';
 import JobIDCard from './JobIDCard/JobIDCard';
 import {
@@ -13,8 +13,7 @@ import './MaintenancePanel.css';
 
 const MaintenancePanel = () => {
   const columns = useMemo(() => columnDefs, []);
-  const { investigateContact } = useAppActions();
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
 
   const table = useReactTable({
     data: state.contacts,
@@ -23,7 +22,11 @@ const MaintenancePanel = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  console.log(state);
+  const handleClick = () => {
+    dispatch({
+      type: 'SCHEDULE_JOB',
+    });
+  };
 
   return (
     <RuxContainer className='maintenance-panel'>
@@ -31,7 +34,7 @@ const MaintenancePanel = () => {
       <RuxContainer className='jobs-section'>
         <h2>Jobs</h2>
         <div className='jobs-wrapper'>
-          <RuxButton>Scehdule Job</RuxButton>
+          <RuxButton onClick={handleClick}>Scehdule Job</RuxButton>
           <JobIDCard />
           <JobIDCard />
           <JobIDCard />
@@ -41,11 +44,7 @@ const MaintenancePanel = () => {
       <RuxContainer>
         <div className='maintenance-wrapper'>
           <h2>Maintenance History</h2>
-          <AstroReactTable
-            table={table}
-            isSortable
-            onRowClick={investigateContact}
-          />
+          <AstroReactTable table={table} isSortable />
         </div>
       </RuxContainer>
     </RuxContainer>

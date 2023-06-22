@@ -83,6 +83,20 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'SCHEDULE_JOB': {
+      const page = 'schedule-job';
+
+      return {
+        ...state,
+        ...payload,
+        page,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: 'Schedule Job' },
+        ],
+      };
+    }
+
     case 'SET_CONTACTS_LIST': {
       const page = 'contacts-list';
 

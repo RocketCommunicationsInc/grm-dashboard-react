@@ -15,6 +15,7 @@ import ContactsList from './ContactsList/ContactsList';
 import EquipmentDetailsPanel from './EquipmentDetailsPanel/EquipmentDetailsPanel';
 import './App.css';
 import MaintenancePanel from './MaintenancePanel/MaintenancePanel';
+import ScheduleJob from './MaintenancePanel/ScheduleJob/ScehduleJob';
 
 const App = () => {
   const [tab, setTab] = useState('Contacts');
@@ -30,6 +31,18 @@ const App = () => {
             <AlertDetails />
             <EquipmentDetailsPanel />
             <MaintenancePanel />
+          </main>
+        </>
+      );
+
+    case 'schedule-job':
+      return (
+        <>
+          <GlobalStatusBar />
+          <BreadcrumbNav />
+          <main className='Alert-details-page'>
+            <AlertDetails />
+            <ScheduleJob />
           </main>
         </>
       );
