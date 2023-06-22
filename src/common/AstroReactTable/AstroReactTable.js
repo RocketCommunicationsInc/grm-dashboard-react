@@ -25,10 +25,12 @@ export const AstroReactTable = ({
         {table.getFlatHeaders().map(({ id, column, getContext }) => (
           <div
             key={id}
-            className={`Astro-react-table__col', ${
+            className={`Astro-react-table__col ${
               isSortable && !!column.getIsSorted()
                 ? 'Astro-react-table__sorted'
-                : 'Astro-react-table__sortable'
+                : isSortable
+                ? 'Astro-react-table__sortable'
+                : ''
             }`}
             style={column.columnDef.style}
             onClick={isSortable ? column.getToggleSortingHandler() : undefined}
