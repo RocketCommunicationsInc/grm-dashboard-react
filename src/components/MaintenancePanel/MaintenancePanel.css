@@ -1,0 +1,27 @@
+.jobs-section rux-container {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  display: inline-block;
+}
+
+.maintenance-panel rux-container:nth-of-type(1) {
+  flex-direction: row;
+}
+
+.jobs-wrapper {
+  margin-top: var(--spacing-4);
+  display: flex;
+  flex-wrap: nowrap;
+  gap: var(--spacing-3);
+  justify-content: space-between;
+}
+
+.maintenance-wrapper {
+  height: 19rem;
+  margin-bottom: var(--spacing-6);
+}
+
+.maintenance-wrapper h2 {
+  margin-bottom: var(--spacing-3);
+}

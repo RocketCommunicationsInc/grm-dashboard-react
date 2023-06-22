@@ -14,6 +14,7 @@ import ContactsSummaryPanel from './ContactsSummaryPanel/ContactsSummaryPanel';
 import ContactsList from './ContactsList/ContactsList';
 import EquipmentDetailsPanel from './EquipmentDetailsPanel/EquipmentDetailsPanel';
 import './App.css';
+import MaintenancePanel from './MaintenancePanel/MaintenancePanel';
 
 const App = () => {
   const [tab, setTab] = useState('Contacts');
@@ -27,8 +28,8 @@ const App = () => {
           <BreadcrumbNav />
           <main className='Alert-details-page'>
             <AlertDetails />
-            <ContactDetails />
             <EquipmentDetailsPanel />
+            <MaintenancePanel />
           </main>
         </>
       );
