@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { RuxIcon } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
@@ -26,10 +25,11 @@ export const AstroReactTable = ({
         {table.getFlatHeaders().map(({ id, column, getContext }) => (
           <div
             key={id}
-            className={classNames('Astro-react-table__col', {
-              'Astro-react-table__sorted': isSortable && !!column.getIsSorted(),
-              'Astro-react-table__sortable': isSortable,
-            })}
+            className={`Astro-react-table__col', ${
+              isSortable && !!column.getIsSorted()
+                ? 'Astro-react-table__sorted'
+                : 'Astro-react-table__sortable'
+            }`}
             style={column.columnDef.style}
             onClick={isSortable ? column.getToggleSortingHandler() : undefined}
           >
@@ -49,10 +49,13 @@ export const AstroReactTable = ({
           <div
             key={id}
             onClick={() => handleRowClick(original)}
-            className={classNames('Astro-react-table__row', {
-              'Astro-react-table__selected': handleIsSelected(original),
-              'Astro-react-table__selectable': !!onRowClick,
-            })}
+            className={`Astro-react-table__row ${
+              handleIsSelected(original)
+                ? 'Astro-react-table__selected'
+                : !!onRowClick
+                ? 'Astro-react-table__selectable'
+                : ''
+            }`}
           >
             {getVisibleCells().map(({ id, column, getContext }) => (
               <div
