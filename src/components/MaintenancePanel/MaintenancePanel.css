@@ -12,9 +12,13 @@
 .jobs-wrapper {
   margin-top: var(--spacing-4);
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   gap: var(--spacing-3);
-  justify-content: space-between;
+  justify-content: flex-end;
+}
+
+.jobs-wrapper rux-button {
+  margin-right: auto;
 }
 
 .maintenance-wrapper {

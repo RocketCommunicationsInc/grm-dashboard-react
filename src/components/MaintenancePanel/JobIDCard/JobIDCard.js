@@ -27,7 +27,7 @@ const JobIDCard = ({ id, status, type, startTime, stopTime }) => {
         size='small'
         label='Stop'
       />
-      <RuxButton>View Details</RuxButton>
+      <RuxButton disabled>View Details</RuxButton>
     </RuxCard>
   );
 };

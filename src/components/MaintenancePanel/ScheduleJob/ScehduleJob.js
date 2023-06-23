@@ -11,6 +11,7 @@ import { useMemo, useState } from 'react';
 import { columnDefs } from './ScheduleJobColumns';
 import { useAppContext } from '../../../providers/AppProvider';
 import { AstroReactTable } from '../../../common';
+// import scheduledJobsData from '../../../data/scheduledJobs.json';
 
 import {
   getCoreRowModel,
@@ -23,8 +24,21 @@ import './ScheduleJob.css';
 
 const ScheduleJob = () => {
   const columns = useMemo(() => columnDefs, []);
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
+
+  const uniqueJobId = Math.random().toString(5).substring(3, 8);
+
+  const [newJob, setNewJob] = useState({
+    jobId: uniqueJobId,
+    jobType: '',
+    description: '',
+    startTime: '',
+    stopTime: '',
+    technician: '',
+    follow: true,
+    status: '',
+  });
 
   const table = useReactTable({
     data: state.contacts,
@@ -33,6 +47,32 @@ const ScheduleJob = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  const handleCancel = () => {
+    dispatch({ type: 'SET_PAGE' });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch({ type: 'SCHEDULE_NEW_JOB', payload: newJob });
+    // setNewJob({
+    //   jobId: uniqueJobId,
+    //   jobType: '',
+    //   description: '',
+    //   startTime: '',
+    //   stopTime: '',
+    //   technician: '',
+    //   follow: true,
+    //   status: '',
+    // });
+  };
+
+  const handleChange = (e) => {
+    setNewJob((prevState) => ({
+      ...prevState,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
   return (
     <RuxContainer className='schedule-job'>
       <header slot='header'>Job Request</header>
@@ -40,24 +80,56 @@ const ScheduleJob = () => {
         <div className='job-request-section'>
           <ul>
             <li>1. Select Job Type</li>
-            <RuxSelect size='small' label=' Job Type'>
+            <RuxSelect
+              onRuxchange={handleChange}
+              size='small'
+              label=' Job Type'
+              value={newJob.jobType}
+              name='jobType'
+            >
               <RuxOption label='- Select -'></RuxOption>
-              {state.scheduledJobs.map((job) => (
-                <RuxOption label={job.jobType}></RuxOption>
-              ))}
+              <RuxOption value='Maintenence' label='Maintenence'></RuxOption>
+              <RuxOption value='IT Support' label='IT Support'></RuxOption>
+              <RuxOption value='Hardware' label='Hardware'></RuxOption>
+              <RuxOption value='Other' label='Other'></RuxOption>
             </RuxSelect>
-            <RuxTextarea placeholder='Enter Description' label='Description' />
+            <RuxTextarea
+              onRuxinput={handleChange}
+              placeholder='Enter Description'
+              label='Description'
+            />
 
             <li>2. Select Time</li>
-            <RuxInput size='small' type='datetime-local' label=' Start' />
-            <RuxInput size='small' type='datetime-local' label=' Stop' />
+            <RuxInput
+              onRuxinput={handleChange}
+              value={newJob.startTime}
+              size='small'
+              type='datetime-local'
+              label='Start'
+              name='startTime'
+            />
+            <RuxInput
+              onRuxinput={handleChange}
+              value={newJob.stopTime}
+              size='small'
+              type='datetime-local'
+              label='Stop'
+              name='stopTime'
+            />
 
             <li>3. Select Technician</li>
-            <RuxSelect size='small' label='Technician'>
-              <RuxOption label='- Select -'></RuxOption>
-              {state.scheduledJobs.map((job) => (
-                <RuxOption label={job.technician}></RuxOption>
-              ))}
+            <RuxSelect
+              onRuxchange={handleChange}
+              size='small'
+              label='Technician'
+              value={newJob.technician}
+              name='technician'
+            >
+              <RuxOption value='' label='- Select -'></RuxOption>
+              <RuxOption value='R. Swanson' label='R. Swanson'></RuxOption>
+              <RuxOption value='B. Stinson' label='B. Stinson'></RuxOption>
+              <RuxOption value='M. Scott' label='M. Scott'></RuxOption>
+              <RuxOption value='J. Day' label='J. Day'></RuxOption>
             </RuxSelect>
 
             <li>
@@ -114,8 +186,10 @@ const ScheduleJob = () => {
         </RuxContainer>
       </div>
       <footer slot='footer'>
-        <RuxButton secondary>Cancel</RuxButton>
-        <RuxButton>Submit Request</RuxButton>
+        <RuxButton secondary onClick={handleCancel}>
+          Cancel
+        </RuxButton>
+        <RuxButton onClick={handleSubmit}>Submit Request</RuxButton>
       </footer>
     </RuxContainer>
   );

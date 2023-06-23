@@ -16,6 +16,13 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'SCHEDULE_NEW_JOB': {
+      return {
+        ...state,
+        scheduledJobs: [...state.scheduledJobs, payload],
+      };
+    }
+
     case 'DELETE_ALERT': {
       const errorId = state.currentAlert.errorId;
 
@@ -88,7 +95,7 @@ export const appReducer = (state, { type, payload }) => {
 
       return {
         ...state,
-        ...payload,
+        scheduledJobs: state.scheduledJobs,
         page,
         links: [
           ...state.links,
