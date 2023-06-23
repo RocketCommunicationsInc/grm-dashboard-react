@@ -11,6 +11,7 @@ import { useMemo, useState } from 'react';
 import { columnDefs } from './ScheduleJobColumns';
 import { useAppContext } from '../../../providers/AppProvider';
 import { AstroReactTable } from '../../../common';
+
 import {
   getCoreRowModel,
   getSortedRowModel,
@@ -32,8 +33,6 @@ const ScheduleJob = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  console.log(state);
-
   return (
     <RuxContainer className='schedule-job'>
       <header slot='header'>Job Request</header>
@@ -43,9 +42,9 @@ const ScheduleJob = () => {
             <li>1. Select Job Type</li>
             <RuxSelect size='small' label=' Job Type'>
               <RuxOption label='- Select -'></RuxOption>
-              <RuxOption label='Comms'></RuxOption>
-              <RuxOption label='Facilities'></RuxOption>
-              <RuxOption label='RF'></RuxOption>
+              {state.scheduledJobs.map((job) => (
+                <RuxOption label={job.jobType}></RuxOption>
+              ))}
             </RuxSelect>
             <RuxTextarea placeholder='Enter Description' label='Description' />
 
@@ -56,9 +55,9 @@ const ScheduleJob = () => {
             <li>3. Select Technician</li>
             <RuxSelect size='small' label='Technician'>
               <RuxOption label='- Select -'></RuxOption>
-              <RuxOption label='T. Rodgers'></RuxOption>
-              <RuxOption label='M. Stanley'></RuxOption>
-              <RuxOption label='R. Johnson'></RuxOption>
+              {state.scheduledJobs.map((job) => (
+                <RuxOption label={job.technician}></RuxOption>
+              ))}
             </RuxSelect>
 
             <li>

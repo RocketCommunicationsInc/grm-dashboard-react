@@ -35,10 +35,15 @@ const MaintenancePanel = () => {
         <h2>Jobs</h2>
         <div className='jobs-wrapper'>
           <RuxButton onClick={handleClick}>Scehdule Job</RuxButton>
-          <JobIDCard />
-          <JobIDCard />
-          <JobIDCard />
-          <JobIDCard />
+          {state.scheduledJobs.map((job) => (
+            <JobIDCard
+              type={job.jobType}
+              id={job.jobId}
+              startTime={job.startTime}
+              stopTime={job.stopTime}
+              status={job.status}
+            />
+          ))}
         </div>
       </RuxContainer>
       <RuxContainer>
