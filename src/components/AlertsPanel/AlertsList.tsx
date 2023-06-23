@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from 'react';
 import { RuxCheckbox } from '@astrouxds/react';
-import AlertListItem from './AlertListItem';
+import AlertListItem from './AlertsListItem';
 import type { Category, Status } from '@astrouxds/mock-data';
 import { useTTCGRMActions, useTTCGRMAlerts } from '@astrouxds/mock-data';
 
