@@ -1,4 +1,4 @@
-.Dashboard-page {
+.dashboard-page {
   display: grid;
   /* Screen height minus the height of the Global Status Bar */
   height: calc(100vh - 6rem);
@@ -34,20 +34,20 @@
   box-shadow: var(--container-color-border) 0 0 0 1px;
 }
 
-.Alert-details-page {
+.alert-details-page {
   display: flex;
   flex-direction: column;
   padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
   gap: var(--spacing-3);
 }
 
-.Contacts-list-page {
+.contacts-list-page {
   /* 100vh - (height of global status bar + height of breadcrumb element) */
   height: calc(100vh - 10.25rem);
   padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
 }
 
-.Contact-details-page {
+.contact-details-page {
   height: calc(100vh - 10.25rem);
   padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
 }
