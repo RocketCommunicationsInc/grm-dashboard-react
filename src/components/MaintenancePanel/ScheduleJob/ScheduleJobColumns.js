@@ -8,39 +8,43 @@ export const columnDefs = [
     header: 'IRON',
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor('contactMode', {
+  columnHelper.accessor('contactGround', {
     header: 'Ground Station',
+    style: { flex: 1 },
   }),
-  columnHelper.accessor('contactSatellite', {
+  columnHelper.accessor('contactREV', {
     header: 'REV',
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor('contactSatellite', {
+  columnHelper.accessor('contactEquipment', {
     header: 'Equpiment String',
     cell: (info) => info.getValue(),
+    style: { flex: 4 },
   }),
-  columnHelper.accessor('contactSatellite', {
+  columnHelper.accessor('contactState', {
     header: 'State',
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor('contactSatellite', {
+  columnHelper.accessor('contactDOY', {
     header: 'DOY',
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor('contactAOS', {
+  columnHelper.accessor('contactBeginTimestamp', {
     header: 'Start Time',
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
+    style: { flex: 2 },
   }),
-  columnHelper.accessor('contactLOS', {
+  columnHelper.accessor('contactAOS', {
     header: 'AOS',
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
-  columnHelper.accessor('contactEndTimestamp', {
+  columnHelper.accessor('contactLOS', {
     header: 'LOS',
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
   columnHelper.accessor('contactEndTimestamp', {
     header: 'Stop Time',
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
+    style: { flex: 2 },
   }),
 ];

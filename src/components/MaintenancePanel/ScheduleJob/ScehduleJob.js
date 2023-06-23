@@ -32,6 +32,8 @@ const ScheduleJob = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  console.log(state);
+
   return (
     <RuxContainer className='schedule-job'>
       <header slot='header'>Job Request</header>
@@ -41,6 +43,9 @@ const ScheduleJob = () => {
             <li>1. Select Job Type</li>
             <RuxSelect size='small' label=' Job Type'>
               <RuxOption label='- Select -'></RuxOption>
+              <RuxOption label='Comms'></RuxOption>
+              <RuxOption label='Facilities'></RuxOption>
+              <RuxOption label='RF'></RuxOption>
             </RuxSelect>
             <RuxTextarea placeholder='Enter Description' label='Description' />
 
@@ -51,6 +56,9 @@ const ScheduleJob = () => {
             <li>3. Select Technician</li>
             <RuxSelect size='small' label='Technician'>
               <RuxOption label='- Select -'></RuxOption>
+              <RuxOption label='T. Rodgers'></RuxOption>
+              <RuxOption label='M. Stanley'></RuxOption>
+              <RuxOption label='R. Johnson'></RuxOption>
             </RuxSelect>
 
             <li>
@@ -59,7 +67,9 @@ const ScheduleJob = () => {
               not follow this job, you must view the job from the Equpiment
               Manager for any updates or alerts.
             </li>
-            <RuxCheckbox label='Follow' />
+            <li>
+              <RuxCheckbox label='Follow' />
+            </li>
 
             <RuxButton onClick={() => setCalculateConflicts(true)}>
               Calculate Conflicts
@@ -71,7 +81,7 @@ const ScheduleJob = () => {
           <h2>Conflicts (0)</h2>
           <span>
             This equpiment may be allocated to contacts within the timeframe of
-            this maintenance job. A lot of these contacts is provided below
+            this maintenance job. A list of these contacts is provided below
             after clicking "Calculate Conflicts".
             <br /> <br />
           </span>

@@ -25,38 +25,3 @@
 .maintenance-wrapper h2 {
   margin-bottom: var(--spacing-3);
 }
-
-.schedule-job-wrapper rux-textarea {
-  margin-bottom: var(--spacing-4);
-}
-
-.schedule-job-wrapper rux-input,
-.schedule-job-wrapper rux-select {
-  display: flex;
-  margin-block: var(--spacing-4);
-}
-
-.schedule-job-wrapper rux-input::part(form-field),
-.schedule-job-wrapper rux-select::part(select) {
-  flex-direction: row;
-  width: 14rem;
-}
-
-.schedule-job-wrapper rux-input::part(label),
-.schedule-job-wrapper rux-select::part(label) {
-  margin-right: var(--spacing-2);
-  margin-top: var(--spacing-1);
-}
-
-.conflicts-section h2 {
-  margin-bottom: var(--spacing-4);
-}
-
-.table-section .Astro-react-table {
-  margin-top: var(--spacing-6);
-}
-
-.table-section span {
-  margin: auto;
-  font-size: var(--font-size-lg);
-}
