@@ -35,6 +35,13 @@ const MaintenancePanel = () => {
         <h2>Jobs</h2>
         <div className='jobs-wrapper'>
           <RuxButton onClick={handleClick}>Scehdule Job</RuxButton>
+          <JobIDCard
+            type='IT Support'
+            id='7602'
+            startTime='2023-06-08T16:31'
+            stopTime='2023-09-08T18:31'
+            status='Approved'
+          />
           {state.scheduledJobs.map((job) => (
             <JobIDCard
               type={job.jobType}

@@ -11,7 +11,6 @@ import { useMemo, useState } from 'react';
 import { columnDefs } from './ScheduleJobColumns';
 import { useAppContext } from '../../../providers/AppProvider';
 import { AstroReactTable } from '../../../common';
-// import scheduledJobsData from '../../../data/scheduledJobs.json';
 
 import {
   getCoreRowModel,
@@ -28,6 +27,8 @@ const ScheduleJob = () => {
   const [calculateConflicts, setCalculateConflicts] = useState(false);
 
   const uniqueJobId = Math.random().toString(5).substring(3, 8);
+  const statusValues = ['Approved', 'Started', 'Stopped'];
+  const randomStatus = Math.floor(Math.random() * statusValues.length);
 
   const [newJob, setNewJob] = useState({
     jobId: uniqueJobId,
@@ -37,7 +38,7 @@ const ScheduleJob = () => {
     stopTime: '',
     technician: '',
     follow: true,
-    status: '',
+    status: statusValues[randomStatus],
   });
 
   const table = useReactTable({
@@ -54,16 +55,6 @@ const ScheduleJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: 'SCHEDULE_NEW_JOB', payload: newJob });
-    // setNewJob({
-    //   jobId: uniqueJobId,
-    //   jobType: '',
-    //   description: '',
-    //   startTime: '',
-    //   stopTime: '',
-    //   technician: '',
-    //   follow: true,
-    //   status: '',
-    // });
   };
 
   const handleChange = (e) => {
@@ -97,6 +88,8 @@ const ScheduleJob = () => {
               onRuxinput={handleChange}
               placeholder='Enter Description'
               label='Description'
+              value={newJob.description}
+              name='description'
             />
 
             <li>2. Select Time</li>
