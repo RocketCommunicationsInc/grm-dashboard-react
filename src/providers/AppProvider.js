@@ -27,7 +27,6 @@ export const useAppContext = () => useContext(AppContext);
 
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
-  console.log(state);
 
   useEffect(() => {
     return timeoutRepeater(() => {

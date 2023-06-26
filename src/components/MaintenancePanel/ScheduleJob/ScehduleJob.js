@@ -11,7 +11,7 @@ import { useMemo, useState } from 'react';
 import { columnDefs } from './ScheduleJobColumns';
 import { useAppContext } from '../../../providers/AppProvider';
 import { AstroReactTable } from '../../../common';
-
+import useAlertsPanel from '../../AlertsPanel/useAlertsPanel';
 import {
   getCoreRowModel,
   getSortedRowModel,
@@ -25,9 +25,9 @@ const ScheduleJob = () => {
   const columns = useMemo(() => columnDefs, []);
   const { state, dispatch } = useAppContext();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
+  const [inputsFilledOut, setInputsFilledOut] = useState(false);
 
   const uniqueJobId = Math.floor(Math.random() * 90000) + 10000;
-
   const statusValues = ['Approved', 'Started', 'Stopped'];
   const randomStatus = Math.floor(Math.random() * statusValues.length);
 
@@ -48,6 +48,8 @@ const ScheduleJob = () => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
+  const { rows } = useAlertsPanel();
+  console.log(rows);
 
   const handleCancel = () => {
     dispatch({ type: 'SET_ALERT_DETAILS_PAGE' });
@@ -64,6 +66,7 @@ const ScheduleJob = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
+    setInputsFilledOut(true);
   };
 
   return (
@@ -134,17 +137,26 @@ const ScheduleJob = () => {
               Manager for any updates or alerts.
             </li>
             <li>
-              <RuxCheckbox label='Follow' />
+              <RuxCheckbox checked label='Follow' />
             </li>
-
-            <RuxButton onClick={() => setCalculateConflicts(true)}>
-              Calculate Conflicts
-            </RuxButton>
+            {!inputsFilledOut ? (
+              <RuxButton disabled onClick={() => setCalculateConflicts(true)}>
+                Calculate Conflicts
+              </RuxButton>
+            ) : (
+              <RuxButton onClick={() => setCalculateConflicts(true)}>
+                Calculate Conflicts
+              </RuxButton>
+            )}
           </ul>
         </div>
 
         <RuxContainer className='conflicts-section'>
-          <h2>Conflicts (0)</h2>
+          {!calculateConflicts ? (
+            <h2>Conflicts (0)</h2>
+          ) : (
+            <h2>Conflicts ({rows.length})</h2>
+          )}
           <span>
             This equpiment may be allocated to contacts within the timeframe of
             this maintenance job. A list of these contacts is provided below
@@ -184,7 +196,13 @@ const ScheduleJob = () => {
         <RuxButton secondary onClick={handleCancel}>
           Cancel
         </RuxButton>
-        <RuxButton onClick={handleSubmit}>Submit Request</RuxButton>
+        {!calculateConflicts ? (
+          <RuxButton disabled onClick={handleSubmit}>
+            Submit Request
+          </RuxButton>
+        ) : (
+          <RuxButton onClick={handleSubmit}>Submit Request</RuxButton>
+        )}
       </footer>
     </RuxContainer>
   );
