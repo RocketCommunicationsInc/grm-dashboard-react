@@ -139,7 +139,7 @@ export const appReducer = (state, { type, payload }) => {
     }
 
     case 'SET_ALERT_DETAILS_PAGE': {
-      if (payload === 'contacts-list') {
+      if (payload === 'schedule-job') {
         const page = payload;
         const errorId = payload.currentAlert.errorId;
 
