@@ -131,10 +131,31 @@ export const appReducer = (state, { type, payload }) => {
           ],
         };
       }
-
       return {
         ...state,
         page: 'dashboard',
+        links: initialState.links,
+      };
+    }
+
+    case 'SET_ALERT_DETAILS_PAGE': {
+      if (payload === 'contacts-list') {
+        const page = payload;
+        const errorId = payload.currentAlert.errorId;
+
+        return {
+          ...state,
+          page,
+          links: [
+            ...initialState.links,
+            { href: `/${page}`, page, title: `Alert ${errorId} Details` },
+          ],
+        };
+      }
+
+      return {
+        ...state,
+        page: 'alert-details',
         links: initialState.links,
       };
     }

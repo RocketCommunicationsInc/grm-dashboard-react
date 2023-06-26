@@ -26,7 +26,8 @@ const ScheduleJob = () => {
   const { state, dispatch } = useAppContext();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
 
-  const uniqueJobId = Math.random().toString(5).substring(3, 8);
+  const uniqueJobId = Math.floor(Math.random() * 90000) + 10000;
+
   const statusValues = ['Approved', 'Started', 'Stopped'];
   const randomStatus = Math.floor(Math.random() * statusValues.length);
 
@@ -49,12 +50,13 @@ const ScheduleJob = () => {
   });
 
   const handleCancel = () => {
-    dispatch({ type: 'SET_PAGE' });
+    dispatch({ type: 'SET_ALERT_DETAILS_PAGE' });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: 'SCHEDULE_NEW_JOB', payload: newJob });
+    dispatch({ type: 'SET_ALERT_DETAILS_PAGE' });
   };
 
   const handleChange = (e) => {
