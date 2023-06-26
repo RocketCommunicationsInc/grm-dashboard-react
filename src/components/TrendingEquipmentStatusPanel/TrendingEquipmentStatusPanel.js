@@ -6,25 +6,6 @@ import { randInt } from '../../util';
 import './TrendingEquipmentStatusPanel.css';
 
 const TrendingEquipmentStatusPanel = () => {
-  const series = [
-    {
-      label: 'RF',
-      data: labels.map(() => randInt(0, 100)),
-    },
-    {
-      label: 'Digital',
-      data: labels.map(() => randInt(0, 100)),
-    },
-    {
-      label: 'Comms',
-      data: labels.map(() => randInt(0, 100)),
-    },
-    {
-      label: 'Facilities',
-      data: labels.map(() => randInt(0, 100)),
-    },
-  ];
-
   const labels = [
     '0300',
     '0400',
@@ -38,6 +19,23 @@ const TrendingEquipmentStatusPanel = () => {
     '1200',
     '1300',
     '1400',
+  ];
+
+  const series = [
+    {
+      data: labels.map(() => randInt(0, 100)),
+      label: 'mango',
+    },
+    {
+      data: labels.map(() => randInt(0, 100)),
+    },
+    {
+      data: labels.map(() => randInt(0, 100)),
+    },
+    {
+      data: labels.map(() => randInt(0, 100)),
+    },
+    { labels: ['Comms', 'Digital', 'Facilities', 'RF'] },
   ];
 
   var options = {
@@ -111,7 +109,6 @@ const TrendingEquipmentStatusPanel = () => {
         );
       },
       style: {
-        fontSize: '12px',
         color: 'var(--color-text-primary)',
       },
       shared: false,
@@ -143,15 +140,12 @@ const TrendingEquipmentStatusPanel = () => {
       ],
     },
     colors: ['rgb(77, 172, 255)', 'rgb(218, 156, 231)', '#00c7cb', '#a1e9eb'],
-
     legend: {
       position: 'top',
       horizontalAlign: 'left',
       floating: false,
       formatter: undefined,
-      inverseOrder: false,
-      width: undefined,
-      height: undefined,
+      // labels: ['Comms', 'Digital', 'Facilities', 'RF'],
       // tooltipHoverFormatter: function (seriesName, opts) {
       //   return (
       //     seriesName +
@@ -160,20 +154,14 @@ const TrendingEquipmentStatusPanel = () => {
       //     '</strong>'
       //   );
       // },
-      customLegendItems: [],
-      offsetX: 0,
-      offsetY: 0,
       labels: {
         colors: 'var(--color-text-primary)',
       },
       markers: {
-        width: 12,
-        height: 12,
-        strokeWidth: 0,
-        customHTML: undefined,
+        // customHTML: function (seriesName) {
+        //   return seriesName;
+        // },
         onClick: undefined,
-        offsetX: 0,
-        offsetY: 0,
       },
     },
   };
