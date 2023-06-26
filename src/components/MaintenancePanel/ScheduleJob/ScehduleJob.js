@@ -49,7 +49,6 @@ const ScheduleJob = () => {
     getSortedRowModel: getSortedRowModel(),
   });
   const { rows } = useAlertsPanel();
-  console.log(rows);
 
   const handleCancel = () => {
     dispatch({ type: 'SET_ALERT_DETAILS_PAGE' });
