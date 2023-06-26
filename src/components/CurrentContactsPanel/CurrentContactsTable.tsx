@@ -1,4 +1,4 @@
-import { MouseEvent, useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import {
   RuxContainer,
   RuxTable,

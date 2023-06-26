@@ -1,15 +1,13 @@
-import { useState } from 'react';
 import {
   RuxCheckbox,
   RuxStatus,
   RuxButton,
   RuxAccordion,
   RuxAccordionItem,
-  RuxNotification,
 } from '@astrouxds/react';
 import { useAppContext } from '../../providers/AppProvider';
 import { useTTCGRMActions, useTTCGRMContacts } from '@astrouxds/mock-data';
-import type { Alert, Contact } from '@astrouxds/mock-data';
+import type { Alert } from '@astrouxds/mock-data';
 
 import { randInt } from '../../util';
 import { randomContact } from '../../data/data';
