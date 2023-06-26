@@ -60,7 +60,7 @@ const CurrentContactsTable = () => {
 
   const handleSelectState = (e: any) => {
     setStateSelection(e.target.value as 'executing' | 'failed' | 'all');
-    setOpenBanner(true);
+    setOpenBanner(e.target.value !== 'all');
   };
 
   const filterContacts = useCallback(
