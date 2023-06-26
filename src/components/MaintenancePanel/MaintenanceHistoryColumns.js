@@ -6,7 +6,6 @@ const columnHelper = createColumnHelper();
 export const columnDefs = [
   columnHelper.accessor('jobId', {
     header: 'Job ID',
-    cell: (info) => info.getValue(),
   }),
   columnHelper.accessor('jobType', {
     header: 'Type',
@@ -25,10 +24,8 @@ export const columnDefs = [
   }),
   columnHelper.accessor('technician', {
     header: 'Technician',
-    cell: 'John Smith',
   }),
   columnHelper.accessor('description', {
     header: 'Description',
-    cell: (info) => info.getValue(),
   }),
 ];
