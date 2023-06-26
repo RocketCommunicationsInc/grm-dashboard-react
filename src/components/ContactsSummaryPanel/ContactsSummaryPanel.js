@@ -96,7 +96,7 @@ const ContactsSummaryPanel = () => {
     },
   ];
 
-  var options = {
+  const options = {
     onClick: onClick,
     onHover: onHover,
     chart: {

@@ -1,6 +1,5 @@
 import { memo } from 'react';
 import Chart from 'react-apexcharts';
-import { RuxCheckbox, RuxCheckboxGroup } from '@astrouxds/react';
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import './TrendingEquipmentStatusPanel.css';
@@ -147,7 +146,6 @@ const TrendingEquipmentStatusPanel = () => {
       horizontalAlign: 'left',
       floating: false,
       formatter: undefined,
-      // labels: ['Comms', 'Digital', 'Facilities', 'RF'],
       // tooltipHoverFormatter: function (seriesName, opts) {
       //   return (
       //     seriesName +
