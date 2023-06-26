@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { RuxTab, RuxTabs } from '@astrouxds/react';
 import Alerts from '../AlertsPanel/Alerts';
 import TrendingEquipmentStatusPanel from '../TrendingEquipmentStatusPanel/TrendingEquipmentStatusPanel';
-import CurrentContactsPanel from '../CurrentContactsPanel/CurrentContactsPanel';
+import CurrentContactsTable from '../CurrentContactsPanel/CurrentContactsTable';
 import EquipmentStatusPanel from '../EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from '../ContactsSummaryPanel/ContactsSummaryPanel';
 
@@ -22,7 +22,7 @@ const Dashboard = () => {
       </nav>
       <section className='Dashboard-page__right-top-panel'>
         {tab === 'Contacts' ? (
-          <CurrentContactsPanel />
+          <CurrentContactsTable />
         ) : (
           <EquipmentStatusPanel />
         )}
