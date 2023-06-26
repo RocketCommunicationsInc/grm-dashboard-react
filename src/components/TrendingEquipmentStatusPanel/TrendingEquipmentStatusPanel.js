@@ -24,18 +24,20 @@ const TrendingEquipmentStatusPanel = () => {
   const series = [
     {
       data: labels.map(() => randInt(0, 100)),
-      label: 'mango',
+      name: 'Commns',
     },
     {
       data: labels.map(() => randInt(0, 100)),
+      name: 'Digital',
     },
     {
       data: labels.map(() => randInt(0, 100)),
+      name: 'Facilities',
     },
     {
       data: labels.map(() => randInt(0, 100)),
+      name: 'RF',
     },
-    { labels: ['Comms', 'Digital', 'Facilities', 'RF'] },
   ];
 
   var options = {

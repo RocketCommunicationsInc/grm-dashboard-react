@@ -87,16 +87,16 @@ const EquipmentStatus = () => {
 
   const series = [
     {
-      data: initialDonuts,
+      data: [25, 25, 25, 25],
     },
     {
-      data: initialDonuts,
+      data: [25, 25, 25, 25],
     },
     {
-      data: initialDonuts,
+      data: [25, 25, 25, 25],
     },
     {
-      data: initialDonuts,
+      data: [25, 25, 25, 25],
     },
   ];
 

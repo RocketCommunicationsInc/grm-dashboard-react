@@ -21,3 +21,9 @@
 .Contacts-summary-panel__table-container {
   height: 11rem;
 }
+
+.trending-equipment-panel__select rux-slider {
+  width: 15rem;
+  display: flex;
+  margin-left: auto;
+}

@@ -3,7 +3,7 @@ import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
 import Chart from 'react-apexcharts';
-import { RuxPopUp } from '@astrouxds/react';
+import { RuxPopUp, RuxSlider } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
 
 const ContactsSummaryPanel = () => {
@@ -35,7 +35,7 @@ const ContactsSummaryPanel = () => {
       ...dataset,
       data: randomNumbers(12),
     }));
-  }, []);
+  }, [initialDataset]);
 
   const onClick = (_, elements) => {
     const activeElement = elements[0];
@@ -79,32 +79,31 @@ const ContactsSummaryPanel = () => {
 
   const series = [
     {
-      data: labels.map(() => randInt(0, 100)),
-      label: 'mango',
+      data: labels.map(() => randInt(0, 6)),
+      name: 'Upcoming',
     },
     {
-      data: labels.map(() => randInt(0, 100)),
+      data: labels.map(() => randInt(0, 7)),
+      name: 'Executing',
     },
     {
-      data: labels.map(() => randInt(0, 100)),
+      data: labels.map(() => randInt(0, 6)),
+      name: 'Complete',
     },
     {
-      data: labels.map(() => randInt(0, 100)),
+      data: labels.map(() => randInt(0, 7)),
+      name: 'Failed',
     },
-    { labels: ['Comms', 'Digital', 'Facilities', 'RF'] },
   ];
 
   var options = {
-    onClick,
-    onHover,
+    onClick: onClick,
+    onHover: onHover,
     chart: {
-      stacked: false,
+      stacked: true,
       toolbar: {
         show: false,
       },
-    },
-    grid: {
-      borderColor: 'var(--color-border-interactive-default)',
     },
     xaxis: {
       categories: labels,
@@ -141,39 +140,10 @@ const ContactsSummaryPanel = () => {
             colors: 'var(--color-text-primary)',
           },
         },
-        title: {
-          style: {
-            color: 'var(--color-text-primary)',
-          },
-        },
       },
     ],
     tooltip: {
-      enabled: true,
-      x: {
-        show: false,
-      },
-      theme: '',
-      custom: function ({ seriesName, series, seriesIndex, dataPointIndex }) {
-        console.log(series);
-        return (
-          '<span class="tooltip-box">' +
-          seriesName +
-          series[seriesIndex][dataPointIndex] +
-          '</span>'
-        );
-      },
-      style: {
-        color: 'var(--color-text-primary)',
-      },
-      shared: false,
-      intersect: false,
-      onDatasetHover: {
-        highlightDataSeries: false,
-      },
-      marker: {
-        show: false,
-      },
+      enabled: false,
     },
     colors: ['rgb(77, 172, 255)', 'rgb(218, 156, 231)', '#00c7cb', '#a1e9eb'],
     legend: {
@@ -194,6 +164,7 @@ const ContactsSummaryPanel = () => {
     <div className='trending-equipment-panel'>
       <PanelHeader heading='Contacts Summary' />
       <div className='trending-equipment-panel__select'>
+        <RuxSlider value='50' />
         <Chart type='bar' options={options} series={series} height='100%' />
         <RuxPopUp
           open={open}
