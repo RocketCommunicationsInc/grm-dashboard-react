@@ -1,6 +1,6 @@
 import { Chart as ChartJS, ArcElement } from 'chart.js';
 import { Fragment, useEffect, useState } from 'react';
-import { Doughnut } from 'react-chartjs-2';
+import { Pie } from 'react-chartjs-2';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import { PanelHeader } from '../../common';
@@ -9,17 +9,17 @@ import './EquipmentStatusPanel.css';
 ChartJS.register(ArcElement);
 
 const initialDonuts = [
-  { data: [47, 22, 31], label: 'RF' },
-  { data: [63, 17, 20], label: 'Comms' },
-  { data: [36, 34, 30], label: 'Digital' },
-  { data: [27, 30, 43], label: 'Facilities' },
+  { data: [33, 17, 20, 30], label: 'Comms' },
+  { data: [13, 34, 28, 15], label: 'Digital' },
+  { data: [20, 36, 39, 17], label: 'Facilities' },
+  { data: [40, 22, 25, 15], label: 'RF' },
 ];
 
 const getRandomData = () => {
   const randomData = [];
 
-  for (let i = 0; i < 4; i++) {
-    randomData.push(generate(100, 3));
+  for (let i = 0; i < 5; i++) {
+    randomData.push(generate(100, 4));
   }
 
   return randomData;
@@ -66,26 +66,13 @@ const EquipmentStatus = () => {
     <>
       <PanelHeader heading='Current Equipment Status' />
       <div className='Equipment-status__parent'>
-        <div className='Equipment-status__legend'>
-          <div className='Equipment-status__legend-item'>
-            <span id='idle' className='Equipment-status__key-dot' />
-            Idle
-          </div>
-          <div className='Equipment-status__legend-item'>
-            <span id='busy' className='Equipment-status__key-dot' />
-            Busy
-          </div>
-          <div className='Equipment-status__legend-item'>
-            <span id='inoperable' className='Equipment-status__key-dot' />
-            Inoperable
-          </div>
-        </div>
         <div className='Equipment-status__chart-container'>
-          {chart.map(({ data, label }, index) => (
+          {chart.map(({ data, label }) => (
             <Fragment key={label}>
-              <div className='Equipment-status__doughnut-container'>
-                <Doughnut
-                  className='Equipment-status__doughnut-chart'
+              <div className='Equipment-status__pie-container'>
+                <p>{label}</p>
+                <Pie
+                  className='Equipment-status__pie-chart'
                   options={{
                     plugins: {
                       datalabels: {
@@ -104,20 +91,40 @@ const EquipmentStatus = () => {
                     datasets: [
                       {
                         data: data,
-                        backgroundColor: ['#00c7cb', '#938bdb', '#4dacff'],
+                        backgroundColor: [
+                          '#00c7cb',
+                          '#938bdb',
+                          '#4dacff',
+                          '#a1e9eb',
+                        ],
                         borderWidth: 0,
                       },
                     ],
                   }}
                 />
-                <p>{label}</p>
               </div>
-
-              {index < chart.length - 1 && (
-                <div className='Equipment-status__divider' />
-              )}
             </Fragment>
           ))}
+          <div className='Equipment-status__legend'>
+            <ul>
+              <li>
+                <span id='busy-negative' />
+                Busy ( - Thresh )
+              </li>
+              <li>
+                <span id='busy' />
+                Busy ( + Thresh )
+              </li>
+              <li>
+                <span id='idle' />
+                Idle
+              </li>
+              <li>
+                <span id='inoperable' />
+                Inoperable
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </>

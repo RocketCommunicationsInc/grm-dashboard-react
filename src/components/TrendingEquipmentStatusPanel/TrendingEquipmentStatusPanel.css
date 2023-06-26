@@ -5,9 +5,11 @@
 }
 
 .trending-equipment-panel__select {
-  display: flex;
-  flex-direction: row-reverse;
+  /* display: flex;
+  flex-direction: row-reverse; */
+  width: 100%;
   padding: var(--spacing-4);
+  height: 99.5%;
 }
 
 .trending-equipment-panel__chart-wrapper {

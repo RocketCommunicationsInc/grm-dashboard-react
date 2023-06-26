@@ -5,10 +5,12 @@
   "dependencies": {
     "@astrouxds/react": "^7.11.0",
     "@tanstack/react-table": "^8.7.4",
+    "apexcharts": "^3.41.0",
     "chart.js": "^4.1.1",
     "chartjs-plugin-annotation": "^2.1.2",
     "chartjs-plugin-datalabels": "^2.2.0",
     "react": "^18.2.0",
+    "react-apexcharts": "^1.4.0",
     "react-chartjs-2": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",

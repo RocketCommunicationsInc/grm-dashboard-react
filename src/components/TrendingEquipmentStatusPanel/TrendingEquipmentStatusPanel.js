@@ -1,133 +1,188 @@
-import { useState, memo } from 'react';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import annotationPlugin from 'chartjs-plugin-annotation';
-import { Line } from 'react-chartjs-2';
-import { RuxSelect, RuxOption } from '@astrouxds/react';
+import { memo } from 'react';
+import Chart from 'react-apexcharts';
+import { RuxCheckbox, RuxCheckboxGroup } from '@astrouxds/react';
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import './TrendingEquipmentStatusPanel.css';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  annotationPlugin
-);
-
-const setOptions = (isAnnotated) => ({
-  responsive: true,
-  maintainAspectRatio: false,
-  animation: false,
-  plugins: {
-    annotation: isAnnotated
-      ? {
-          annotations: {
-            line1: {
-              type: 'line',
-              yMin: 90,
-              yMax: 90,
-              borderColor: 'white',
-              borderWidth: 2,
-              borderDash: [2],
-            },
-            label1: {
-              type: 'label',
-              content: 'Usage Threshold',
-              backgroundColor: '#172635',
-              color: 'white',
-              textAlign: 'center',
-              yValue: 80,
-              font: {
-                size: 10,
-              },
-            },
-          },
-        }
-      : false,
-    legend: { align: 'end', labels: { color: 'white' } },
-  },
-  scales: {
-    y: {
-      grid: { color: '#1c3f5e', drawTicks: false },
-      ticks: { color: 'white' },
-    },
-    x: {
-      ticks: { color: 'white' },
-    },
-  },
-});
-
 const TrendingEquipmentStatusPanel = () => {
-  const [selectedOption, setSelectedOption] = useState('Busy');
-  const hours = new Array(12).fill(new Date().getHours());
-  const labels = hours.map((h, i) => {
-    const hour = h + i > 23 ? h + i - 24 : h + i;
-    return hour + ':00';
-  });
+  const series = [
+    {
+      label: 'RF',
+      data: labels.map(() => randInt(0, 100)),
+    },
+    {
+      label: 'Digital',
+      data: labels.map(() => randInt(0, 100)),
+    },
+    {
+      label: 'Comms',
+      data: labels.map(() => randInt(0, 100)),
+    },
+    {
+      label: 'Facilities',
+      data: labels.map(() => randInt(0, 100)),
+    },
+  ];
 
-  const data = {
-    labels,
-    datasets: [
-      {
-        label: 'RF',
-        data: labels.map(() => randInt(0, 100)),
-        borderColor: 'rgb(77, 172, 255)',
-        backgroundColor: 'rgb(77, 172, 255)',
-        fill: false,
+  const labels = [
+    '0300',
+    '0400',
+    '1500',
+    '1600',
+    '1700',
+    '1800',
+    '1900',
+    '1000',
+    '1100',
+    '1200',
+    '1300',
+    '1400',
+  ];
+
+  var options = {
+    chart: {
+      stacked: false,
+      toolbar: {
+        show: false,
       },
-      {
-        label: 'Digital',
-        data: labels.map(() => randInt(0, 100)),
-        borderColor: 'rgb(218, 156, 231)',
-        backgroundColor: 'rgb(218, 156, 231)',
-        fill: false,
+    },
+    grid: {
+      borderColor: 'var(--color-border-interactive-default)',
+    },
+    stroke: {
+      width: [3, 3, 3, 3],
+    },
+    xaxis: {
+      categories: labels,
+      labels: {
+        style: {
+          colors: 'var(--color-text-primary)',
+        },
       },
-      {
-        label: 'Comms',
-        data: labels.map(() => randInt(0, 100)),
-        borderColor: '#00c7cb',
-        backgroundColor: '#00c7cb',
-        fill: false,
+      tooltip: {
+        enabled: false,
       },
+      axisTicks: {
+        show: false,
+      },
+    },
+    yaxis: [
       {
-        label: 'Facilities',
-        data: labels.map(() => randInt(0, 100)),
-        borderColor: '#a1e9eb',
-        backgroundColor: '#a1e9eb',
-        fill: false,
+        show: true,
+        tickAmount: 10,
+        decimalsInFloat: 0,
+        min: 0,
+        max: 100,
+        axisTicks: {
+          show: false,
+        },
+        axisBorder: {
+          show: true,
+          color: 'var(--color-text-primary)',
+        },
+        labels: {
+          enabled: true,
+          show: true,
+          style: {
+            colors: 'var(--color-text-primary)',
+          },
+        },
+        title: {
+          style: {
+            color: 'var(--color-text-primary)',
+          },
+        },
       },
     ],
-  };
+    tooltip: {
+      enabled: true,
+      x: {
+        show: false,
+      },
+      theme: '',
+      custom: function ({ seriesName, series, seriesIndex, dataPointIndex }) {
+        console.log(series);
+        return (
+          '<span class="tooltip-box">' +
+          seriesName +
+          series[seriesIndex][dataPointIndex] +
+          '</span>'
+        );
+      },
+      style: {
+        fontSize: '12px',
+        color: 'var(--color-text-primary)',
+      },
+      shared: false,
+      intersect: false,
+      onDatasetHover: {
+        highlightDataSeries: false,
+      },
+      marker: {
+        show: false,
+      },
+    },
+    annotations: {
+      yaxis: [
+        {
+          y: 90,
+          borderColor: 'var(--color-background-base-default)',
+          strokeDashArray: 7,
+          label: {
+            borderColor: 'var(--color-background-base-default)',
+            position: 'center',
+            offsetY: 5,
+            style: {
+              color: 'var(--color-text-primary)',
+              background: 'var(--color-background-surface-hover)',
+            },
+            text: 'Upper Threshold',
+          },
+        },
+      ],
+    },
+    colors: ['rgb(77, 172, 255)', 'rgb(218, 156, 231)', '#00c7cb', '#a1e9eb'],
 
-  const handleSelect = (evt) => {
-    setSelectedOption(evt.srcElement.value);
+    legend: {
+      position: 'top',
+      horizontalAlign: 'left',
+      floating: false,
+      formatter: undefined,
+      inverseOrder: false,
+      width: undefined,
+      height: undefined,
+      // tooltipHoverFormatter: function (seriesName, opts) {
+      //   return (
+      //     seriesName +
+      //     ' - <strong>' +
+      //     opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
+      //     '</strong>'
+      //   );
+      // },
+      customLegendItems: [],
+      offsetX: 0,
+      offsetY: 0,
+      labels: {
+        colors: 'var(--color-text-primary)',
+      },
+      markers: {
+        width: 12,
+        height: 12,
+        strokeWidth: 0,
+        customHTML: undefined,
+        onClick: undefined,
+        offsetX: 0,
+        offsetY: 0,
+      },
+    },
   };
 
   return (
     <div className='trending-equipment-panel'>
       <PanelHeader heading='Trending Equipment Status' />
       <div className='trending-equipment-panel__select'>
-        <RuxSelect size='small' onRuxchange={handleSelect}>
-          <RuxOption value='Busy' label='Busy' />
-          <RuxOption value='Idle' label='Idle' />
-          <RuxOption value='Inoperable' label='Inoperable' />
-        </RuxSelect>
-      </div>
-      <div className='trending-equipment-panel__chart-wrapper'>
-        <Line options={setOptions(selectedOption === 'Busy')} data={data} />
+        <Chart type='line' options={options} series={series} height='100%' />
       </div>
     </div>
   );
