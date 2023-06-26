@@ -4,30 +4,30 @@ import { TwoDigitTime } from '../../common';
 const columnHelper = createColumnHelper();
 
 export const columnDefs = [
-  columnHelper.accessor('contactName', {
+  columnHelper.accessor('jobId', {
     header: 'Job ID',
     cell: (info) => info.getValue(),
   }),
-  columnHelper.accessor('contactMode', {
+  columnHelper.accessor('jobType', {
     header: 'Type',
   }),
-  columnHelper.accessor('contactAOS', {
+  columnHelper.accessor('createdOn', {
     header: 'Created On',
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
-  columnHelper.accessor('contactLOS', {
+  columnHelper.accessor('startTime', {
     header: 'Started On',
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
-  columnHelper.accessor('contactEndTimestamp', {
+  columnHelper.accessor('stopTime', {
     header: 'Completed On',
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
-  columnHelper.accessor('contactDOY', {
+  columnHelper.accessor('technician', {
     header: 'Technician',
     cell: 'John Smith',
   }),
-  columnHelper.accessor('contactSatellite', {
+  columnHelper.accessor('description', {
     header: 'Description',
     cell: (info) => info.getValue(),
   }),

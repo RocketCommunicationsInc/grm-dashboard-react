@@ -16,7 +16,7 @@ const MaintenancePanel = () => {
   const { state, dispatch } = useAppContext();
 
   const table = useReactTable({
-    data: state.contacts,
+    data: state.scheduledJobs,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -37,10 +37,10 @@ const MaintenancePanel = () => {
           <RuxButton onClick={handleClick}>Scehdule Job</RuxButton>
           <JobIDCard
             type='IT Support'
-            id='7602'
+            id='76029'
             startTime='2023-06-08T16:31'
             stopTime='2023-09-08T18:31'
-            status='Approved'
+            status='Pending'
           />
           {state.scheduledJobs.map((job) => (
             <JobIDCard
