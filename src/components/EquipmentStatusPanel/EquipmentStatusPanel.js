@@ -38,6 +38,8 @@ const EquipmentStatus = () => {
     { data: [27, 20, 33, 20] },
   ];
 
+  const labels = ['COMMS', 'DIGITAL', 'FACILITIES', 'RF'];
+
   const [chart, setChart] = useState(initialDonuts);
 
   //App updates every 30 seconds
@@ -69,27 +71,35 @@ const EquipmentStatus = () => {
     stroke: {
       colors: 'none',
     },
-    // responsive: [
-    //   {
-    //     breakpoint: 300,
-    //     options: {
-    //       chart: {
-    //         width: 200,
-    //       },
-    //     },
-    //   },
-    // ],
+    responsive: [
+      {
+        breakpoint: 250,
+        options: {
+          chart: {
+            width: 200,
+          },
+        },
+      },
+    ],
   };
 
   return (
     <>
       <PanelHeader heading='Current Equipment Status' />
       <div className='Equipment-status__parent'>
+        <div className='labels'>
+          <span> COMMS</span>
+          <span> DIGITAL</span>
+          <span> FACILITIES</span>
+          <span> RF</span>
+        </div>
         <div className='Equipment-status__chart-container'>
           {chart.map(({ data, label }) => (
             <Fragment key={label}>
               <div className='Equipment-status__pie-container'>
-                <p>{label}</p>
+                {/* {labels.map((label) => (
+                  <p>{label}</p>
+                ))} */}
                 <Chart
                   type='pie'
                   width={250}

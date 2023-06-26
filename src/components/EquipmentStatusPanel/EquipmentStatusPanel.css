@@ -57,3 +57,9 @@
 #inoperable {
   background: var(--color-palette-brightblue-500);
 }
+
+.Equipment-status__parent .labels {
+  display: flex;
+  gap: 11.1rem;
+  margin-left: 8%;
+}
