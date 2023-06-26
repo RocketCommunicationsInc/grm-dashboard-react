@@ -13,7 +13,7 @@ const Main = () => {
     <main className={`${page}-page`}>
       {page !== 'dashboard' ? <BreadcrumbNav /> : null}
       {page === 'alert-details' ? (
-        <AlertDetailsPage />
+        <AlertDetailsPage currentAlert={state.currentAlert} />
       ) : page === 'contacts-list' ? (
         <ContactsList />
       ) : page === 'contact-details' ? (

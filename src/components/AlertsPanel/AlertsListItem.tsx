@@ -7,34 +7,42 @@ import {
   RuxAccordionItem,
   RuxNotification,
 } from '@astrouxds/react';
-import { useTTCGRMActions } from '@astrouxds/mock-data';
-import type { Alert } from '@astrouxds/mock-data';
+import { useAppContext } from '../../providers/AppProvider';
+import { useTTCGRMActions, useTTCGRMContacts } from '@astrouxds/mock-data';
+import type { Alert, Contact } from '@astrouxds/mock-data';
+
+import { randInt } from '../../util';
+import { randomContact } from '../../data/data';
 
 type PropTypes = {
   alertItem: Alert;
 };
 
 const AlertListItem = ({ alertItem }: PropTypes) => {
+  const { dispatch } = useAppContext() as any;
   const { modifyAlert } = useTTCGRMActions();
+  const { dataById: contactsById } = useTTCGRMContacts();
   const toggleSelected = (alert: Alert) =>
     modifyAlert({ ...alert, selected: !alertItem.selected });
-  const [openBanner, setOpenBanner] = useState(false);
+
+  const handleClick = () => {
+    dispatch({
+      type: 'INVESTIGATE_ALERT',
+      payload: {
+        currentAlert: alertItem,
+        currentContact: contactsById[alertItem.contactRefId],
+        affectedContacts: Array.from({ length: randInt(2, 6) }, randomContact),
+      },
+    });
+  };
 
   return (
     <li>
-      <RuxNotification
-        small
-        closeAfter={3}
-        onRuxclosed={() => setOpenBanner(false)}
-        open={openBanner}
-      >
-        This feature has not been implemented.
-      </RuxNotification>
       <RuxAccordion>
         <RuxAccordionItem id={alertItem.id}>
           <div className='accordion-item__content'>
             <div>{alertItem.message}</div>
-            <RuxButton icon='launch' onClick={() => setOpenBanner(true)}>
+            <RuxButton icon='launch' onClick={handleClick}>
               Investigate
             </RuxButton>
           </div>

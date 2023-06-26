@@ -1,8 +1,10 @@
-import { useMemo, useCallback } from 'react';
-import { RuxCheckbox } from '@astrouxds/react';
+import { useMemo, useCallback, useState } from 'react';
+import { RuxCheckbox, RuxIcon } from '@astrouxds/react';
 import AlertListItem from './AlertsListItem';
-import type { Category, Status } from '@astrouxds/mock-data';
+import type { Category, Status, Alert } from '@astrouxds/mock-data';
 import { useTTCGRMActions, useTTCGRMAlerts } from '@astrouxds/mock-data';
+
+type SortDirection = 'ASC' | 'DESC';
 
 type PropTypes = {
   severitySelection: Status | 'all';
@@ -10,17 +12,22 @@ type PropTypes = {
 };
 
 const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
-  const { dataById: alerts } = useTTCGRMAlerts();
+  const { dataArray: alertsArray, dataById: alerts } = useTTCGRMAlerts();
   const { allAlertsHaveProp, anyAlertsHaveProp, modifyAllAlerts } =
     useTTCGRMActions();
   const allSelected = allAlertsHaveProp('selected', true);
   const selectAll = () => modifyAllAlerts({ selected: true });
   const selectNone = () => modifyAllAlerts({ selected: false });
   const anySelected = anyAlertsHaveProp('selected', true);
+  const [sortDirection, setSortDirection] = useState<SortDirection>('ASC');
+  const [sortProp, setSortProp] = useState<keyof Alert>('id');
 
   const filterAlerts = useCallback(
-    (severity: Status | 'all', category: Category | 'all') => {
-      const alertsArray = Object.values(alerts);
+    (
+      alertsArray: Alert[],
+      severity: Status | 'all',
+      category: Category | 'all'
+    ) => {
       const filteredForSeverityAlerts =
         severity !== 'all'
           ? alertsArray.filter((alert) => alert.status === severity)
@@ -31,16 +38,46 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
               (alert) => alert.category === category
             )
           : filteredForSeverityAlerts;
-      return filteredForCategoryAlerts;
+      return filteredForCategoryAlerts.map((alert) => alert.id);
+    },
+    []
+  );
+
+  const filteredAlertIds = useMemo(() => {
+    return filterAlerts(alertsArray, severitySelection, categorySelection);
+  }, [filterAlerts, alertsArray, severitySelection, categorySelection]);
+
+  const sortAlerts = useCallback(
+    (
+      filteredAlertIds: string[],
+      property: keyof Alert,
+      sortDirection: SortDirection
+    ) => {
+      const newSortedAlertIds = [...filteredAlertIds].sort(
+        (a: string, b: string) => {
+          const firstAlert = alerts[a];
+          const secondAlert = alerts[b];
+          const firstAlertValue = firstAlert[property as keyof Alert];
+          const secondAlertValue = secondAlert[property as keyof Alert];
+          if (sortDirection !== 'ASC') {
+            return String(firstAlertValue).localeCompare(
+              String(secondAlertValue)
+            );
+          } else {
+            return String(secondAlertValue).localeCompare(
+              String(firstAlertValue)
+            );
+          }
+        }
+      );
+      return newSortedAlertIds;
     },
     [alerts]
   );
 
-  const filteredAlertIds = useMemo(() => {
-    return filterAlerts(severitySelection, categorySelection).map(
-      (alert) => alert.id
-    );
-  }, [filterAlerts, severitySelection, categorySelection]);
+  const displayAlertIds = useMemo(() => {
+    return sortAlerts(filteredAlertIds, sortProp, sortDirection);
+  }, [sortAlerts, filteredAlertIds, sortProp, sortDirection]);
 
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
@@ -48,6 +85,26 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
       selectAll();
     } else {
       selectNone();
+    }
+  };
+
+  const handleClick = (event: any) => {
+    const target = event.currentTarget as HTMLElement;
+    const sortProperty = target.dataset.sortprop as keyof Alert;
+    if (sortProperty === sortProp) {
+      // clicked same currently sorted column
+      if (sortDirection === 'ASC') {
+        setSortDirection('DESC');
+        sortAlerts(filteredAlertIds, sortProperty, 'DESC');
+      } else {
+        setSortDirection('ASC');
+        sortAlerts(filteredAlertIds, sortProperty, 'ASC');
+      }
+    } else {
+      // clicked new column
+      setSortProp(sortProperty);
+      sortAlerts(filteredAlertIds, sortProperty, 'ASC');
+      setSortDirection('ASC');
     }
   };
 
@@ -60,13 +117,34 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
           checked={allSelected}
           indeterminate={anySelected && !allSelected}
         />
-        <span>Message</span>
-        <span>Category</span>
-        <span>Time</span>
+        <span data-sortprop='message' onClick={handleClick}>
+          Message
+          <RuxIcon
+            icon={sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'}
+            size='small'
+            className={sortProp === 'message' ? 'visible' : 'hidden'}
+          />
+        </span>
+        <span data-sortprop='category' onClick={handleClick}>
+          Category
+          <RuxIcon
+            icon={sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'}
+            size='small'
+            className={sortProp === 'category' ? 'visible' : 'hidden'}
+          />
+        </span>
+        <span data-sortprop='timestamp' onClick={handleClick}>
+          Time
+          <RuxIcon
+            icon={sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'}
+            size='small'
+            className={sortProp === 'timestamp' ? 'visible' : 'hidden'}
+          />
+        </span>
       </div>
       <ul className='alert-list'>
-        {filteredAlertIds.map((alertId) => (
-          <AlertListItem alertItem={alerts[alertId]} key={alertId} />
+        {displayAlertIds.map((id) => (
+          <AlertListItem alertItem={alerts[id]} key={id} />
         ))}
       </ul>
     </>

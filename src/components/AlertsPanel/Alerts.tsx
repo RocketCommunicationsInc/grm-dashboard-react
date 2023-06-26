@@ -22,7 +22,7 @@ const Alerts = () => {
 
   const { deleteAlertsWithProp, anyAlertsHaveProp } = useTTCGRMActions();
   const { dataIds: alertIds } = useTTCGRMAlerts();
-  console.log(alertIds);
+
   const anySelected = anyAlertsHaveProp('selected', true);
   const deleteSelectedAlerts = () => deleteAlertsWithProp('selected', true);
 

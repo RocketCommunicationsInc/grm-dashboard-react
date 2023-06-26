@@ -21,7 +21,7 @@ const AlertDetails = () => {
       label: 'Severity',
       node: (
         <RuxInput
-          value={capitalize(state.currentAlert.errorSeverity)}
+          value={capitalize(state.currentAlert.status)}
           readonly
           size='small'
         />
@@ -32,7 +32,7 @@ const AlertDetails = () => {
       label: 'Alert ID',
       node: (
         <RuxInput
-          value={state.currentAlert.errorMessage.split(' - ')[0]}
+          value={state.currentAlert.id.split(' - ')[0]}
           readonly
           size='small'
         />
@@ -43,7 +43,7 @@ const AlertDetails = () => {
       label: 'Category',
       node: (
         <RuxInput
-          value={capitalize(state.currentAlert.errorCategory)}
+          value={capitalize(state.currentAlert.category)}
           readonly
           size='small'
         />
@@ -54,7 +54,7 @@ const AlertDetails = () => {
       label: 'Time',
       node: (
         <RuxInput
-          value={formatReadableTime(state.currentAlert.errorTime)}
+          value={formatReadableTime(state.currentAlert.timestamp)}
           readonly
           size='small'
         />

@@ -6,9 +6,9 @@ import { TTCGRMProvider } from '@astrouxds/mock-data';
 
 const options = {
   alertsPercentage: 50 as const,
-  initial: 15,
-  interval: 2,
-  limit: 45,
+  initial: 10,
+  interval: 1,
+  limit: 50,
 };
 
 const App = () => {
