@@ -6,11 +6,13 @@ import CurrentContactsPanel from '../CurrentContactsPanel/CurrentContactsPanel';
 import EquipmentStatusPanel from '../EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from '../ContactsSummaryPanel/ContactsSummaryPanel';
 
+import './Dashboard.css';
+
 const Dashboard = () => {
   const [tab, setTab] = useState('Contacts');
 
   return (
-    <>
+    <main className='dashboard-page'>
       <aside className='Dashboard-page__left-panel'>
         <AlertsPanel />
       </aside>
@@ -34,7 +36,7 @@ const Dashboard = () => {
           <TrendingEquipmentStatusPanel />
         )}
       </section>
-    </>
+    </main>
   );
 };
 

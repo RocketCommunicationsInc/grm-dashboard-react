@@ -9,6 +9,8 @@ import { AstroReactTable } from '../../common';
 import { useAppActions, useAppContext } from '../../providers/AppProvider';
 import { columnDefs } from './ContactsListColumns';
 
+import './ContactsList.css';
+
 const ContactsList = () => {
   const columns = useMemo(() => columnDefs, []);
   const { investigateContact } = useAppActions();
@@ -22,7 +24,13 @@ const ContactsList = () => {
   });
 
   return (
-    <AstroReactTable table={table} isSortable onRowClick={investigateContact} />
+    <main className='contacts-list-page'>
+      <AstroReactTable
+        table={table}
+        isSortable
+        onRowClick={investigateContact}
+      />
+    </main>
   );
 };
 
