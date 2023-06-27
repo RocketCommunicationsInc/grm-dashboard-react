@@ -60,6 +60,7 @@
 
 .Equipment-status__parent .labels {
   display: flex;
-  gap: 11.1rem;
   margin-left: 8%;
+  justify-content: space-between;
+  margin-right: 15rem;
 }

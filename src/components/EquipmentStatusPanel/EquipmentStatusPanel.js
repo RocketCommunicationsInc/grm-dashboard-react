@@ -37,7 +37,6 @@ const EquipmentStatus = () => {
     { data: [26, 34, 30, 10] },
     { data: [27, 20, 33, 20] },
   ];
-
   const labels = ['COMMS', 'DIGITAL', 'FACILITIES', 'RF'];
 
   const [chart, setChart] = useState(initialDonuts);
@@ -71,6 +70,32 @@ const EquipmentStatus = () => {
     stroke: {
       colors: 'none',
     },
+    tooltip: {
+      enabled: true,
+      x: {
+        show: false,
+      },
+      theme: '',
+      custom: function ({ series, seriesIndex, dataPointIndex }) {
+        console.log(series);
+        return (
+          '<span class="tooltip-box">' +
+          series[seriesIndex][dataPointIndex] +
+          '</span>'
+        );
+      },
+      style: {
+        color: 'var(--color-text-primary)',
+      },
+      shared: false,
+      intersect: false,
+      onDatasetHover: {
+        highlightDataSeries: false,
+      },
+      marker: {
+        show: false,
+      },
+    },
     responsive: [
       {
         breakpoint: 250,
@@ -87,19 +112,17 @@ const EquipmentStatus = () => {
     <>
       <PanelHeader heading='Current Equipment Status' />
       <div className='Equipment-status__parent'>
-        <div className='labels'>
+        {/* <div className='labels'>
           <span> COMMS</span>
           <span> DIGITAL</span>
           <span> FACILITIES</span>
           <span> RF</span>
-        </div>
+        </div> */}
         <div className='Equipment-status__chart-container'>
-          {chart.map(({ data, label }) => (
-            <Fragment key={label}>
+          {chart.map(({ data, index }) => (
+            <Fragment key={index}>
               <div className='Equipment-status__pie-container'>
-                {/* {labels.map((label) => (
-                  <p>{label}</p>
-                ))} */}
+                <span>Label</span>
                 <Chart
                   type='pie'
                   width={250}
