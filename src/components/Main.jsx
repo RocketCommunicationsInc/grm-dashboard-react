@@ -2,7 +2,6 @@ import { BreadcrumbNav } from '../common';
 import AlertDetailsPage from './AlertDetails/AlertDetailsPage';
 import ContactDetails from './ContactDetails/ContactDetails';
 import Dashboard from './Dashboard/Dashboard';
-import ContactsList from './ContactsList/ContactsList';
 import ContactsTable from './ContactsList/ContactsTable';
 import { useAppContext } from '../providers/AppProvider';
 import ScheduleJobPage from './MaintenancePanel/ScheduleJob/ScheduleJobPage';
