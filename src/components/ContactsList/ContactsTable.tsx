@@ -305,10 +305,20 @@ const ContactsTable = () => {
                   <RuxTableCell>
                     {getDayOfYear(contact.beginTimestamp * 1000)}
                   </RuxTableCell>
-                  <RuxTableCell>{contact.beginTimestamp}</RuxTableCell>
-                  <RuxTableCell>{contact.aos}</RuxTableCell>
-                  <RuxTableCell>{contact.los}</RuxTableCell>
-                  <RuxTableCell>{contact.endTimestamp}</RuxTableCell>
+                  <RuxTableCell>
+                    {new Date(contact.beginTimestamp)
+                      .toTimeString()
+                      .slice(0, 8)}
+                  </RuxTableCell>
+                  <RuxTableCell>
+                    {new Date(contact.aos).toTimeString().slice(0, 8)}
+                  </RuxTableCell>
+                  <RuxTableCell>
+                    {new Date(contact.los).toTimeString().slice(0, 8)}
+                  </RuxTableCell>
+                  <RuxTableCell>
+                    {new Date(contact.endTimestamp).toTimeString().slice(0, 8)}
+                  </RuxTableCell>
                 </RuxTableRow>
               );
             })}

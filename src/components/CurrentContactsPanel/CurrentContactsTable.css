@@ -39,7 +39,3 @@
 .table-wrapper rux-table-header-row .hidden {
   visibility: hidden;
 }
-.table-wrapper rux-table-cell:first-of-type,
-.table-wrapper rux-table-header-cell:first-of-type {
-  max-width: 1rem;
-}
