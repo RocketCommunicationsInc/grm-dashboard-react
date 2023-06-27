@@ -56,7 +56,7 @@ export const appReducer = (state, { type, payload }) => {
 
     case 'INVESTIGATE_ALERT': {
       const page = 'alert-details';
-      const errorId = payload.currentAlert.errorId;
+      const id = payload.currentAlert.id;
 
       return {
         ...state,
@@ -64,7 +64,7 @@ export const appReducer = (state, { type, payload }) => {
         page,
         links: [
           ...state.links,
-          { href: `/${page}`, page, title: `Alert ${errorId} Details` },
+          { href: `/${page}`, page, title: `Alert ${id} Details` },
         ],
       };
     }
