@@ -2,6 +2,7 @@ import { RuxBreadcrumb, RuxBreadcrumbItem } from '@astrouxds/react';
 
 import { useAppContext } from '../../providers/AppProvider';
 import './BreadcrumbNav.css';
+import SearchBar from '../SearchBar/SearchBar';
 
 export const BreadcrumbNav = () => {
   const { state, dispatch } = useAppContext();
@@ -13,20 +14,23 @@ export const BreadcrumbNav = () => {
   };
 
   return (
-    <RuxBreadcrumb className='Breadcrumb-nav'>
-      {state.links.map(({ href, page, title }, i) => {
-        const isLast = state.links.length === i + 1;
+    <div className='breadcrumb-search-wrapper'>
+      <RuxBreadcrumb className='Breadcrumb-nav'>
+        {state.links.map(({ href, page, title }, i) => {
+          const isLast = state.links.length === i + 1;
 
-        return (
-          <RuxBreadcrumbItem
-            key={page}
-            onClick={isLast ? undefined : (e) => handleClick(e, page)}
-            href={isLast ? undefined : href}
-          >
-            {title}
-          </RuxBreadcrumbItem>
-        );
-      })}
-    </RuxBreadcrumb>
+          return (
+            <RuxBreadcrumbItem
+              key={page}
+              onClick={isLast ? undefined : (e) => handleClick(e, page)}
+              href={isLast ? undefined : href}
+            >
+              {title}
+            </RuxBreadcrumbItem>
+          );
+        })}
+      </RuxBreadcrumb>
+      <SearchBar />
+    </div>
   );
 };
