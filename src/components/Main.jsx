@@ -3,6 +3,7 @@ import AlertDetailsPage from './AlertDetails/AlertDetailsPage';
 import ContactDetails from './ContactDetails/ContactDetails';
 import Dashboard from './Dashboard/Dashboard';
 import ContactsList from './ContactsList/ContactsList';
+import ContactsTable from './ContactsList/ContactsTable';
 import { useAppContext } from '../providers/AppProvider';
 
 const Main = () => {
@@ -15,7 +16,7 @@ const Main = () => {
       {page === 'alert-details' ? (
         <AlertDetailsPage currentAlert={state.currentAlert} />
       ) : page === 'contacts-list' ? (
-        <ContactsList />
+        <ContactsTable />
       ) : page === 'contact-details' ? (
         <ContactDetails />
       ) : page === 'dashboard' ? (
