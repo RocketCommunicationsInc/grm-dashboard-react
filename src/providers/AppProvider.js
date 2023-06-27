@@ -18,6 +18,7 @@ export const initialState = {
   currentAlert: null,
   currentContact: null,
   affectedContacts: [],
+  scheduledJobs: [],
 };
 
 const AppContext = createContext({});

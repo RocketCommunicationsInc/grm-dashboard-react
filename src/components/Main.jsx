@@ -5,6 +5,7 @@ import Dashboard from './Dashboard/Dashboard';
 import ContactsList from './ContactsList/ContactsList';
 import ContactsTable from './ContactsList/ContactsTable';
 import { useAppContext } from '../providers/AppProvider';
+import ScheduleJobPage from './MaintenancePanel/ScheduleJob/ScheduleJobPage';
 
 const Main = () => {
   const { state } = useAppContext();
@@ -21,6 +22,8 @@ const Main = () => {
         <ContactDetails />
       ) : page === 'dashboard' ? (
         <Dashboard />
+      ) : page === 'schedule-job' ? (
+        <ScheduleJobPage />
       ) : null}
     </main>
   );

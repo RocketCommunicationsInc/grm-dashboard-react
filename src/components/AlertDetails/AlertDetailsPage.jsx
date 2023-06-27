@@ -1,14 +1,14 @@
 import React from 'react';
 import AlertDetails from './AlertDetails';
-import ContactDetails from '../ContactDetails/ContactDetails';
+import MaintenancePanel from '../MaintenancePanel/MaintenancePanel';
 import EquipmentDetailsPanel from '../EquipmentDetailsPanel/EquipmentDetailsPanel';
 
 const AlertDetailsPage = () => {
   return (
     <>
       <AlertDetails />
-      <ContactDetails />
       <EquipmentDetailsPanel />
+      <MaintenancePanel />
     </>
   );
 };

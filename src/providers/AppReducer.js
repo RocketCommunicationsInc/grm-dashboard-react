@@ -16,6 +16,13 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'SCHEDULE_NEW_JOB': {
+      return {
+        ...state,
+        scheduledJobs: [...state.scheduledJobs, payload],
+      };
+    }
+
     case 'DELETE_ALERT': {
       const errorId = state.currentAlert.errorId;
 
@@ -83,6 +90,20 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'SCHEDULE_JOB': {
+      const page = 'schedule-job';
+
+      return {
+        ...state,
+        scheduledJobs: state.scheduledJobs,
+        page,
+        links: [
+          ...state.links,
+          { href: `/${page}`, page, title: 'Schedule Job' },
+        ],
+      };
+    }
+
     case 'SET_CONTACTS_LIST': {
       const page = 'contacts-list';
 
@@ -110,10 +131,31 @@ export const appReducer = (state, { type, payload }) => {
           ],
         };
       }
-
       return {
         ...state,
         page: 'dashboard',
+        links: initialState.links,
+      };
+    }
+
+    case 'SET_ALERT_DETAILS_PAGE': {
+      if (payload === 'schedule-job') {
+        const page = payload;
+        const errorId = payload.currentAlert.errorId;
+
+        return {
+          ...state,
+          page,
+          links: [
+            ...initialState.links,
+            { href: `/alert-details`, page, title: `Alert ${errorId} Details` },
+          ],
+        };
+      }
+
+      return {
+        ...state,
+        page: 'alert-details',
         links: initialState.links,
       };
     }
