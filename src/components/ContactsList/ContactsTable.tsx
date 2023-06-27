@@ -21,7 +21,12 @@ import { useAppActions } from '../../providers/AppProvider';
 
 type SortDirection = 'ASC' | 'DESC';
 
-const ContactsTable = () => {
+type PropTypes = {
+  searchValue: string;
+  setSearchValue: React.SetStateAction<string>;
+};
+
+const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
   const [openBanner, setOpenBanner] = useState(false);
   const { dataArray: contactsArray, dataById: contacts } = useTTCGRMContacts();
   const { investigateContact } = useAppActions();
@@ -29,9 +34,6 @@ const ContactsTable = () => {
   const [sortProp, setSortProp] = useState<keyof Contact | 'priority' | 'doy'>(
     'id'
   );
-  const [stateSelection, setStateSelection] = useState<
-    'executing' | 'failed' | 'all'
-  >('all');
 
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
@@ -54,24 +56,25 @@ const ContactsTable = () => {
   };
 
   const handleClearFilter = () => {
-    setStateSelection('all');
+    // setSearchValue('');
     setOpenBanner(false);
   };
 
   const filterContacts = useCallback(
-    (contactsArray: Contact[], state: 'executing' | 'failed' | 'all') => {
-      const filteredForStateContacts =
-        state !== 'all'
-          ? contactsArray.filter((contact) => contact.state === state)
-          : contactsArray;
+    (contactsArray: Contact[], searchValue: string) => {
+      const filteredForStateContacts = searchValue
+        ? contactsArray.filter((contact) =>
+            contact.satellite.includes(searchValue)
+          )
+        : contactsArray;
       return filteredForStateContacts.map((contact) => contact.id);
     },
     []
   );
 
   const filteredContactIds = useMemo(() => {
-    return filterContacts(contactsArray, stateSelection);
-  }, [contactsArray, filterContacts, stateSelection]);
+    return filterContacts(contactsArray, searchValue);
+  }, [contactsArray, filterContacts, searchValue]);
 
   const sortContacts = useCallback(
     (
