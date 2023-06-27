@@ -42,7 +42,6 @@ const ScheduleJob = () => {
     status: statusValues[randomStatus],
     createdOn: Date.now(),
   });
-  console.log(state);
 
   const table = useReactTable({
     data: state.contacts,

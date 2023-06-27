@@ -141,7 +141,6 @@ export const appReducer = (state, { type, payload }) => {
     case 'SET_ALERT_DETAILS_PAGE': {
       if (payload === 'schedule-job') {
         const page = payload;
-        console.log(page);
         const errorId = payload.currentAlert.errorId;
 
         return {

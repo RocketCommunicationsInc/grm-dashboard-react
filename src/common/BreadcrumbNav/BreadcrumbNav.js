@@ -1,7 +1,8 @@
-import { RuxBreadcrumb, RuxBreadcrumbItem, RuxInput } from '@astrouxds/react';
+import { RuxBreadcrumb, RuxBreadcrumbItem } from '@astrouxds/react';
 
 import { useAppContext } from '../../providers/AppProvider';
 import './BreadcrumbNav.css';
+import SearchBar from '../SearchBar/SearchBar';
 
 export const BreadcrumbNav = () => {
   const { state, dispatch } = useAppContext();
@@ -29,7 +30,7 @@ export const BreadcrumbNav = () => {
           );
         })}
       </RuxBreadcrumb>
-      <RuxInput type='search' placeholder='Search...' />
+      <SearchBar />
     </div>
   );
 };
