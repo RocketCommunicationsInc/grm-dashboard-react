@@ -7,9 +7,16 @@ import { RuxPopUp, RuxSlider } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
 
 const ContactsSummaryPanel = () => {
+  const [zoomLevel, setZoomLevel] = useState(5);
+
+  const handleSliderChange = (e) => {
+    setZoomLevel(e.target.value);
+  };
+
   const randomNumbers = (length) =>
     Array.from({ length }, () => randInt(0, 20));
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const initialDataset = [
     { label: 'In Progress', backgroundColor: '#938bdb' },
     { label: 'Issues', backgroundColor: '#4dacff' },
@@ -104,6 +111,22 @@ const ContactsSummaryPanel = () => {
       toolbar: {
         show: false,
       },
+      // zoom: {
+      //   enabled: true,
+      //   type: 'y',
+      //   autoScaleYaxis: false,
+      //   zoomedArea: {
+      //     fill: {
+      //       color: '#90CAF9',
+      //       opacity: 0.4,
+      //     },
+      //     stroke: {
+      //       color: '#0D47A1',
+      //       opacity: 0.4,
+      //       width: 1,
+      //     },
+      //   },
+      // },
     },
     xaxis: {
       categories: labels,
@@ -164,7 +187,12 @@ const ContactsSummaryPanel = () => {
     <div className='trending-equipment-panel'>
       <PanelHeader heading='Contacts Summary' />
       <div className='trending-equipment-panel__select'>
-        <RuxSlider value='50' />
+        <RuxSlider
+          value={zoomLevel}
+          onRuxinput={handleSliderChange}
+          min={0}
+          max={10}
+        />
         <Chart type='bar' options={options} series={series} height='100%' />
         <RuxPopUp
           open={open}

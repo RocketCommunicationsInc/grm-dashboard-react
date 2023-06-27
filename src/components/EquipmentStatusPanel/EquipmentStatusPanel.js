@@ -129,6 +129,7 @@ const EquipmentStatus = () => {
                   height={250}
                   series={data}
                   options={options}
+                  key={index}
                 />
               </div>
             </Fragment>

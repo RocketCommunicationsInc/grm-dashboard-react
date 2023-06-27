@@ -46,6 +46,9 @@ const TrendingEquipmentStatusPanel = () => {
         show: false,
       },
     },
+    markers: {
+      size: 2,
+    },
     grid: {
       borderColor: 'var(--color-border-interactive-default)',
     },
@@ -100,11 +103,17 @@ const TrendingEquipmentStatusPanel = () => {
         show: false,
       },
       theme: '',
-      custom: function ({ seriesName, series, seriesIndex, dataPointIndex }) {
-        console.log(series);
+      custom: function ({ series, seriesIndex, dataPointIndex }) {
+        console.log(
+          series,
+          'series',
+          seriesIndex,
+          'index',
+          dataPointIndex,
+          'dpIndex'
+        );
         return (
           '<span class="tooltip-box">' +
-          seriesName +
           series[seriesIndex][dataPointIndex] +
           '</span>'
         );
@@ -156,12 +165,6 @@ const TrendingEquipmentStatusPanel = () => {
       // },
       labels: {
         colors: 'var(--color-text-primary)',
-      },
-      markers: {
-        // customHTML: function (seriesName) {
-        //   return seriesName;
-        // },
-        onClick: undefined,
       },
     },
   };
