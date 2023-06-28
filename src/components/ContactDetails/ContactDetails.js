@@ -22,7 +22,7 @@ import {
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
-import { formatReadableTime } from '../../util/util';
+import { formatReadableTime, getDayOfYear } from '../../util';
 import './ContactDetails.css';
 
 const ContactDetails = () => {
@@ -54,20 +54,20 @@ const ContactDetails = () => {
     {
       label: 'Priority',
       node: isEditing ? (
-        <RuxSelect value={contact.contactPriority} size='small'>
+        <RuxSelect value={contact.status} size='small'>
           {options.priorities.map((option) => (
             <RuxOption key={option} value={option} label={option} />
           ))}
         </RuxSelect>
       ) : (
-        <RuxInput value={contact.contactPriority} size='small' readonly />
+        <RuxInput value={contact.status} size='small' readonly />
       ),
     },
     {
       label: 'State',
       node: (
         <RuxInput
-          value={contact.contactState}
+          value={contact.state}
           readonly={!isEditing}
           size='small'
           name='contactState'
@@ -79,7 +79,7 @@ const ContactDetails = () => {
       label: 'IRON',
       node: (
         <RuxInput
-          value={contact.contactName}
+          value={contact.name}
           readonly={!isEditing}
           size='small'
           name='contactName'
@@ -91,7 +91,7 @@ const ContactDetails = () => {
       label: 'Ground Station',
       node: (
         <RuxInput
-          value={contact.contactGround}
+          value={contact.ground}
           readonly={!isEditing}
           size='small'
           name='contactGround'
@@ -103,7 +103,7 @@ const ContactDetails = () => {
       label: 'REV',
       node: (
         <RuxInput
-          value={contact.contactREV}
+          value={contact.rev}
           readonly={!isEditing}
           size='small'
           name='contactREV'
@@ -115,7 +115,7 @@ const ContactDetails = () => {
       label: 'DOY',
       node: (
         <RuxInput
-          value={contact.contactDOY}
+          value={getDayOfYear(contact.beginTimestamp * 1000)}
           readonly={!isEditing}
           size='small'
           name='contactDOY'
@@ -127,7 +127,7 @@ const ContactDetails = () => {
       label: 'Start Time',
       node: (
         <RuxInput
-          value={formatReadableTime(contact.contactBeginTimestamp)}
+          value={formatReadableTime(contact.beginTimestamp)}
           readonly
           size='small'
         />
@@ -137,7 +137,7 @@ const ContactDetails = () => {
       label: 'AOS',
       node: (
         <RuxInput
-          value={formatReadableTime(contact.contactAOS)}
+          value={formatReadableTime(contact.aos)}
           readonly
           size='small'
         />
@@ -147,7 +147,7 @@ const ContactDetails = () => {
       label: 'LOS',
       node: (
         <RuxInput
-          value={formatReadableTime(contact.contactLOS)}
+          value={formatReadableTime(contact.los)}
           readonly
           size='small'
         />
@@ -157,7 +157,7 @@ const ContactDetails = () => {
       label: 'Stop Time',
       node: (
         <RuxInput
-          value={formatReadableTime(contact.contactEndTimestamp)}
+          value={formatReadableTime(contact.endTimestamp)}
           readonly
           size='small'
         />
@@ -166,13 +166,13 @@ const ContactDetails = () => {
     {
       label: 'Command Mode',
       node: isEditing ? (
-        <RuxSelect value={contact.contactMode} size='small'>
+        <RuxSelect value={contact.mode} size='small'>
           {options.modes.map((option) => (
             <RuxOption key={option} value={option} label={option} />
           ))}
         </RuxSelect>
       ) : (
-        <RuxInput value={contact.contactMode} size='small' readonly />
+        <RuxInput value={contact.mode} size='small' readonly />
       ),
     },
     {
@@ -186,7 +186,7 @@ const ContactDetails = () => {
       label: 'Configuration',
       node: isEditing ? (
         <RuxSelect
-          value={contact.contactEquipmentConfig}
+          value={contact.equipment}
           size='small'
           name='contactEquipmentConfig'
           onRuxchange={handleChange}
@@ -198,11 +198,7 @@ const ContactDetails = () => {
           <RuxOption value='Config 5' label='Config 5' />
         </RuxSelect>
       ) : (
-        <RuxInput
-          value={contact.contactEquipmentConfig}
-          size='small'
-          readonly
-        />
+        <RuxInput value={contact.equipment} size='small' readonly />
       ),
     },
   ];
