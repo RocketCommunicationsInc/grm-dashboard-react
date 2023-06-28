@@ -34,11 +34,3 @@
   width: 18rem;
   margin-left: auto;
 }
-
-/* const openPopup = (dataPointIndex) => {
-  const {categories, series} = this.state.options.xaxis
-  const category = categories[dataPointIndex]
-  const value = series[0].data[dataPointIndex]
-  const popUpContent = `${category}, Value: ${value}`
-    };
-    openPopup(); */

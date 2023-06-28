@@ -107,19 +107,16 @@ const TrendingEquipmentStatusPanel = () => {
       },
       theme: '',
       custom: function ({ series, seriesIndex, dataPointIndex, w }) {
-        const label = w.globals.seriesNames[seriesIndex];
-        const allocation = series[seriesIndex][dataPointIndex];
-        const xAxisLabel = labels[dataPointIndex];
         return (
           '<div class="tooltip-box">' +
           '<span>' +
-          label +
+          w.globals.seriesNames[seriesIndex] +
           '</span> <br/>' +
           '<span>Allocations: ' +
-          allocation +
+          series[seriesIndex][dataPointIndex] +
           '%</span> <br/>' +
           '<span> ' +
-          xAxisLabel +
+          labels[dataPointIndex] +
           '</span>' +
           '</div>'
         );
