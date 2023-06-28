@@ -3,11 +3,11 @@ import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
 import Chart from 'react-apexcharts';
-import { RuxPopUp, RuxSlider } from '@astrouxds/react';
+import { RuxPopUp, RuxSlider, RuxIcon } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
 
 const ContactsSummaryPanel = () => {
-  const [zoomLevel, setZoomLevel] = useState(5);
+  const [zoomLevel, setZoomLevel] = useState(3);
 
   const handleSliderChange = (e) => {
     setZoomLevel(e.target.value);
@@ -18,52 +18,47 @@ const ContactsSummaryPanel = () => {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const initialDataset = [
-    { label: 'In Progress', backgroundColor: '#938bdb' },
-    { label: 'Issues', backgroundColor: '#4dacff' },
-    { label: 'Planned', backgroundColor: '#00c7cb' },
-    { label: 'Completed', backgroundColor: '#a1e9eb' },
+    { name: 'In Progress', backgroundColor: '#938bdb' },
+    { name: 'Issues', backgroundColor: '#4dacff' },
+    { name: 'Planned', backgroundColor: '#00c7cb' },
+    { name: 'Completed', backgroundColor: '#a1e9eb' },
   ];
 
   const initialPopup = {
-    top: 0,
-    left: 0,
-    width: 0,
-    height: 0,
-    open: false,
     title: '',
     length: 0,
+    x: 0,
+    y: 0,
   };
 
-  const [popup, setPopup] = useState(initialPopup);
-  const { height, left, top, width, open, title, length } = popup;
+  const [popup, setPopup] = useState(false);
+  const [popupContent, setPopupContent] = useState(initialPopup);
+  const { title, length, x, y } = popupContent;
 
-  const datasets = useMemo(() => {
-    return initialDataset.map((dataset) => ({
-      ...dataset,
-      data: randomNumbers(12),
-    }));
-  }, [initialDataset]);
+  // const datasets = useMemo(() => {
+  //   return initialDataset.map((dataset) => ({
+  //     ...dataset,
+  //     data: randomNumbers(12),
+  //   }));
+  // }, [initialDataset]);
 
-  const onClick = (_, elements) => {
-    const activeElement = elements[0];
-    if (!activeElement) return;
+  // const onClick = (_, elements) => {
+  //   const activeElement = elements[0];
+  //   console.log(activeElement, 'elements');
+  //   if (!activeElement) return;
 
-    const {
-      element: { height, width, x, y, $context },
-      datasetIndex,
-      index,
-    } = activeElement;
+  //   const {
+  //     element: { $context },
+  //     datasetIndex,
+  //     index,
+  //   } = activeElement;
 
-    setPopup({
-      title: `${datasets[datasetIndex].label} ${labels[index]}`,
-      length: $context.raw,
-      open: true,
-      top: y + 16,
-      left: x,
-      width: width / 2,
-      height,
-    });
-  };
+  //   setPopup({
+  //     title: `${datasets[datasetIndex].label} ${labels[index]}`,
+  //     length: $context.raw,
+  //     open: true,
+  //   });
+  // };
 
   const onHover = (evt, ele) => {
     evt.native.target.style.cursor = ele[0] ? 'pointer' : 'default';
@@ -104,12 +99,24 @@ const ContactsSummaryPanel = () => {
   ];
 
   const options = {
-    onClick: onClick,
-    onHover: onHover,
     chart: {
       stacked: true,
       toolbar: {
         show: false,
+      },
+      events: {
+        //click: onClick,
+        dataPointSelection: function (chartContext, config) {
+          setPopupContent({
+            title: `${series[config.seriesIndex].name} ${
+              labels[config.dataPointIndex]
+            }`,
+            length: `${chartContext.raw}`,
+          });
+          setPopup(true);
+        },
+        // zoomed: zoomLevel,
+        // mouseMove: onHover,
       },
       // zoom: {
       //   enabled: true,
@@ -187,21 +194,30 @@ const ContactsSummaryPanel = () => {
     <div className='trending-equipment-panel'>
       <PanelHeader heading='Contacts Summary' />
       <div className='trending-equipment-panel__select'>
-        <RuxSlider
-          value={zoomLevel}
-          onRuxinput={handleSliderChange}
-          min={0}
-          max={10}
+        <div className='slider-wrapper'>
+          <RuxIcon icon='search' size='extra-small' />
+          <RuxSlider
+            value={zoomLevel}
+            onRuxinput={handleSliderChange}
+            min={0}
+            max={6}
+          />
+          <RuxIcon icon='search' size='1.5rem' />
+        </div>
+        <Chart
+          // onClick={onClick}
+          type='bar'
+          options={options}
+          series={series}
+          height='100%'
         />
-        <Chart type='bar' options={options} series={series} height='100%' />
         <RuxPopUp
-          open={open}
-          placement='right-start'
+          open={popup}
+          placement='right'
           className='Contacts-summary-panel__pop-up'
-          style={{ top, left }}
           onRuxpopupclosed={() => setPopup(initialPopup)}
         >
-          <div slot='trigger' style={{ width, height }} />
+          <div slot='trigger' />
 
           <ContactsSummaryPanelTable {...{ length, title }} />
         </RuxPopUp>

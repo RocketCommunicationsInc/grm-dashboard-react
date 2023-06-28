@@ -12,6 +12,8 @@
 
 .Contacts-summary-panel__pop-up {
   position: absolute;
+  top: 80%;
+  left: 50%;
 }
 
 .Contacts-summary-panel::part(popup-content) {
@@ -22,8 +24,17 @@
   height: 11rem;
 }
 
-.trending-equipment-panel__select rux-slider {
-  width: 15rem;
+.slider-wrapper {
   display: flex;
+  align-items: center;
+  width: 18rem;
   margin-left: auto;
 }
+
+/* const openPopup = (dataPointIndex) => {
+  const {categories, series} = this.state.options.xaxis
+  const category = categories[dataPointIndex]
+  const value = series[0].data[dataPointIndex]
+  const popUpContent = `${category}, Value: ${value}`
+    };
+    openPopup(); */
