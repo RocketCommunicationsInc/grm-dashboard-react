@@ -1,10 +1,11 @@
-import { memo, useMemo, useState } from 'react';
+import { memo, useMemo, useState, useEffect } from 'react';
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
 import Chart from 'react-apexcharts';
 import { RuxPopUp, RuxSlider, RuxIcon } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
+import { getRandomContact } from '../../data/data';
 
 const ContactsSummaryPanel = () => {
   const [zoomLevel, setZoomLevel] = useState(3);
@@ -33,8 +34,9 @@ const ContactsSummaryPanel = () => {
 
   const [popup, setPopup] = useState(false);
   const [popupContent, setPopupContent] = useState(initialPopup);
-  const { title, length, x, y } = popupContent;
-
+  const [popupPosition, setpopupPosition] = useState();
+  const { title, length } = popupContent;
+  //] const { x, y } = popupPosition;
   // const datasets = useMemo(() => {
   //   return initialDataset.map((dataset) => ({
   //     ...dataset,
@@ -98,43 +100,105 @@ const ContactsSummaryPanel = () => {
     },
   ];
 
+  const tickAmount = Math.ceil(labels.length * (zoomLevel / 10));
+
+  const updatedOptions = {
+    xaxis: {
+      labels: {
+        formatter: function (value) {
+          const hours = value.substring(0, 2);
+          const minutes = value.substring(2, 4);
+          return hours + ':' + minutes;
+        },
+      },
+      tickAmount: tickAmount,
+    },
+  };
+
   const options = {
     chart: {
       stacked: true,
       toolbar: {
         show: false,
       },
-      events: {
-        //click: onClick,
-        dataPointSelection: function (chartContext, config) {
-          setPopupContent({
-            title: `${series[config.seriesIndex].name} ${
-              labels[config.dataPointIndex]
-            }`,
-            length: `${chartContext.raw}`,
-          });
-          setPopup(true);
-        },
-        // zoomed: zoomLevel,
-        // mouseMove: onHover,
-      },
-      // zoom: {
-      //   enabled: true,
-      //   type: 'y',
-      //   autoScaleYaxis: false,
-      //   zoomedArea: {
-      //     fill: {
-      //       color: '#90CAF9',
-      //       opacity: 0.4,
-      //     },
-      //     stroke: {
-      //       color: '#0D47A1',
-      //       opacity: 0.4,
-      //       width: 1,
-      //     },
+      // events: {
+      //   //click: onClick,
+      //   dataPointSelection: function (
+      //     chartContext,
+      //     config,
+      //     series,
+      //     seriesIndex,
+      //     dataPointIndex,
+      //     w
+      //   ) {
+      //     const chart = document.getElementById('contacts-summary-chart');
+      //     const chartRect = chart.getBoundingClientRect();
+      //     const bar = chart && chart.querySelector('.apexcharts-bar-series');
+      //     const newBar = chart.querySelector(
+      //       `.apexcharts-bar-series .apexcharts-series[data\\:index='${config.seriesIndex}'] .apexcharts-bar[data\\:index='${config.dataPointIndex}']`
+      //     );
+      //     // if (!chart || !bar) return;
+
+      //     // // const newBar = chart.querySelector(
+      //     // //   `.apexcharts-bar-series .apexcharts-series[data\\:realIndex=" ' + config.seriesIndex + ' "] .apexcharts-bar[data\\:realIndex=" ' + config.dataPointIndex + ' "]`
+      //     // // );
+
+      //     // const barChildren =
+      //     //   bar &&
+      //     //   bar.children[config.seriesIndex] &&
+      //     //   bar.children[config.seriesIndex].children[config.dataPointIndex];
+      //     // if (!bar || !chart) return;
+
+      //     // console.log(newBar);
+
+      //     // const barRect = barChildren.getBoundingClientRect();
+      //     const offsetY = chartRect.top - 2;
+      //     const offsetX = chartRect.left + 2;
+      //     console.log(offsetX);
+
+      //     setPopupContent({
+      //       title: `${w.globals.seriesNames[seriesIndex]} ${
+      //         labels[config.dataPointIndex]
+      //       }`,
+      //       length: Array.from(getRandomContact),
+      //     });
+
+      //     // setpopupPosition({
+      //     //   //  x: offsetX,
+      //     //   // y: offsetY,
+      //     // });
+      //     setPopup(true);
       //   },
       // },
+      // plotOptions: {
+      //   bar: {
+      //     distributed: true,
+      //     dataLabels: {
+      //       position: 'center',
+      //     },
+      events: {
+        click: function (event, chartContext, config, w, seriesIndex) {
+          const seriesName = w.globals.seriesNames[seriesIndex];
+          const dataPointIndex = labels[config.dataPointIndex];
+          console.log(seriesName, dataPointIndex);
+
+          const x =
+            (config.w.config.chart.width * (config.dataPointIndex + 0.5)) /
+            config.w.config.series.length;
+          const y = config.y - 20;
+
+          setPopup(true);
+          setPopupContent({
+            title: `${seriesName} ${dataPointIndex}`,
+            length: Array.from(getRandomContact),
+            x: x,
+            y: y,
+          });
+        },
+      },
     },
+    //   },
+    // },
     xaxis: {
       categories: labels,
       labels: {
@@ -175,7 +239,7 @@ const ContactsSummaryPanel = () => {
     tooltip: {
       enabled: false,
     },
-    colors: ['rgb(77, 172, 255)', 'rgb(218, 156, 231)', '#00c7cb', '#a1e9eb'],
+    colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
     legend: {
       position: 'top',
       horizontalAlign: 'left',
@@ -198,18 +262,18 @@ const ContactsSummaryPanel = () => {
           <RuxIcon icon='search' size='extra-small' />
           <RuxSlider
             value={zoomLevel}
-            onRuxinput={handleSliderChange}
+            onRuxinput={updatedOptions}
             min={0}
             max={6}
           />
           <RuxIcon icon='search' size='1.5rem' />
         </div>
         <Chart
-          // onClick={onClick}
           type='bar'
           options={options}
           series={series}
           height='100%'
+          id='contacts-summary-chart'
         />
         <RuxPopUp
           open={popup}

@@ -17,3 +17,9 @@
   padding: var(--spacing-4);
   overflow: auto;
 }
+
+.tooltip-box {
+  background-color: var(--color-background-base-selected);
+  padding: var(--spacing-1);
+  border: none;
+}

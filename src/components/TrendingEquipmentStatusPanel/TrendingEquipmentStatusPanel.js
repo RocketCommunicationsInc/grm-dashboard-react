@@ -84,6 +84,9 @@ const TrendingEquipmentStatusPanel = () => {
           color: 'var(--color-text-primary)',
         },
         labels: {
+          formatter: function (value) {
+            return value + '%';
+          },
           enabled: true,
           show: true,
           style: {
@@ -103,23 +106,28 @@ const TrendingEquipmentStatusPanel = () => {
         show: false,
       },
       theme: '',
-      custom: function ({ series, seriesIndex, dataPointIndex }) {
-        console.log(
-          series,
-          'series',
-          seriesIndex,
-          'index',
-          dataPointIndex,
-          'dpIndex'
-        );
+      custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+        const label = w.globals.seriesNames[seriesIndex];
+        const allocation = series[seriesIndex][dataPointIndex];
+        const xAxisLabel = labels[dataPointIndex];
         return (
-          '<span class="tooltip-box">' +
-          series[seriesIndex][dataPointIndex] +
-          '</span>'
+          '<div class="tooltip-box">' +
+          '<span>' +
+          label +
+          '</span> <br/>' +
+          '<span>Allocations: ' +
+          allocation +
+          '%</span> <br/>' +
+          '<span> ' +
+          xAxisLabel +
+          '</span>' +
+          '</div>'
         );
       },
+      fillSeriesColor: true,
       style: {
         color: 'var(--color-text-primary)',
+        background: 'blue',
       },
       shared: false,
       intersect: false,
@@ -128,6 +136,12 @@ const TrendingEquipmentStatusPanel = () => {
       },
       marker: {
         show: false,
+      },
+    },
+    theme: {
+      pallete: 'palette1',
+      tooltip: {
+        background: 'blue',
       },
     },
     annotations: {
@@ -149,20 +163,11 @@ const TrendingEquipmentStatusPanel = () => {
         },
       ],
     },
-    colors: ['rgb(77, 172, 255)', 'rgb(218, 156, 231)', '#00c7cb', '#a1e9eb'],
+    colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
     legend: {
       position: 'top',
       horizontalAlign: 'left',
       floating: false,
-      formatter: undefined,
-      // tooltipHoverFormatter: function (seriesName, opts) {
-      //   return (
-      //     seriesName +
-      //     ' - <strong>' +
-      //     opts.w.globals.series[opts.seriesIndex][opts.dataPointIndex] +
-      //     '</strong>'
-      //   );
-      // },
       labels: {
         colors: 'var(--color-text-primary)',
       },

@@ -16,6 +16,10 @@
   left: 50%;
 }
 
+.Contacts-summary-panel__pop-up::part(container) {
+  width: 30rem;
+}
+
 .Contacts-summary-panel::part(popup-content) {
   width: 28rem;
 }

@@ -32,12 +32,11 @@ const EquipmentStatus = () => {
   }, [generate]);
 
   const initialDonuts = [
-    { data: [37, 22, 21, 20] },
-    { data: [43, 17, 25, 15] },
-    { data: [26, 34, 30, 10] },
-    { data: [27, 20, 33, 20] },
+    { data: [37, 22, 21, 20], name: 'COMMS' },
+    { data: [43, 17, 25, 15], name: 'DIGITAL' },
+    { data: [26, 34, 30, 10], name: 'FACILITIES' },
+    { data: [27, 20, 33, 20], name: 'RF' },
   ];
-  const labels = ['COMMS', 'DIGITAL', 'FACILITIES', 'RF'];
 
   const [chart, setChart] = useState(initialDonuts);
 
@@ -60,7 +59,14 @@ const EquipmentStatus = () => {
   }, [getRandomData]);
 
   const options = {
-    colors: ['rgb(77, 172, 255)', 'rgb(218, 156, 231)', '#00c7cb', '#a1e9eb'],
+    plotOptions: {
+      pie: {
+        dataLabels: {
+          enabled: true,
+        },
+      },
+    },
+    colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
     legend: {
       show: false,
     },
@@ -71,30 +77,7 @@ const EquipmentStatus = () => {
       colors: 'none',
     },
     tooltip: {
-      enabled: true,
-      x: {
-        show: false,
-      },
-      theme: '',
-      custom: function ({ series, seriesIndex, dataPointIndex }) {
-        console.log(series);
-        return (
-          '<span class="tooltip-box">' +
-          series[seriesIndex][dataPointIndex] +
-          '</span>'
-        );
-      },
-      style: {
-        color: 'var(--color-text-primary)',
-      },
-      shared: false,
-      intersect: false,
-      onDatasetHover: {
-        highlightDataSeries: false,
-      },
-      marker: {
-        show: false,
-      },
+      enabled: false,
     },
     responsive: [
       {
@@ -112,24 +95,18 @@ const EquipmentStatus = () => {
     <>
       <PanelHeader heading='Current Equipment Status' />
       <div className='Equipment-status__parent'>
-        {/* <div className='labels'>
-          <span> COMMS</span>
-          <span> DIGITAL</span>
-          <span> FACILITIES</span>
-          <span> RF</span>
-        </div> */}
         <div className='Equipment-status__chart-container'>
-          {chart.map(({ data, index }) => (
-            <Fragment key={index}>
+          {chart.map(({ data, name }) => (
+            <Fragment key={name}>
               <div className='Equipment-status__pie-container'>
-                <span>Label</span>
+                <span>{name}</span>
                 <Chart
                   type='pie'
                   width={250}
                   height={250}
                   series={data}
                   options={options}
-                  key={index}
+                  key={name}
                 />
               </div>
             </Fragment>

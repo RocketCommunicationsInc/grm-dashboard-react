@@ -47,7 +47,7 @@
 }
 
 #busy {
-  background: var(--color-palette-purple-400);
+  background: var(--color-palette-purple-200);
 }
 
 #idle {
