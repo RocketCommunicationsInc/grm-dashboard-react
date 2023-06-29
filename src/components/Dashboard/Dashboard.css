@@ -1,0 +1,35 @@
+.dashboard-page {
+  display: grid;
+  /* Screen height minus the height of the Global Status Bar */
+  height: calc(100vh - 6rem);
+  padding: var(--spacing-4) var(--spacing-6);
+  gap: var(--spacing-3);
+  grid-template-columns: minmax(37.5rem, 1fr) minmax(0, 2fr);
+  grid-template-rows: 3.75rem repeat(2, minmax(0, 1fr));
+  grid-template-areas:
+    'left-panel tabs-bar'
+    'left-panel right-top-panel'
+    'left-panel right-bottom-panel';
+}
+
+.Dashboard-page__left-panel {
+  grid-area: left-panel;
+  background-color: var(--color-background-surface-default);
+  box-shadow: var(--container-color-border) 0 0 0 1px;
+}
+
+.Dashboard-page__tabs-bar {
+  grid-area: tabs-bar;
+}
+
+.Dashboard-page__right-top-panel {
+  grid-area: right-top-panel;
+  background-color: var(--color-background-surface-default);
+  box-shadow: var(--container-color-border) 0 0 0 1px;
+}
+
+.Dashboard-page__right-bottom-panel {
+  grid-area: right-bottom-panel;
+  background-color: var(--color-background-surface-default);
+  box-shadow: var(--container-color-border) 0 0 0 1px;
+}

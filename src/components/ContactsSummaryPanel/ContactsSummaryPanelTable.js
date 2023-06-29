@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { RuxStatus } from '@astrouxds/react';
 import {
   createColumnHelper,
@@ -6,7 +7,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-
+import './ContactsSummaryPanel.css';
 import { getRandomContact } from '../../data/data';
 import { AstroReactTable, HStack, TwoDigitTime } from '../../common';
 import { useAppActions } from '../../providers/AppProvider';
@@ -37,11 +38,12 @@ const columnDefs = [
 ];
 
 const ContactsSummaryPanelTable = ({ length, title }) => {
-  const { setContactsList, investigateContact } = useAppActions();
+  const navigate = useNavigate();
+  const { investigateContact } = useAppActions();
 
   const handleViewAll = (e) => {
     e.preventDefault();
-    setContactsList();
+    navigate('contacts');
   };
 
   const table = useReactTable({

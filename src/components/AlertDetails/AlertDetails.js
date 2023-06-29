@@ -11,6 +11,7 @@ import {
   PanelHeader,
   PanelSubContainer,
 } from '../../common';
+import './AlertDetails.css';
 
 const AlertDetails = () => {
   const { state, dispatch } = useAppContext();
@@ -63,30 +64,32 @@ const AlertDetails = () => {
   ];
 
   return (
-    <PanelContainer>
-      <PanelHeader heading='Alert Details' />
+    <main className={`$alert-details-page`}>
+      <PanelContainer>
+        <PanelHeader heading='Alert Details' />
 
-      <PanelBody>
-        <DetailsCommonGrid>
-          <PanelSubContainer>
-            <DetailsGrid details={alertGeneralDetails} />
-          </PanelSubContainer>
+        <PanelBody>
+          <DetailsCommonGrid>
+            <PanelSubContainer>
+              <DetailsGrid details={alertGeneralDetails} />
+            </PanelSubContainer>
 
-          <PanelSubContainer heading='Description'>
-            <p>{state.currentAlert.longMessage}.</p>
-          </PanelSubContainer>
+            <PanelSubContainer heading='Description'>
+              <p>{state.currentAlert.longMessage}.</p>
+            </PanelSubContainer>
 
-          <AffectedContacts contacts={state.affectedContacts} />
-        </DetailsCommonGrid>
-      </PanelBody>
+            <AffectedContacts contacts={state.affectedContacts} />
+          </DetailsCommonGrid>
+        </PanelBody>
 
-      <PanelFooter>
-        <RuxButton secondary onClick={handleClick}>
-          Dismiss
-        </RuxButton>
-        <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
-      </PanelFooter>
-    </PanelContainer>
+        <PanelFooter>
+          <RuxButton secondary onClick={handleClick}>
+            Dismiss
+          </RuxButton>
+          <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
+        </PanelFooter>
+      </PanelContainer>
+    </main>
   );
 };
 

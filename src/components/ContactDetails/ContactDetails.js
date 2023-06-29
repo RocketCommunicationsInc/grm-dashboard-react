@@ -223,105 +223,107 @@ const ContactDetails = () => {
   ];
 
   return (
-    <PanelContainer>
-      <PanelHeader heading='Contact Details' />
+    <main className={`contact-details-page`}>
+      <PanelContainer>
+        <PanelHeader heading='Contact Details' />
 
-      <PanelBody>
-        <ContactLabel contact={contact} />
+        <PanelBody>
+          <ContactLabel contact={contact} />
 
-        <DetailsCommonGrid className='Contact-details-grid'>
-          <PanelSubContainer>
-            <DetailsGrid details={generalDetails} />
-          </PanelSubContainer>
+          <DetailsCommonGrid className='Contact-details-grid'>
+            <PanelSubContainer>
+              <DetailsGrid details={generalDetails} />
+            </PanelSubContainer>
 
-          <PanelSubContainer
-            heading='Equipment String'
-            className='Contact-details-grid__equipment-string'
-          >
-            <PanelSubContainer className='config-wrapper'>
-              <DetailsGrid details={configDetails} />
+            <PanelSubContainer
+              heading='Equipment String'
+              className='Contact-details-grid__equipment-string'
+            >
+              <PanelSubContainer className='config-wrapper'>
+                <DetailsGrid details={configDetails} />
 
-              <div>
-                ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
-                ENC123
-              </div>
+                <div>
+                  ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
+                  ENC123
+                </div>
 
-              <div>
-                <RuxMonitoringIcon
-                  status='caution'
-                  icon='antenna'
-                  label='ANT1'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='SLWS6'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='SB7PLD1'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='RCVR8'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='MBS1CH2'
-                />
-              </div>
+                <div>
+                  <RuxMonitoringIcon
+                    status='caution'
+                    icon='antenna'
+                    label='ANT1'
+                  />
+                  <RuxMonitoringIcon
+                    status='normal'
+                    icon='satellite'
+                    label='SLWS6'
+                  />
+                  <RuxMonitoringIcon
+                    status='normal'
+                    icon='satellite'
+                    label='SB7PLD1'
+                  />
+                  <RuxMonitoringIcon
+                    status='normal'
+                    icon='satellite'
+                    label='RCVR8'
+                  />
+                  <RuxMonitoringIcon
+                    status='normal'
+                    icon='satellite'
+                    label='MBS1CH2'
+                  />
+                </div>
 
-              <div>
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='SFEP3CH1'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='UPS104'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='VHR1'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='ENC123'
-                />
+                <div>
+                  <RuxMonitoringIcon
+                    status='normal'
+                    icon='satellite'
+                    label='SFEP3CH1'
+                  />
+                  <RuxMonitoringIcon
+                    status='normal'
+                    icon='satellite'
+                    label='UPS104'
+                  />
+                  <RuxMonitoringIcon
+                    status='normal'
+                    icon='satellite'
+                    label='VHR1'
+                  />
+                  <RuxMonitoringIcon
+                    status='normal'
+                    icon='satellite'
+                    label='ENC123'
+                  />
+                </div>
+              </PanelSubContainer>
+
+              <div className='sub-grid'>
+                <PanelSubContainer heading='ANT1 Details'>
+                  <DetailsGrid details={antDetails} />
+                </PanelSubContainer>
+
+                <AffectedContacts contacts={state.affectedContacts} />
               </div>
             </PanelSubContainer>
 
-            <div className='sub-grid'>
-              <PanelSubContainer heading='ANT1 Details'>
-                <DetailsGrid details={antDetails} />
-              </PanelSubContainer>
+            <EventLog rowsToShow={16} />
+          </DetailsCommonGrid>
+        </PanelBody>
 
-              <AffectedContacts contacts={state.affectedContacts} />
-            </div>
-          </PanelSubContainer>
-
-          <EventLog rowsToShow={16} />
-        </DetailsCommonGrid>
-      </PanelBody>
-
-      <PanelFooter>
-        <RuxButton secondary onClick={handleCancel}>
-          Cancel
-        </RuxButton>
-        {isEditing ? (
-          <RuxButton onClick={handleSubmit}>Save</RuxButton>
-        ) : (
-          <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
-        )}
-      </PanelFooter>
-    </PanelContainer>
+        <PanelFooter>
+          <RuxButton secondary onClick={handleCancel}>
+            Cancel
+          </RuxButton>
+          {isEditing ? (
+            <RuxButton onClick={handleSubmit}>Save</RuxButton>
+          ) : (
+            <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
+          )}
+        </PanelFooter>
+      </PanelContainer>
+    </main>
   );
 };
 
