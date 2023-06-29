@@ -12,8 +12,6 @@
 
 .Contacts-summary-panel__pop-up {
   position: absolute;
-  /* top: 80%;
-  left: 50%; */
 }
 
 .Contacts-summary-panel__pop-up::part(container) {
@@ -38,38 +36,3 @@
   width: 18rem;
   margin-left: auto;
 }
-
-/* if (!chartContext || !chartContext.active || !chartContext.active.length) {
-  return;
-}
-
-const { datasetIndex, index } = chartContext.active[0];
-const selectedDataset = datasets[datasetIndex];
-
-const chart = document.getElementById('contacts-summary-chart');
-const rect = chart.getBoundingClientRect();
-if (!rect) {
-  return;
-}
-setPopup({
-  title: `${index}`, // Use dataPointIndex instead of event.dataPointIndex
-  length: datasets.length,
-  open: true,
-  top: rect.top + 56, // Use rect.top instead of y
-  left: rect.left, // Use rect.left instead of x
-  height,
-  width,
-});
-};
-
-useEffect(() => {
-const chart = document.getElementById('contacts-summary-chart');
-chart.addEventListener('click', (event) => {
-const chartContext = Chart.helpers.getChartInstance(chart).getContext('2d');
-onClick(event, chartContext);
-});
-
-return () => {
-chart.removeEventListener('click', onClick);
-};
-}, []); */

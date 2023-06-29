@@ -76,7 +76,7 @@ const ContactsSummaryPanel = () => {
 
         setPopup({
           title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
-          length: datasets.length,
+          length: randInt(3, 12),
           open: true,
           top: event.pageY - rect.top,
           left: event.pageX - rect.left,
