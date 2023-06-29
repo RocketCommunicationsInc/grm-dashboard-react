@@ -10,53 +10,50 @@ import { getRandomContact } from '../../data/data';
 const ContactsSummaryPanel = () => {
   const [zoomLevel, setZoomLevel] = useState(6);
 
-  const randomNumbers = (length) =>
-    Array.from({ length }, () => randInt(0, 20));
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const initialDataset = [
-    { name: 'In Progress', backgroundColor: '#938bdb' },
-    { name: 'Issues', backgroundColor: '#4dacff' },
-    { name: 'Planned', backgroundColor: '#00c7cb' },
-    { name: 'Completed', backgroundColor: '#a1e9eb' },
-  ];
-
   const initialPopup = {
     title: '',
     length: 0,
     x: 0,
     y: 0,
+    open: false,
   };
 
-  const [popup, setPopup] = useState(false);
-  const [popupContent, setPopupContent] = useState(initialPopup);
-  const [popupPosition, setpopupPosition] = useState();
-  const { title, length } = popupContent;
-  //] const { x, y } = popupPosition;
-  // const datasets = useMemo(() => {
-  //   return initialDataset.map((dataset) => ({
-  //     ...dataset,
-  //     data: randomNumbers(12),
-  //   }));
-  // }, [initialDataset]);
+  const [popup, setPopup] = useState(initialPopup);
+  const { title, length, x, y, open } = popup;
 
-  // const onClick = (_, elements) => {
-  //   const activeElement = elements[0];
-  //   console.log(activeElement, 'elements');
-  //   if (!activeElement) return;
+  const datasets = useMemo((chartContext, config, event) => {
+    const randomNumbers = (length) =>
+      Array.from({ length }, () => randInt(0, 20));
+    const initialDataset = [
+      { label: 'Upcoming', backgroundColor: '#938bdb' },
+      { label: 'Executing', backgroundColor: '#4dacff' },
+      { label: 'Complete', backgroundColor: '#00c7cb' },
+      { label: 'Failed', backgroundColor: '#a1e9eb' },
+    ];
+    return initialDataset.map((dataset) => ({
+      ...dataset,
+      data: randomNumbers(12),
+    }));
+  }, []);
 
-  //   const {
-  //     element: { $context },
-  //     datasetIndex,
-  //     index,
-  //   } = activeElement;
+  const onClick = (chartContext, config, event) => {
+    const { dataPointIndex, seriesIndex } = config;
+    // const activeElement = elements[0];
+    // console.log(activeElement, 'elements');
+    // if (!activeElement) return;
 
-  //   setPopup({
-  //     title: `${datasets[datasetIndex].label} ${labels[index]}`,
-  //     length: $context.raw,
-  //     open: true,
-  //   });
-  // };
+    // const {
+    //   element: { context },
+    //   datasetIndex,
+    //   index,
+    // } = activeElement;
+
+    setPopup({
+      title: `${datasets[seriesIndex]} `,
+      length: datasets.length,
+      open: true,
+    });
+  };
 
   const labels = [
     '0300',
@@ -111,53 +108,54 @@ const ContactsSummaryPanel = () => {
         show: false,
       },
       events: {
-        //click: onClick,
-        dataPointSelection: function (
-          chartContext,
-          config,
-          series,
-          seriesIndex,
-          dataPointIndex,
-          w
-        ) {
-          const chart = document.getElementById('contacts-summary-chart');
-          const chartRect = chart.getBoundingClientRect();
-          const bar = chart && chart.querySelector('.apexcharts-bar-series');
-          const newBar = chart.querySelector(
-            `.apexcharts-bar-series .apexcharts-series[data\\:index='${config.seriesIndex}'] .apexcharts-bar[data\\:index='${config.dataPointIndex}']`
-          );
-          // if (!chart || !bar) return;
+        click: onClick,
+        // click: function (
+        //   chartContext,
+        //   config,
+        //   series,
+        //   seriesIndex,
+        //   dataPointIndex,
+        //   w,
+        //   context
+        // ) {
+        //   // const chart = document.getElementById('contacts-summary-chart');
+        //   // const chartRect = chart.getBoundingClientRect();
+        //   // const bar = chart && chart.querySelector('.apexcharts-bar-series');
+        //   // const newBar = chart.querySelector(
+        //   //   `.apexcharts-bar-series .apexcharts-series[data\\:index='${config.seriesIndex}'] .apexcharts-bar[data\\:index='${config.dataPointIndex}']`
+        //   // );
+        //   // // if (!chart || !bar) return;
 
-          // // const newBar = chart.querySelector(
-          // //   `.apexcharts-bar-series .apexcharts-series[data\\:realIndex=" ' + config.seriesIndex + ' "] .apexcharts-bar[data\\:realIndex=" ' + config.dataPointIndex + ' "]`
-          // // );
+        //   // // // const newBar = chart.querySelector(
+        //   // // //   `.apexcharts-bar-series .apexcharts-series[data\\:realIndex=" ' + config.seriesIndex + ' "] .apexcharts-bar[data\\:realIndex=" ' + config.dataPointIndex + ' "]`
+        //   // // // );
 
-          // const barChildren =
-          //   bar &&
-          //   bar.children[config.seriesIndex] &&
-          //   bar.children[config.seriesIndex].children[config.dataPointIndex];
-          // if (!bar || !chart) return;
+        //   // // const barChildren =
+        //   // //   bar &&
+        //   // //   bar.children[config.seriesIndex] &&
+        //   // //   bar.children[config.seriesIndex].children[config.dataPointIndex];
+        //   // // if (!bar || !chart) return;
 
-          // console.log(newBar);
+        //   // // console.log(newBar);
 
-          // const barRect = barChildren.getBoundingClientRect();
-          const offsetY = chartRect.top - 2;
-          const offsetX = chartRect.left + 2;
-          console.log(offsetX);
+        //   // // const barRect = barChildren.getBoundingClientRect();
+        //   // const offsetY = chartRect.top - 2;
+        //   // const offsetX = chartRect.left + 2;
+        //   // console.log(offsetX);
 
-          setPopupContent({
-            title: `${w.globals.seriesNames[seriesIndex]} ${
-              labels[config.dataPointIndex]
-            }`,
-            length: Array.from(getRandomContact),
-          });
-
-          // setpopupPosition({
-          //   //  x: offsetX,
-          //   // y: offsetY,
-          // });
-          setPopup(true);
-        },
+        //   setPopup({
+        //     title: `${w.globals.seriesNames[seriesIndex]} ${labels[dataPointIndex]}`,
+        //     length: getRandomContact,
+        //     // x:, y:
+        //     open: true,
+        //   });
+        //   console.log(config, 'context');
+        //   // setpopupPosition({
+        //   //   //  x: offsetX,
+        //   //   // y: offsetY,
+        //   // });
+        //   //setPopup(true);
+        // },
       },
     },
     // plotOptions: {
@@ -197,7 +195,8 @@ const ContactsSummaryPanel = () => {
         },
       },
       tooltip: {
-        enabled: false,
+        enabled: true,
+        shared: false,
       },
       axisTicks: {
         show: false,
@@ -266,7 +265,7 @@ const ContactsSummaryPanel = () => {
           id='contacts-summary-chart'
         />
         <RuxPopUp
-          open={popup}
+          open={open}
           placement='right'
           className='Contacts-summary-panel__pop-up'
           onRuxpopupclosed={() => setPopup(initialPopup)}
