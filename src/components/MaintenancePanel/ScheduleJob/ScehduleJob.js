@@ -8,6 +8,7 @@ import {
   RuxTextarea,
 } from '@astrouxds/react';
 import { useMemo, useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
 import { columnDefs } from './ScheduleJobColumns';
 import { useAppContext } from '../../../providers/AppProvider';
 import { AstroReactTable } from '../../../common';
@@ -22,6 +23,8 @@ import { flexRender } from '@tanstack/react-table';
 import './ScheduleJob.css';
 
 const ScheduleJob = () => {
+  const navigate = useNavigate();
+  const params = useParams();
   const columns = useMemo(() => columnDefs, []);
   const { state, dispatch } = useAppContext();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
@@ -53,12 +56,14 @@ const ScheduleJob = () => {
 
   const handleCancel = () => {
     dispatch({ type: 'SET_ALERT_DETAILS_PAGE' });
+    navigate(`/alerts/${params.alertId}`);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: 'SCHEDULE_NEW_JOB', payload: newJob });
     dispatch({ type: 'SET_ALERT_DETAILS_PAGE' });
+    navigate(`/alerts/${params.alertId}`);
   };
 
   const handleChange = (e) => {

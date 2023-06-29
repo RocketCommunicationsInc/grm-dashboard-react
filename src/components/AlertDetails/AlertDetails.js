@@ -1,6 +1,7 @@
 import { RuxButton, RuxInput } from '@astrouxds/react';
 import { capitalize, formatReadableTime } from '../../util/util';
 import { useAppContext } from '../../providers/AppProvider';
+import { useNavigate, useParams } from 'react-router-dom';
 import {
   AffectedContacts,
   DetailsCommonGrid,
@@ -12,17 +13,26 @@ import {
   PanelSubContainer,
 } from '../../common';
 import './AlertDetails.css';
+import { useTTCGRMAlerts } from '@astrouxds/mock-data';
 
 const AlertDetails = () => {
+  const navigate = useNavigate();
+  const params = useParams();
+  const { dataById: alerts } = useTTCGRMAlerts();
+  const currentAlert = alerts[params.alertId];
+
   const { state, dispatch } = useAppContext();
-  const handleClick = () => dispatch({ type: 'DELETE_ALERT' });
+  const handleClick = () => {
+    dispatch({ type: 'DELETE_ALERT' });
+    navigate('/');
+  };
 
   const alertGeneralDetails = [
     {
       label: 'Severity',
       node: (
         <RuxInput
-          value={capitalize(state.currentAlert.status)}
+          value={capitalize(currentAlert.status)}
           readonly
           size='small'
         />
@@ -33,7 +43,7 @@ const AlertDetails = () => {
       label: 'Alert ID',
       node: (
         <RuxInput
-          value={state.currentAlert.id.split(' - ')[0]}
+          value={currentAlert.id.split(' - ')[0]}
           readonly
           size='small'
         />
@@ -44,7 +54,7 @@ const AlertDetails = () => {
       label: 'Category',
       node: (
         <RuxInput
-          value={capitalize(state.currentAlert.category)}
+          value={capitalize(currentAlert.category)}
           readonly
           size='small'
         />
@@ -55,7 +65,7 @@ const AlertDetails = () => {
       label: 'Time',
       node: (
         <RuxInput
-          value={formatReadableTime(state.currentAlert.timestamp)}
+          value={formatReadableTime(currentAlert.timestamp)}
           readonly
           size='small'
         />
@@ -75,7 +85,7 @@ const AlertDetails = () => {
             </PanelSubContainer>
 
             <PanelSubContainer heading='Description'>
-              <p>{state.currentAlert.longMessage}.</p>
+              <p>{currentAlert.longMessage}.</p>
             </PanelSubContainer>
 
             <AffectedContacts contacts={state.affectedContacts} />

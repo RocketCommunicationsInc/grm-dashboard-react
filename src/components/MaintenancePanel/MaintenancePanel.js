@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { RuxButton, RuxContainer } from '@astrouxds/react';
 import { useMemo } from 'react';
 import { columnDefs } from './MaintenanceHistoryColumns';
@@ -12,6 +13,7 @@ import {
 import './MaintenancePanel.css';
 
 const MaintenancePanel = () => {
+  const navigate = useNavigate();
   const columns = useMemo(() => columnDefs, []);
   const { state, dispatch } = useAppContext();
 
@@ -26,6 +28,7 @@ const MaintenancePanel = () => {
     dispatch({
       type: 'SCHEDULE_JOB',
     });
+    navigate('schedule-job');
   };
 
   return (
@@ -34,7 +37,7 @@ const MaintenancePanel = () => {
       <RuxContainer className='jobs-section'>
         <h2>Jobs</h2>
         <div className='jobs-wrapper'>
-          <RuxButton onClick={handleClick}>Scehdule Job</RuxButton>
+          <RuxButton onClick={handleClick}>Schedule Job</RuxButton>
           <JobIDCard
             type='IT Support'
             id='76029'

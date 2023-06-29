@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   RuxContainer,
   RuxTable,
@@ -27,6 +28,7 @@ type PropTypes = {
 };
 
 const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
+  const navigate = useNavigate();
   const [openBanner, setOpenBanner] = useState(false);
   const { dataArray: contactsArray, dataById: contacts } = useTTCGRMContacts();
   const { investigateContact } = useAppActions();
@@ -302,7 +304,7 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
                 return (
                   <RuxTableRow
                     key={contactId}
-                    onClick={() => investigateContact(contact)}
+                    onClick={() => navigate(`/contacts/${contact.id}`)}
                   >
                     {/* no priority value on contact, using normal as placeholder */}
                     <RuxTableCell>Normal</RuxTableCell>

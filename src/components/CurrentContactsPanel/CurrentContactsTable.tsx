@@ -1,4 +1,5 @@
 import { useState, useMemo, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import {
   RuxContainer,
   RuxTable,
@@ -24,6 +25,7 @@ import { useAppActions } from '../../providers/AppProvider';
 type SortDirection = 'ASC' | 'DESC';
 
 const CurrentContactsTable = () => {
+  const navigate = useNavigate();
   const [openBanner, setOpenBanner] = useState(false);
   const { dataArray: contactsArray, dataById: contacts } = useTTCGRMContacts();
   const { investigateContact } = useAppActions();
@@ -253,7 +255,7 @@ const CurrentContactsTable = () => {
               return (
                 <RuxTableRow
                   key={contactId}
-                  onClick={() => investigateContact(contact)}
+                  onClick={() => navigate(`/contacts/${contact.id}`)}
                 >
                   <RuxTableCell>
                     <RuxStatus status={contact.status} />

@@ -1,6 +1,5 @@
 import AppProvider from './providers/AppProvider';
 import GlobalStatusBar from './components/GlobalStatusBar/GlobalStatusBar';
-import Main from './components/Main';
 import './App.css';
 import { TTCGRMProvider } from '@astrouxds/mock-data';
 import {
@@ -29,17 +28,16 @@ const router = createBrowserRouter(
           </>
         }
       >
-        <Route
-          path='contacts'
-          element={<ContactsTablePage />}
-          handle={{
-            crumb: 'contacts',
-          }}
-        >
+        <Route path='contacts'>
+          <Route index element={<ContactsTablePage />} />
           <Route path=':contactId' element={<ContactDetails />} />
         </Route>
-        <Route path='alerts/:alertId' element={<AlertDetailsPage />}>
-          <Route path='schedule-job' element={<ScheduleJobPage />} />
+        <Route path='alerts'>
+          <Route index element={<Dashboard />} />
+          <Route path=':alertId'>
+            <Route index element={<AlertDetailsPage />} />
+            <Route path='schedule-job' element={<ScheduleJobPage />} />
+          </Route>
         </Route>
       </Route>
     </>

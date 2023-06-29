@@ -7,7 +7,8 @@ import {
   RuxOption,
   RuxSelect,
 } from '@astrouxds/react';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
@@ -26,15 +27,22 @@ import { formatReadableTime, getDayOfYear } from '../../util';
 import './ContactDetails.css';
 
 const ContactDetails = () => {
+  const navigate = useNavigate();
+  const params = useParams();
+  const { dataById: contacts } = useTTCGRMContacts();
+  const currentContact = contacts[params.contactId];
   const { state, dispatch } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [contact, setContact] = useState(state.currentContact);
 
   const handleCancel = () => {
     if (isEditing) {
-      setContact(state.currentContact);
+      setContact(currentContact);
       setIsEditing(false);
-    } else dispatch({ type: 'SET_PAGE' });
+    } else {
+      dispatch({ type: 'SET_PAGE' });
+      navigate('/contacts');
+    }
   };
 
   const handleSubmit = (e) => {
