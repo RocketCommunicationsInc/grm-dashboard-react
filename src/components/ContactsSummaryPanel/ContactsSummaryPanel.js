@@ -8,11 +8,7 @@ import './ContactsSummaryPanel.css';
 import { getRandomContact } from '../../data/data';
 
 const ContactsSummaryPanel = () => {
-  const [zoomLevel, setZoomLevel] = useState(3);
-
-  const handleSliderChange = (e) => {
-    setZoomLevel(e.target.value);
-  };
+  const [zoomLevel, setZoomLevel] = useState(1);
 
   const randomNumbers = (length) =>
     Array.from({ length }, () => randInt(0, 20));
@@ -81,38 +77,30 @@ const ContactsSummaryPanel = () => {
     '1400',
   ];
 
+  const labelsArr = labels.length - (zoomLevel - 1);
+  const labelsShown = labels.slice(0, labelsArr);
+
   const series = [
     {
-      data: labels.map(() => randInt(0, 6)),
+      data: labelsShown.map(() => randInt(0, 6)),
       name: 'Upcoming',
     },
     {
-      data: labels.map(() => randInt(0, 7)),
+      data: labelsShown.map(() => randInt(0, 7)),
       name: 'Executing',
     },
     {
-      data: labels.map(() => randInt(0, 6)),
+      data: labelsShown.map(() => randInt(0, 6)),
       name: 'Complete',
     },
     {
-      data: labels.map(() => randInt(0, 7)),
+      data: labelsShown.map(() => randInt(0, 7)),
       name: 'Failed',
     },
   ];
 
-  const tickAmount = Math.ceil(labels.length * (zoomLevel / 10));
-
-  const updatedOptions = {
-    xaxis: {
-      labels: {
-        formatter: function (value) {
-          const hours = value.substring(0, 2);
-          const minutes = value.substring(2, 4);
-          return hours + ':' + minutes;
-        },
-      },
-      tickAmount: tickAmount,
-    },
+  const handleZoom = (e) => {
+    setZoomLevel(parseInt(e.target.value));
   };
 
   const options = {
@@ -200,7 +188,7 @@ const ContactsSummaryPanel = () => {
     //   },
     // },
     xaxis: {
-      categories: labels,
+      categories: labelsShown,
       labels: {
         style: {
           colors: 'var(--color-text-primary)',
@@ -218,7 +206,7 @@ const ContactsSummaryPanel = () => {
         show: true,
         tickAmount: 10,
         decimalsInFloat: 0,
-        min: 0,
+        min: 1,
         max: 22,
         axisTicks: {
           show: false,
@@ -262,9 +250,9 @@ const ContactsSummaryPanel = () => {
           <RuxIcon icon='search' size='extra-small' />
           <RuxSlider
             value={zoomLevel}
-            onRuxinput={updatedOptions}
-            min={0}
-            max={6}
+            onRuxinput={handleZoom}
+            min={1}
+            max={11}
           />
           <RuxIcon icon='search' size='1.5rem' />
         </div>
