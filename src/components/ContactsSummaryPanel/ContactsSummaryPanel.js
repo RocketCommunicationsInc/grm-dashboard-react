@@ -1,101 +1,94 @@
-import { memo, useMemo, useState, useEffect } from 'react';
+import { memo, useMemo, useState, useCallback } from 'react';
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
 import Chart from 'react-apexcharts';
 import { RuxPopUp, RuxSlider, RuxIcon } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
-import { getRandomContact } from '../../data/data';
+
+const initialPopup = {
+  title: '',
+  length: 0,
+  top: 0,
+  left: 0,
+  width: 0,
+  height: 0,
+  open: false,
+};
+
+const initialDataset = [
+  { name: 'Upcoming', backgroundColor: '#938bdb' },
+  { name: 'Executing', backgroundColor: '#4dacff' },
+  { name: 'Complete', backgroundColor: '#00c7cb' },
+  { name: 'Failed', backgroundColor: '#a1e9eb' },
+];
 
 const ContactsSummaryPanel = () => {
   const [zoomLevel, setZoomLevel] = useState(6);
-
-  const initialPopup = {
-    title: '',
-    length: 0,
-    x: 0,
-    y: 0,
-    open: false,
-  };
+  const labels = useMemo(
+    () => [
+      '0300',
+      '0400',
+      '0500',
+      '0600',
+      '0700',
+      '0800',
+      '0900',
+      '1000',
+      '1100',
+      '1200',
+      '1300',
+      '1400',
+      '1500',
+      '1600',
+      '1700',
+      '1800',
+      '1900',
+    ],
+    []
+  );
+  const labelsArr = labels.length - (zoomLevel - 1);
+  const labelsShown = useMemo(
+    () => labels.slice(0, labelsArr),
+    [labels, labelsArr]
+  );
 
   const [popup, setPopup] = useState(initialPopup);
-  const { title, length, x, y, open } = popup;
+  const { title, length, open, height, left, top, width } = popup;
 
-  const datasets = useMemo((chartContext, config, event) => {
-    const randomNumbers = (length) =>
-      Array.from({ length }, () => randInt(0, 20));
-    const initialDataset = [
-      { label: 'Upcoming', backgroundColor: '#938bdb' },
-      { label: 'Executing', backgroundColor: '#4dacff' },
-      { label: 'Complete', backgroundColor: '#00c7cb' },
-      { label: 'Failed', backgroundColor: '#a1e9eb' },
-    ];
-    return initialDataset.map((dataset) => ({
-      ...dataset,
-      data: randomNumbers(12),
-    }));
-  }, []);
+  const firstDatasets = useMemo(
+    () =>
+      initialDataset.map((dataset) => ({
+        ...dataset,
+        data: labelsShown.map(() => randInt(0, 6)),
+      })),
+    [labelsShown]
+  );
 
-  const onClick = (chartContext, config, event) => {
-    const { dataPointIndex, seriesIndex } = config;
-    // const activeElement = elements[0];
-    // console.log(activeElement, 'elements');
-    // if (!activeElement) return;
+  const datasets = firstDatasets;
 
-    // const {
-    //   element: { context },
-    //   datasetIndex,
-    //   index,
-    // } = activeElement;
+  const onClick = useCallback(
+    (event, chartContext, config) => {
+      setTimeout(() => {
+        const { dataPointIndex, seriesIndex } = config;
+        const selectedDataset = datasets[seriesIndex];
+        const chart = document.getElementById('chart-container');
+        const rect = chart.getBoundingClientRect();
+        console.log(chartContext, 'chartContext');
 
-    setPopup({
-      title: `${datasets[seriesIndex]} `,
-      length: datasets.length,
-      open: true,
-    });
-  };
-
-  const labels = [
-    '0300',
-    '0400',
-    '0500',
-    '0600',
-    '0700',
-    '0800',
-    '0900',
-    '1000',
-    '1100',
-    '1200',
-    '1300',
-    '1400',
-    '1500',
-    '1600',
-    '1700',
-    '1800',
-    '1900',
-  ];
-
-  const labelsArr = labels.length - (zoomLevel - 1);
-  const labelsShown = labels.slice(0, labelsArr);
-
-  const series = [
-    {
-      data: labelsShown.map(() => randInt(0, 6)),
-      name: 'Upcoming',
+        setPopup({
+          title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
+          length: datasets.length,
+          open: true,
+          top: event.pageY - rect.top,
+          left: event.pageX - rect.left,
+          height,
+          width,
+        });
+      });
     },
-    {
-      data: labelsShown.map(() => randInt(0, 7)),
-      name: 'Executing',
-    },
-    {
-      data: labelsShown.map(() => randInt(0, 6)),
-      name: 'Complete',
-    },
-    {
-      data: labelsShown.map(() => randInt(0, 7)),
-      name: 'Failed',
-    },
-  ];
+    [datasets, height, width]
+  );
 
   const handleZoom = (e) => {
     setZoomLevel(parseInt(e.target.value));
@@ -108,85 +101,10 @@ const ContactsSummaryPanel = () => {
         show: false,
       },
       events: {
-        click: onClick,
-        // click: function (
-        //   chartContext,
-        //   config,
-        //   series,
-        //   seriesIndex,
-        //   dataPointIndex,
-        //   w,
-        //   context
-        // ) {
-        //   // const chart = document.getElementById('contacts-summary-chart');
-        //   // const chartRect = chart.getBoundingClientRect();
-        //   // const bar = chart && chart.querySelector('.apexcharts-bar-series');
-        //   // const newBar = chart.querySelector(
-        //   //   `.apexcharts-bar-series .apexcharts-series[data\\:index='${config.seriesIndex}'] .apexcharts-bar[data\\:index='${config.dataPointIndex}']`
-        //   // );
-        //   // // if (!chart || !bar) return;
-
-        //   // // // const newBar = chart.querySelector(
-        //   // // //   `.apexcharts-bar-series .apexcharts-series[data\\:realIndex=" ' + config.seriesIndex + ' "] .apexcharts-bar[data\\:realIndex=" ' + config.dataPointIndex + ' "]`
-        //   // // // );
-
-        //   // // const barChildren =
-        //   // //   bar &&
-        //   // //   bar.children[config.seriesIndex] &&
-        //   // //   bar.children[config.seriesIndex].children[config.dataPointIndex];
-        //   // // if (!bar || !chart) return;
-
-        //   // // console.log(newBar);
-
-        //   // // const barRect = barChildren.getBoundingClientRect();
-        //   // const offsetY = chartRect.top - 2;
-        //   // const offsetX = chartRect.left + 2;
-        //   // console.log(offsetX);
-
-        //   setPopup({
-        //     title: `${w.globals.seriesNames[seriesIndex]} ${labels[dataPointIndex]}`,
-        //     length: getRandomContact,
-        //     // x:, y:
-        //     open: true,
-        //   });
-        //   console.log(config, 'context');
-        //   // setpopupPosition({
-        //   //   //  x: offsetX,
-        //   //   // y: offsetY,
-        //   // });
-        //   //setPopup(true);
-        // },
+        dataPointSelection: onClick,
       },
     },
-    // plotOptions: {
-    //   bar: {
-    //     distributed: true,
-    //     dataLabels: {
-    //       position: 'center',
-    //     },
-    //   events: {
-    //     click: function (event, chartContext, config, w, seriesIndex) {
-    //       const seriesName = w.globals.seriesNames[seriesIndex];
-    //       const dataPointIndex = labels[config.dataPointIndex];
-    //       console.log(seriesName, dataPointIndex);
 
-    //       const x =
-    //         (config.w.config.chart.width * (config.dataPointIndex + 0.5)) /
-    //         config.w.config.series.length;
-    //       const y = config.y - 20;
-
-    //       setPopup(true);
-    //       setPopupContent({
-    //         title: `${seriesName} ${dataPointIndex}`,
-    //         length: Array.from(getRandomContact),
-    //         x: x,
-    //         y: y,
-    //       });
-    //     },
-    //   },
-    // },
-    //   },
-    // },
     xaxis: {
       categories: labelsShown,
       labels: {
@@ -241,12 +159,19 @@ const ContactsSummaryPanel = () => {
         onClick: undefined,
       },
     },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          enabled: true,
+        },
+      },
+    },
   };
 
   return (
     <div className='trending-equipment-panel'>
       <PanelHeader heading='Contacts Summary' />
-      <div className='trending-equipment-panel__select'>
+      <div className='trending-equipment-panel__select' id='chart-container'>
         <div className='slider-wrapper'>
           <RuxIcon icon='search' size='extra-small' />
           <RuxSlider
@@ -260,17 +185,18 @@ const ContactsSummaryPanel = () => {
         <Chart
           type='bar'
           options={options}
-          series={series}
+          series={datasets}
           height='100%'
           id='contacts-summary-chart'
         />
         <RuxPopUp
           open={open}
-          placement='right'
+          placement='right-start'
           className='Contacts-summary-panel__pop-up'
           onRuxpopupclosed={() => setPopup(initialPopup)}
+          style={{ top, left }}
         >
-          <div slot='trigger' />
+          <div slot='trigger' style={{ width, height }} />
           <ContactsSummaryPanelTable {...{ length, title }} />
         </RuxPopUp>
       </div>
