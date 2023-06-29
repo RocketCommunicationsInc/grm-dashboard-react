@@ -35,6 +35,11 @@ const CurrentContactsTable = () => {
     'executing' | 'failed' | 'all'
   >('all');
 
+  const handleRowClick = (contact: Contact) => {
+    investigateContact(contact);
+    navigate(`/contacts/${contact.id}`);
+  };
+
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
     const sortProperty = target.dataset.sortprop as keyof Contact;
@@ -255,7 +260,7 @@ const CurrentContactsTable = () => {
               return (
                 <RuxTableRow
                   key={contactId}
-                  onClick={() => navigate(`/contacts/${contact.id}`)}
+                  onClick={() => handleRowClick(contact)}
                 >
                   <RuxTableCell>
                     <RuxStatus status={contact.status} />
