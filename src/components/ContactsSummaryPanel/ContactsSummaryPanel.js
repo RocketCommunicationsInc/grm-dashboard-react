@@ -70,11 +70,9 @@ const ContactsSummaryPanel = () => {
   const onClick = useCallback(
     (event, chartContext, config) => {
       setTimeout(() => {
-        const { dataPointIndex, seriesIndex } = config;
-        const selectedDataset = datasets[seriesIndex];
+        const { seriesIndex } = config;
         const chart = document.getElementById('chart-container');
         const rect = chart.getBoundingClientRect();
-        console.log(chartContext, 'chartContext');
 
         setPopup({
           title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
