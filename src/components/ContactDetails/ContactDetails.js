@@ -3,7 +3,6 @@ import {
   RuxButton,
   RuxCheckbox,
   RuxInput,
-  RuxMonitoringIcon,
   RuxOption,
   RuxSelect,
 } from '@astrouxds/react';
@@ -24,11 +23,14 @@ import {
 import { options } from '../../data/options';
 import { formatReadableTime, getDayOfYear } from '../../util';
 import './ContactDetails.css';
+import EquipmentIcons from './EquipmentIcons/EqupimentIcons';
 
 const ContactDetails = () => {
   const { state, dispatch } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [contact, setContact] = useState(state.currentContact);
+
+  console.log(state);
 
   const handleCancel = () => {
     if (isEditing) {
@@ -241,61 +243,9 @@ const ContactDetails = () => {
             <PanelSubContainer className='config-wrapper'>
               <DetailsGrid details={configDetails} />
 
-              <div>
-                ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
-                ENC123
-              </div>
+              <span>{contact.equipment}</span>
 
-              <div>
-                <RuxMonitoringIcon
-                  status='caution'
-                  icon='antenna'
-                  label='ANT1'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='SLWS6'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='SB7PLD1'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='RCVR8'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='MBS1CH2'
-                />
-              </div>
-
-              <div>
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='SFEP3CH1'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='UPS104'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='VHR1'
-                />
-                <RuxMonitoringIcon
-                  status='normal'
-                  icon='satellite'
-                  label='ENC123'
-                />
-              </div>
+              <EquipmentIcons equipmentString={contact.equipment} />
             </PanelSubContainer>
 
             <div className='sub-grid'>

@@ -4,3 +4,7 @@
   gap: var(--spacing-2);
   grid-template-columns: minmax(8rem, 1fr) minmax(8rem, 1fr);
 }
+
+.Details-grid fragment {
+  text-transform: capitalize;
+}

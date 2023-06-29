@@ -1,4 +1,4 @@
-import { RuxDatetime } from '@astrouxds/react';
+import { RuxDatetime, RuxInput } from '@astrouxds/react';
 import { memo } from 'react';
 import { generateEvents } from '../../data/data';
 import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
@@ -8,8 +8,9 @@ export const EventLog = memo(({ rowsToShow }) => {
   const events = generateEvents();
 
   return (
-    <PanelSubContainer heading='Event Log' className='event-log'>
-      <div className='log-container'>
+    <div className='log-container'>
+      <RuxInput type='search' placeholder='Filter Log...' />
+      <PanelSubContainer heading='Event Log' className='event-log'>
         <div className='log-header'>
           <div>Time</div>
           <div>Event</div>
@@ -31,7 +32,7 @@ export const EventLog = memo(({ rowsToShow }) => {
             </li>
           ))}
         </ul>
-      </div>
-    </PanelSubContainer>
+      </PanelSubContainer>
+    </div>
   );
 });
