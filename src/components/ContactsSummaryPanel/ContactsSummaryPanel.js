@@ -148,13 +148,8 @@ const ContactsSummaryPanel = () => {
     legend: {
       position: 'top',
       horizontalAlign: 'left',
-      floating: false,
-      formatter: undefined,
       labels: {
         colors: 'var(--color-text-primary)',
-      },
-      markers: {
-        onClick: undefined,
       },
     },
     plotOptions: {
