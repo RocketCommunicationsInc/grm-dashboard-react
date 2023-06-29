@@ -1,5 +1,6 @@
-.event-log .log-container {
-  border: 1px solid var(--color-background-base-default);
+.log-container {
+  display: flex;
+  flex-direction: column;
 }
 
 .event-log .log-header {

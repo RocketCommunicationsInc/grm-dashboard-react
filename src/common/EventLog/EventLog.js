@@ -1,15 +1,16 @@
-import { RuxDatetime, RuxInput } from '@astrouxds/react';
+import { RuxDatetime } from '@astrouxds/react';
 import { memo } from 'react';
 import { generateEvents } from '../../data/data';
 import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
 import './EventLog.css';
+import FilterEventLog from './FilterEventLog/FilterEventLog';
 
 export const EventLog = memo(({ rowsToShow }) => {
   const events = generateEvents();
 
   return (
     <div className='log-container'>
-      <RuxInput type='search' placeholder='Filter Log...' />
+      <FilterEventLog />
       <PanelSubContainer heading='Event Log' className='event-log'>
         <div className='log-header'>
           <div>Time</div>
