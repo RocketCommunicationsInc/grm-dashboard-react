@@ -8,7 +8,7 @@ import './ContactsSummaryPanel.css';
 import { getRandomContact } from '../../data/data';
 
 const ContactsSummaryPanel = () => {
-  const [zoomLevel, setZoomLevel] = useState(1);
+  const [zoomLevel, setZoomLevel] = useState(6);
 
   const randomNumbers = (length) =>
     Array.from({ length }, () => randInt(0, 20));
@@ -58,10 +58,6 @@ const ContactsSummaryPanel = () => {
   //   });
   // };
 
-  const onHover = (evt, ele) => {
-    evt.native.target.style.cursor = ele[0] ? 'pointer' : 'default';
-  };
-
   const labels = [
     '0300',
     '0400',
@@ -75,6 +71,11 @@ const ContactsSummaryPanel = () => {
     '1200',
     '1300',
     '1400',
+    '1500',
+    '1600',
+    '1700',
+    '1800',
+    '1900',
   ];
 
   const labelsArr = labels.length - (zoomLevel - 1);
@@ -252,7 +253,7 @@ const ContactsSummaryPanel = () => {
             value={zoomLevel}
             onRuxinput={handleZoom}
             min={1}
-            max={11}
+            max={15}
           />
           <RuxIcon icon='search' size='1.5rem' />
         </div>
