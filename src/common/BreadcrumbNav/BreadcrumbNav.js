@@ -1,36 +1,26 @@
 import { RuxBreadcrumb, RuxBreadcrumbItem } from '@astrouxds/react';
-
-import { useAppContext } from '../../providers/AppProvider';
+import { useMatches, useNavigate } from 'react-router-dom';
 import './BreadcrumbNav.css';
-import SearchBar from '../SearchBar/SearchBar';
+import { capitalize } from '../../util/util';
 
 export const BreadcrumbNav = () => {
-  const { state, dispatch } = useAppContext();
-
-  const handleClick = (e, page) => {
-    e.preventDefault();
-
-    dispatch({ type: 'SET_PAGE', payload: page });
-  };
+  const navigate = useNavigate();
+  const matches = useMatches();
 
   return (
     <div className='breadcrumb-search-wrapper'>
       <RuxBreadcrumb className='Breadcrumb-nav'>
-        {state.links.map(({ href, page, title }, i) => {
-          const isLast = state.links.length === i + 1;
-
+        {matches.map((match, index) => {
           return (
             <RuxBreadcrumbItem
-              key={page}
-              onClick={isLast ? undefined : (e) => handleClick(e, page)}
-              href={isLast ? undefined : href}
+              key={index}
+              onClick={() => navigate(`/${match.handle?.crumb || ''}`)}
             >
-              {title}
+              {capitalize(match.handle?.crumb || 'Dashbaord')}
             </RuxBreadcrumbItem>
           );
         })}
       </RuxBreadcrumb>
-      <SearchBar />
     </div>
   );
 };

@@ -1,7 +1,8 @@
 .breadcrumb-search-wrapper {
-  display: flex;
+  display: inline-flex;
   flex-wrap: nowrap;
   justify-content: space-between;
+  width: 50%;
 }
 
 .Breadcrumb-nav::part(container) {
