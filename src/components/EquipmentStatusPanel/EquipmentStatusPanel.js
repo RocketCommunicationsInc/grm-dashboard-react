@@ -59,11 +59,26 @@ const EquipmentStatus = () => {
   }, [getRandomData]);
 
   const options = {
+    chart: {
+      events: {
+        click: 'none',
+        hover: 'none',
+      },
+      dropShadow: {
+        enabled: false,
+      },
+    },
+    dataLabels: {
+      hideOverflowingLabels: true,
+      enabled: true,
+      style: {
+        colors: ['var(--color-text-primary)'],
+        fontFamily: 'var(--font-monospace-1-font-family)',
+      },
+    },
     plotOptions: {
       pie: {
-        dataLabels: {
-          enabled: true,
-        },
+        expandOnClick: false,
       },
     },
     colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],

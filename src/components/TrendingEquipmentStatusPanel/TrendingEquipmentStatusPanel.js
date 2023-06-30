@@ -42,6 +42,9 @@ const TrendingEquipmentStatusPanel = () => {
   var options = {
     chart: {
       stacked: false,
+      zoom: {
+        enabled: false,
+      },
       toolbar: {
         show: false,
       },
@@ -165,8 +168,9 @@ const TrendingEquipmentStatusPanel = () => {
       position: 'top',
       horizontalAlign: 'left',
       floating: false,
+      fontSize: 'var(--font-size-lg)',
       labels: {
-        colors: 'var(--color-text-primary)',
+        colors: 'var(--color-text-interactive-default)',
       },
     },
   };

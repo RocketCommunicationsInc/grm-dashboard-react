@@ -60,7 +60,7 @@ const ContactsSummaryPanel = () => {
     () =>
       initialDataset.map((dataset) => ({
         ...dataset,
-        data: labelsShown.map(() => randInt(3, 6)),
+        data: labelsShown.map(() => randInt(4, 6.5)),
       })),
     [labelsShown]
   );
@@ -78,7 +78,7 @@ const ContactsSummaryPanel = () => {
           title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
           length: randInt(3, 12),
           open: true,
-          top: event.pageY - rect.top,
+          top: event.pageY - 20 - rect.top,
           left: event.pageX - rect.left,
           height,
           width,
@@ -95,6 +95,9 @@ const ContactsSummaryPanel = () => {
   const options = {
     chart: {
       stacked: true,
+      animations: {
+        enabled: false,
+      },
       toolbar: {
         show: false,
       },
@@ -147,6 +150,7 @@ const ContactsSummaryPanel = () => {
     legend: {
       position: 'top',
       horizontalAlign: 'left',
+      fontSize: 'var(--font-size-lg)',
       labels: {
         colors: 'var(--color-text-interactive-default)',
       },
@@ -157,11 +161,13 @@ const ContactsSummaryPanel = () => {
     plotOptions: {
       bar: {
         dataLabels: {
-          position: 'top',
+          position: 'center',
           hideOverflowingLabels: true,
           enabled: true,
           style: {
             color: 'var(--color-text-primary)',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
           },
         },
       },
@@ -191,7 +197,7 @@ const ContactsSummaryPanel = () => {
         />
         <RuxPopUp
           open={open}
-          placement='top'
+          placement='left'
           className='Contacts-summary-panel__pop-up'
           onRuxpopupclosed={() => setPopup(initialPopup)}
           style={{ top, left }}
