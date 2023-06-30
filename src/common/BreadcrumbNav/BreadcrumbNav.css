@@ -10,6 +10,7 @@
 }
 
 rux-breadcrumb-item {
+  color: var(--color-text-interactive-default);
   cursor: pointer;
 }
 

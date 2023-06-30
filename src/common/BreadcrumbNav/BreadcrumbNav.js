@@ -1,36 +1,42 @@
 import { RuxBreadcrumb, RuxBreadcrumbItem } from '@astrouxds/react';
-import { useMatches, useNavigate } from 'react-router-dom';
+import { useMatches, useParams, useNavigate } from 'react-router-dom';
 import './BreadcrumbNav.css';
 import { capitalize } from '../../util/util';
 
-const getLastPath = (pathname) => {
-  const index = pathname.lastIndexOf('/');
-  const lastPath = pathname.substring(index + 1);
-
-  return lastPath.length === 36 ? lastPath : capitalize(lastPath);
-};
-
 export const BreadcrumbNav = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const matches = useMatches();
-
-  const filteredMatches = matches.filter((match) => {
-    return match.pathname === '/' || match.pathname.at(-1) !== '/';
-  });
-
   if (matches.length === 0) return null;
+
+  const filteredMatches = matches.filter(
+    (match) => match.pathname.slice(-1) !== '/' && match.pathname !== '/alerts'
+  );
+
+  const getLastPath = (pathname) => {
+    const index = pathname.lastIndexOf('/');
+    const lastPath = pathname.substring(index + 1);
+
+    if (lastPath.length === 36) {
+      if (params.alertId) return `Alert ${lastPath} Details`;
+      if (params.contactId) return `Contact ${lastPath} Details`;
+    }
+    return capitalize(lastPath);
+  };
+
   return (
     <div className='breadcrumb-search-wrapper'>
       <RuxBreadcrumb className='Breadcrumb-nav'>
+        <RuxBreadcrumbItem key={'Dashboard'} onClick={() => navigate('/')}>
+          Dashboard
+        </RuxBreadcrumbItem>
         {filteredMatches.map((match, index) => {
           return (
             <RuxBreadcrumbItem
               key={index}
               onClick={() => navigate(match.pathname)}
             >
-              {match.pathname === '/'
-                ? 'Dashboard'
-                : getLastPath(match.pathname)}
+              {getLastPath(match.pathname)}
             </RuxBreadcrumbItem>
           );
         })}
