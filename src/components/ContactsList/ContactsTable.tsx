@@ -37,6 +37,11 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
     'id'
   );
 
+  const handleRowClick = (contact: Contact) => {
+    investigateContact(contact);
+    navigate(`/contacts/${contact.id}`);
+  };
+
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
     const sortProperty = target.dataset.sortprop as keyof Contact;
@@ -304,7 +309,7 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
                 return (
                   <RuxTableRow
                     key={contactId}
-                    onClick={() => navigate(`/contacts/${contact.id}`)}
+                    onClick={() => handleRowClick(contact)}
                   >
                     {/* no priority value on contact, using normal as placeholder */}
                     <RuxTableCell>Normal</RuxTableCell>

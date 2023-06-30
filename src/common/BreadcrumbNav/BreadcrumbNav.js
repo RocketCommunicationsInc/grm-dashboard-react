@@ -14,16 +14,23 @@ export const BreadcrumbNav = () => {
   const navigate = useNavigate();
   const matches = useMatches();
 
+  const filteredMatches = matches.filter((match) => {
+    return match.pathname === '/' || match.pathname.at(-1) !== '/';
+  });
+
   return (
     <div className='breadcrumb-search-wrapper'>
       <RuxBreadcrumb className='Breadcrumb-nav'>
-        {matches.map((match, index) => {
+        {filteredMatches.map((match, index) => {
+          console.log(getLastPath(match.pathname));
           return (
             <RuxBreadcrumbItem
               key={index}
               onClick={() => navigate(match.pathname)}
             >
-              {getLastPath(match.pathname) || 'Dashboard'}
+              {match.pathname === '/'
+                ? 'Dashboard'
+                : getLastPath(match.pathname)}
             </RuxBreadcrumbItem>
           );
         })}
