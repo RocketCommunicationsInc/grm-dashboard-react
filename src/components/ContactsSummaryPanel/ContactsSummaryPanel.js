@@ -1,128 +1,208 @@
-import { memo, useMemo, useState } from 'react';
-import { RuxPopUp } from '@astrouxds/react';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
-import { Bar } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Legend,
-} from 'chart.js';
-
+import { memo, useMemo, useState, useCallback } from 'react';
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
+import Chart from 'react-apexcharts';
+import { RuxPopUp, RuxSlider, RuxIcon } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
 
-ChartJS.register(CategoryScale, LinearScale, BarElement, Legend);
-
-const randomNumbers = (length) => Array.from({ length }, () => randInt(0, 20));
-
-const initialDataset = [
-  { label: 'In Progress', backgroundColor: '#938bdb' },
-  { label: 'Issues', backgroundColor: '#4dacff' },
-  { label: 'Planned', backgroundColor: '#00c7cb' },
-  { label: 'Completed', backgroundColor: '#a1e9eb' },
-];
-
 const initialPopup = {
+  title: '',
+  length: 0,
   top: 0,
   left: 0,
   width: 0,
   height: 0,
   open: false,
-  title: '',
-  length: 0,
 };
 
+const initialDataset = [
+  { name: 'Upcoming', backgroundColor: '#938bdb' },
+  { name: 'Executing', backgroundColor: '#4dacff' },
+  { name: 'Complete', backgroundColor: '#00c7cb' },
+  { name: 'Failed', backgroundColor: '#a1e9eb' },
+];
+
 const ContactsSummaryPanel = () => {
+  const [zoomLevel, setZoomLevel] = useState(6);
+  const labels = useMemo(
+    () => [
+      '0300',
+      '0400',
+      '0500',
+      '0600',
+      '0700',
+      '0800',
+      '0900',
+      '1000',
+      '1100',
+      '1200',
+      '1300',
+      '1400',
+      '1500',
+      '1600',
+      '1700',
+      '1800',
+      '1900',
+    ],
+    []
+  );
+  const labelsArr = labels.length - (zoomLevel - 1);
+  const labelsShown = useMemo(
+    () => labels.slice(0, labelsArr),
+    [labels, labelsArr]
+  );
+
   const [popup, setPopup] = useState(initialPopup);
-  const { height, left, top, width, open, title, length } = popup;
+  const { title, length, open, height, left, top, width } = popup;
 
-  const datasets = useMemo(() => {
-    return initialDataset.map((dataset) => ({
-      ...dataset,
-      data: randomNumbers(12),
-    }));
-  }, []);
+  const firstDatasets = useMemo(
+    () =>
+      initialDataset.map((dataset) => ({
+        ...dataset,
+        data: labelsShown.map(() => randInt(4, 6.5)),
+      })),
+    [labelsShown]
+  );
 
-  const hours = Array(12).fill(new Date().getHours());
-  const labels = hours.map((h, i) => {
-    const hour = h + i > 23 ? h + i - 24 : h + i;
-    return hour + ':00';
-  });
+  const datasets = firstDatasets;
 
-  const onClick = (_, elements) => {
-    const activeElement = elements[0];
-    if (!activeElement) return;
+  const onClick = useCallback(
+    (event, chartContext, config) => {
+      setTimeout(() => {
+        const { seriesIndex } = config;
+        const chart = document.getElementById('chart-container');
+        const rect = chart.getBoundingClientRect();
 
-    const {
-      element: { height, width, x, y, $context },
-      datasetIndex,
-      index,
-    } = activeElement;
+        setPopup({
+          title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
+          length: randInt(3, 12),
+          open: true,
+          top: event.pageY - 20 - rect.top,
+          left: event.pageX - rect.left,
+          height,
+          width,
+        });
+      });
+    },
+    [datasets, height, width]
+  );
 
-    setPopup({
-      title: `${datasets[datasetIndex].label} ${labels[index]}`,
-      length: $context.raw,
-      open: true,
-      top: y + 16,
-      left: x,
-      width: width / 2,
-      height,
-    });
+  const handleZoom = (e) => {
+    setZoomLevel(parseInt(e.target.value));
   };
 
-  const onHover = (evt, ele) => {
-    evt.native.target.style.cursor = ele[0] ? 'pointer' : 'default';
+  const options = {
+    chart: {
+      stacked: true,
+      animations: {
+        enabled: false,
+      },
+      toolbar: {
+        show: false,
+      },
+      events: {
+        dataPointSelection: onClick,
+      },
+    },
+    xaxis: {
+      categories: labelsShown,
+      labels: {
+        style: {
+          colors: 'var(--color-text-primary)',
+        },
+      },
+      tooltip: {
+        enabled: true,
+        shared: false,
+      },
+      axisTicks: {
+        show: false,
+      },
+    },
+    yaxis: [
+      {
+        show: true,
+        tickAmount: 10,
+        decimalsInFloat: 0,
+        min: 1,
+        max: 24,
+        axisTicks: {
+          show: false,
+        },
+        axisBorder: {
+          show: true,
+          color: 'var(--color-text-primary)',
+        },
+        labels: {
+          enabled: true,
+          show: true,
+          style: {
+            colors: 'var(--color-text-primary)',
+          },
+        },
+      },
+    ],
+    tooltip: {
+      enabled: false,
+    },
+    colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
+    legend: {
+      position: 'top',
+      horizontalAlign: 'left',
+      fontSize: 'var(--font-size-lg)',
+      labels: {
+        colors: 'var(--color-text-interactive-default)',
+      },
+    },
+    fill: {
+      opacity: 5,
+    },
+    plotOptions: {
+      bar: {
+        dataLabels: {
+          position: 'center',
+          hideOverflowingLabels: true,
+          enabled: true,
+          style: {
+            color: 'var(--color-text-primary)',
+            whiteSpace: 'nowrap',
+            overflow: 'hidden',
+          },
+        },
+      },
+    },
   };
 
   return (
-    <div className='Contacts-summary-panel'>
+    <div className='trending-equipment-panel'>
       <PanelHeader heading='Contacts Summary' />
-      <div className='Contacts-summary-panel__chart-wrapper'>
-        <Bar
-          data={{ labels, datasets }}
-          plugins={[ChartDataLabels]}
-          options={{
-            onClick,
-            onHover,
-            maintainAspectRatio: false,
-            animation: false,
-            plugins: {
-              datalabels: {
-                color: 'white',
-                formatter: (val) => (val > 3 ? val : ''),
-                font: { size: 16, weight: 700 },
-              },
-              legend: { align: 'end', labels: { color: 'white' } },
-              tooltip: false,
-            },
-            scales: {
-              x: {
-                grid: { display: false },
-                stacked: true,
-                ticks: { color: 'white' },
-              },
-              y: {
-                grid: { color: '#1c3f5e', drawTicks: false },
-                stacked: true,
-                ticks: { color: 'white', padding: 8 },
-              },
-            },
-          }}
+      <div className='trending-equipment-panel__select' id='chart-container'>
+        <div className='slider-wrapper'>
+          <RuxIcon icon='search' size='extra-small' />
+          <RuxSlider
+            value={zoomLevel}
+            onRuxinput={handleZoom}
+            min={1}
+            max={15}
+          />
+          <RuxIcon icon='search' size='1.5rem' />
+        </div>
+        <Chart
+          type='bar'
+          options={options}
+          series={datasets}
+          height='100%'
+          id='contacts-summary-chart'
         />
-
         <RuxPopUp
           open={open}
-          placement='right-start'
+          placement='left'
           className='Contacts-summary-panel__pop-up'
-          style={{ top, left }}
           onRuxpopupclosed={() => setPopup(initialPopup)}
+          style={{ top, left }}
         >
           <div slot='trigger' style={{ width, height }} />
-
           <ContactsSummaryPanelTable {...{ length, title }} />
         </RuxPopUp>
       </div>

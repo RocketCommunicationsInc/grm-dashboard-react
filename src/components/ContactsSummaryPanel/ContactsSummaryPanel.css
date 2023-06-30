@@ -14,10 +14,26 @@
   position: absolute;
 }
 
+.Contacts-summary-panel__pop-up::part(container) {
+  width: 30rem;
+}
+
 .Contacts-summary-panel::part(popup-content) {
   width: 28rem;
 }
 
 .Contacts-summary-panel__table-container {
   height: 11rem;
+}
+
+.trending-equipment-panel__select {
+  position: relative;
+}
+
+.slider-wrapper {
+  display: flex;
+  align-items: center;
+  width: 18rem;
+  margin-left: calc(100% - 20.5rem);
+  position: absolute;
 }
