@@ -51,6 +51,12 @@ const ContactDetails = () => {
     }));
   };
 
+  const stateCap =
+    contact.state.charAt(0).toUpperCase() + contact.state.slice(1);
+
+  const priorityCap =
+    contact.status.charAt(0).toUpperCase() + contact.status.slice(1); //!incorrect data
+
   const generalDetails = [
     {
       label: 'Priority',
@@ -61,7 +67,7 @@ const ContactDetails = () => {
           ))}
         </RuxSelect>
       ) : (
-        <RuxInput value={contact.status} size='small' readonly /> //!incorrect data
+        <RuxInput value={priorityCap} size='small' readonly /> //!incorrect data
       ),
     },
     {
@@ -78,7 +84,7 @@ const ContactDetails = () => {
           <RuxOption value='executing' label='Executing' />
         </RuxSelect>
       ) : (
-        <RuxInput value={contact.state} size='small' readonly />
+        <RuxInput value={stateCap} size='small' readonly />
       ),
     },
     {
@@ -230,6 +236,14 @@ const ContactDetails = () => {
     },
   ];
 
+  const configEqupiment = [
+    { value: 'ANT62 BAFB1 SFEP454CH1 ECEU6 WS275 USP450', label: 'Config 1' },
+    { value: 'ANT60 VAFB1 SFEP147CH1 ECEU6 WS487 USP281', label: 'Config 2' },
+    { value: 'ANT180 SAFB1 SFEP472CH1 ECEU6 WS334 USP200', label: 'Config 3' },
+    { value: 'ANT123 VAFB1 SFEP242CH1 ECEU6 WS476 USP248', label: 'Config 4' },
+    { value: 'ANT25 PAFB1 SFEP147CH1 ECEU6 WS334 USP191', label: 'Config 5' },
+  ];
+
   const configDetails = [
     {
       label: 'Configuration',
@@ -240,29 +254,22 @@ const ContactDetails = () => {
           name='equipment'
           onRuxchange={handleChange}
         >
-          <RuxOption
-            value='ANT62 BAFB1 SFEP454CH1 ECEU6 WS275 USP450'
-            label='Config 1'
-          />
-          <RuxOption
-            value='ANT60 VAFB1 SFEP147CH1 ECEU6 WS487 USP281'
-            label='Config 2'
-          />
-          <RuxOption
-            value='ANT180 SAFB1 SFEP472CH1 ECEU6 WS334 USP200'
-            label='Config 3'
-          />
-          <RuxOption
-            value='ANT123 VAFB1 SFEP242CH1 ECEU6 WS476 USP248'
-            label='Config 4'
-          />
-          <RuxOption
-            value='ANT25 PAFB1 SFEP147CH1 ECEU6 WS334 USP191'
-            label='Config 5'
-          />
+          {configEqupiment.map(({ value, label }) => (
+            <RuxOption key={label} value={value} label={label} />
+          ))}
         </RuxSelect>
       ) : (
-        <RuxInput value={contact.equipment} size='small' />
+        <RuxSelect
+          value={contact.equipment}
+          size='small'
+          name='equipment'
+          onRuxchange={handleChange}
+          disabled
+        >
+          {configEqupiment.map(({ value, label }) => (
+            <RuxOption key={label} value={value} label={label} />
+          ))}
+        </RuxSelect>
       ),
     },
   ];
