@@ -15,7 +15,7 @@ import './MaintenancePanel.css';
 const MaintenancePanel = () => {
   const navigate = useNavigate();
   const columns = useMemo(() => columnDefs, []);
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
 
   const table = useReactTable({
     data: state.scheduledJobs,
