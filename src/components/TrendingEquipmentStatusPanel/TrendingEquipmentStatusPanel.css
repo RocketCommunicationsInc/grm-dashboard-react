@@ -5,13 +5,21 @@
 }
 
 .trending-equipment-panel__select {
-  display: flex;
-  flex-direction: row-reverse;
+  /* display: flex;
+  flex-direction: row-reverse; */
+  width: 100%;
   padding: var(--spacing-4);
+  height: 100%;
 }
 
 .trending-equipment-panel__chart-wrapper {
   flex-grow: 1;
   padding: var(--spacing-4);
   overflow: auto;
+}
+
+.tooltip-box {
+  background-color: var(--color-background-base-selected);
+  padding: var(--spacing-1);
+  border: none;
 }
