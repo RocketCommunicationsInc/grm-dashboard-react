@@ -14,8 +14,18 @@ rux-breadcrumb-item {
   cursor: pointer;
 }
 
+rux-breadcrumb-item:last-of-type {
+  color: var(--color-text-primary);
+  cursor: pointer;
+}
+
+rux-breadcrumb-item:last-of-type:hover {
+  color: var(--color-text-primary);
+}
+
 rux-breadcrumb-item:hover {
   color: var(--color-text-interactive-hover);
+  cursor: default;
 }
 
 .breadcrumb-search-wrapper rux-input {
