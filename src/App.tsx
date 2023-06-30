@@ -8,6 +8,7 @@ import {
   RouterProvider,
   Route,
   Outlet,
+  Navigate,
 } from 'react-router-dom';
 import { BreadcrumbNav } from './common';
 import AlertDetailsPage from './components/AlertDetails/AlertDetailsPage';
@@ -38,7 +39,7 @@ const router = createBrowserRouter(
           />
         </Route>
         <Route path='alerts'>
-          <Route index element={<Dashboard />} />
+          <Route index element={<Navigate to={'/'} />} />
           <Route path=':alertId'>
             <Route
               index
