@@ -14,3 +14,13 @@
 .Contact-details-page {
   padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
 }
+
+.contact-details-sat {
+  display: flex;
+  margin-top: var(--spacing-6);
+  margin-bottom: -1.5rem;
+}
+
+.contact-details-sat rux-status {
+  margin-inline: var(--spacing-4);
+}

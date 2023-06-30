@@ -2,6 +2,6 @@
   display: flex;
   width: 13rem;
   align-items: center;
-  position: absolute;
+  /* position: absolute; */
   margin-left: 25%;
 }

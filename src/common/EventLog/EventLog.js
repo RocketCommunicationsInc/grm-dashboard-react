@@ -10,8 +10,11 @@ export const EventLog = memo(({ rowsToShow }) => {
 
   return (
     <div className='log-container'>
-      <FilterEventLog />
-      <PanelSubContainer heading='Event Log' className='event-log'>
+      <header>
+        <h3>Event Log</h3>
+        <FilterEventLog />
+      </header>
+      <PanelSubContainer className='event-log'>
         <div className='log-header'>
           <div>Time</div>
           <div>Event</div>
