@@ -15,6 +15,7 @@ import ContactDetails from './components/ContactDetails/ContactDetails';
 import Dashboard from './components/Dashboard/Dashboard';
 import ContactsTablePage from './components/ContactsList/ContactsTablePage';
 import ScheduleJobPage from './components/MaintenancePanel/ScheduleJob/ScheduleJobPage';
+import NoDataFound from './common/Error/NoDataFound';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -30,13 +31,25 @@ const router = createBrowserRouter(
       >
         <Route path='contacts'>
           <Route index element={<ContactsTablePage />} />
-          <Route path=':contactId' element={<ContactDetails />} />
+          <Route
+            path=':contactId'
+            element={<ContactDetails />}
+            errorElement={<NoDataFound dataType='contact' />}
+          />
         </Route>
         <Route path='alerts'>
           <Route index element={<Dashboard />} />
           <Route path=':alertId'>
-            <Route index element={<AlertDetailsPage />} />
-            <Route path='schedule-job' element={<ScheduleJobPage />} />
+            <Route
+              index
+              element={<AlertDetailsPage />}
+              errorElement={<NoDataFound dataType='alert' />}
+            />
+            <Route
+              path='schedule-job'
+              element={<ScheduleJobPage />}
+              errorElement={<NoDataFound dataType='alert' />}
+            />
           </Route>
         </Route>
       </Route>

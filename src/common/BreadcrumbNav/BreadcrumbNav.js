@@ -17,7 +17,8 @@ export const BreadcrumbNav = () => {
   const filteredMatches = matches.filter((match) => {
     return match.pathname === '/' || match.pathname.at(-1) !== '/';
   });
-
+  console.log(matches);
+  if (matches.length === 0) return null;
   return (
     <div className='breadcrumb-search-wrapper'>
       <RuxBreadcrumb className='Breadcrumb-nav'>
