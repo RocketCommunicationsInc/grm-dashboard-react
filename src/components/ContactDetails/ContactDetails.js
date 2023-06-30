@@ -40,7 +40,6 @@ const ContactDetails = () => {
       setContact(currentContact);
       setIsEditing(false);
     } else {
-      dispatch({ type: 'SET_PAGE' });
       navigate('/contacts');
     }
   };

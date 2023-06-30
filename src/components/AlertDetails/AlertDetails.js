@@ -13,17 +13,19 @@ import {
   PanelSubContainer,
 } from '../../common';
 import './AlertDetails.css';
-import { useTTCGRMAlerts } from '@astrouxds/mock-data';
+import { useTTCGRMAlerts, useTTCGRMActions } from '@astrouxds/mock-data';
 
 const AlertDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { dataById: alerts } = useTTCGRMAlerts();
+  const { deleteAlert } = useTTCGRMActions();
   const currentAlert = alerts[params.alertId];
 
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
+
   const handleClick = () => {
-    dispatch({ type: 'DELETE_ALERT' });
+    deleteAlert(currentAlert.contactRefId, currentAlert.id);
     navigate('/');
   };
 

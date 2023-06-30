@@ -55,14 +55,12 @@ const ScheduleJob = () => {
   const { rows } = useAlertsPanel();
 
   const handleCancel = () => {
-    dispatch({ type: 'SET_ALERT_DETAILS_PAGE' });
     navigate(`/alerts/${params.alertId}`);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch({ type: 'SCHEDULE_NEW_JOB', payload: newJob });
-    dispatch({ type: 'SET_ALERT_DETAILS_PAGE' });
     navigate(`/alerts/${params.alertId}`);
   };
 

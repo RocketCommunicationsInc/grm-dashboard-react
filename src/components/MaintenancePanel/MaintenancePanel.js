@@ -25,9 +25,6 @@ const MaintenancePanel = () => {
   });
 
   const handleClick = () => {
-    dispatch({
-      type: 'SCHEDULE_JOB',
-    });
     navigate('schedule-job');
   };
 

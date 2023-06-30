@@ -1,5 +1,3 @@
-import { initialState } from './AppProvider';
-
 export const appReducer = (state, { type, payload }) => {
   switch (type) {
     case 'ADD_ALERT': {
@@ -20,20 +18,6 @@ export const appReducer = (state, { type, payload }) => {
       return {
         ...state,
         scheduledJobs: [...state.scheduledJobs, payload],
-      };
-    }
-
-    case 'DELETE_ALERT': {
-      const errorId = state.currentAlert.errorId;
-
-      return {
-        ...state,
-        alerts: state.alerts.filter((alert) => alert.errorId !== errorId),
-        page: 'dashboard',
-        currentAlert: null,
-        currentContact: null,
-        affectedContacts: [],
-        links: initialState.links,
       };
     }
 
@@ -62,103 +46,19 @@ export const appReducer = (state, { type, payload }) => {
     }
 
     case 'INVESTIGATE_ALERT': {
-      const page = 'alert-details';
-      const id = payload.currentAlert.id;
-
       return {
         ...state,
         ...payload,
-        page,
-        links: [
-          ...state.links,
-          { href: `/${page}`, page, title: `Alert ${id} Details` },
-        ],
       };
     }
 
     case 'INVESTIGATE_CONTACT': {
-      const page = 'contact-details';
-
       return {
         ...state,
         ...payload,
-        page,
-        links: [
-          ...state.links,
-          { href: `/${page}`, page, title: 'Contact Details' },
-        ],
       };
     }
 
-    case 'SCHEDULE_JOB': {
-      const page = 'schedule-job';
-
-      return {
-        ...state,
-        scheduledJobs: state.scheduledJobs,
-        page,
-        links: [
-          ...state.links,
-          { href: `/${page}`, page, title: 'Schedule Job' },
-        ],
-      };
-    }
-
-    case 'SET_CONTACTS_LIST': {
-      const page = 'contacts-list';
-
-      return {
-        ...state,
-        page,
-        contacts: state.contacts,
-        links: [
-          ...state.links,
-          { href: `/${page}`, page, title: 'Contact List' },
-        ],
-      };
-    }
-
-    case 'SET_PAGE': {
-      if (payload === 'contacts-list') {
-        const page = payload;
-
-        return {
-          ...state,
-          page,
-          links: [
-            ...initialState.links,
-            { href: `/${page}`, page, title: 'Contact List' },
-          ],
-        };
-      }
-      return {
-        ...state,
-        page: 'dashboard',
-        links: initialState.links,
-      };
-    }
-
-    case 'SET_ALERT_DETAILS_PAGE': {
-      if (payload === 'schedule-job') {
-        const page = payload;
-        const errorId = payload.currentAlert.errorId;
-
-        return {
-          ...state,
-          page,
-          links: [
-            ...initialState.links,
-            { href: `/alert-details`, page, title: `Alert ${errorId} Details` },
-          ],
-        };
-      }
-
-      return {
-        ...state,
-        page: 'alert-details',
-        links: initialState.links,
-      };
-    }
     default: {
       throw new Error(`Unhandled app reducer type: ${type}`);
     }
