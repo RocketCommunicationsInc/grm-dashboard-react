@@ -126,7 +126,7 @@ const ContactsSummaryPanel = () => {
         tickAmount: 10,
         decimalsInFloat: 0,
         min: 1,
-        max: 22,
+        max: 24,
         axisTicks: {
           show: false,
         },
