@@ -9,6 +9,14 @@
   padding: var(--spacing-6);
 }
 
+rux-breadcrumb-item {
+  cursor: pointer;
+}
+
+rux-breadcrumb-item:hover {
+  color: var(--color-text-interactive-hover);
+}
+
 .breadcrumb-search-wrapper rux-input {
   margin-block: auto;
   margin-right: var(--spacing-6);

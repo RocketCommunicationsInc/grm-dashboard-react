@@ -22,7 +22,6 @@ export const BreadcrumbNav = () => {
     <div className='breadcrumb-search-wrapper'>
       <RuxBreadcrumb className='Breadcrumb-nav'>
         {filteredMatches.map((match, index) => {
-          console.log(getLastPath(match.pathname));
           return (
             <RuxBreadcrumbItem
               key={index}
