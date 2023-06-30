@@ -1,50 +1,46 @@
-import { Chart as ChartJS, ArcElement } from 'chart.js';
-import { Fragment, useEffect, useState } from 'react';
-import { Doughnut } from 'react-chartjs-2';
-import ChartDataLabels from 'chartjs-plugin-datalabels';
+import { Fragment, useCallback, useEffect, useState } from 'react';
+import Chart from 'react-apexcharts';
 
 import { PanelHeader } from '../../common';
 import './EquipmentStatusPanel.css';
 
-ChartJS.register(ArcElement);
-
-const initialDonuts = [
-  { data: [47, 22, 31], label: 'RF' },
-  { data: [63, 17, 20], label: 'Comms' },
-  { data: [36, 34, 30], label: 'Digital' },
-  { data: [27, 30, 43], label: 'Facilities' },
-];
-
-const getRandomData = () => {
-  const randomData = [];
-
-  for (let i = 0; i < 4; i++) {
-    randomData.push(generate(100, 3));
-  }
-
-  return randomData;
-};
-
-const generate = (max, theCount) => {
-  const randomArray = [];
-  let currSum = 0;
-  for (let i = 0; i < theCount - 1; i++) {
-    randomArray[i] = randomBetween(1, max - (theCount - i - 1) - currSum);
-    currSum += randomArray[i];
-  }
-  randomArray[theCount - 1] = Math.trunc(max - currSum);
-
-  return randomArray;
-};
-
-const randomBetween = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-};
-
 const EquipmentStatus = () => {
+  const generate = useCallback((max, theCount) => {
+    const randomArray = [];
+    let currSum = 0;
+    for (let i = 0; i < theCount - 1; i++) {
+      randomArray[i] = randomBetween(1, max - (theCount - i - 1) - currSum);
+      currSum += randomArray[i];
+    }
+    randomArray[theCount - 1] = Math.trunc(max - currSum);
+
+    return randomArray;
+  }, []);
+
+  const randomBetween = (min, max) => {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  };
+
+  const getRandomData = useCallback(() => {
+    const randomData = [];
+
+    for (let i = 0; i < 5; i++) {
+      randomData.push(generate(100, 4));
+    }
+
+    return randomData;
+  }, [generate]);
+
+  const initialDonuts = [
+    { data: [37, 22, 21, 20], name: 'COMMS' },
+    { data: [43, 17, 25, 15], name: 'DIGITAL' },
+    { data: [26, 34, 30, 10], name: 'FACILITIES' },
+    { data: [27, 20, 33, 20], name: 'RF' },
+  ];
+
   const [chart, setChart] = useState(initialDonuts);
 
-  // App updates every 30 seconds
+  //App updates every 30 seconds
   useEffect(() => {
     const interval = setInterval(() => {
       const random = getRandomData();
@@ -60,64 +56,96 @@ const EquipmentStatus = () => {
     return () => {
       clearInterval(interval);
     };
-  }, []);
+  }, [getRandomData]);
+
+  const options = {
+    chart: {
+      events: {
+        click: 'none',
+        hover: 'none',
+      },
+      dropShadow: {
+        enabled: false,
+      },
+    },
+    dataLabels: {
+      hideOverflowingLabels: true,
+      enabled: true,
+      style: {
+        colors: ['var(--color-text-primary)'],
+        fontFamily: 'var(--font-monospace-1-font-family)',
+      },
+    },
+    plotOptions: {
+      pie: {
+        expandOnClick: false,
+      },
+    },
+    colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
+    legend: {
+      show: false,
+    },
+    toolbar: {
+      show: false,
+    },
+    stroke: {
+      colors: 'none',
+    },
+    tooltip: {
+      enabled: false,
+    },
+    responsive: [
+      {
+        breakpoint: 250,
+        options: {
+          chart: {
+            width: 200,
+          },
+        },
+      },
+    ],
+  };
 
   return (
     <>
       <PanelHeader heading='Current Equipment Status' />
       <div className='Equipment-status__parent'>
-        <div className='Equipment-status__legend'>
-          <div className='Equipment-status__legend-item'>
-            <span id='idle' className='Equipment-status__key-dot' />
-            Idle
-          </div>
-          <div className='Equipment-status__legend-item'>
-            <span id='busy' className='Equipment-status__key-dot' />
-            Busy
-          </div>
-          <div className='Equipment-status__legend-item'>
-            <span id='inoperable' className='Equipment-status__key-dot' />
-            Inoperable
-          </div>
-        </div>
         <div className='Equipment-status__chart-container'>
-          {chart.map(({ data, label }, index) => (
-            <Fragment key={label}>
-              <div className='Equipment-status__doughnut-container'>
-                <Doughnut
-                  className='Equipment-status__doughnut-chart'
-                  options={{
-                    plugins: {
-                      datalabels: {
-                        color: 'white',
-                        font: {
-                          size: 14,
-                          weight: 700,
-                          lineHeight: 20,
-                        },
-                        formatter: (val) => (val > 2 ? val + '%' : ''),
-                      },
-                    },
-                  }}
-                  plugins={[ChartDataLabels]}
-                  data={{
-                    datasets: [
-                      {
-                        data: data,
-                        backgroundColor: ['#00c7cb', '#938bdb', '#4dacff'],
-                        borderWidth: 0,
-                      },
-                    ],
-                  }}
+          {chart.map(({ data, name }) => (
+            <Fragment key={name}>
+              <div className='Equipment-status__pie-container'>
+                <span>{name}</span>
+                <Chart
+                  type='pie'
+                  width={250}
+                  height={250}
+                  series={data}
+                  options={options}
+                  key={name}
                 />
-                <p>{label}</p>
               </div>
-
-              {index < chart.length - 1 && (
-                <div className='Equipment-status__divider' />
-              )}
             </Fragment>
           ))}
+          <div className='Equipment-status__legend'>
+            <ul>
+              <li>
+                <span id='busy-negative' />
+                Busy ( - Thresh )
+              </li>
+              <li>
+                <span id='busy' />
+                Busy ( + Thresh )
+              </li>
+              <li>
+                <span id='idle' />
+                Idle
+              </li>
+              <li>
+                <span id='inoperable' />
+                Inoperable
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </>
