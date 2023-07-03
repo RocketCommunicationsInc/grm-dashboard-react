@@ -23,12 +23,7 @@ import {
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
-import {
-  formatReadableTime,
-  capitalize,
-  getDayOfYear,
-  randInt,
-} from '../../util';
+import { formatReadableTime, capitalize, getDayOfYear } from '../../util';
 import './ContactDetails.css';
 import EquipmentIcons from './EquipmentIcons/EqupimentIcons';
 
@@ -283,43 +278,19 @@ const ContactDetails = () => {
   const antDetails = [
     {
       label: 'Parameter',
-      node: (
-        <RuxInput
-          value={`A-${randInt(1000, 9000)}`}
-          size='small'
-          readonly={!isEditing}
-        />
-      ),
+      node: <RuxInput value='A-9J70' size='small' readonly={!isEditing} />,
     },
     {
       label: 'Parameter',
-      node: (
-        <RuxInput
-          value={`B-${randInt(1000, 9000)}`}
-          size='small'
-          readonly={!isEditing}
-        />
-      ),
+      node: <RuxInput value='B-34P1' size='small' readonly={!isEditing} />,
     },
     {
       label: 'Parameter',
-      node: (
-        <RuxInput
-          value={`C-${randInt(1000, 9000)}`}
-          size='small'
-          readonly={!isEditing}
-        />
-      ),
+      node: <RuxInput value='C-8K02' size='small' readonly={!isEditing} />,
     },
     {
       label: 'Parameter',
-      node: (
-        <RuxInput
-          value={`D-${randInt(1000, 9000)}`}
-          size='small'
-          readonly={!isEditing}
-        />
-      ),
+      node: <RuxInput value='D-5L64' size='small' readonly={!isEditing} />,
     },
   ];
 
