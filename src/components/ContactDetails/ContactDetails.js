@@ -279,7 +279,7 @@ const ContactDetails = () => {
       label: 'Parameter',
       node: (
         <RuxInput
-          value={`A-${Math.floor(Math.random() * 7000) + 1070}`}
+          value={`A-${Math.floor(Math.random() * 7000) + 1070}`} //!Needs correct data
           size='small'
           readonly={!isEditing}
         />
