@@ -3,13 +3,18 @@ import { memo } from 'react';
 import { generateEvents } from '../../data/data';
 import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
 import './EventLog.css';
+import FilterEventLog from './FilterEventLog/FilterEventLog';
 
 export const EventLog = memo(({ rowsToShow }) => {
   const events = generateEvents();
 
   return (
-    <PanelSubContainer heading='Event Log' className='event-log'>
-      <div className='log-container'>
+    <div className='log-container'>
+      <header>
+        <h3>Event Log</h3>
+        <FilterEventLog />
+      </header>
+      <PanelSubContainer className='event-log'>
         <div className='log-header'>
           <div>Time</div>
           <div>Event</div>
@@ -31,7 +36,7 @@ export const EventLog = memo(({ rowsToShow }) => {
             </li>
           ))}
         </ul>
-      </div>
-    </PanelSubContainer>
+      </PanelSubContainer>
+    </div>
   );
 });
