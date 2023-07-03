@@ -39,3 +39,9 @@
 .table-wrapper rux-table-header-row .hidden {
   visibility: hidden;
 }
+
+.contacts-list-page {
+  /* 100vh - (height of global status bar + height of breadcrumb element) */
+  height: calc(100vh - 10.25rem);
+  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
+}

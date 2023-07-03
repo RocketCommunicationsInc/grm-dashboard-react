@@ -5,6 +5,7 @@ import {
   RuxAccordion,
   RuxAccordionItem,
 } from '@astrouxds/react';
+import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../providers/AppProvider';
 import { useTTCGRMActions, useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Alert } from '@astrouxds/mock-data';
@@ -17,6 +18,7 @@ type PropTypes = {
 };
 
 const AlertListItem = ({ alertItem }: PropTypes) => {
+  const navigate = useNavigate();
   const { dispatch } = useAppContext() as any;
   const { modifyAlert } = useTTCGRMActions();
   const { dataById: contactsById } = useTTCGRMContacts();
@@ -32,6 +34,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
         affectedContacts: Array.from({ length: randInt(2, 6) }, randomContact),
       },
     });
+    navigate(`alerts/${alertItem.id}`);
   };
 
   return (
