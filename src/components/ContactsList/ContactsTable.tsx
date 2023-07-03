@@ -9,7 +9,7 @@ import type { ColumnDef, UpdatedContact } from '../../common/Table/Table';
 
 type PropTypes = {
   searchValue: string;
-  setSearchValue: React.SetStateAction<string>;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
 const determineDOYValue = (originalValue: any) =>

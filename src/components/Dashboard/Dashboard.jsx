@@ -5,12 +5,13 @@ import TrendingEquipmentStatusPanel from '../TrendingEquipmentStatusPanel/Trendi
 import CurrentContactsTable from '../CurrentContactsPanel/CurrentContactsTable';
 import EquipmentStatusPanel from '../EquipmentStatusPanel/EquipmentStatusPanel';
 import ContactsSummaryPanel from '../ContactsSummaryPanel/ContactsSummaryPanel';
+import './Dashboard.css';
 
 const Dashboard = () => {
   const [tab, setTab] = useState('Contacts');
 
   return (
-    <>
+    <main className={`dashboard-page`}>
       <aside className='Dashboard-page__left-panel'>
         <Alerts />
       </aside>
@@ -34,7 +35,7 @@ const Dashboard = () => {
           <TrendingEquipmentStatusPanel />
         )}
       </section>
-    </>
+    </main>
   );
 };
 
