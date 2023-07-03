@@ -27,14 +27,14 @@ const MaintenancePanel = () => {
 
   const [currentJob, setCurrentJob] = useState(state.scheduledJobs);
 
-  // const getJobById = (id) => {
-  //   const currentJobId = state.scheduledJobs.find((job) => job.jobId === id);
-  //   if (currentJob) {
-  //     setCurrentJob(currentJobId);
-  //   }
-  //   console.log(currentJob);
-  // };
-  // getJobById();
+  const getJobById = (id) => {
+    const currentJobId = state.scheduledJobs.find((job) => job.jobId === id);
+    if (currentJob) {
+      setCurrentJob(currentJobId);
+    }
+    console.log(currentJob);
+  };
+  getJobById();
 
   const handleClick = () => {
     navigate('schedule-job');

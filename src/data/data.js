@@ -47,8 +47,7 @@ export function generateEvents() {
 export const dummyObject = {
   jobId: 76029,
   jobType: 'IT Support',
-  description:
-    'Updates needed on all desktop computers on level 4 of main building',
+  description: 'Updates needed on all desktop computers in main building',
   startTime: '2023-06-08T16:31',
   stopTime: '2023-09-08T18:31',
   technician: 'M. Scott',
