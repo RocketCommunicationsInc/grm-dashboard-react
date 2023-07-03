@@ -58,14 +58,6 @@ export const appReducer = (state, { type, payload }) => {
         ...payload,
       };
     }
-
-    case 'JOB_DETAILS': {
-      return {
-        ...state,
-        ...payload,
-      };
-    }
-
     default: {
       throw new Error(`Unhandled app reducer type: ${type}`);
     }

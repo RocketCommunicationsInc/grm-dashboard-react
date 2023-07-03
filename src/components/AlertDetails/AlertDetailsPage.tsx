@@ -1,4 +1,3 @@
-import React from 'react';
 import AlertDetails from './AlertDetails';
 import MaintenancePanel from '../MaintenancePanel/MaintenancePanel';
 import EquipmentDetailsPanel from '../EquipmentDetailsPanel/EquipmentDetailsPanel';

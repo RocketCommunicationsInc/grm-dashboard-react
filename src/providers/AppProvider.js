@@ -17,6 +17,7 @@ export const initialState = {
   currentContact: null,
   affectedContacts: [],
   scheduledJobs: [],
+  currentJob: null,
 };
 
 const AppContext = createContext({});
