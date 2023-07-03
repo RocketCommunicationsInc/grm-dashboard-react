@@ -2,9 +2,13 @@ export function randInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function capitalize(val) {
-  if (!val) return;
-  return val.charAt(0).toUpperCase() + val.substring(1);
+export function capitalize(str) {
+  if (!str) return;
+  let arr = str.split('-');
+  let capitalized = arr.map(
+    (item) => item.charAt(0).toUpperCase() + item.slice(1).toLowerCase()
+  );
+  return capitalized.join(' ');
 }
 
 export function formatReadableTime(timestamp) {
