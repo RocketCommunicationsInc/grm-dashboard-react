@@ -8,7 +8,12 @@ import {
 
 import { appReducer } from './AppReducer';
 import { randInt, timeoutRepeater } from '../util/util';
-import { getRandomAlert, getRandomContact, randomContact } from '../data/data';
+import {
+  getRandomAlert,
+  getRandomContact,
+  randomContact,
+  dummyObject,
+} from '../data/data';
 
 export const initialState = {
   contacts: [],
@@ -16,7 +21,7 @@ export const initialState = {
   currentAlert: null,
   currentContact: null,
   affectedContacts: [],
-  scheduledJobs: [],
+  scheduledJobs: [dummyObject],
   currentJob: null,
 };
 

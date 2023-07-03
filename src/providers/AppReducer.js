@@ -21,6 +21,19 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'EDIT_Job': {
+      const newJob = state.scheduledJobs.map((job) => {
+        if (job._id !== payload._id) {
+          return job;
+        } else return { ...job, ...payload };
+      });
+
+      return {
+        ...state,
+        contacts: newJob,
+      };
+    }
+
     case 'DELETE_ALERTS': {
       const alerts = state.alerts.filter(
         (alert) => !payload.includes(alert.errorId)

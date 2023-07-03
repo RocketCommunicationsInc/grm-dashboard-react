@@ -19,7 +19,7 @@
 .jobs-wrapper rux-input::part(form-field),
 .jobs-wrapper rux-select::part(select) {
   flex-direction: row;
-  width: 18rem;
+  width: 16rem;
 }
 
 .jobs-wrapper rux-input::part(label),

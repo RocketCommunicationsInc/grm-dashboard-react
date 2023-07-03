@@ -10,6 +10,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useState } from 'react';
 import './MaintenancePanel.css';
 
 const MaintenancePanel = () => {
@@ -24,8 +25,23 @@ const MaintenancePanel = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  const [currentJob, setCurrentJob] = useState(state.scheduledJobs);
+
+  // const getJobById = (id) => {
+  //   const currentJobId = state.scheduledJobs.find((job) => job.jobId === id);
+  //   if (currentJob) {
+  //     setCurrentJob(currentJobId);
+  //   }
+  //   console.log(currentJob);
+  // };
+  // getJobById();
+
   const handleClick = () => {
     navigate('schedule-job');
+  };
+
+  const handleJobDetailsClick = () => {
+    navigate('job-details');
   };
 
   return (
@@ -35,13 +51,6 @@ const MaintenancePanel = () => {
         <h2>Jobs</h2>
         <div className='job-card-wrapper'>
           <RuxButton onClick={handleClick}>Schedule Job</RuxButton>
-          <JobIDCard
-            type='IT Support'
-            id='76029'
-            startTime='2023-06-08T16:31'
-            stopTime='2023-09-08T18:31'
-            status='Pending'
-          />
           {state.scheduledJobs.map((job) => (
             <JobIDCard
               type={job.jobType}
@@ -49,6 +58,7 @@ const MaintenancePanel = () => {
               startTime={job.startTime}
               stopTime={job.stopTime}
               status={job.status}
+              viewJob={handleJobDetailsClick}
             />
           ))}
         </div>

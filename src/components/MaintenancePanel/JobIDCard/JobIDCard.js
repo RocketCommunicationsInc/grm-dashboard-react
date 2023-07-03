@@ -1,10 +1,7 @@
 import { RuxButton, RuxCard, RuxInput } from '@astrouxds/react';
-import { useNavigate } from 'react-router-dom';
 import './JobIDCard.css';
 
 const JobIDCard = ({ id, status, type, startTime, stopTime, viewJob }) => {
-  const navigate = useNavigate();
-
   return (
     <RuxCard className='job-id-card'>
       <div slot='header'>
@@ -29,9 +26,7 @@ const JobIDCard = ({ id, status, type, startTime, stopTime, viewJob }) => {
         size='small'
         label='Stop'
       />
-      <RuxButton onClick={() => navigate('job-details')}>
-        View Details
-      </RuxButton>
+      <RuxButton onClick={viewJob}>View Details</RuxButton>
     </RuxCard>
   );
 };
