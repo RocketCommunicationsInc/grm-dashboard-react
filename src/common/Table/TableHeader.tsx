@@ -40,6 +40,7 @@ const TableHeader = ({
       <RuxTableHeaderRow>
         {columnDefs.map((colDef) => (
           <TableHeaderCell
+            key={colDef.label}
             columnDefinition={colDef}
             handleClick={handleClick}
             sortDirection={sortDirection}

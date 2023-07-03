@@ -23,14 +23,12 @@ type PropTypes = {
 };
 
 const Table = ({ columnDefs, filteredData }: PropTypes) => {
-  const { investigateContact } = useAppActions();
   const [sortDirection, setSortDirection] = useState<'ASC' | 'DESC'>('ASC');
   const [sortProp, setSortProp] = useState<keyof UpdatedContact>('id');
   const [sortedData, setSortedData] = useState<UpdatedContact[]>([]);
 
   const sortData = useCallback(
     (property: keyof UpdatedContact, sortDirection: 'ASC' | 'DESC') => {
-      console.log(filteredData);
       const sortedData = [...filteredData].sort(
         (a: UpdatedContact, b: UpdatedContact) => {
           const firstContactValue = a[property];
@@ -65,11 +63,7 @@ const Table = ({ columnDefs, filteredData }: PropTypes) => {
           sortProp={sortProp}
           sortDirection={sortDirection}
         />
-        <TableBody
-          columnDefs={columnDefs}
-          sortedData={sortedData}
-          handleRowClick={investigateContact}
-        />
+        <TableBody columnDefs={columnDefs} sortedData={sortedData} />
       </RuxTable>
     </div>
   );

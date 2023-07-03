@@ -1,4 +1,4 @@
-import type { MouseEventHandler } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { RuxTableBody } from '@astrouxds/react';
 import TableBodyRow from './TableBodyRow';
 import type { ColumnDef, UpdatedContact } from './Table';
@@ -6,10 +6,11 @@ import type { ColumnDef, UpdatedContact } from './Table';
 type PropTypes = {
   columnDefs: ColumnDef[];
   sortedData: UpdatedContact[];
-  handleRowClick: MouseEventHandler<HTMLElement>;
 };
 
-const TableBody = ({ columnDefs, sortedData, handleRowClick }: PropTypes) => {
+const TableBody = ({ columnDefs, sortedData }: PropTypes) => {
+  const navigate = useNavigate();
+
   return (
     <RuxTableBody>
       {sortedData.map((data) => {
@@ -18,7 +19,7 @@ const TableBody = ({ columnDefs, sortedData, handleRowClick }: PropTypes) => {
             key={data.id}
             columnDefs={columnDefs}
             rowData={data}
-            handleRowClick={handleRowClick}
+            handleRowClick={() => navigate(data.id)}
           />
         );
       })}

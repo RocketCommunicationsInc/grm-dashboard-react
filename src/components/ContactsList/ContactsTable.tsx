@@ -1,4 +1,4 @@
-import { useState, useMemo, useCallback } from 'react';
+import { useMemo, useCallback } from 'react';
 import { RuxContainer, RuxNotification, RuxButton } from '@astrouxds/react';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
@@ -45,12 +45,10 @@ const columnDefs: ColumnDef[] = [
 ];
 
 const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
-  const [openBanner, setOpenBanner] = useState(false);
   const { dataArray: contactsArray } = useTTCGRMContacts();
 
   const handleClearFilter = () => {
-    // setSearchValue('');
-    setOpenBanner(false);
+    setSearchValue('');
   };
 
   const filterContacts = useCallback(
@@ -71,7 +69,7 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
 
   return (
     <RuxContainer>
-      <RuxNotification open={openBanner} small hide-close>
+      <RuxNotification open={searchValue !== ''} small hide-close>
         One or more filters selected.
         <RuxButton
           onClick={handleClearFilter}
