@@ -23,7 +23,12 @@ import {
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
-import { formatReadableTime } from '../../util';
+import {
+  formatReadableTime,
+  capitalize,
+  getDayOfYear,
+  randInt,
+} from '../../util';
 import './ContactDetails.css';
 import EquipmentIcons from './EquipmentIcons/EqupimentIcons';
 
@@ -58,12 +63,6 @@ const ContactDetails = () => {
     }));
   };
 
-  const stateCap =
-    contact.state.charAt(0).toUpperCase() + contact.state.slice(1);
-
-  const priorityCap =
-    contact.status.charAt(0).toUpperCase() + contact.status.slice(1); //!incorrect data
-
   const generalDetails = [
     {
       label: 'Priority',
@@ -74,7 +73,8 @@ const ContactDetails = () => {
           ))}
         </RuxSelect>
       ) : (
-        <RuxInput value={priorityCap} size='small' readonly /> //!incorrect data
+        // * Placeholder until we have priority data
+        <RuxInput value='Normal' size='small' readonly />
       ),
     },
     {
@@ -91,17 +91,17 @@ const ContactDetails = () => {
           <RuxOption value='executing' label='Executing' />
         </RuxSelect>
       ) : (
-        <RuxInput value={stateCap} size='small' readonly />
+        <RuxInput value={capitalize(contact.state)} size='small' readonly />
       ),
     },
     {
       label: 'IRON',
       node: (
         <RuxInput
-          value={contact.name.toString().slice(0, 4)} //!incorrect data
+          value={contact.satellite}
           readonly={!isEditing}
           size='small'
-          name='name'
+          name='satellite'
           onRuxinput={handleChange}
         />
       ),
@@ -134,12 +134,11 @@ const ContactDetails = () => {
       label: 'DOY',
       node: (
         <RuxInput
-          value={202}
+          value={getDayOfYear(contact.beginTimestamp * 1000)}
           readonly={!isEditing}
           size='small'
           name='contactDOY'
           onRuxinput={handleChange}
-          disabled //disabled until we have new data and DOY is on currentContact
         />
       ),
     },
@@ -219,24 +218,24 @@ const ContactDetails = () => {
         />
       ),
     },
-    //!Add back in when we have updated data and mode exists
-    // {
-    //   label: 'Command Mode',
-    //   node: isEditing ? (
-    //     <RuxSelect
-    //       value={contact.mode}
-    //       size='small'
-    //       onRuxchange={handleChange}
-    //       name='mode'
-    //     >
-    //       {options.modes.map((option) => (
-    //         <RuxOption key={option} value={option} label={option} />
-    //       ))}
-    //     </RuxSelect>
-    //   ) : (
-    //     <RuxInput value={contact.mode} size='small' readonly />
-    //   ),
-    // },
+    {
+      label: 'Command Mode',
+      node: isEditing ? (
+        <RuxSelect
+          value={contact.mode}
+          size='small'
+          onRuxchange={handleChange}
+          name='mode'
+        >
+          {options.modes.map((option) => (
+            <RuxOption key={option} value={option} label={option} />
+          ))}
+        </RuxSelect>
+      ) : (
+        // * Placeholder until we have mode data
+        <RuxInput value='Full Automation' size='small' readonly />
+      ),
+    },
     {
       label: 'Active',
       node: <RuxCheckbox className='active-checkbox' checked disabled />,
@@ -286,7 +285,7 @@ const ContactDetails = () => {
       label: 'Parameter',
       node: (
         <RuxInput
-          value={`A-${Math.floor(Math.random() * 7000) + 1070}`} //!Needs correct data
+          value={`A-${randInt(1000, 9000)}`}
           size='small'
           readonly={!isEditing}
         />
@@ -296,7 +295,7 @@ const ContactDetails = () => {
       label: 'Parameter',
       node: (
         <RuxInput
-          value={`B-${Math.floor(Math.random() * 9000) + 1030}`}
+          value={`B-${randInt(1000, 9000)}`}
           size='small'
           readonly={!isEditing}
         />
@@ -306,7 +305,7 @@ const ContactDetails = () => {
       label: 'Parameter',
       node: (
         <RuxInput
-          value={`C-${Math.floor(Math.random() * 2000) + 1100}`}
+          value={`C-${randInt(1000, 9000)}`}
           size='small'
           readonly={!isEditing}
         />
@@ -316,7 +315,7 @@ const ContactDetails = () => {
       label: 'Parameter',
       node: (
         <RuxInput
-          value={`D-${Math.floor(Math.random() * 9000) + 1050}`}
+          value={`D-${randInt(1000, 9000)}`}
           size='small'
           readonly={!isEditing}
         />
