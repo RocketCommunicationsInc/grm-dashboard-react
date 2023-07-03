@@ -182,7 +182,9 @@ const ScheduleJob = () => {
                     <RuxTableHeaderCell>Stop Time</RuxTableHeaderCell>
                   </RuxTableHeaderRow>
                 </RuxTableHeader>
-                <span>Conflicts have not been calculated.</span>
+                <span className='conflicts'>
+                  Conflicts have not been calculated.
+                </span>
               </RuxTable>
             )}
           </div>

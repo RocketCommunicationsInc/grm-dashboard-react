@@ -57,21 +57,6 @@ const router = createBrowserRouter(
               element={<JobDetailsPage />}
               errorElement={<NoDataFound dataType='alert' />}
             />
-            {/* <Route path='alerts'>
-              <Route index element={<Navigate to={'/'} />} />
-              <Route path=':alertId'>
-                <Route
-                  index
-                  element={<AlertDetailsPage />}
-                  errorElement={<NoDataFound dataType='alert' />}
-                />
-                <Route
-                  path='job-details'
-                  element={<JobDetailsPage />}
-                  errorElement={<NoDataFound dataType='alert' />}
-                />
-              </Route>
-            </Route> */}
           </Route>
         </Route>
       </Route>
