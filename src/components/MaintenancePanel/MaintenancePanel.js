@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { RuxButton, RuxContainer } from '@astrouxds/react';
 import { useMemo } from 'react';
 import { columnDefs } from './MaintenanceHistoryColumns';
@@ -10,12 +10,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
+import { useTTCGRMAlerts, useTTCGRMActions } from '@astrouxds/mock-data';
 import './MaintenancePanel.css';
 
 const MaintenancePanel = () => {
   const navigate = useNavigate();
   const columns = useMemo(() => columnDefs, []);
   const { state } = useAppContext();
+  const params = useParams();
+  const { dataById: alerts } = useTTCGRMAlerts();
+  const currentAlert = alerts[params.alertId];
 
   const table = useReactTable({
     data: state.scheduledJobs,
@@ -26,6 +30,11 @@ const MaintenancePanel = () => {
 
   const handleClick = () => {
     navigate('schedule-job');
+  };
+
+  const viewJobDetails = () => {
+    // deleteAlert(currentAlert.contactRefId, currentAlert.id);
+    navigate('/job-details-page');
   };
 
   return (
@@ -49,6 +58,7 @@ const MaintenancePanel = () => {
               startTime={job.startTime}
               stopTime={job.stopTime}
               status={job.status}
+              viewJob={viewJobDetails}
             />
           ))}
         </div>
