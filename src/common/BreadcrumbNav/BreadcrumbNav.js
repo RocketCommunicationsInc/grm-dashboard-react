@@ -1,36 +1,46 @@
 import { RuxBreadcrumb, RuxBreadcrumbItem } from '@astrouxds/react';
-
-import { useAppContext } from '../../providers/AppProvider';
+import { useMatches, useParams, useNavigate } from 'react-router-dom';
 import './BreadcrumbNav.css';
-import SearchBar from '../SearchBar/SearchBar';
+import { capitalize } from '../../util/util';
 
 export const BreadcrumbNav = () => {
-  const { state, dispatch } = useAppContext();
+  const navigate = useNavigate();
+  const params = useParams();
+  const matches = useMatches();
+  if (matches.length === 0) return null;
 
-  const handleClick = (e, page) => {
-    e.preventDefault();
+  const filteredMatches = matches.filter(
+    (match) => match.pathname.slice(-1) !== '/' && match.pathname !== '/alerts'
+  );
 
-    dispatch({ type: 'SET_PAGE', payload: page });
+  const getLastPath = (pathname) => {
+    const index = pathname.lastIndexOf('/');
+    const lastPath = pathname.substring(index + 1);
+
+    if (lastPath.length === 36) {
+      if (params.alertId) return `Alert ${lastPath} Details`;
+      if (params.contactId) return `Contact ${lastPath} Details`;
+    }
+    return capitalize(lastPath);
   };
 
   return (
     <div className='breadcrumb-search-wrapper'>
       <RuxBreadcrumb className='Breadcrumb-nav'>
-        {state.links.map(({ href, page, title }, i) => {
-          const isLast = state.links.length === i + 1;
-
+        <RuxBreadcrumbItem key={'Dashboard'} onClick={() => navigate('/')}>
+          Dashboard
+        </RuxBreadcrumbItem>
+        {filteredMatches.map((match, index) => {
           return (
             <RuxBreadcrumbItem
-              key={page}
-              onClick={isLast ? undefined : (e) => handleClick(e, page)}
-              href={isLast ? undefined : href}
+              key={index}
+              onClick={() => navigate(match.pathname)}
             >
-              {title}
+              {getLastPath(match.pathname)}
             </RuxBreadcrumbItem>
           );
         })}
       </RuxBreadcrumb>
-      <SearchBar />
     </div>
   );
 };

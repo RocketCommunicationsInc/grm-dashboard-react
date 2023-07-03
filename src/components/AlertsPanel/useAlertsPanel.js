@@ -5,11 +5,12 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-
+import { useNavigate } from 'react-router-dom';
 import columnDefs from './AlertsPanelColumns';
 import { useAppContext } from '../../providers/AppProvider';
 
 const useAlertsPanel = () => {
+  const navigate = useNavigate();
   const { state, dispatch } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
   const [sorting, setSorting] = useState([]);
@@ -53,6 +54,7 @@ const useAlertsPanel = () => {
 
     dispatch({ type: 'DELETE_ALERTS', payload });
     setRowSelection({});
+    navigate('/');
   };
 
   return {

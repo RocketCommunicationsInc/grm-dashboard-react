@@ -7,7 +7,8 @@ import {
   RuxSelect,
   RuxStatus,
 } from '@astrouxds/react';
-
+import { useNavigate, useParams } from 'react-router-dom';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
@@ -27,15 +28,21 @@ import './ContactDetails.css';
 import EquipmentIcons from './EquipmentIcons/EqupimentIcons';
 
 const ContactDetails = () => {
+  const navigate = useNavigate();
+  const params = useParams();
+  const { dataById: contacts } = useTTCGRMContacts();
+  const currentContact = contacts[params.contactId];
   const { state, dispatch } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [contact, setContact] = useState(state.currentContact);
 
   const handleCancel = () => {
     if (isEditing) {
-      setContact(state.currentContact);
+      setContact(currentContact);
       setIsEditing(false);
-    } else dispatch({ type: 'SET_PAGE' });
+    } else {
+      navigate('/contacts');
+    }
   };
 
   const handleSubmit = (e) => {
@@ -318,56 +325,58 @@ const ContactDetails = () => {
   ];
 
   return (
-    <PanelContainer>
-      <PanelHeader heading='Contact Details' />
+    <main className={`contact-details-page`}>
+      <PanelContainer>
+        <PanelHeader heading='Contact Details' />
 
-      <PanelBody>
-        <h2 className='contact-details-sat'>
-          <RuxStatus status={contact.status} /> {contact.satellite}
-        </h2>
-        <ContactLabel contact={contact} />
+        <PanelBody>
+          <h2 className='contact-details-sat'>
+            <RuxStatus status={contact.status} /> {contact.satellite}
+          </h2>
+          <ContactLabel contact={contact} />
 
-        <DetailsCommonGrid className='Contact-details-grid'>
-          <PanelSubContainer>
-            <DetailsGrid details={generalDetails} />
-          </PanelSubContainer>
-
-          <PanelSubContainer
-            heading='Equipment String'
-            className='Contact-details-grid__equipment-string'
-          >
-            <PanelSubContainer className='config-wrapper'>
-              <DetailsGrid details={configDetails} />
-
-              <span>{contact.equipment}</span>
-
-              <EquipmentIcons equipmentString={contact.equipment} />
+          <DetailsCommonGrid className='Contact-details-grid'>
+            <PanelSubContainer>
+              <DetailsGrid details={generalDetails} />
             </PanelSubContainer>
 
-            <div className='sub-grid'>
-              <PanelSubContainer heading='ANT1 Details'>
-                <DetailsGrid details={antDetails} />
+            <PanelSubContainer
+              heading='Equipment String'
+              className='Contact-details-grid__equipment-string'
+            >
+              <PanelSubContainer className='config-wrapper'>
+                <DetailsGrid details={configDetails} />
+
+                <span>{contact.equipment}</span>
+
+                <EquipmentIcons equipmentString={contact.equipment} />
               </PanelSubContainer>
 
-              <AffectedContacts contacts={state.affectedContacts} />
-            </div>
-          </PanelSubContainer>
+              <div className='sub-grid'>
+                <PanelSubContainer heading='ANT1 Details'>
+                  <DetailsGrid details={antDetails} />
+                </PanelSubContainer>
 
-          <EventLog rowsToShow={16} />
-        </DetailsCommonGrid>
-      </PanelBody>
+                <AffectedContacts contacts={state.affectedContacts} />
+              </div>
+            </PanelSubContainer>
 
-      <PanelFooter>
-        <RuxButton secondary onClick={handleCancel}>
-          Cancel
-        </RuxButton>
-        {isEditing ? (
-          <RuxButton onClick={handleSubmit}>Save</RuxButton>
-        ) : (
-          <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
-        )}
-      </PanelFooter>
-    </PanelContainer>
+            <EventLog rowsToShow={16} />
+          </DetailsCommonGrid>
+        </PanelBody>
+
+        <PanelFooter>
+          <RuxButton secondary onClick={handleCancel}>
+            Cancel
+          </RuxButton>
+          {isEditing ? (
+            <RuxButton onClick={handleSubmit}>Save</RuxButton>
+          ) : (
+            <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
+          )}
+        </PanelFooter>
+      </PanelContainer>
+    </main>
   );
 };
 

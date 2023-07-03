@@ -24,3 +24,7 @@
 .contact-details-sat rux-status {
   margin-inline: var(--spacing-4);
 }
+.contact-details-page {
+  height: calc(100vh - 10.25rem);
+  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
+}
