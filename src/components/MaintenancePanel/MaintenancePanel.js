@@ -33,7 +33,7 @@ const MaintenancePanel = () => {
       <header slot='header'>Maintenance</header>
       <RuxContainer className='jobs-section'>
         <h2>Jobs</h2>
-        <div className='jobs-wrapper'>
+        <div className='job-card-wrapper'>
           <RuxButton onClick={handleClick}>Schedule Job</RuxButton>
           <JobIDCard
             type='IT Support'

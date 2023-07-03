@@ -9,7 +9,7 @@
   flex-direction: row;
 }
 
-.jobs-wrapper {
+.job-card-wrapper {
   margin-top: var(--spacing-4);
   display: flex;
   flex-wrap: wrap;

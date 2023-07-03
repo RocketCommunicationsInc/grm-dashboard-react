@@ -6,27 +6,22 @@ import {
   RuxOption,
   RuxSelect,
   RuxTextarea,
+  RuxTableHeader,
+  RuxTableHeaderCell,
+  RuxTable,
+  RuxTableHeaderRow,
 } from '@astrouxds/react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { columnDefs } from './ScheduleJobColumns';
 import { useAppContext } from '../../../providers/AppProvider';
-import { AstroReactTable } from '../../../common';
 import useAlertsPanel from '../../AlertsPanel/useAlertsPanel';
-import {
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
-import { flexRender } from '@tanstack/react-table';
-
+import ConflictsTable from '../../JobDetails/ConflictsTable';
 import './ScheduleJob.css';
 
 const ScheduleJob = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const columns = useMemo(() => columnDefs, []);
-  const { state, dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
 
@@ -46,12 +41,6 @@ const ScheduleJob = () => {
     createdOn: Date.now(),
   });
 
-  const table = useReactTable({
-    data: state.contacts,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-  });
   const { rows } = useAlertsPanel();
 
   const handleCancel = () => {
@@ -175,22 +164,26 @@ const ScheduleJob = () => {
 
           <div className='table-section'>
             {calculateConflicts ? (
-              <AstroReactTable table={table} isSortable />
+              <ConflictsTable />
             ) : (
-              <div className='Astro-react-table'>
-                <header className='Astro-react-table__header'>
-                  {table.getFlatHeaders().map(({ id, column, getContext }) => (
-                    <div
-                      key={id}
-                      className='Astro-react-table__col'
-                      style={column.columnDef.style}
-                    >
-                      {flexRender(column.columnDef.header, getContext())}
-                    </div>
-                  ))}
-                </header>
+              <RuxTable>
+                <RuxTableHeader>
+                  <RuxTableHeaderRow>
+                    <RuxTableHeaderCell>Status</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>IRON</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Ground Station</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>REV</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Equipment</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>State</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>DOY</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Start Time</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>AOS</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>LOS</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Stop Time</RuxTableHeaderCell>
+                  </RuxTableHeaderRow>
+                </RuxTableHeader>
                 <span>Conflicts have not been calculated.</span>
-              </div>
+              </RuxTable>
             )}
           </div>
         </RuxContainer>

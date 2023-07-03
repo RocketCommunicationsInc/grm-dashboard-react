@@ -32,13 +32,13 @@
   margin-top: var(--spacing-6);
 }
 
-.table-section span {
+.table-section rux-table span {
   margin: auto;
   font-size: var(--font-size-lg);
 }
 
 .job-request-section {
-  width: 33rem;
+  width: 40rem;
   padding-inline: var(--spacing-6);
 }
 
@@ -56,10 +56,6 @@
 
 .conflicts-section {
   flex: 1;
-}
-
-.table-section {
-  height: 30rem;
 }
 
 .schedule-job footer[slot='footer'] {
