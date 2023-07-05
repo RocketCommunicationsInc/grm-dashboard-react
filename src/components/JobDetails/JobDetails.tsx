@@ -25,7 +25,6 @@ const JobDetails = () => {
   const { dataById: contacts } = useTTCGRMContacts();
   const [job, setJob] = useState(state.currentJob);
   const currentContact = contacts[params.contactId as keyof typeof contacts];
-  console.log(job, 'job');
   const [isModifying, setIsModifying] = useState(false);
 
   const handleCancel = () => {

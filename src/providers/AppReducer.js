@@ -25,14 +25,21 @@ export const appReducer = (state, { type, payload }) => {
       const selectedJob = state.scheduledJobs.find(
         (job) => job.jobId === payload
       );
-      const modifiedJob = { ...selectedJob, ...payload };
-      const updatedJobsArr = state.scheduledJobs.map((job) =>
-        job.jobId === payload ? modifiedJob : job
+      const updatedJobs = state.scheduledJobs.map(
+        (job) => {
+          if (job.jobId === payload) {
+            console.log(job, 'job');
+            return job;
+          } else console.log({ ...selectedJob, ...payload }, 'modified');
+          return { ...selectedJob, ...payload };
+        }
+        // job.jobId === payload ? job : modifiedJob
       );
+      console.log(updatedJobs, 'updatedarr');
       return {
         ...state,
-        scheduledJobs: updatedJobsArr,
-        currentJob: modifiedJob ? modifiedJob : {},
+        scheduledJobs: updatedJobs,
+        currentJob: { ...selectedJob, ...payload },
       };
     }
 

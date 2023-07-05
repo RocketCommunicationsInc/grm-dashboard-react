@@ -52,7 +52,7 @@ export const dummyJob = {
   stopTime: '2023-09-08T18:31',
   technician: 'M. Scott',
   follow: true,
-  status: 'Completed',
+  status: 'Approved',
   createdOn: '2023-06-06T11:42',
   equpiment: 'ANT7',
 };

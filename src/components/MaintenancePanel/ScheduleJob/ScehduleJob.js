@@ -26,7 +26,13 @@ const ScheduleJob = () => {
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
 
   const uniqueJobId = Math.floor(Math.random() * 90000) + 10000;
-  const statusValues = ['Approved', 'Started', 'Stopped'];
+  const statusValues = [
+    'Approved',
+    'Started',
+    'Stopped',
+    'Sumbitted',
+    'Online',
+  ];
   const randomStatus = Math.floor(Math.random() * statusValues.length);
   const equipmentValues = ['ANT3', 'BAFB4', 'ANT9', 'BAFB5', 'ANT12', 'BAFB8'];
   const randomEqupiment = Math.floor(Math.random() * equipmentValues.length);
