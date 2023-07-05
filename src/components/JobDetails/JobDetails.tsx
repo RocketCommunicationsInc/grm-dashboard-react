@@ -25,9 +25,8 @@ const JobDetails = () => {
   const { dataById: contacts } = useTTCGRMContacts();
   const [job, setJob] = useState(state.currentJob);
   const currentContact = contacts[params.contactId as keyof typeof contacts];
-
+  console.log(job, 'job');
   const [isModifying, setIsModifying] = useState(false);
-  console.log(state);
 
   const handleCancel = () => {
     if (isModifying) {
@@ -53,7 +52,9 @@ const JobDetails = () => {
 
   return (
     <RuxContainer className='job-details-panel'>
-      <header slot='header'>[Equpiment Name] Maintenance Job ID ####</header>
+      <header slot='header'>
+        [{job.equpiment}] Maintenance Job ID {job.jobId}
+      </header>
       <div className='jobs-wrapper'>
         <div className='jobs-details-section'>
           <h2 slot='toolbar'>Job Details</h2>
@@ -65,7 +66,7 @@ const JobDetails = () => {
                   onRuxchange={handleChange}
                   size='small'
                   label=' Job Type'
-                  // value={newJob.jobType}
+                  value={job.jobType}
                   name='jobType'
                 >
                   <RuxOption value='' label='- Select -'></RuxOption>
@@ -83,14 +84,14 @@ const JobDetails = () => {
                   onRuxinput={handleChange}
                   placeholder='Enter Description'
                   label='Description'
-                  // value={newJob.description}
+                  value={job.description}
                   name='description'
                 />
               </li>
               <li>2. Select Time</li>
               <RuxInput
                 onRuxinput={handleChange}
-                // value={newJob.startTime}
+                value={job.startTime}
                 size='small'
                 type='datetime-local'
                 label='Start'
@@ -98,7 +99,7 @@ const JobDetails = () => {
               />
               <RuxInput
                 onRuxinput={handleChange}
-                // value={newJob.stopTime}
+                value={job.stopTime}
                 size='small'
                 type='datetime-local'
                 label='Stop'
@@ -108,7 +109,7 @@ const JobDetails = () => {
                 onRuxchange={handleChange}
                 size='small'
                 label='Technician'
-                // value={newJob.technician}
+                value={job.technician}
                 name='technician'
               >
                 <RuxOption value='' label='- Select -'></RuxOption>
@@ -132,24 +133,38 @@ const JobDetails = () => {
                   readonly
                   size='small'
                   label='Job Type'
-                  value='PMR 01'
+                  value={job.jobType}
                 />
               </li>
               <li>
-                <RuxTextarea disabled label='Description' value='description' />
+                <RuxTextarea
+                  disabled
+                  label='Description'
+                  value={job.description}
+                />
               </li>
               <li>
-                <RuxInput readonly size='small' label='Start' value='PMR 01' />
+                <RuxInput
+                  readonly
+                  size='small'
+                  label='Start'
+                  value={job.startTime}
+                />
               </li>
               <li>
-                <RuxInput readonly size='small' label='Stop' value='PMR 01' />
+                <RuxInput
+                  readonly
+                  size='small'
+                  label='Stop'
+                  value={job.stopTime}
+                />
               </li>
               <li>
                 <RuxInput
                   readonly
                   size='small'
                   label='Technician'
-                  value='PMR 01'
+                  value={job.technician}
                 />
               </li>
               <li>

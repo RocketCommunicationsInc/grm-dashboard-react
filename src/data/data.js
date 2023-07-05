@@ -54,4 +54,5 @@ export const dummyJob = {
   follow: true,
   status: 'Completed',
   createdOn: '2023-06-06T11:42',
+  equpiment: 'ANT7',
 };

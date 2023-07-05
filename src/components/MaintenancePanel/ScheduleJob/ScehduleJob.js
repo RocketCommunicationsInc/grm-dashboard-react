@@ -28,6 +28,8 @@ const ScheduleJob = () => {
   const uniqueJobId = Math.floor(Math.random() * 90000) + 10000;
   const statusValues = ['Approved', 'Started', 'Stopped'];
   const randomStatus = Math.floor(Math.random() * statusValues.length);
+  const equipmentValues = ['ANT3', 'BAFB4', 'ANT9', 'BAFB5', 'ANT12', 'BAFB8'];
+  const randomEqupiment = Math.floor(Math.random() * equipmentValues.length);
 
   const [newJob, setNewJob] = useState({
     jobId: uniqueJobId,
@@ -39,6 +41,7 @@ const ScheduleJob = () => {
     follow: true,
     status: statusValues[randomStatus],
     createdOn: Date.now(),
+    equpiment: equipmentValues[randomEqupiment],
   });
 
   const { rows } = useAlertsPanel();
