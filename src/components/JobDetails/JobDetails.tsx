@@ -16,6 +16,7 @@ import ConflictsTable from './ConflictsTable';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 
 import './JobDetails.css';
+import Stepper from './Stepper/Stepper';
 
 const JobDetails = () => {
   const { state, dispatch }: any = useAppContext();
@@ -26,6 +27,7 @@ const JobDetails = () => {
   const [job, setJob] = useState(state.currentJob);
   const currentContact = contacts[params.contactId as keyof typeof contacts];
   const [isModifying, setIsModifying] = useState(false);
+  const [currentStatus, setCurrentStatus] = useState(job.status);
 
   const handleCancel = () => {
     if (isModifying) {
@@ -49,6 +51,18 @@ const JobDetails = () => {
     }));
   };
 
+  const stepperTitle = document.getElementsByClassName('step-name');
+
+  // let stepTitle = '';
+  for (let i = 0; i < stepperTitle.length; i++) {
+    const element = stepperTitle[i].parentElement;
+    console.log(element);
+    if (stepperTitle[i].innerHTML === job.status) {
+      // stepTitle = stepperTitle[i].innerHTML;
+      element?.classList.add('active');
+    }
+  }
+
   return (
     <RuxContainer className='job-details-panel'>
       <header slot='header'>
@@ -56,8 +70,12 @@ const JobDetails = () => {
       </header>
       <div className='jobs-wrapper'>
         <div className='jobs-details-section'>
+          <Stepper
+            // status={currentStatus}
+            isCompleted={false}
+          />
+
           <h2 slot='toolbar'>Job Details</h2>
-          <div>stepper section</div>
           {isModifying ? (
             <ul>
               <li>
