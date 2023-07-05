@@ -44,7 +44,7 @@ export function generateEvents() {
   }));
 }
 
-export const dummyObject = {
+export const dummyJob = {
   jobId: 76029,
   jobType: 'IT Support',
   description: 'Updates needed on all desktop computers in main building',

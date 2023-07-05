@@ -12,7 +12,7 @@ import {
   getRandomAlert,
   getRandomContact,
   randomContact,
-  dummyObject,
+  dummyJob,
 } from '../data/data';
 
 export const initialState = {
@@ -21,7 +21,7 @@ export const initialState = {
   currentAlert: null,
   currentContact: null,
   affectedContacts: [],
-  scheduledJobs: [dummyObject],
+  scheduledJobs: [dummyJob],
   currentJob: null,
 };
 

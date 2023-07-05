@@ -21,16 +21,18 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
-    case 'EDIT_Job': {
-      const newJob = state.scheduledJobs.map((job) => {
-        if (job._id !== payload._id) {
-          return job;
-        } else return { ...job, ...payload };
-      });
-
+    case 'EDIT_JOB': {
+      const selectedJob = state.scheduledJobs.find(
+        (job) => job.jobId === payload
+      );
+      const modifiedJob = { ...selectedJob, ...payload };
+      const updatedJobsArr = state.scheduledJobs.map((job) =>
+        job.jobId === payload ? modifiedJob : job
+      );
       return {
         ...state,
-        contacts: newJob,
+        scheduledJobs: updatedJobsArr,
+        currentJob: modifiedJob ? modifiedJob : {},
       };
     }
 

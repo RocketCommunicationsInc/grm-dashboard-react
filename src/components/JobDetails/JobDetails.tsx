@@ -23,10 +23,11 @@ const JobDetails = () => {
   const params = useParams();
   const { rows } = useAlertsPanel();
   const { dataById: contacts } = useTTCGRMContacts();
-  const [job, setJob] = useState(state.currentContact);
+  const [job, setJob] = useState(state.currentJob);
   const currentContact = contacts[params.contactId as keyof typeof contacts];
 
   const [isModifying, setIsModifying] = useState(false);
+  console.log(state);
 
   const handleCancel = () => {
     if (isModifying) {

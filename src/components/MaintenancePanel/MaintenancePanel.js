@@ -10,13 +10,12 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import { useState } from 'react';
 import './MaintenancePanel.css';
 
 const MaintenancePanel = () => {
   const navigate = useNavigate();
   const columns = useMemo(() => columnDefs, []);
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
 
   const table = useReactTable({
     data: state.scheduledJobs,
@@ -25,22 +24,12 @@ const MaintenancePanel = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  const [currentJob, setCurrentJob] = useState(state.scheduledJobs);
-
-  const getJobById = (id) => {
-    const currentJobId = state.scheduledJobs.find((job) => job.jobId === id);
-    if (currentJob) {
-      setCurrentJob(currentJobId);
-    }
-    console.log(currentJob);
-  };
-  getJobById();
-
   const handleClick = () => {
     navigate('schedule-job');
   };
 
-  const handleJobDetailsClick = () => {
+  const handleJobDetailsClick = (id) => {
+    dispatch({ type: 'EDIT_JOB', payload: id });
     navigate('job-details');
   };
 
@@ -53,12 +42,13 @@ const MaintenancePanel = () => {
           <RuxButton onClick={handleClick}>Schedule Job</RuxButton>
           {state.scheduledJobs.map((job) => (
             <JobIDCard
+              key={job.jobId}
               type={job.jobType}
               id={job.jobId}
               startTime={job.startTime}
               stopTime={job.stopTime}
               status={job.status}
-              viewJob={handleJobDetailsClick}
+              viewJob={() => handleJobDetailsClick(job.jobId)}
             />
           ))}
         </div>
