@@ -1,13 +1,14 @@
 import { RuxTableHeader, RuxTableHeaderRow } from '@astrouxds/react';
 import type { Dispatch, SetStateAction } from 'react';
 import TableHeaderCell from './TableHeaderCell';
-import type { ColumnDef, UpdatedContact } from './Table';
+import type { ColumnDef } from './Table';
+import type { Contact } from '@astrouxds/mock-data';
 
 type PropTypes = {
   columnDefs: ColumnDef[];
-  setSortProp: Dispatch<SetStateAction<keyof UpdatedContact>>;
+  setSortProp: Dispatch<SetStateAction<keyof Contact>>;
   setSortDirection: Dispatch<SetStateAction<'ASC' | 'DESC'>>;
-  sortProp: keyof UpdatedContact;
+  sortProp: keyof Contact;
   sortDirection: 'ASC' | 'DESC';
 };
 
@@ -20,7 +21,7 @@ const TableHeader = ({
 }: PropTypes) => {
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     const target = event.currentTarget as HTMLElement;
-    const sortProperty = target.dataset.sortprop as keyof UpdatedContact;
+    const sortProperty = target.dataset.sortprop as keyof Contact;
     if (sortProperty === sortProp) {
       // clicked same currently sorted column
       if (sortDirection === 'ASC') {

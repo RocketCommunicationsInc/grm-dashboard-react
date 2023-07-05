@@ -1,10 +1,11 @@
 import type { MouseEventHandler } from 'react';
 import { RuxTableRow, RuxTableCell, RuxStatus } from '@astrouxds/react';
-import type { ColumnDef, UpdatedContact } from './Table';
+import type { Contact } from '@astrouxds/mock-data';
+import type { ColumnDef } from './Table';
 
 type PropTypes = {
   columnDefs: ColumnDef[];
-  rowData: UpdatedContact;
+  rowData: Contact;
   handleRowClick: MouseEventHandler<HTMLElement>;
 };
 

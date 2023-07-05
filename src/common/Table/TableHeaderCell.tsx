@@ -1,11 +1,12 @@
 import { RuxTableHeaderCell, RuxIcon } from '@astrouxds/react';
-import type { ColumnDef, UpdatedContact } from './Table';
+import type { ColumnDef } from './Table';
+import type { Contact } from '@astrouxds/mock-data';
 
 type PropTypes = {
   columnDefinition: ColumnDef;
   handleClick: React.MouseEventHandler<HTMLElement>;
   sortDirection: 'ASC' | 'DESC';
-  sortProp: keyof UpdatedContact;
+  sortProp: keyof Contact;
 };
 
 const TableHeaderCell = ({

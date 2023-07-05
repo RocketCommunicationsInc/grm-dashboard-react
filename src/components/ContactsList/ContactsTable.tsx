@@ -1,24 +1,19 @@
 import { useMemo, useCallback } from 'react';
 import { RuxContainer, RuxNotification, RuxButton } from '@astrouxds/react';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { useTTCGRMContacts, useTTCGRMAlerts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
 import './ContactsTable.css';
 import Table from '../../common/Table/Table';
-import { getDayOfYear } from '../../util/index';
-import type { ColumnDef, UpdatedContact } from '../../common/Table/Table';
+import type { ColumnDef } from '../../common/Table/Table';
+import { determineTimeString } from '../../util/index';
 
 type PropTypes = {
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const determineDOYValue = (originalValue: any) =>
-  getDayOfYear(originalValue * 1000);
-const determineTimeString = (originalValue: any) =>
-  new Date(originalValue).toTimeString().slice(0, 8);
-
 const columnDefs: ColumnDef[] = [
-  { label: 'Priority', property: 'priority', valueFn: () => 'Normal' },
+  { label: 'Priority', property: 'priority' },
   { label: '', property: 'status' },
   { label: 'IRON', property: 'satellite' },
   { label: 'Ground Station', property: 'ground' },
@@ -27,8 +22,7 @@ const columnDefs: ColumnDef[] = [
   { label: 'State', property: 'state' },
   {
     label: 'DOY',
-    property: 'beginTimestamp',
-    valueFn: determineDOYValue,
+    property: 'dayOfYear',
   },
   {
     label: 'Start Time',
@@ -45,8 +39,9 @@ const columnDefs: ColumnDef[] = [
 ];
 
 const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
-  const { dataArray: contactsArray } = useTTCGRMContacts();
-
+  const { dataArray: contacts } = useTTCGRMContacts();
+  const { dataArray: alerts } = useTTCGRMAlerts();
+  console.log(alerts);
   const handleClearFilter = () => {
     setSearchValue('');
   };
@@ -64,8 +59,8 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
   );
 
   const filteredContacts = useMemo(() => {
-    return filterContacts(contactsArray, searchValue);
-  }, [contactsArray, filterContacts, searchValue]);
+    return filterContacts(contacts, searchValue);
+  }, [contacts, filterContacts, searchValue]);
 
   return (
     <RuxContainer>
@@ -81,10 +76,7 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
         </RuxButton>
         to display all alerts.
       </RuxNotification>
-      <Table
-        columnDefs={columnDefs}
-        filteredData={filteredContacts as UpdatedContact[]}
-      />
+      <Table columnDefs={columnDefs} filteredData={filteredContacts} />
     </RuxContainer>
   );
 };
