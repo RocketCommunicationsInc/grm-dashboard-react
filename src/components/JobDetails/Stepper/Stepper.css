@@ -76,6 +76,7 @@
 
 .stepper-item:has(~ .active) .step-counter .checkmark {
   visibility: visible;
+  color: var(--color-background-interactive-muted);
 }
 
 .stepper-item:first-child::before,
