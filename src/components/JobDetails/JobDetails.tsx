@@ -12,7 +12,7 @@ import { useAppContext } from '../../providers/AppProvider';
 import { useParams, useNavigate } from 'react-router-dom';
 import { EventLog } from '../../common';
 import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
-import ConflictsTable from './ConflictsTable';
+import ConfdivctsTable from './ConflictsTable';
 
 import './JobDetails.css';
 import Stepper from './Stepper/Stepper';
@@ -67,39 +67,31 @@ const JobDetails = () => {
       </header>
       <div className='jobs-wrapper'>
         <div className='jobs-details-section'>
-          <Stepper />
-
           <h2 slot='toolbar'>Job Details</h2>
+          <Stepper />
           {isModifying ? (
-            <ul>
-              <li>
-                <RuxSelect
-                  onRuxchange={handleChange}
-                  size='small'
-                  label=' Job Type'
-                  value={job.jobType}
-                  name='jobType'
-                >
-                  <RuxOption value='' label='- Select -'></RuxOption>
-                  <RuxOption
-                    value='Maintenence'
-                    label='Maintenence'
-                  ></RuxOption>
-                  <RuxOption value='IT Support' label='IT Support'></RuxOption>
-                  <RuxOption value='Hardware' label='Hardware'></RuxOption>
-                  <RuxOption value='Other' label='Other'></RuxOption>
-                </RuxSelect>
-              </li>
-              <li>
-                <RuxTextarea
-                  onRuxinput={handleChange}
-                  placeholder='Enter Description'
-                  label='Description'
-                  value={job.description}
-                  name='description'
-                />
-              </li>
-              <li>2. Select Time</li>
+            <>
+              <RuxSelect
+                onRuxchange={handleChange}
+                size='small'
+                label=' Job Type'
+                value={job.jobType}
+                name='jobType'
+              >
+                <RuxOption value='' label='- Select -'></RuxOption>
+                <RuxOption value='Maintenence' label='Maintenence'></RuxOption>
+                <RuxOption value='IT Support' label='IT Support'></RuxOption>
+                <RuxOption value='Hardware' label='Hardware'></RuxOption>
+                <RuxOption value='Other' label='Other'></RuxOption>
+              </RuxSelect>
+
+              <RuxTextarea
+                onRuxinput={handleChange}
+                placeholder='Enter Description'
+                label='Description'
+                value={job.description}
+                name='description'
+              />
               <RuxInput
                 onRuxinput={handleChange}
                 value={job.startTime}
@@ -129,69 +121,53 @@ const JobDetails = () => {
                 <RuxOption value='M. Scott' label='M. Scott'></RuxOption>
                 <RuxOption value='J. Day' label='J. Day'></RuxOption>
               </RuxSelect>
-              <li>
-                <RuxCheckbox checked label='Follow' />
-              </li>
-              <li>
-                {/* @ts-expect-error */}
-                <EventLog rowsToShow={8} />
-              </li>
-            </ul>
+              <RuxCheckbox checked label='Follow' />
+
+              {/* @ts-expect-error */}
+              <EventLog rowsToShow={6} />
+            </>
           ) : (
-            <ul>
-              <li>
-                <RuxInput
-                  readonly
-                  size='small'
-                  label='Job Type'
-                  value={job.jobType}
-                />
-              </li>
-              <li>
-                <RuxTextarea
-                  disabled
-                  label='Description'
-                  value={job.description}
-                />
-              </li>
-              <li>
-                <RuxInput
-                  readonly
-                  size='small'
-                  label='Start'
-                  value={job.startTime}
-                />
-              </li>
-              <li>
-                <RuxInput
-                  readonly
-                  size='small'
-                  label='Stop'
-                  value={job.stopTime}
-                />
-              </li>
-              <li>
-                <RuxInput
-                  readonly
-                  size='small'
-                  label='Technician'
-                  value={job.technician}
-                />
-              </li>
-              <li>
-                <RuxCheckbox disabled checked label='Follow' />
-              </li>
-              <li>
-                {/* @ts-expect-error */}
-                <EventLog rowsToShow={8} />
-              </li>
-            </ul>
+            <>
+              <RuxInput
+                readonly
+                size='small'
+                label='Job Type'
+                value={job.jobType}
+              />
+              <RuxTextarea
+                disabled
+                label='Description'
+                value={job.description}
+              />
+              <RuxInput
+                readonly
+                size='small'
+                label='Start'
+                value={job.startTime}
+              />
+              <RuxInput
+                readonly
+                size='small'
+                label='Stop'
+                value={job.stopTime}
+              />
+              <RuxInput
+                readonly
+                size='small'
+                label='Technician'
+                value={job.technician}
+              />
+              <RuxCheckbox disabled checked label='Follow' />
+
+              {/* @ts-expect-error */}
+              <EventLog rowsToShow={6} />
+            </>
           )}
         </div>
-        <RuxContainer className='conflicts-section'>
-          <div className='table-section'>
+        <RuxContainer className='job-details-conflicts-section'>
+          <div className='job-details-table-section'>
             <h2>Conflicts ({rows.length})</h2>
-            <ConflictsTable />
+            <ConfdivctsTable />
           </div>
         </RuxContainer>
       </div>

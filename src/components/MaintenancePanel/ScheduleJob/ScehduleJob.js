@@ -30,7 +30,7 @@ const ScheduleJob = () => {
     'Approved',
     'Started',
     'Stopped',
-    'Sumbitted',
+    'Submitted',
     'Online',
   ];
   const randomStatus = Math.floor(Math.random() * statusValues.length);
@@ -191,11 +191,11 @@ const ScheduleJob = () => {
                     <RuxTableHeaderCell>Stop Time</RuxTableHeaderCell>
                   </RuxTableHeaderRow>
                 </RuxTableHeader>
-                <span className='conflicts'>
-                  Conflicts have not been calculated.
-                </span>
               </RuxTable>
             )}
+            <span className='conflicts-placeholder'>
+              Conflicts have not been calculated.
+            </span>
           </div>
         </RuxContainer>
       </div>

@@ -8,7 +8,6 @@
 
 .schedule-job-wrapper rux-input,
 .schedule-job-wrapper rux-select {
-  display: flex;
   margin-block: var(--spacing-2);
 }
 
@@ -20,21 +19,31 @@
 
 .schedule-job-wrapper rux-input::part(label),
 .schedule-job-wrapper rux-select::part(label) {
-  margin-right: var(--spacing-2);
+  margin-right: var(--spacing-4);
   margin-top: var(--spacing-1);
 }
 
 .conflicts-section h2 {
-  margin-bottom: var(--spacing-4);
+  margin: var(--spacing-4);
 }
 
-.table-section .Astro-react-table {
+.conflicts-section span {
+  padding-inline: var(--spacing-4);
+}
+
+.table-section {
   margin-top: var(--spacing-6);
 }
 
-.table-section rux-table span {
-  margin: auto;
-  font-size: var(--font-size-lg);
+.table-section {
+  height: 30rem;
+}
+
+.conflicts-placeholder {
+  display: flex;
+  justify-content: center;
+  margin-top: 18%;
+  font-size: var(--font-size-xl);
 }
 
 .job-request-section {

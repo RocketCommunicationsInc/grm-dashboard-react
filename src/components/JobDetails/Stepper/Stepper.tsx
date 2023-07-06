@@ -3,7 +3,7 @@ import './Stepper.css';
 
 const Stepper = () => {
   const steps = [
-    { title: 'Sudmitted' },
+    { title: 'Submitted' },
     { title: 'Approved' },
     { title: 'Started' },
     { title: 'Stopped' },
