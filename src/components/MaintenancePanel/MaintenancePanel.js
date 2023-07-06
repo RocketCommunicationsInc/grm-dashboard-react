@@ -28,8 +28,8 @@ const MaintenancePanel = () => {
     navigate('schedule-job');
   };
 
-  const handleJobDetailsClick = (id) => {
-    dispatch({ type: 'EDIT_JOB', payload: id });
+  const handleJobDetailsClick = (job) => {
+    dispatch({ type: 'EDIT_JOB', payload: job });
     navigate('job-details');
   };
 
@@ -48,7 +48,7 @@ const MaintenancePanel = () => {
               startTime={job.startTime}
               stopTime={job.stopTime}
               status={job.status}
-              viewJob={() => handleJobDetailsClick(job.jobId)}
+              viewJob={() => handleJobDetailsClick(job)}
             />
           ))}
         </div>

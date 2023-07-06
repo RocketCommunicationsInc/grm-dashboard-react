@@ -25,17 +25,13 @@ export const appReducer = (state, { type, payload }) => {
       const selectedJob = state.scheduledJobs.find(
         (job) => job.jobId === payload
       );
-      const modifiedJob = { ...selectedJob, payload };
-      const updatedJobs = state.scheduledJobs.map(
-        (job) => {
-          if (job.jobId === payload) {
-            return modifiedJob;
-          }
-          return job;
+      const modifiedJob = { ...selectedJob, ...payload };
+      const updatedJobs = state.scheduledJobs.map((job) => {
+        if (job.jobId === payload.jobId) {
+          return modifiedJob;
         }
-        // job.jobId === payload ? job : modifiedJob
-      );
-      console.log(modifiedJob, 'updatedarr');
+        return job;
+      });
       return {
         ...state,
         scheduledJobs: updatedJobs,

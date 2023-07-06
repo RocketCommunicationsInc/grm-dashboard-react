@@ -1,11 +1,7 @@
 import { RuxIcon } from '@astrouxds/react';
 import './Stepper.css';
 
-type PropTypes = {
-  status?: string;
-};
-
-const Stepper = ({ status }: PropTypes) => {
+const Stepper = () => {
   const steps = [
     { title: 'Sudmitted' },
     { title: 'Approved' },
@@ -17,7 +13,7 @@ const Stepper = ({ status }: PropTypes) => {
   return (
     <div className='stepper-wrapper'>
       {steps.map(({ title }) => (
-        <div className={`stepper-item ${status}`}>
+        <div className='stepper-item'>
           <div className='step-counter'>
             <RuxIcon className='checkmark' icon='check' size='1.5rem' />
           </div>

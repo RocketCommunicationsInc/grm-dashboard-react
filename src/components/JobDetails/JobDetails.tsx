@@ -37,7 +37,9 @@ const JobDetails = () => {
   const handleSubmit = (e: any) => {
     e.preventDefault();
     setIsModifying(false);
-    dispatch({ type: 'EDIT_JOB', payload: job });
+    if (job.jobId) {
+      dispatch({ type: 'EDIT_JOB', payload: job });
+    }
   };
 
   const handleChange = (e: any) => {
@@ -53,7 +55,6 @@ const JobDetails = () => {
     for (let i = 0; i < stepperTitle.length; i++) {
       const element = stepperTitle[i].parentElement;
       if (stepperTitle[i].innerHTML === job.status) {
-        console.log(stepperTitle[i].innerHTML, 'html');
         element?.classList.add('active');
       }
     }
@@ -66,7 +67,7 @@ const JobDetails = () => {
       </header>
       <div className='jobs-wrapper'>
         <div className='jobs-details-section'>
-          <Stepper status={job.status} />
+          <Stepper />
 
           <h2 slot='toolbar'>Job Details</h2>
           {isModifying ? (
