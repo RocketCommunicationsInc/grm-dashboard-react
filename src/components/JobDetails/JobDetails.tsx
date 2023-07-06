@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import {
   RuxCheckbox,
   RuxContainer,
@@ -50,15 +50,15 @@ const JobDetails = () => {
       [e.target.name]: e.target.value,
     }));
   };
+  const stepperTitle = document.getElementsByClassName('step-title');
+  const checkmarkIcon = document.getElementsByClassName('checkmark');
+  useEffect(() => {}, [stepperTitle]);
 
-  const stepperTitle = document.getElementsByClassName('step-name');
-
-  // let stepTitle = '';
   for (let i = 0; i < stepperTitle.length; i++) {
     const element = stepperTitle[i].parentElement;
-    console.log(element);
+    // const checkmarkEl = stepperTitle[i].previousElementSibling?.children;
+    // console.log(checkmarkEl);
     if (stepperTitle[i].innerHTML === job.status) {
-      // stepTitle = stepperTitle[i].innerHTML;
       element?.classList.add('active');
     }
   }
@@ -70,10 +70,7 @@ const JobDetails = () => {
       </header>
       <div className='jobs-wrapper'>
         <div className='jobs-details-section'>
-          <Stepper
-            // status={currentStatus}
-            isCompleted={false}
-          />
+          <Stepper status={currentStatus} />
 
           <h2 slot='toolbar'>Job Details</h2>
           {isModifying ? (
