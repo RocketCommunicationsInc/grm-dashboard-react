@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   RuxCheckbox,
   RuxContainer,
@@ -13,7 +13,6 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { EventLog } from '../../common';
 import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
 import ConflictsTable from './ConflictsTable';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
 
 import './JobDetails.css';
 import Stepper from './Stepper/Stepper';
@@ -23,14 +22,12 @@ const JobDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { rows } = useAlertsPanel();
-  const { dataById: contacts } = useTTCGRMContacts();
   const [job, setJob] = useState(state.currentJob);
-  const currentContact = contacts[params.contactId as keyof typeof contacts];
   const [isModifying, setIsModifying] = useState(false);
 
   const handleCancel = () => {
     if (isModifying) {
-      setJob(currentContact);
+      setJob(job);
       setIsModifying(false);
     } else {
       navigate(`/alerts/${params.alertId}`);
@@ -49,14 +46,18 @@ const JobDetails = () => {
       [e.target.name]: e.target.value,
     }));
   };
-  const stepperTitle = document.getElementsByClassName('step-title');
 
-  for (let i = 0; i < stepperTitle.length; i++) {
-    const element = stepperTitle[i].parentElement;
-    if (stepperTitle[i].innerHTML === job.status) {
-      element?.classList.add('active');
+  useEffect(() => {
+    const stepperTitle = document.getElementsByClassName('step-title');
+
+    for (let i = 0; i < stepperTitle.length; i++) {
+      const element = stepperTitle[i].parentElement;
+      if (stepperTitle[i].innerHTML === job.status) {
+        console.log(stepperTitle[i].innerHTML, 'html');
+        element?.classList.add('active');
+      }
     }
-  }
+  });
 
   return (
     <RuxContainer className='job-details-panel'>
