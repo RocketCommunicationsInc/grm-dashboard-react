@@ -23,7 +23,7 @@
   content: '';
   border-bottom: 1px solid var(--color-text-secondary);
   width: 100%;
-  top: var(--spacing-4);
+  top: 14px;
   left: -50%;
   z-index: 2;
 }
@@ -33,7 +33,7 @@
   content: '';
   border-bottom: 1px solid var(--color-text-secondary);
   width: 100%;
-  top: var(--spacing-4);
+  top: 14px;
   left: 50%;
   z-index: 2;
 }
@@ -47,7 +47,7 @@
   width: 1.75rem;
   height: 1.75rem;
   border-radius: 50%;
-  border: 1px solid var(--color-text-interactive-default);
+  border: 1px solid var(--color-background-interactive-muted);
   background-color: var(--color-background-surface-header);
   margin-bottom: 0.5rem;
 }
@@ -57,17 +57,15 @@
 }
 
 .stepper-item.active .step-counter {
-  /* outline: inset 0.45rem var(--color-text-interactive-default);
-  outline-offset: -0.45rem; */
-  background-color: var(--color-text-interactive-default);
+  background-color: var(--color-background-interactive-muted);
 }
 
 .stepper-item:has(~ .active)::after {
   position: absolute;
   content: '';
-  border-bottom: 2px solid var(--color-text-interactive-default);
+  border-bottom: 2px solid var(--color-background-interactive-muted);
   width: 100%;
-  top: var(--spacing-4);
+  top: 14px;
   left: 50%;
   z-index: 3;
 }

@@ -19,7 +19,12 @@ const Stepper = ({ status }: PropTypes) => {
       {steps.map(({ title }) => (
         <div className={`stepper-item ${status}`}>
           <div className='step-counter'>
-            <RuxIcon className='checkmark' icon='check' size='1.5rem' />
+            <RuxIcon
+              style={{ color: 'var(--color-background-interactive-muted)' }}
+              className='checkmark'
+              icon='check'
+              size='1.5rem'
+            />
           </div>
           <div className='step-title'>{title}</div>
         </div>
