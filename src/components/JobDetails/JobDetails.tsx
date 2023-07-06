@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   RuxCheckbox,
   RuxContainer,
@@ -27,7 +27,6 @@ const JobDetails = () => {
   const [job, setJob] = useState(state.currentJob);
   const currentContact = contacts[params.contactId as keyof typeof contacts];
   const [isModifying, setIsModifying] = useState(false);
-  const [currentStatus, setCurrentStatus] = useState(job.status);
 
   const handleCancel = () => {
     if (isModifying) {
@@ -51,13 +50,10 @@ const JobDetails = () => {
     }));
   };
   const stepperTitle = document.getElementsByClassName('step-title');
-  const checkmarkIcon = document.getElementsByClassName('checkmark');
   useEffect(() => {}, [stepperTitle]);
 
   for (let i = 0; i < stepperTitle.length; i++) {
     const element = stepperTitle[i].parentElement;
-    // const checkmarkEl = stepperTitle[i].previousElementSibling?.children;
-    // console.log(checkmarkEl);
     if (stepperTitle[i].innerHTML === job.status) {
       element?.classList.add('active');
     }
@@ -70,7 +66,7 @@ const JobDetails = () => {
       </header>
       <div className='jobs-wrapper'>
         <div className='jobs-details-section'>
-          <Stepper status={currentStatus} />
+          <Stepper status={job.status} />
 
           <h2 slot='toolbar'>Job Details</h2>
           {isModifying ? (

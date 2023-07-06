@@ -57,7 +57,7 @@
 }
 
 .stepper-item.active .step-counter {
-  /* outline: 0.45rem inset var(--color-text-interactive-default);
+  /* outline: inset 0.45rem var(--color-text-interactive-default);
   outline-offset: -0.45rem; */
   background-color: var(--color-text-interactive-default);
 }
