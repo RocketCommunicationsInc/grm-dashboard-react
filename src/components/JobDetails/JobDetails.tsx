@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   RuxCheckbox,
   RuxContainer,
@@ -50,7 +50,6 @@ const JobDetails = () => {
     }));
   };
   const stepperTitle = document.getElementsByClassName('step-title');
-  useEffect(() => {}, [stepperTitle]);
 
   for (let i = 0; i < stepperTitle.length; i++) {
     const element = stepperTitle[i].parentElement;
