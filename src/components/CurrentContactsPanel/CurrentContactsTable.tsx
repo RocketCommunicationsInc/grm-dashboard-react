@@ -46,11 +46,10 @@ const columnDefs: ColumnDef[] = [
 
 const CurrentContactsTable = () => {
   const { dataArray: contactsArray } = useTTCGRMContacts();
-  console.log(contactsArray);
   const [stateSelection, setStateSelection] = useState<
     'executing' | 'failed' | 'all'
   >('all');
-  console.log(contactsArray);
+
   const numFailed = contactsArray.filter(
     (contact) => contact.state === 'failed'
   ).length;
@@ -80,7 +79,7 @@ const CurrentContactsTable = () => {
   const filteredContacts = useMemo(() => {
     return filterContacts(contactsArray, stateSelection);
   }, [contactsArray, filterContacts, stateSelection]);
-  console.log(filteredContacts);
+
   return (
     <RuxContainer>
       <div slot='header'>Current Contacts</div>

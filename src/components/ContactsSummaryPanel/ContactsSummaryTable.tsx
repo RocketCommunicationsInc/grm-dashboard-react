@@ -1,91 +1,62 @@
 import { useMemo, useCallback } from 'react';
-import {
-  RuxTable,
-  RuxTableHeader,
-  RuxTableHeaderRow,
-  RuxTableHeaderCell,
-  RuxTableRow,
-  RuxTableCell,
-  RuxTableBody,
-  RuxStatus,
-} from '@astrouxds/react';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
+import { determineTimeString } from '../../util/index';
+import Table from '../../common/Table/Table';
+import type { ColumnDef } from '../../common/Table/Table';
+import { HStack } from '../../common';
+import { Link } from 'react-router-dom';
+import { capitalize } from '../../util/index';
 
-import { useAppActions } from '../../providers/AppProvider';
+const columnDefs: ColumnDef[] = [
+  { label: '', property: 'status' },
+  { label: 'Contact', property: 'satellite' },
+  { label: 'AOS', property: 'aos', valueFn: determineTimeString },
+  { label: 'LOS', property: 'los', valueFn: determineTimeString },
+];
 
 type PropTypes = {
+  title: string;
   startTime: number;
   endTime: number;
-  label: string;
+  state: string;
 };
 
-const ContactsSummaryTable = ({ startTime, endTime, label }: PropTypes) => {
-  const { dataArray: contactsArray, dataById: contacts } = useTTCGRMContacts();
-  const { investigateContact } = useAppActions();
+const ContactsSummaryTable = ({
+  title,
+  startTime,
+  endTime,
+  state,
+}: PropTypes) => {
+  const { dataArray: contactsArray } = useTTCGRMContacts();
 
   const filterContacts = useCallback(
     (contactsArray: Contact[]) => {
       const filteredForStateContacts = contactsArray.filter((contact) => {
         return (
-          contact.beginTimestamp >= startTime &&
-          contact.endTimestamp <= endTime &&
-          contact.status === label
+          // contact.beginTimestamp >= startTime &&
+          // contact.endTimestamp <= endTime &&
+          capitalize(contact.state) === state
         );
       });
 
-      return filteredForStateContacts.map((contact) => contact.id);
+      return filteredForStateContacts;
     },
-    [endTime, startTime, label]
+    [state]
   );
 
-  const filteredContactIds = useMemo(() => {
-    return filterContacts(contactsArray);
+  const filteredContacts = useMemo(() => {
+    return filterContacts(contactsArray).slice(0, 5);
   }, [contactsArray, filterContacts]);
 
   return (
     <>
-      <div>Title</div>
-      <div className='table-wrapper'>
-        <RuxTable>
-          <RuxTableHeader>
-            <RuxTableHeaderRow>
-              <RuxTableHeaderCell>
-                {/* left blank for status */}
-              </RuxTableHeaderCell>
-              <RuxTableHeaderCell>Contact</RuxTableHeaderCell>
-              <RuxTableHeaderCell>AOS</RuxTableHeaderCell>
-              <RuxTableHeaderCell>LOS</RuxTableHeaderCell>
-            </RuxTableHeaderRow>
-          </RuxTableHeader>
-          <RuxTableBody>
-            {filteredContactIds.map((contactId) => {
-              const contact = contacts[contactId];
-              return (
-                <RuxTableRow
-                  key={contactId}
-                  onClick={() => investigateContact(contact)}
-                >
-                  {/* no priority value on contact, using normal as placeholder */}
-                  <RuxTableCell>Normal</RuxTableCell>
-                  <RuxTableCell>
-                    <RuxStatus status={contact.status} />
-                  </RuxTableCell>
-                  <RuxTableCell>{`${contact.satellite} ${contact.ground} ${contact.rev}`}</RuxTableCell>
-                  <RuxTableCell>
-                    {new Date(contact.aos).toTimeString().slice(0, 8)}
-                  </RuxTableCell>
-                  <RuxTableCell>
-                    {new Date(contact.los).toTimeString().slice(0, 8)}
-                  </RuxTableCell>
-                </RuxTableRow>
-              );
-            })}
-          </RuxTableBody>
-        </RuxTable>
-      </div>
+      <HStack spacing={3} className='space-between p-2'>
+        <p>{title}</p>
+        <Link to='/contacts'>View All</Link>
+      </HStack>
+      <Table columnDefs={columnDefs} filteredData={filteredContacts} />
     </>
   );
 };
-
 export default ContactsSummaryTable;

@@ -8,7 +8,7 @@ import {
   RuxSelect,
 } from '@astrouxds/react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { useTTCGRMContacts, useTTCGRMActions } from '@astrouxds/mock-data';
 import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
@@ -23,21 +23,21 @@ import {
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
-import { formatReadableTime, getDayOfYear } from '../../util';
+import { formatReadableTime } from '../../util';
 import './ContactDetails.css';
 
 const ContactDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const { modifyContact } = useTTCGRMActions();
   const { dataById: contacts } = useTTCGRMContacts();
-  const currentContact = contacts[params.contactId];
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
-  const [contact, setContact] = useState(state.currentContact);
+  const [contact, setContact] = useState(contacts[params.contactId]);
 
   const handleCancel = () => {
     if (isEditing) {
-      setContact(currentContact);
+      setContact(contacts[params.contactId]);
       setIsEditing(false);
     } else {
       navigate('/contacts');
@@ -47,7 +47,7 @@ const ContactDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
-    dispatch({ type: 'EDIT_CONTACT', payload: contact });
+    modifyContact(contact);
   };
 
   const handleChange = (e) => {
@@ -61,13 +61,18 @@ const ContactDetails = () => {
     {
       label: 'Priority',
       node: isEditing ? (
-        <RuxSelect value={contact.status} size='small'>
+        <RuxSelect
+          value={contact.priority}
+          size='small'
+          name='priority'
+          onRuxchange={handleChange}
+        >
           {options.priorities.map((option) => (
             <RuxOption key={option} value={option} label={option} />
           ))}
         </RuxSelect>
       ) : (
-        <RuxInput value={contact.status} size='small' readonly />
+        <RuxInput value={contact.priority} size='small' readonly />
       ),
     },
     {
@@ -77,7 +82,7 @@ const ContactDetails = () => {
           value={contact.state}
           readonly={!isEditing}
           size='small'
-          name='contactState'
+          name='state'
           onRuxinput={handleChange}
         />
       ),
@@ -86,10 +91,10 @@ const ContactDetails = () => {
       label: 'IRON',
       node: (
         <RuxInput
-          value={contact.name}
+          value={contact.satellite}
           readonly={!isEditing}
           size='small'
-          name='contactName'
+          name='satellite'
           onRuxinput={handleChange}
         />
       ),
@@ -101,7 +106,7 @@ const ContactDetails = () => {
           value={contact.ground}
           readonly={!isEditing}
           size='small'
-          name='contactGround'
+          name='ground'
           onRuxinput={handleChange}
         />
       ),
@@ -113,7 +118,7 @@ const ContactDetails = () => {
           value={contact.rev}
           readonly={!isEditing}
           size='small'
-          name='contactREV'
+          name='rev'
           onRuxinput={handleChange}
         />
       ),
@@ -122,10 +127,10 @@ const ContactDetails = () => {
       label: 'DOY',
       node: (
         <RuxInput
-          value={getDayOfYear(contact.beginTimestamp * 1000)}
+          value={contact.dayOfYear}
           readonly={!isEditing}
           size='small'
-          name='contactDOY'
+          name='dayOfYear'
           onRuxinput={handleChange}
         />
       ),
@@ -173,7 +178,12 @@ const ContactDetails = () => {
     {
       label: 'Command Mode',
       node: isEditing ? (
-        <RuxSelect value={contact.mode} size='small'>
+        <RuxSelect
+          value={contact.mode}
+          size='small'
+          name='mode'
+          onRuxchange={handleChange}
+        >
           {options.modes.map((option) => (
             <RuxOption key={option} value={option} label={option} />
           ))}
