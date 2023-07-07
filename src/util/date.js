@@ -6,3 +6,6 @@ export const getDayOfYear = (date) => {
   const day = Math.floor(diff / oneDay);
   return day;
 };
+
+export const determineTimeString = (originalValue) =>
+  new Date(originalValue).toTimeString().slice(0, 8);
