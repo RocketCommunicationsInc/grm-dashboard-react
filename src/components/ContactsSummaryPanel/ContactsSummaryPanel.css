@@ -14,12 +14,12 @@
   position: absolute;
 }
 
-.Contacts-summary-panel__pop-up::part(container) {
-  width: 30rem;
+.Contacts-summary-panel__pop-up::part(popup-content) {
+  background-color: var(--color-background-surface-header);
 }
 
-.Contacts-summary-panel::part(popup-content) {
-  width: 28rem;
+.Contacts-summary-panel__pop-up .pop-up__header {
+  background-color: var(--color-background-base-default);
 }
 
 .Contacts-summary-panel__table-container {

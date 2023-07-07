@@ -51,7 +51,7 @@ const ContactsSummaryTable = ({
 
   return (
     <>
-      <HStack spacing={3} className='space-between p-2'>
+      <HStack spacing={3} className='pop-up__header space-between p-2'>
         <p>{title}</p>
         <Link to='/contacts'>View All</Link>
       </HStack>

@@ -1,5 +1,8 @@
+.table-wrapper {
+  min-width: 350px;
+}
+
 .table-wrapper rux-table {
-  /* table-layout: fixed; */
   width: 100%;
 }
 
