@@ -15,15 +15,14 @@ export const EventLog = memo(({ rowsToShow }) => {
       return events;
     } else
       return events.filter((event) => {
-        const { timestamp, message } = event;
         if (
-          typeof message === 'string' &&
-          message.toLowerCase().includes(filter)
+          typeof event.message === 'string' &&
+          event.message.toLowerCase().includes(filter)
         ) {
           return true;
         } else if (
-          typeof timestamp === 'number' &&
-          setHhMmSs(timestamp).toString().includes(filter)
+          typeof event.timestamp === 'number' &&
+          setHhMmSs(event.timestamp).toString().includes(filter)
         ) {
           return true;
         }
