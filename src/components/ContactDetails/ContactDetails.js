@@ -3,9 +3,9 @@ import {
   RuxButton,
   RuxCheckbox,
   RuxInput,
-  RuxMonitoringIcon,
   RuxOption,
   RuxSelect,
+  RuxStatus,
 } from '@astrouxds/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTTCGRMContacts, useTTCGRMActions } from '@astrouxds/mock-data';
@@ -23,8 +23,9 @@ import {
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
-import { formatReadableTime } from '../../util';
+import { formatReadableTime, capitalize } from '../../util';
 import './ContactDetails.css';
+import EquipmentIcons from './EquipmentIcons/EqupimentIcons';
 
 const ContactDetails = () => {
   const navigate = useNavigate();
@@ -77,14 +78,19 @@ const ContactDetails = () => {
     },
     {
       label: 'State',
-      node: (
-        <RuxInput
-          value={contact.state}
-          readonly={!isEditing}
+      node: isEditing ? (
+        <RuxSelect
           size='small'
+          onRuxchange={handleChange}
+          value={contact.state}
           name='state'
-          onRuxinput={handleChange}
-        />
+        >
+          <RuxOption value='complete' label='Complete' />
+          <RuxOption value='failed' label='Failed' />
+          <RuxOption value='executing' label='Executing' />
+        </RuxSelect>
+      ) : (
+        <RuxInput value={capitalize(contact.state)} size='small' readonly />
       ),
     },
     {
@@ -137,41 +143,77 @@ const ContactDetails = () => {
     },
     {
       label: 'Start Time',
-      node: (
+      node: isEditing ? (
+        <RuxInput
+          value={contact.beginTimestamp}
+          readonly={!isEditing}
+          size='small'
+          type='datetime-local'
+          name='beginTimestamp'
+          onRuxinput={handleChange}
+        />
+      ) : (
         <RuxInput
           value={formatReadableTime(contact.beginTimestamp)}
-          readonly
           size='small'
+          readonly
         />
       ),
     },
     {
       label: 'AOS',
-      node: (
+      node: isEditing ? (
+        <RuxInput
+          value={contact.aos}
+          readonly={!isEditing}
+          size='small'
+          type='datetime-local'
+          name='aos'
+          onRuxinput={handleChange}
+        />
+      ) : (
         <RuxInput
           value={formatReadableTime(contact.aos)}
-          readonly
           size='small'
+          readonly
         />
       ),
     },
     {
       label: 'LOS',
-      node: (
+      node: isEditing ? (
+        <RuxInput
+          value={contact.los}
+          readonly={!isEditing}
+          size='small'
+          type='datetime-local'
+          name='los'
+          onRuxinput={handleChange}
+        />
+      ) : (
         <RuxInput
           value={formatReadableTime(contact.los)}
-          readonly
           size='small'
+          readonly
         />
       ),
     },
     {
       label: 'Stop Time',
-      node: (
+      node: isEditing ? (
+        <RuxInput
+          value={contact.endTimestamp}
+          readonly={!isEditing}
+          size='small'
+          type='datetime-local'
+          name='endTimestamp'
+          onRuxinput={handleChange}
+        />
+      ) : (
         <RuxInput
           value={formatReadableTime(contact.endTimestamp)}
-          readonly
           size='small'
+          readonly
         />
       ),
     },
@@ -189,13 +231,22 @@ const ContactDetails = () => {
           ))}
         </RuxSelect>
       ) : (
-        <RuxInput value={contact.mode} size='small' readonly />
+        // * Placeholder until we have mode data
+        <RuxInput value='Full Automation' size='small' readonly />
       ),
     },
     {
       label: 'Active',
-      node: <RuxCheckbox checked disabled={!isEditing} />,
+      node: <RuxCheckbox className='active-checkbox' checked disabled />,
     },
+  ];
+
+  const configEqupiment = [
+    { value: 'ANT62 BAFB1 SFEP454CH1 ECEU6 WS275 USP450', label: 'Config 1' },
+    { value: 'ANT60 VAFB1 SFEP147CH1 ECEU6 WS487 USP281', label: 'Config 2' },
+    { value: 'ANT180 SAFB1 SFEP472CH1 ECEU6 WS334 USP200', label: 'Config 3' },
+    { value: 'ANT123 VAFB1 SFEP242CH1 ECEU6 WS476 USP248', label: 'Config 4' },
+    { value: 'ANT25 PAFB1 SFEP147CH1 ECEU6 WS334 USP191', label: 'Config 5' },
   ];
 
   const configDetails = [
@@ -205,17 +256,25 @@ const ContactDetails = () => {
         <RuxSelect
           value={contact.equipment}
           size='small'
-          name='contactEquipmentConfig'
+          name='equipment'
           onRuxchange={handleChange}
         >
-          <RuxOption value='Config 1' label='Config 1' />
-          <RuxOption value='Config 2' label='Config 2' />
-          <RuxOption value='Config 3' label='Config 3' />
-          <RuxOption value='Config 4' label='Config 4' />
-          <RuxOption value='Config 5' label='Config 5' />
+          {configEqupiment.map(({ value, label }) => (
+            <RuxOption key={label} value={value} label={label} />
+          ))}
         </RuxSelect>
       ) : (
-        <RuxInput value={contact.equipment} size='small' readonly />
+        <RuxSelect
+          value={contact.equipment}
+          size='small'
+          name='equipment'
+          onRuxchange={handleChange}
+          disabled
+        >
+          {configEqupiment.map(({ value, label }) => (
+            <RuxOption key={label} value={value} label={label} />
+          ))}
+        </RuxSelect>
       ),
     },
   ];
@@ -223,19 +282,19 @@ const ContactDetails = () => {
   const antDetails = [
     {
       label: 'Parameter',
-      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+      node: <RuxInput value='A-9J70' size='small' readonly={!isEditing} />,
     },
     {
       label: 'Parameter',
-      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+      node: <RuxInput value='B-34P1' size='small' readonly={!isEditing} />,
     },
     {
       label: 'Parameter',
-      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+      node: <RuxInput value='C-8K02' size='small' readonly={!isEditing} />,
     },
     {
       label: 'Parameter',
-      node: <RuxInput value='Value' size='small' readonly={!isEditing} />,
+      node: <RuxInput value='D-5L64' size='small' readonly={!isEditing} />,
     },
   ];
 
@@ -245,6 +304,9 @@ const ContactDetails = () => {
         <PanelHeader heading='Contact Details' />
 
         <PanelBody>
+          <h2 className='contact-details-sat'>
+            <RuxStatus status={contact.status} /> {contact.satellite}
+          </h2>
           <ContactLabel contact={contact} />
 
           <DetailsCommonGrid className='Contact-details-grid'>
@@ -259,61 +321,9 @@ const ContactDetails = () => {
               <PanelSubContainer className='config-wrapper'>
                 <DetailsGrid details={configDetails} />
 
-                <div>
-                  ANT1, SLWS6, SB7PLD1, RCVR8, MBS1CH2, SFEP3CH1, UPS104, VHR1,
-                  ENC123
-                </div>
+                <span>{contact.equipment}</span>
 
-                <div>
-                  <RuxMonitoringIcon
-                    status='caution'
-                    icon='antenna'
-                    label='ANT1'
-                  />
-                  <RuxMonitoringIcon
-                    status='normal'
-                    icon='satellite'
-                    label='SLWS6'
-                  />
-                  <RuxMonitoringIcon
-                    status='normal'
-                    icon='satellite'
-                    label='SB7PLD1'
-                  />
-                  <RuxMonitoringIcon
-                    status='normal'
-                    icon='satellite'
-                    label='RCVR8'
-                  />
-                  <RuxMonitoringIcon
-                    status='normal'
-                    icon='satellite'
-                    label='MBS1CH2'
-                  />
-                </div>
-
-                <div>
-                  <RuxMonitoringIcon
-                    status='normal'
-                    icon='satellite'
-                    label='SFEP3CH1'
-                  />
-                  <RuxMonitoringIcon
-                    status='normal'
-                    icon='satellite'
-                    label='UPS104'
-                  />
-                  <RuxMonitoringIcon
-                    status='normal'
-                    icon='satellite'
-                    label='VHR1'
-                  />
-                  <RuxMonitoringIcon
-                    status='normal'
-                    icon='satellite'
-                    label='ENC123'
-                  />
-                </div>
+                <EquipmentIcons equipmentString={contact.equipment} />
               </PanelSubContainer>
 
               <div className='sub-grid'>
