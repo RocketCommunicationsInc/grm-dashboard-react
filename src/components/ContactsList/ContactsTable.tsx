@@ -14,7 +14,7 @@ type PropTypes = {
 
 const columnDefs: ColumnDef[] = [
   { label: 'Priority', property: 'priority' },
-  { label: '', property: 'status' },
+  { label: 'Status', property: 'status' },
   { label: 'IRON', property: 'satellite' },
   { label: 'Ground Station', property: 'ground' },
   { label: 'REV', property: 'rev' },
