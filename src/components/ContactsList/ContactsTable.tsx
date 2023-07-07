@@ -86,16 +86,20 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
           if (!searchValue) {
             return contactsArray;
           } else if (
-            key === 'beginTimestamp' ||
-            'endTimestamp' ||
-            'los' ||
-            'aos'
+            (key === 'beginTimestamp' || 'endTimestamp' || 'los' || 'aos') &&
+            setHhMmSs(searchVal).toString().includes(searchValue)
           ) {
-            return setHhMmSs(searchVal).toString().includes(searchValue);
-          } else if (typeof searchVal === 'string') {
-            return searchVal.toLowerCase().includes(searchValue);
-          } else if (typeof searchVal === 'number') {
-            return searchVal.toString().includes(searchValue);
+            return true;
+          } else if (
+            typeof searchVal === 'string' &&
+            searchVal.toLowerCase().includes(searchValue)
+          ) {
+            return true;
+          } else if (
+            typeof searchVal === 'number' &&
+            searchVal.toString().includes(searchValue)
+          ) {
+            return true;
           }
           return false;
         })
