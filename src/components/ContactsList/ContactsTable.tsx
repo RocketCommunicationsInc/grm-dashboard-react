@@ -5,7 +5,7 @@ import type { Contact } from '@astrouxds/mock-data';
 import './ContactsTable.css';
 import Table from '../../common/Table/Table';
 import type { ColumnDef } from '../../common/Table/Table';
-import { determineTimeString } from '../../util/index';
+import { determineTimeString, capitalize } from '../../util';
 
 type PropTypes = {
   searchValue: string;
@@ -19,7 +19,7 @@ const columnDefs: ColumnDef[] = [
   { label: 'Ground Station', property: 'ground' },
   { label: 'REV', property: 'rev' },
   { label: 'Equipment', property: 'equipment' },
-  { label: 'State', property: 'state' },
+  { label: 'State', property: 'state', valueFn: capitalize },
   {
     label: 'DOY',
     property: 'dayOfYear',

@@ -9,7 +9,7 @@ import {
 import Table from '../../common/Table/Table';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
-import { determineTimeString } from '../../util/index';
+import { determineTimeString, capitalize } from '../../util';
 import './CurrentContactsTable.css';
 import type { ColumnDef } from '../../common/Table/Table';
 
@@ -25,7 +25,7 @@ const columnDefs: ColumnDef[] = [
   { label: 'Ground Station', property: 'ground' },
   { label: 'REV', property: 'rev' },
   { label: 'Equipment String', property: 'equipment' },
-  { label: 'State', property: 'state' },
+  { label: 'State', property: 'state', valueFn: capitalize },
   {
     label: 'DOY',
     property: 'dayOfYear',
