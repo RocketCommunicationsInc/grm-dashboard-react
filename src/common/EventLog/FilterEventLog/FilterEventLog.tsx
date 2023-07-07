@@ -1,19 +1,16 @@
 import { RuxInput } from '@astrouxds/react';
 import './FilterEventLog.css';
-//import { useState } from 'react';
 
-const FilterEventLog = () => {
-  // const [filter, setFilter] = useState();
+type PropTypes = {
+  setFilter: () => void;
+};
 
-  // const handleFilter = (e: any) => {
-  //   setFilter(e.target.value);
-  // };
-
+const FilterEventLog = ({ setFilter }: PropTypes) => {
   return (
     <RuxInput
       type='search'
       placeholder='Filter Log...'
-      // onRuxinput={handleFilter}
+      onRuxinput={setFilter}
     />
   );
 };
