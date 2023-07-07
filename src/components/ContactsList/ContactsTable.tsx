@@ -17,7 +17,7 @@ import {
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
 import './ContactsTable.css';
-import { getDayOfYear } from '../../util/index';
+import { capitalize, getDayOfYear, setHhMmSs } from '../../util/index';
 import { useAppActions } from '../../providers/AppProvider';
 
 type SortDirection = 'ASC' | 'DESC';
@@ -63,17 +63,44 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
   };
 
   const handleClearFilter = () => {
-    // setSearchValue('');
+    setSearchValue('');
     setOpenBanner(false);
   };
 
   const filterContacts = useCallback(
     (contactsArray: Contact[], searchValue: string) => {
-      const filteredForStateContacts = searchValue
-        ? contactsArray.filter((contact) =>
-            contact.satellite.includes(searchValue)
-          )
-        : contactsArray;
+      const searchKeys = [
+        'satellite',
+        'ground',
+        'equipment',
+        'state',
+        'beginTimestamp',
+        'aos',
+        'los',
+        'endTimestamp',
+        'rev',
+      ];
+      const filteredForStateContacts = contactsArray.filter((contact) =>
+        searchKeys.some((key) => {
+          const searchVal = contact[key as keyof typeof contact];
+          if (!searchValue) {
+            return contactsArray;
+          } else if (
+            key === 'beginTimestamp' ||
+            'endTimestamp' ||
+            'los' ||
+            'aos'
+          ) {
+            return setHhMmSs(searchVal).toString().includes(searchValue);
+          } else if (typeof searchVal === 'string') {
+            return searchVal.toLowerCase().includes(searchValue);
+          } else if (typeof searchVal === 'number') {
+            return searchVal.toString().includes(searchValue);
+          }
+          return false;
+        })
+      );
+
       return filteredForStateContacts.map((contact) => contact.id);
     },
     []
@@ -321,7 +348,7 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
                     <RuxTableCell>{contact.rev}</RuxTableCell>
                     <RuxTableCell>{contact.equipment}</RuxTableCell>
                     <RuxTableCell id='state-t-cell'>
-                      {contact.state}
+                      {capitalize(contact.state)}
                     </RuxTableCell>
                     <RuxTableCell>
                       {getDayOfYear(contact.beginTimestamp * 1000)}
