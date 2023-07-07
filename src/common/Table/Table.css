@@ -14,6 +14,11 @@
 .table-wrapper rux-table-header-row .visible {
   visibility: visible;
 }
+
+.table-wrapper rux-table-header-cell:has(rux-icon.visible) {
+  color: var(--color-text-interactive-default);
+}
+
 .table-wrapper rux-table-header-row .hidden {
   visibility: hidden;
 }
