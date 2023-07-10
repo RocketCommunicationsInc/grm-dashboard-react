@@ -1,70 +1,48 @@
-import { useState, useMemo, useCallback } from 'react';
-import { useNavigate } from 'react-router-dom';
-import {
-  RuxContainer,
-  RuxTable,
-  RuxTableHeader,
-  RuxTableHeaderRow,
-  RuxTableHeaderCell,
-  RuxTableRow,
-  RuxTableCell,
-  RuxTableBody,
-  RuxIcon,
-  RuxStatus,
-  RuxNotification,
-  RuxButton,
-} from '@astrouxds/react';
+import { useMemo, useCallback } from 'react';
+import { RuxContainer, RuxNotification, RuxButton } from '@astrouxds/react';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
+import type { ColumnDef } from '../../common/Table/Table';
+import Table from '../../common/Table/Table';
+import { determineTimeString, capitalize, setHhMmSs } from '../../util';
 import './ContactsTable.css';
-import { capitalize, getDayOfYear, setHhMmSs } from '../../util/index';
-import { useAppActions } from '../../providers/AppProvider';
-
-type SortDirection = 'ASC' | 'DESC';
 
 type PropTypes = {
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
 };
 
+const columnDefs: ColumnDef[] = [
+  { label: 'Priority', property: 'priority' },
+  { label: 'Status', property: 'status' },
+  { label: 'IRON', property: 'satellite' },
+  { label: 'Ground Station', property: 'ground' },
+  { label: 'REV', property: 'rev' },
+  { label: 'Equipment', property: 'equipment' },
+  { label: 'State', property: 'state', valueFn: capitalize },
+  {
+    label: 'DOY',
+    property: 'dayOfYear',
+  },
+  {
+    label: 'Start Time',
+    property: 'beginTimestamp',
+    valueFn: determineTimeString,
+  },
+  { label: 'AOS', property: 'aos', valueFn: determineTimeString },
+  { label: 'LOS', property: 'los', valueFn: determineTimeString },
+  {
+    label: 'Stop Time',
+    property: 'endTimestamp',
+    valueFn: determineTimeString,
+  },
+];
+
 const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
-  const navigate = useNavigate();
-  const [openBanner, setOpenBanner] = useState(false);
-  const { dataArray: contactsArray, dataById: contacts } = useTTCGRMContacts();
-  const { investigateContact } = useAppActions();
-  const [sortDirection, setSortDirection] = useState<SortDirection>('ASC');
-  const [sortProp, setSortProp] = useState<keyof Contact | 'priority' | 'doy'>(
-    'id'
-  );
-
-  const handleRowClick = (contact: Contact) => {
-    investigateContact(contact);
-    navigate(`/contacts/${contact.id}`);
-  };
-
-  const handleClick = (event: any) => {
-    const target = event.currentTarget as HTMLElement;
-    const sortProperty = target.dataset.sortprop as keyof Contact;
-    if (sortProperty === sortProp) {
-      // clicked same currently sorted column
-      if (sortDirection === 'ASC') {
-        setSortDirection('DESC');
-        sortContacts(sortProperty, 'DESC');
-      } else {
-        setSortDirection('ASC');
-        sortContacts(sortProperty, 'ASC');
-      }
-    } else {
-      // clicked new column
-      setSortProp(sortProperty);
-      sortContacts(sortProperty, 'ASC');
-      setSortDirection('ASC');
-    }
-  };
+  const { dataArray: contacts } = useTTCGRMContacts();
 
   const handleClearFilter = () => {
     setSearchValue('');
-    setOpenBanner(false);
   };
 
   const filterContacts = useCallback(
@@ -79,6 +57,8 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
         'los',
         'endTimestamp',
         'rev',
+        'priority',
+        'dayOfYear',
       ];
       const filteredForStateContacts = contactsArray.filter((contact) =>
         searchKeys.some((key) => {
@@ -105,282 +85,31 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
         })
       );
 
-      return filteredForStateContacts.map((contact) => contact.id);
+      return filteredForStateContacts;
     },
     []
   );
 
-  const filteredContactIds = useMemo(() => {
-    return filterContacts(contactsArray, searchValue);
-  }, [contactsArray, filterContacts, searchValue]);
-
-  const sortContacts = useCallback(
-    (
-      property: keyof Contact | 'priority' | 'doy',
-      sortDirection: SortDirection
-    ) => {
-      const newSortedContactIds = [...filteredContactIds].sort(
-        (a: string, b: string) => {
-          const firstContact = contacts[a];
-          const secondContact = contacts[b];
-          const firstContactValue = firstContact[property as keyof Contact];
-          const secondContactValue = secondContact[property as keyof Contact];
-          if (sortDirection !== 'ASC') {
-            return String(firstContactValue).localeCompare(
-              String(secondContactValue)
-            );
-          } else {
-            return String(secondContactValue).localeCompare(
-              String(firstContactValue)
-            );
-          }
-        }
-      );
-      return newSortedContactIds;
-    },
-    [contacts, filteredContactIds]
-  );
-
-  const sortedContactIds = useMemo(() => {
-    return sortContacts(sortProp, sortDirection);
-  }, [sortContacts, sortDirection, sortProp]);
+  const filteredContacts = useMemo(() => {
+    return filterContacts(contacts, searchValue);
+  }, [contacts, filterContacts, searchValue]);
 
   return (
-    <main className={`contacts-list-page`}>
-      <RuxContainer>
-        <RuxNotification open={openBanner} small hide-close>
-          One or more filters selected.
-          <RuxButton
-            onClick={handleClearFilter}
-            secondary
-            borderless
-            size='small'
-          >
-            Clear filters
-          </RuxButton>
-          to display all alerts.
-        </RuxNotification>
-        <div className='table-wrapper'>
-          <RuxTable>
-            <RuxTableHeader>
-              <RuxTableHeaderRow>
-                <RuxTableHeaderCell
-                  data-sortprop='priority'
-                  onClick={handleClick}
-                >
-                  Priority
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'priority' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell
-                  data-sortprop='status'
-                  onClick={handleClick}
-                >
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'status' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell
-                  data-sortprop='satellite'
-                  onClick={handleClick}
-                >
-                  IRON
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'satellite' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell
-                  data-sortprop='ground'
-                  onClick={handleClick}
-                >
-                  Ground Station
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'ground' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell data-sortprop='rev' onClick={handleClick}>
-                  REV
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'rev' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell
-                  data-sortprop='equipment'
-                  onClick={handleClick}
-                >
-                  Equipment
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'equipment' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell data-sortprop='state' onClick={handleClick}>
-                  State
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'state' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell data-sortprop='doy' onClick={handleClick}>
-                  DOY
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'doy' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell
-                  data-sortprop='beginTimestamp'
-                  onClick={handleClick}
-                >
-                  Start Time
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={
-                      sortProp === 'beginTimestamp' ? 'visible' : 'hidden'
-                    }
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell data-sortprop='aos' onClick={handleClick}>
-                  AOS
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'aos' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell data-sortprop='los' onClick={handleClick}>
-                  LOS
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={sortProp === 'los' ? 'visible' : 'hidden'}
-                  />
-                </RuxTableHeaderCell>
-                <RuxTableHeaderCell
-                  data-sortprop='endTimestamp'
-                  onClick={handleClick}
-                >
-                  Stop Time
-                  <RuxIcon
-                    icon={
-                      sortDirection === 'ASC'
-                        ? 'arrow-drop-down'
-                        : 'arrow-drop-up'
-                    }
-                    size='small'
-                    className={
-                      sortProp === 'endTimestamp' ? 'visible' : 'hidden'
-                    }
-                  />
-                </RuxTableHeaderCell>
-              </RuxTableHeaderRow>
-            </RuxTableHeader>
-            <RuxTableBody>
-              {sortedContactIds.map((contactId) => {
-                const contact = contacts[contactId];
-                return (
-                  <RuxTableRow
-                    key={contactId}
-                    onClick={() => handleRowClick(contact)}
-                  >
-                    {/* no priority value on contact, using normal as placeholder */}
-                    <RuxTableCell>Normal</RuxTableCell>
-                    <RuxTableCell>
-                      <RuxStatus status={contact.status} />
-                    </RuxTableCell>
-                    <RuxTableCell>{contact.satellite}</RuxTableCell>
-                    <RuxTableCell>{contact.ground}</RuxTableCell>
-                    <RuxTableCell>{contact.rev}</RuxTableCell>
-                    <RuxTableCell>{contact.equipment}</RuxTableCell>
-                    <RuxTableCell id='state-t-cell'>
-                      {capitalize(contact.state)}
-                    </RuxTableCell>
-                    <RuxTableCell>
-                      {getDayOfYear(contact.beginTimestamp * 1000)}
-                    </RuxTableCell>
-                    <RuxTableCell>
-                      {new Date(contact.beginTimestamp)
-                        .toTimeString()
-                        .slice(0, 8)}
-                    </RuxTableCell>
-                    <RuxTableCell>
-                      {new Date(contact.aos).toTimeString().slice(0, 8)}
-                    </RuxTableCell>
-                    <RuxTableCell>
-                      {new Date(contact.los).toTimeString().slice(0, 8)}
-                    </RuxTableCell>
-                    <RuxTableCell>
-                      {new Date(contact.endTimestamp)
-                        .toTimeString()
-                        .slice(0, 8)}
-                    </RuxTableCell>
-                  </RuxTableRow>
-                );
-              })}
-            </RuxTableBody>
-          </RuxTable>
-        </div>
-      </RuxContainer>
-    </main>
+    <RuxContainer>
+      <RuxNotification open={searchValue !== ''} small hide-close>
+        One or more filters selected.
+        <RuxButton
+          onClick={handleClearFilter}
+          secondary
+          borderless
+          size='small'
+        >
+          Clear filters
+        </RuxButton>
+        to display all alerts.
+      </RuxNotification>
+      <Table columnDefs={columnDefs} filteredData={filteredContacts} />
+    </RuxContainer>
   );
 };
 
