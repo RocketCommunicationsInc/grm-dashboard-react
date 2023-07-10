@@ -334,8 +334,9 @@ const ContactDetails = () => {
                 <AffectedContacts contacts={state.affectedContacts} />
               </div>
             </PanelSubContainer>
-
-            <EventLog rowsToShow={16} />
+            <div className='contact-details-log'>
+              <EventLog />
+            </div>
           </DetailsCommonGrid>
         </PanelBody>
 

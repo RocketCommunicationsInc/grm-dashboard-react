@@ -1,35 +1,17 @@
-.log-container {
+.log-wrapper {
+  height: 98%;
+  width: 100%;
   display: flex;
-  flex-direction: column;
 }
 
-.log-container header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-inline: var(--spacing-4);
+rux-log {
+  overflow: auto;
+  height: 100%;
+  flex: 1;
+  min-width: 40rem;
 }
-
-.event-log .log-header {
-  align-items: center;
-  display: grid;
-  gap: var(--spacing-2);
-  grid-template-columns: 2fr 3fr;
-  background-color: var(--color-background-surface-header);
-  padding: var(--spacing-2);
-  padding-right: var(--spacing-6);
-  box-shadow: var(--shadow-overlay);
-  height: 2.625rem;
-}
-
-.event-log .log-list {
-  overflow-y: scroll;
-}
-
-.event-log .log-list li {
-  align-items: center;
-  display: grid;
-  gap: var(--spacing-2);
-  grid-template-columns: 2fr 3fr;
-  padding: var(--spacing-2);
-}
+/* 
+.log-wrapper rux-log::part(log-notification) {
+  max-width: 38.5rem;
+  padding-right: none;
+} */
