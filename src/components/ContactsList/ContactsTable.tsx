@@ -47,34 +47,27 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
 
   const filterContacts = useCallback(
     (contactsArray: Contact[], searchValue: string) => {
-      const searchKeys = [
-        'satellite',
-        'ground',
-        'equipment',
-        'state',
-        'beginTimestamp',
-        'aos',
-        'los',
-        'endTimestamp',
-        'rev',
-        'priority',
-        'dayOfYear',
-      ];
+      if (!searchValue) return contactsArray;
+      const propertyArray = columnDefs.map((def) => def.property);
       const filteredForStateContacts = contactsArray.filter((contact) =>
-        searchKeys.some((key) => {
-          const searchVal = contact[key as keyof typeof contact];
-          if (!searchValue) {
-            return contactsArray;
+        propertyArray.some((key) => {
+          const contactVal = contact[key];
+          if (
+            key === 'beginTimestamp' ||
+            key === 'endTimestamp' ||
+            key === 'los' ||
+            key === 'aos'
+          ) {
+            return setHhMmSs(contactVal).toString().includes(searchValue);
+          } else {
+            return contactVal
+              .toString()
+              .toLowerCase()
+              .includes(searchValue.toLowerCase());
           }
-          return (
-            (searchVal &&
-              searchVal.toString().toLowerCase().includes(searchValue)) ||
-            ((key === 'beginTimestamp' || 'endTimestamp' || 'los' || 'aos') &&
-              setHhMmSs(searchVal).toString().includes(searchValue))
-          );
         })
       );
-      return filteredForStateContacts;
+      return filteredForStateContacts || contactsArray;
     },
     []
   );
