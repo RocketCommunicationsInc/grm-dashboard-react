@@ -65,23 +65,14 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
           const searchVal = contact[key as keyof typeof contact];
           if (!searchValue) {
             return contactsArray;
-          } else if (
-            (key === 'beginTimestamp' || 'endTimestamp' || 'los' || 'aos') &&
-            setHhMmSs(searchVal).toString().includes(searchValue)
-          ) {
-            return true;
-          } else if (
-            typeof searchVal === 'string' &&
-            searchVal.toLowerCase().includes(searchValue)
-          ) {
-            return true;
-          } else if (
-            typeof searchVal === 'number' &&
-            searchVal.toString().includes(searchValue)
-          ) {
-            return true;
+          } else {
+            return (
+              (searchVal &&
+                searchVal.toString().toLowerCase().includes(searchValue)) ||
+              ((key === 'beginTimestamp' || 'endTimestamp' || 'los' || 'aos') &&
+                setHhMmSs(searchVal).toString().includes(searchValue))
+            );
           }
-          return false;
         })
       );
 
