@@ -11,3 +11,7 @@
   max-height: 17rem;
   height: calc(100% - 0.5rem);
 }
+
+.equpiment-details-log rux-log::part(log-notification) {
+  max-width: 42rem;
+}

@@ -33,3 +33,7 @@
 .contact-details-log {
   max-height: 34.5rem;
 }
+
+.contact-details-log rux-log::part(log-notification) {
+  max-width: 40.5rem;
+}
