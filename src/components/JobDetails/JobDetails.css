@@ -56,6 +56,7 @@
   max-height: 22.5rem;
   overflow-y: auto;
   overflow-x: hidden;
+  min-width: 42rem;
 }
 
 .job-details-log rux-log::part(log-notification) {
