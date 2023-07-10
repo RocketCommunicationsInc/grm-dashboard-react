@@ -12,5 +12,6 @@ rux-log {
 }
 
 rux-log::part(log-notification) {
-  max-width: 40rem;
+  max-width: 39rem;
+  padding-right: none;
 }
