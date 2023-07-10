@@ -55,7 +55,9 @@ const EquipmentDetailsPanel = () => {
               ipsum eu ante…
             </p>
           </PanelSubContainer>
-          <EventLog rowsToShow={5} />
+          <div className='equpiment-details-log'>
+            <EventLog />
+          </div>
         </DetailsCommonGrid>
       </PanelBody>
     </PanelContainer>

@@ -50,3 +50,15 @@
   display: flex;
   gap: var(--spacing-3);
 }
+
+.job-details-log {
+  margin-top: var(--spacing-8);
+  max-height: 22.5rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+  min-width: 42rem;
+}
+
+.job-details-log rux-log::part(log-notification) {
+  max-width: 38.5rem;
+}
