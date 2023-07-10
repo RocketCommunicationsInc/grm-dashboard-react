@@ -123,8 +123,9 @@ const JobDetails = () => {
               </RuxSelect>
               <RuxCheckbox checked label='Follow' />
 
-              {/* @ts-expect-error */}
-              <EventLog rowsToShow={6} />
+              <div className='job-details-log'>
+                <EventLog />
+              </div>
             </>
           ) : (
             <>
@@ -159,8 +160,9 @@ const JobDetails = () => {
               />
               <RuxCheckbox disabled checked label='Follow' />
 
-              {/* @ts-expect-error */}
-              <EventLog rowsToShow={6} />
+              <div className='job-details-log'>
+                <EventLog />
+              </div>
             </>
           )}
         </div>
