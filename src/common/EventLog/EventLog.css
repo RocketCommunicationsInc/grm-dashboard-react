@@ -1,7 +1,31 @@
-.log-container {
+.log-wrapper {
+  height: 35rem;
+  width: 40rem;
+  display: flex;
+  border: 2px red solid;
+}
+
+rux-log {
+  height: 100%;
+  overflow: auto;
+  flex: 1;
+  width: 40rem;
+  /* display: flex; */
+}
+
+/* .rux-log slot[name='table-header-row'] .header-event-container {
+  width: 6rem;
+  background-color: rebeccapurple;
+  display: flex;
+}
+
+rux-table slot[name='table-header-row'] .header-event-container {
+  background-color: purple;
+} */
+
+/* .log-container {
   display: flex;
   flex-direction: column;
-  height: 20rem;
 }
 
 .log-container header {
@@ -40,4 +64,4 @@
   gap: var(--spacing-2);
   grid-template-columns: 2fr 3fr;
   padding: var(--spacing-2);
-}
+} */

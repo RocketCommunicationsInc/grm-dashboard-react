@@ -40,6 +40,7 @@ export function getRandomContact() {
 export function generateEvents() {
   return contacts.slice(0, randInt(10, 100)).map((c) => ({
     timestamp: c.contactBeginTimestamp * 1000,
+    status: c.status,
     message: c.contactDetail,
   }));
 }
