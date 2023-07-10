@@ -8,8 +8,8 @@
   gap: var(--spacing-4);
 }
 
-.Global-status-bar__status-indicators :nth-child(2) {
+.software-popup-icon {
   border-right: var(--border-width-xs) solid
     var(--color-background-base-selected);
-  padding-right: var(--spacing-6);
+  padding-right: var(--spacing-4);
 }

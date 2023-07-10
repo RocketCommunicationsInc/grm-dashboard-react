@@ -10,6 +10,7 @@ import {
   RuxPopUp,
 } from '@astrouxds/react';
 import useGlobalStatusBar from './useGlobalStatusBar';
+import AlertPopUp from './AlertPopUp/AlertPopUp';
 import './GlobalStatusBar.css';
 
 const GlobalStatusBar = () => {
@@ -45,6 +46,19 @@ const GlobalStatusBar = () => {
 
       <div className='Global-status-bar__status-indicators' slot='right-side'>
         <RuxMonitoringProgressIcon label='UCA' progress={ucaCount} />
+        <RuxPopUp placement='bottom'>
+          <RuxMenu>
+            <AlertPopUp />
+          </RuxMenu>
+          <RuxMonitoringIcon
+            slot='trigger'
+            icon='mission'
+            status='caution'
+            notifications={ucaCount}
+            label='SOFTWARE'
+            className='software-popup-icon'
+          />
+        </RuxPopUp>
         {Object.keys(statusIcons).map((key) => (
           <RuxMonitoringIcon
             {...statusIcons[key]}
