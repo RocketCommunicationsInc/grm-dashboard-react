@@ -3,19 +3,8 @@ import { memo, useState, useMemo, SetStateAction } from 'react';
 import { generateEvents } from '../../data/data';
 import { setHhMmSs } from '../../util';
 import './EventLog.css';
-import Table from '../Table/Table';
-import { ColumnDef } from '../Table/Table';
 
-type PropTypes = {
-  rowsToShow: number;
-};
-
-const columnDefs = [
-  { label: 'Time', property: 'timestamp' },
-  { label: 'Event', property: 'message' },
-];
-
-export const EventLog = memo(({ rowsToShow }: PropTypes) => {
+export const EventLog = memo(() => {
   const events = generateEvents();
   const [filter, setFilter] = useState('');
 
@@ -35,18 +24,22 @@ export const EventLog = memo(({ rowsToShow }: PropTypes) => {
   const handleFilter = (e: { target: { value: SetStateAction<string> } }) => {
     setFilter(e.target.value);
   };
-  const ruxLog = rux - log.shadowRoot.querySelector('table-header');
-  //  ruxLog.style.display = 'flex'
 
   return (
     <div className='log-wrapper'>
       <RuxLog
-        data={filteredEventLogs.map((event) => ({
-          timestamp: new Date(event.timestamp),
-          status: event.status,
-          message: event.message,
-        }))}
-        filter={filter}
+        data={filteredEventLogs.map((event) => {
+          const message =
+            event.message.length < 62
+              ? event.message
+              : event.message.slice(0, 62) + '...';
+          return {
+            timestamp: new Date(event.timestamp),
+            status: event.status,
+            message: message,
+          };
+        })}
+        filter=''
       />
     </div>
   );

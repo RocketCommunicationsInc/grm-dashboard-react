@@ -5,3 +5,8 @@
 .segmented-button-group rux-segmented-button {
   margin: var(--spacing-2);
 }
+
+.equpiment-details-log {
+  max-height: 17rem;
+  height: calc(100% - 0.75rem);
+}
