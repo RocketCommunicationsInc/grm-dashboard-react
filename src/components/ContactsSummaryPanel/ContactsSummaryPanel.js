@@ -1,7 +1,7 @@
 import { memo, useMemo, useState, useCallback } from 'react';
 import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
-import ContactsSummaryPanelTable from './ContactsSummaryPanelTable';
+import ContactsSummaryTable from './ContactsSummaryTable';
 import Chart from 'react-apexcharts';
 import { RuxPopUp, RuxSlider, RuxIcon } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
@@ -54,7 +54,8 @@ const ContactsSummaryPanel = () => {
   );
 
   const [popup, setPopup] = useState(initialPopup);
-  const { title, length, open, height, left, top, width } = popup;
+  const { title, open, height, left, top, width, startTime, endTime, state } =
+    popup;
 
   const firstDatasets = useMemo(
     () =>
@@ -82,6 +83,9 @@ const ContactsSummaryPanel = () => {
           left: event.pageX - rect.left,
           height,
           width,
+          startTime: '',
+          endTime: '',
+          state: datasets[seriesIndex].name,
         });
       });
     },
@@ -203,7 +207,12 @@ const ContactsSummaryPanel = () => {
           style={{ top, left }}
         >
           <div slot='trigger' style={{ width, height }} />
-          <ContactsSummaryPanelTable {...{ length, title }} />
+          <ContactsSummaryTable
+            title={title}
+            startTime={startTime}
+            endTime={endTime}
+            state={state}
+          />
         </RuxPopUp>
       </div>
     </div>

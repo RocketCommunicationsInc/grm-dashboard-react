@@ -8,7 +8,7 @@ import {
   RuxStatus,
 } from '@astrouxds/react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { useTTCGRMContacts, useTTCGRMActions } from '@astrouxds/mock-data';
 import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
@@ -23,22 +23,22 @@ import {
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
-import { formatReadableTime, capitalize, getDayOfYear } from '../../util';
+import { formatReadableTime, capitalize } from '../../util';
 import './ContactDetails.css';
 import EquipmentIcons from './EquipmentIcons/EqupimentIcons';
 
 const ContactDetails = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const { modifyContact } = useTTCGRMActions();
   const { dataById: contacts } = useTTCGRMContacts();
-  const currentContact = contacts[params.contactId];
-  const { state, dispatch } = useAppContext();
+  const { state } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
-  const [contact, setContact] = useState(state.currentContact);
+  const [contact, setContact] = useState(contacts[params.contactId]);
 
   const handleCancel = () => {
     if (isEditing) {
-      setContact(currentContact);
+      setContact(contacts[params.contactId]);
       setIsEditing(false);
     } else {
       navigate('/contacts');
@@ -48,7 +48,7 @@ const ContactDetails = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsEditing(false);
-    dispatch({ type: 'EDIT_CONTACT', payload: contact });
+    modifyContact(contact);
   };
 
   const handleChange = (e) => {
@@ -62,14 +62,18 @@ const ContactDetails = () => {
     {
       label: 'Priority',
       node: isEditing ? (
-        <RuxSelect size='small' onRuxchange={handleChange}>
+        <RuxSelect
+          value={contact.priority}
+          size='small'
+          name='priority'
+          onRuxchange={handleChange}
+        >
           {options.priorities.map((option) => (
             <RuxOption key={option} value={option} label={option} />
           ))}
         </RuxSelect>
       ) : (
-        // * Placeholder until we have priority data
-        <RuxInput value='Normal' size='small' readonly />
+        <RuxInput value={contact.priority} size='small' readonly />
       ),
     },
     {
@@ -129,10 +133,10 @@ const ContactDetails = () => {
       label: 'DOY',
       node: (
         <RuxInput
-          value={getDayOfYear(contact.beginTimestamp * 1000)}
+          value={contact.dayOfYear}
           readonly={!isEditing}
           size='small'
-          name='contactDOY'
+          name='dayOfYear'
           onRuxinput={handleChange}
         />
       ),
@@ -219,8 +223,8 @@ const ContactDetails = () => {
         <RuxSelect
           value={contact.mode}
           size='small'
-          onRuxchange={handleChange}
           name='mode'
+          onRuxchange={handleChange}
         >
           {options.modes.map((option) => (
             <RuxOption key={option} value={option} label={option} />
