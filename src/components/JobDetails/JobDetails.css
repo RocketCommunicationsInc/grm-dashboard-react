@@ -28,17 +28,7 @@
   width: 10rem;
 }
 
-.conflicts {
-  margin: auto;
-  font-size: var(--font-size-lg);
-}
-
-.job-details-table-section h2 {
-  margin: var(--spacing-4);
-}
-
 .jobs-details-section {
-  width: 45rem;
   padding-inline: var(--spacing-6);
 }
 
@@ -46,12 +36,13 @@
   padding-top: var(--spacing-3);
 }
 
-.job-details-table-section {
-  height: calc(100% - 3.7rem);
-}
-
 .job-details-conflicts-section {
   height: 56.5rem;
+  width: 130%;
+}
+
+.job-details-conflicts-section h2 {
+  margin: var(--spacing-4);
 }
 
 .job-details-panel footer[slot='footer'] {

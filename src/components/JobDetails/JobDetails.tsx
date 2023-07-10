@@ -12,7 +12,7 @@ import { useAppContext } from '../../providers/AppProvider';
 import { useParams, useNavigate } from 'react-router-dom';
 import { EventLog } from '../../common';
 import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
-import ConfdivctsTable from './ConflictsTable';
+import ConflictsTable from './ConflictsTable';
 
 import './JobDetails.css';
 import Stepper from './Stepper/Stepper';
@@ -165,10 +165,8 @@ const JobDetails = () => {
           )}
         </div>
         <RuxContainer className='job-details-conflicts-section'>
-          <div className='job-details-table-section'>
-            <h2>Conflicts ({rows.length})</h2>
-            <ConfdivctsTable />
-          </div>
+          <h2>Conflicts ({rows.length})</h2>
+          <ConflictsTable />
         </RuxContainer>
       </div>
 
