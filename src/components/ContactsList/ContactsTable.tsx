@@ -45,8 +45,6 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
     setSearchValue('');
   };
 
-  console.log(contacts);
-
   const filterContacts = useCallback(
     (contactsArray: Contact[], searchValue: string) => {
       if (!searchValue) return contactsArray;
