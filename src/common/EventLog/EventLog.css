@@ -1,6 +1,6 @@
 .log-wrapper {
   height: 98%;
-  width: 41.5rem;
+  width: 100%;
   display: flex;
 }
 
@@ -8,10 +8,10 @@ rux-log {
   overflow: auto;
   height: 100%;
   flex: 1;
-  width: 40rem;
+  min-width: 40rem;
 }
 
-rux-log::part(log-notification) {
-  max-width: 39rem;
+.log-wrapper rux-log::part(log-notification) {
+  max-width: 38.5rem;
   padding-right: none;
 }
