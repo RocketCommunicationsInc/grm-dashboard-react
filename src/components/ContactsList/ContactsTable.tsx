@@ -1,11 +1,11 @@
 import { useMemo, useCallback } from 'react';
 import { RuxContainer, RuxNotification, RuxButton } from '@astrouxds/react';
-import { useTTCGRMContacts, useTTCGRMAlerts } from '@astrouxds/mock-data';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
-import './ContactsTable.css';
-import Table from '../../common/Table/Table';
 import type { ColumnDef } from '../../common/Table/Table';
-import { determineTimeString, capitalize } from '../../util';
+import Table from '../../common/Table/Table';
+import { determineTimeString, capitalize, setHhMmSs } from '../../util';
+import './ContactsTable.css';
 
 type PropTypes = {
   searchValue: string;
@@ -40,8 +40,7 @@ const columnDefs: ColumnDef[] = [
 
 const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
   const { dataArray: contacts } = useTTCGRMContacts();
-  const { dataArray: alerts } = useTTCGRMAlerts();
-  console.log(alerts);
+
   const handleClearFilter = () => {
     setSearchValue('');
   };
@@ -50,12 +49,27 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
 
   const filterContacts = useCallback(
     (contactsArray: Contact[], searchValue: string) => {
-      const filteredForStateContacts = searchValue
-        ? contactsArray.filter((contact) =>
-            contact.satellite.includes(searchValue)
-          )
-        : contactsArray;
-      return filteredForStateContacts;
+      if (!searchValue) return contactsArray;
+      const propertyArray = columnDefs.map((def) => def.property);
+      const filteredForStateContacts = contactsArray.filter((contact) =>
+        propertyArray.some((key) => {
+          const contactVal = contact[key];
+          if (
+            key === 'beginTimestamp' ||
+            key === 'endTimestamp' ||
+            key === 'los' ||
+            key === 'aos'
+          ) {
+            return setHhMmSs(contactVal).toString().includes(searchValue);
+          } else {
+            return contactVal
+              .toString()
+              .toLowerCase()
+              .includes(searchValue.toLowerCase());
+          }
+        })
+      );
+      return filteredForStateContacts || contactsArray;
     },
     []
   );

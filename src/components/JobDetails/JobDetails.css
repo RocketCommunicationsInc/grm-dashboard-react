@@ -1,0 +1,52 @@
+.jobs-wrapper {
+  display: flex;
+}
+
+.jobs-wrapper rux-textarea {
+  margin-bottom: var(--spacing-6);
+}
+
+.jobs-wrapper rux-input,
+.jobs-wrapper rux-select {
+  margin-block: var(--spacing-2);
+}
+
+.jobs-wrapper rux-input::part(form-field) {
+  flex-direction: row;
+  width: 18rem;
+}
+
+.jobs-wrapper rux-select::part(select) {
+  width: 11.5rem;
+  margin-left: -4rem;
+}
+
+.jobs-wrapper rux-input::part(label),
+.jobs-wrapper rux-select::part(label) {
+  margin-right: var(--spacing-2);
+  margin-top: var(--spacing-1);
+  width: 10rem;
+}
+
+.jobs-details-section {
+  padding-inline: var(--spacing-6);
+}
+
+.jobs-details-section rux-checkbox {
+  padding-top: var(--spacing-3);
+}
+
+.job-details-conflicts-section {
+  height: 56.5rem;
+  width: 130%;
+}
+
+.job-details-conflicts-section h2 {
+  margin: var(--spacing-4);
+}
+
+.job-details-panel footer[slot='footer'] {
+  justify-content: flex-end;
+  display: flex;
+  gap: var(--spacing-3);
+}

@@ -44,3 +44,16 @@ export function generateEvents() {
     message: c.contactDetail,
   }));
 }
+
+export const dummyJob = {
+  jobId: 76029,
+  jobType: 'IT Support',
+  description: 'Updates needed on all desktop computers in main building',
+  startTime: '2023-06-08T16:31',
+  stopTime: '2023-09-08T18:31',
+  technician: 'M. Scott',
+  follow: true,
+  status: 'Approved',
+  createdOn: '2023-06-06T11:42',
+  equpiment: 'ANT7',
+};
