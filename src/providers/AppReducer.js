@@ -21,6 +21,24 @@ export const appReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'EDIT_JOB': {
+      const selectedJob = state.scheduledJobs.find(
+        (job) => job.jobId === payload
+      );
+      const modifiedJob = { ...selectedJob, ...payload };
+      const updatedJobs = state.scheduledJobs.map((job) => {
+        if (job.jobId === payload.jobId) {
+          return modifiedJob;
+        }
+        return job;
+      });
+      return {
+        ...state,
+        scheduledJobs: updatedJobs,
+        currentJob: modifiedJob ? modifiedJob : {},
+      };
+    }
+
     case 'DELETE_ALERTS': {
       const alerts = state.alerts.filter(
         (alert) => !payload.includes(alert.errorId)
@@ -58,7 +76,6 @@ export const appReducer = (state, { type, payload }) => {
         ...payload,
       };
     }
-
     default: {
       throw new Error(`Unhandled app reducer type: ${type}`);
     }

@@ -9,15 +9,15 @@
   flex-direction: row;
 }
 
-.jobs-wrapper {
-  margin-top: var(--spacing-4);
+.job-card-wrapper {
+  margin: var(--spacing-4);
   display: flex;
   flex-wrap: wrap;
   gap: var(--spacing-3);
   justify-content: flex-end;
 }
 
-.jobs-wrapper rux-button {
+.job-card-wrapper rux-button {
   margin-right: auto;
 }
 
@@ -26,6 +26,7 @@
   margin-bottom: var(--spacing-6);
 }
 
-.maintenance-wrapper h2 {
-  margin-bottom: var(--spacing-3);
+.maintenance-wrapper h2,
+.jobs-section h2 {
+  margin: var(--spacing-3);
 }

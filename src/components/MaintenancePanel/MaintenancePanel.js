@@ -15,7 +15,7 @@ import './MaintenancePanel.css';
 const MaintenancePanel = () => {
   const navigate = useNavigate();
   const columns = useMemo(() => columnDefs, []);
-  const { state } = useAppContext();
+  const { state, dispatch } = useAppContext();
 
   const table = useReactTable({
     data: state.scheduledJobs,
@@ -28,27 +28,27 @@ const MaintenancePanel = () => {
     navigate('schedule-job');
   };
 
+  const handleJobDetailsClick = (job) => {
+    dispatch({ type: 'EDIT_JOB', payload: job });
+    navigate('job-details');
+  };
+
   return (
     <RuxContainer className='maintenance-panel'>
       <header slot='header'>Maintenance</header>
       <RuxContainer className='jobs-section'>
         <h2>Jobs</h2>
-        <div className='jobs-wrapper'>
+        <div className='job-card-wrapper'>
           <RuxButton onClick={handleClick}>Schedule Job</RuxButton>
-          <JobIDCard
-            type='IT Support'
-            id='76029'
-            startTime='2023-06-08T16:31'
-            stopTime='2023-09-08T18:31'
-            status='Pending'
-          />
           {state.scheduledJobs.map((job) => (
             <JobIDCard
+              key={job.jobId}
               type={job.jobType}
               id={job.jobId}
               startTime={job.startTime}
               stopTime={job.stopTime}
               status={job.status}
+              viewJob={() => handleJobDetailsClick(job)}
             />
           ))}
         </div>
