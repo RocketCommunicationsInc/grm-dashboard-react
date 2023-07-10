@@ -75,7 +75,6 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
           }
         })
       );
-
       return filteredForStateContacts;
     },
     []
