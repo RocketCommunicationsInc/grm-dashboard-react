@@ -1,8 +1,7 @@
 import { RuxButton, RuxCard, RuxInput } from '@astrouxds/react';
-
 import './JobIDCard.css';
 
-const JobIDCard = ({ id, status, type, startTime, stopTime }) => {
+const JobIDCard = ({ id, status, type, startTime, stopTime, viewJob }) => {
   return (
     <RuxCard className='job-id-card'>
       <div slot='header'>
@@ -27,7 +26,7 @@ const JobIDCard = ({ id, status, type, startTime, stopTime }) => {
         size='small'
         label='Stop'
       />
-      <RuxButton disabled>View Details</RuxButton>
+      <RuxButton onClick={viewJob}>View Details</RuxButton>
     </RuxCard>
   );
 };

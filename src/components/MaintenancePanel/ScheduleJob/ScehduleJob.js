@@ -6,33 +6,36 @@ import {
   RuxOption,
   RuxSelect,
   RuxTextarea,
+  RuxTableHeader,
+  RuxTableHeaderCell,
+  RuxTable,
+  RuxTableHeaderRow,
 } from '@astrouxds/react';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { columnDefs } from './ScheduleJobColumns';
 import { useAppContext } from '../../../providers/AppProvider';
-import { AstroReactTable } from '../../../common';
 import useAlertsPanel from '../../AlertsPanel/useAlertsPanel';
-import {
-  getCoreRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from '@tanstack/react-table';
-import { flexRender } from '@tanstack/react-table';
-
+import ConflictsTable from '../../JobDetails/ConflictsTable';
 import './ScheduleJob.css';
 
 const ScheduleJob = () => {
   const navigate = useNavigate();
   const params = useParams();
-  const columns = useMemo(() => columnDefs, []);
-  const { state, dispatch } = useAppContext();
+  const { dispatch } = useAppContext();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
 
   const uniqueJobId = Math.floor(Math.random() * 90000) + 10000;
-  const statusValues = ['Approved', 'Started', 'Stopped'];
+  const statusValues = [
+    'Approved',
+    'Started',
+    'Stopped',
+    'Submitted',
+    'Online',
+  ];
   const randomStatus = Math.floor(Math.random() * statusValues.length);
+  const equipmentValues = ['ANT3', 'BAFB4', 'ANT9', 'BAFB5', 'ANT12', 'BAFB8'];
+  const randomEqupiment = Math.floor(Math.random() * equipmentValues.length);
 
   const [newJob, setNewJob] = useState({
     jobId: uniqueJobId,
@@ -44,14 +47,9 @@ const ScheduleJob = () => {
     follow: true,
     status: statusValues[randomStatus],
     createdOn: Date.now(),
+    equpiment: equipmentValues[randomEqupiment],
   });
 
-  const table = useReactTable({
-    data: state.contacts,
-    columns,
-    getCoreRowModel: getCoreRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-  });
   const { rows } = useAlertsPanel();
 
   const handleCancel = () => {
@@ -175,23 +173,29 @@ const ScheduleJob = () => {
 
           <div className='table-section'>
             {calculateConflicts ? (
-              <AstroReactTable table={table} isSortable />
+              <ConflictsTable />
             ) : (
-              <div className='Astro-react-table'>
-                <header className='Astro-react-table__header'>
-                  {table.getFlatHeaders().map(({ id, column, getContext }) => (
-                    <div
-                      key={id}
-                      className='Astro-react-table__col'
-                      style={column.columnDef.style}
-                    >
-                      {flexRender(column.columnDef.header, getContext())}
-                    </div>
-                  ))}
-                </header>
-                <span>Conflicts have not been calculated.</span>
-              </div>
+              <RuxTable>
+                <RuxTableHeader>
+                  <RuxTableHeaderRow>
+                    <RuxTableHeaderCell>Status</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>IRON</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Ground Station</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>REV</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Equipment</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>State</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>DOY</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Start Time</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>AOS</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>LOS</RuxTableHeaderCell>
+                    <RuxTableHeaderCell>Stop Time</RuxTableHeaderCell>
+                  </RuxTableHeaderRow>
+                </RuxTableHeader>
+              </RuxTable>
             )}
+            <span className='conflicts-placeholder'>
+              Conflicts have not been calculated.
+            </span>
           </div>
         </RuxContainer>
       </div>
