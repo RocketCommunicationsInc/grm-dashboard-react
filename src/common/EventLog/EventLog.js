@@ -1,10 +1,9 @@
-import { RuxDatetime } from '@astrouxds/react';
+import { RuxDatetime, RuxInput } from '@astrouxds/react';
 import { memo, useState, useMemo } from 'react';
 import { generateEvents } from '../../data/data';
 import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
-import './EventLog.css';
-import FilterEventLog from './FilterEventLog/FilterEventLog';
 import { setHhMmSs } from '../../util';
+import './EventLog.css';
 
 export const EventLog = memo(({ rowsToShow }) => {
   const events = generateEvents();
@@ -15,18 +14,11 @@ export const EventLog = memo(({ rowsToShow }) => {
       return events;
     } else
       return events.filter((event) => {
-        if (
-          typeof event.message === 'string' &&
-          event.message.toLowerCase().includes(filter)
-        ) {
-          return true;
-        } else if (
-          typeof event.timestamp === 'number' &&
-          setHhMmSs(event.timestamp).toString().includes(filter)
-        ) {
-          return true;
-        }
-        return false;
+        return (
+          (event.message && event.message.toLowerCase().includes(filter)) ||
+          (event.timestamp &&
+            setHhMmSs(event.timestamp).toString().includes(filter))
+        );
       });
   }, [events, filter]);
 
@@ -38,7 +30,11 @@ export const EventLog = memo(({ rowsToShow }) => {
     <div className='log-container'>
       <header>
         <h3>Event Log</h3>
-        <FilterEventLog setFilter={handleFilter} />
+        <RuxInput
+          type='search'
+          placeholder='Filter Log...'
+          onRuxinput={handleFilter}
+        />
       </header>
       <PanelSubContainer className='event-log'>
         <div className='log-header'>

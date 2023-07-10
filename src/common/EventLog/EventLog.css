@@ -11,6 +11,13 @@
   margin-inline: var(--spacing-4);
 }
 
+.log-container rux-input {
+  display: flex;
+  width: 13rem;
+  align-items: center;
+  margin-left: 25%;
+}
+
 .event-log .log-header {
   align-items: center;
   display: grid;
