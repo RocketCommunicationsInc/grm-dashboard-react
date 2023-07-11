@@ -1,5 +1,8 @@
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { useTTCGRMAlerts } from '@astrouxds/mock-data';
 import {
+  RuxButton,
+  RuxCheckbox,
+  RuxStatus,
   RuxTable,
   RuxTableBody,
   RuxTableCell,
@@ -8,30 +11,49 @@ import {
   RuxTableHeaderRow,
   RuxTableRow,
 } from '@astrouxds/react';
-import { capitalize, setHhMmSs } from '../../../util';
+import { setHhMmSs } from '../../../util';
+import './AlertPopUp.css';
 
 const AlertPopUp = () => {
-  const { dataArray: contacts } = useTTCGRMContacts();
+  const { dataArray: alerts } = useTTCGRMAlerts();
+
+  const softwareAlerts = alerts.filter(
+    (alert) => alert.category === 'software'
+  );
 
   return (
-    <RuxTable>
-      <RuxTableHeader>
-        <RuxTableHeaderRow>
-          <RuxTableHeaderCell>Severity</RuxTableHeaderCell>
-          <RuxTableHeaderCell>Alert ID</RuxTableHeaderCell>
-          <RuxTableHeaderCell>Time</RuxTableHeaderCell>
-        </RuxTableHeaderRow>
-      </RuxTableHeader>
-      <RuxTableBody>
-        {contacts.map((contact) => (
-          <RuxTableRow>
-            <RuxTableCell>{capitalize(contact.status)}</RuxTableCell>
-            <RuxTableCell>{contact.id.slice(1, 5)}</RuxTableCell>
-            <RuxTableCell>{setHhMmSs(contact.beginTimestamp)}</RuxTableCell>
-          </RuxTableRow>
-        ))}
-      </RuxTableBody>
-    </RuxTable>
+    <div className='pop-up-table-wrapper'>
+      <RuxTable>
+        <RuxTableHeader>
+          <RuxTableHeaderRow>
+            <RuxTableHeaderCell>
+              <RuxCheckbox />
+            </RuxTableHeaderCell>
+            <RuxTableHeaderCell>Severity</RuxTableHeaderCell>
+            <RuxTableHeaderCell>Alert ID</RuxTableHeaderCell>
+            <RuxTableHeaderCell>Time</RuxTableHeaderCell>
+          </RuxTableHeaderRow>
+        </RuxTableHeader>
+        <RuxTableBody>
+          {softwareAlerts.map((alert) => (
+            <RuxTableRow>
+              <RuxTableCell>
+                <RuxCheckbox />
+              </RuxTableCell>
+              <RuxTableCell>
+                <RuxStatus status={alert.status} />
+              </RuxTableCell>
+              <RuxTableCell>{alert.id.slice(1, 6)}</RuxTableCell>
+              <RuxTableCell>{setHhMmSs(alert.timestamp)}</RuxTableCell>
+            </RuxTableRow>
+          ))}
+        </RuxTableBody>
+      </RuxTable>
+      <footer slot='footer'>
+        <RuxButton secondary>Dismiss</RuxButton>
+        <RuxButton>Acknowledge</RuxButton>
+      </footer>
+    </div>
   );
 };
 

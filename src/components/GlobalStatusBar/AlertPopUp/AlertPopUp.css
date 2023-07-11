@@ -1,0 +1,25 @@
+.pop-up-table-wrapper {
+  height: 16rem;
+  width: 21rem;
+  position: relative;
+  color: var(--color-palette-neutral-000);
+  overflow: auto;
+}
+
+.pop-up-table-wrapper rux-table {
+  height: calc(100% - 12rem);
+  overflow: auto;
+}
+
+.pop-up-table-wrapper footer[slot='footer'] {
+  display: flex;
+  gap: var(--spacing-3);
+  position: fixed;
+  bottom: 0;
+  background-color: var(--color-background-surface-default);
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--spacing-2);
+  width: 95%;
+  border-top: 1px solid black;
+}
