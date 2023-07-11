@@ -1,6 +1,5 @@
 import { RuxButton, RuxInput } from '@astrouxds/react';
 import { capitalize, formatReadableTime } from '../../util/util';
-import { useAppContext } from '../../providers/AppProvider';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   AffectedContacts,
@@ -21,8 +20,6 @@ const AlertDetails = () => {
   const { dataById: alerts } = useTTCGRMAlerts();
   const { deleteAlert } = useTTCGRMActions();
   const currentAlert = alerts[params.alertId];
-
-  const { state } = useAppContext();
 
   const handleClick = () => {
     deleteAlert(currentAlert.contactRefId, currentAlert.id);
@@ -90,7 +87,7 @@ const AlertDetails = () => {
               <p>{currentAlert.longMessage}.</p>
             </PanelSubContainer>
 
-            <AffectedContacts contacts={state.affectedContacts} />
+            <AffectedContacts />
           </DetailsCommonGrid>
         </PanelBody>
 

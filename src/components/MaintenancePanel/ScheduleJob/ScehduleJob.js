@@ -14,13 +14,14 @@ import {
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../../providers/AppProvider';
-import useAlertsPanel from '../../AlertsPanel/useAlertsPanel';
 import ConflictsTable from '../../JobDetails/ConflictsTable';
 import './ScheduleJob.css';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
 
 const ScheduleJob = () => {
   const navigate = useNavigate();
   const params = useParams();
+  const { dataArray: contacts } = useTTCGRMContacts();
   const { dispatch } = useAppContext();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
@@ -49,8 +50,6 @@ const ScheduleJob = () => {
     createdOn: Date.now(),
     equpiment: equipmentValues[randomEqupiment],
   });
-
-  const { rows } = useAlertsPanel();
 
   const handleCancel = () => {
     navigate(`/alerts/${params.alertId}`);
@@ -156,7 +155,7 @@ const ScheduleJob = () => {
           {!calculateConflicts ? (
             <h2>Conflicts (0)</h2>
           ) : (
-            <h2>Conflicts ({rows.length})</h2>
+            <h2>Conflicts ({contacts.length})</h2>
           )}
           <span>
             This equpiment may be allocated to contacts within the timeframe of

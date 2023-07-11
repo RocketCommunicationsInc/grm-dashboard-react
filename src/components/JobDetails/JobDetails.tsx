@@ -11,17 +11,17 @@ import {
 import { useAppContext } from '../../providers/AppProvider';
 import { useParams, useNavigate } from 'react-router-dom';
 import { EventLog } from '../../common';
-import useAlertsPanel from '../AlertsPanel/useAlertsPanel';
 import ConflictsTable from './ConflictsTable';
 
 import './JobDetails.css';
 import Stepper from './Stepper/Stepper';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
 
 const JobDetails = () => {
   const { state, dispatch }: any = useAppContext();
   const navigate = useNavigate();
   const params = useParams();
-  const { rows } = useAlertsPanel();
+  const { dataArray: contacts } = useTTCGRMContacts();
   const [job, setJob] = useState(state.currentJob);
   const [isModifying, setIsModifying] = useState(false);
 
@@ -167,7 +167,7 @@ const JobDetails = () => {
           )}
         </div>
         <RuxContainer className='job-details-conflicts-section'>
-          <h2>Conflicts ({rows.length})</h2>
+          <h2>Conflicts ({contacts.length})</h2>
           <ConflictsTable />
         </RuxContainer>
       </div>
