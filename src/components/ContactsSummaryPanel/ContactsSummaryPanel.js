@@ -85,7 +85,7 @@ const ContactsSummaryPanel = () => {
         setPopup({
           title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
           open: true,
-          top: event.pageY - 20 - rect.top,
+          top: event.pageY - rect.top,
           left: event.pageX - rect.left,
           height,
           width,
