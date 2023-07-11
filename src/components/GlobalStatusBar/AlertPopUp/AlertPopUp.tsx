@@ -7,12 +7,18 @@ import {
   RuxTableBody,
   RuxTableCell,
   RuxTableRow,
+  RuxIcon,
 } from '@astrouxds/react';
 import { setHhMmSs } from '../../../util';
 import type { Alert } from '@astrouxds/mock-data';
+import { useState } from 'react';
 import './AlertPopUp.css';
 
+type SortDirection = 'ASC' | 'DESC';
+
 const AlertPopUp = () => {
+  const [sortDirection, setSortDirection] = useState<SortDirection>('ASC');
+
   const { dataArray: alerts } = useTTCGRMAlerts();
   const {
     deleteAlertsWithProp,
@@ -42,6 +48,17 @@ const AlertPopUp = () => {
   const toggleSelected = (alert: Alert) =>
     modifyAlert({ ...alert, selected: !alert.selected });
 
+  const sorteAlertsAsc = [...alerts].sort((a, b) =>
+    a.status < b.status ? -1 : 1
+  );
+  const sorteAlertsDesc = [...alerts].sort((a, b) =>
+    a.status > b.status ? 1 : -1
+  );
+
+  const handleSort = () => {
+    //setSortDirection(sortedAlertsAsc);
+  };
+
   return (
     <div className='popup-wrapper'>
       <RuxTable>
@@ -51,7 +68,16 @@ const AlertPopUp = () => {
             checked={allSelected}
             indeterminate={anySelected && !allSelected}
           />
-          <span>Severity</span>
+          <span onClick={handleSort}>
+            Severity
+            <RuxIcon
+              icon={
+                sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'
+              }
+              size='small'
+              className={sortDirection ? 'visible' : 'hidden'}
+            />
+          </span>
           <span>Alert ID</span>
           <span>Time</span>
         </div>
