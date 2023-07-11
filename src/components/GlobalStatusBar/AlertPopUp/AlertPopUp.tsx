@@ -6,9 +6,6 @@ import {
   RuxTable,
   RuxTableBody,
   RuxTableCell,
-  RuxTableHeader,
-  RuxTableHeaderCell,
-  RuxTableHeaderRow,
   RuxTableRow,
 } from '@astrouxds/react';
 import { setHhMmSs } from '../../../util';
@@ -25,23 +22,24 @@ const AlertPopUp = () => {
     modifyAllAlerts,
     modifyAlert,
   } = useTTCGRMActions();
+  console.log(alerts);
 
   const softwareAlerts = alerts.filter(
     (alert) => alert.category === 'software'
   );
 
   const allSelected = allAlertsHaveProp('selected', true);
-  const selectAll = () => modifyAllAlerts({ selected: true });
-  const selectNone = () => modifyAllAlerts({ selected: false });
+  // const selectAll = () => modifyAllAlerts({ selected: true });
+  // const selectNone = () => modifyAllAlerts({ selected: false });
   const anySelected = anyAlertsHaveProp('selected', true);
   const deleteSelectedAlerts = () => deleteAlertsWithProp('selected', true);
 
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
     if (checkbox.checked === true) {
-      selectAll();
+      modifyAllAlerts({ selected: true });
     } else {
-      selectNone();
+      modifyAllAlerts({ selected: false });
     }
   };
 
@@ -49,40 +47,38 @@ const AlertPopUp = () => {
     modifyAlert({ ...alert, selected: !alert.selected });
 
   return (
-    <div className='pop-up-table-wrapper'>
+    <div className='popup-wrapper'>
       <RuxTable>
-        <RuxTableHeader>
-          <RuxTableHeaderRow>
-            <RuxTableHeaderCell>
-              <RuxCheckbox
-                onRuxchange={selectAllHandler}
-                checked={allSelected}
-                indeterminate={anySelected && !allSelected}
-              />
-            </RuxTableHeaderCell>
-            <RuxTableHeaderCell>Severity</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Alert ID</RuxTableHeaderCell>
-            <RuxTableHeaderCell>Time</RuxTableHeaderCell>
-          </RuxTableHeaderRow>
-        </RuxTableHeader>
-        <RuxTableBody>
-          {softwareAlerts.map((alert) => (
-            <RuxTableRow>
-              <RuxTableCell>
-                <RuxCheckbox
-                  id={alert.id}
-                  checked={alert.selected}
-                  onRuxinput={() => toggleSelected(alert)}
-                />
-              </RuxTableCell>
-              <RuxTableCell>
-                <RuxStatus status={alert.status} />
-              </RuxTableCell>
-              <RuxTableCell>{alert.id.slice(1, 6)}</RuxTableCell>
-              <RuxTableCell>{setHhMmSs(alert.timestamp)}</RuxTableCell>
-            </RuxTableRow>
-          ))}
-        </RuxTableBody>
+        <div>
+          <RuxCheckbox
+            onRuxchange={selectAllHandler}
+            checked={allSelected}
+            indeterminate={anySelected && !allSelected}
+          />
+          <span>Severity</span>
+          <span>Alert ID</span>
+          <span>Time</span>
+        </div>
+        <div className='popup-table-wrapper'>
+          <RuxTableBody>
+            {softwareAlerts.map((alert) => (
+              <RuxTableRow>
+                <RuxTableCell>
+                  <RuxCheckbox
+                    id={alert.contactRefId}
+                    checked={alert.selected}
+                    onRuxinput={() => toggleSelected(alert)}
+                  />
+                </RuxTableCell>
+                <RuxTableCell>
+                  <RuxStatus status={alert.status} />
+                </RuxTableCell>
+                <RuxTableCell>{alert.id.slice(1, 6)}</RuxTableCell>
+                <RuxTableCell>{setHhMmSs(alert.timestamp)}</RuxTableCell>
+              </RuxTableRow>
+            ))}
+          </RuxTableBody>
+        </div>
       </RuxTable>
       <footer slot='footer'>
         <RuxButton
