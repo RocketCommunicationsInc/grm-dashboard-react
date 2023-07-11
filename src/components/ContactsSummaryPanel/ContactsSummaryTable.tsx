@@ -17,7 +17,7 @@ type PropTypes = {
   filteredContacts: Contact[];
 };
 
-const ContactsSummaryTable = ({ title, filteredContacts = [] }: PropTypes) => {
+const ContactsSummaryTable = ({ title, filteredContacts }: PropTypes) => {
   return (
     <>
       <HStack spacing={3} className='pop-up__header space-between p-2'>

@@ -1,4 +1,4 @@
-import { memo, useMemo, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { PanelHeader } from '../../common';
 import ContactsSummaryTable from './ContactsSummaryTable';
 import Chart from 'react-apexcharts';
@@ -23,40 +23,35 @@ const initialDataset = [
   { name: 'Failed', backgroundColor: '#a1e9eb' },
 ];
 
+const labels = [
+  '0300',
+  '0400',
+  '0500',
+  '0600',
+  '0700',
+  '0800',
+  '0900',
+  '1000',
+  '1100',
+  '1200',
+  '1300',
+  '1400',
+  '1500',
+  '1600',
+  '1700',
+  '1800',
+  '1900',
+];
+
 const ContactsSummaryPanel = () => {
   const { dataArray: contacts } = useTTCGRMContacts();
   const [zoomLevel, setZoomLevel] = useState(6);
-  const labels = useMemo(
-    () => [
-      '0300',
-      '0400',
-      '0500',
-      '0600',
-      '0700',
-      '0800',
-      '0900',
-      '1000',
-      '1100',
-      '1200',
-      '1300',
-      '1400',
-      '1500',
-      '1600',
-      '1700',
-      '1800',
-      '1900',
-    ],
-    []
-  );
-  const labelsArr = labels.length - (zoomLevel - 1);
-  const labelsShown = useMemo(
-    () => labels.slice(0, labelsArr),
-    [labels, labelsArr]
-  );
-
   const [popup, setPopup] = useState(initialPopup);
   const { title, open, height, left, top, width, filterLabel, filterState } =
     popup;
+
+  const labelsArr = labels.length - (zoomLevel - 1);
+  const labelsShown = labels.slice(0, labelsArr);
 
   const getFilteredContacts = useCallback(
     (timeLabel, desiredState) => {
@@ -73,18 +68,12 @@ const ContactsSummaryPanel = () => {
     [contacts]
   );
 
-  const firstDatasets = useMemo(
-    () =>
-      initialDataset.map((dataset) => ({
-        ...dataset,
-        data: labelsShown.map((label) => {
-          return getFilteredContacts(label, dataset.name).length;
-        }),
-      })),
-    [getFilteredContacts, labelsShown]
-  );
-
-  const datasets = firstDatasets;
+  const datasets = initialDataset.map((dataset) => ({
+    ...dataset,
+    data: labelsShown.map((label) => {
+      return getFilteredContacts(label, dataset.name).length;
+    }),
+  }));
 
   const onClick = useCallback(
     (event, chartContext, config) => {
@@ -233,4 +222,4 @@ const ContactsSummaryPanel = () => {
   );
 };
 
-export default memo(ContactsSummaryPanel);
+export default ContactsSummaryPanel;
