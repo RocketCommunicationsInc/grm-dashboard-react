@@ -1,10 +1,10 @@
 import { memo, useMemo, useState, useCallback } from 'react';
 import { PanelHeader } from '../../common';
-import { randInt } from '../../util';
 import ContactsSummaryTable from './ContactsSummaryTable';
 import Chart from 'react-apexcharts';
 import { RuxPopUp, RuxSlider, RuxIcon } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
 
 const initialPopup = {
   title: '',
@@ -24,6 +24,7 @@ const initialDataset = [
 ];
 
 const ContactsSummaryPanel = () => {
+  const { dataArray: contacts } = useTTCGRMContacts();
   const [zoomLevel, setZoomLevel] = useState(6);
   const labels = useMemo(
     () => [
@@ -54,16 +55,33 @@ const ContactsSummaryPanel = () => {
   );
 
   const [popup, setPopup] = useState(initialPopup);
-  const { title, open, height, left, top, width, startTime, endTime, state } =
+  const { title, open, height, left, top, width, filterLabel, filterState } =
     popup;
+
+  const getFilteredContacts = useCallback(
+    (timeLabel, desiredState) => {
+      if (!timeLabel || !desiredState) return [];
+      const filteredContacts = contacts.filter((contact) => {
+        const timeStampHour = new Date(contact.beginTimestamp).getHours();
+        return (
+          timeStampHour === Number(timeLabel.slice(0, 2)) &&
+          contact.state === desiredState.toLowerCase()
+        );
+      });
+      return filteredContacts;
+    },
+    [contacts]
+  );
 
   const firstDatasets = useMemo(
     () =>
       initialDataset.map((dataset) => ({
         ...dataset,
-        data: labelsShown.map(() => randInt(4, 6.5)),
+        data: labelsShown.map((label) => {
+          return getFilteredContacts(label, dataset.name).length;
+        }),
       })),
-    [labelsShown]
+    [getFilteredContacts, labelsShown]
   );
 
   const datasets = firstDatasets;
@@ -71,25 +89,23 @@ const ContactsSummaryPanel = () => {
   const onClick = useCallback(
     (event, chartContext, config) => {
       setTimeout(() => {
-        const { seriesIndex } = config;
+        const { seriesIndex, dataPointIndex } = config;
         const chart = document.getElementById('chart-container');
         const rect = chart.getBoundingClientRect();
 
         setPopup({
           title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
-          length: randInt(3, 12),
           open: true,
           top: event.pageY - 20 - rect.top,
           left: event.pageX - rect.left,
           height,
           width,
-          startTime: '',
-          endTime: '',
-          state: datasets[seriesIndex].name,
+          filterLabel: labelsShown[dataPointIndex],
+          filterState: datasets[seriesIndex].name,
         });
       });
     },
-    [datasets, height, width]
+    [datasets, height, labelsShown, width]
   );
 
   const handleZoom = (e) => {
@@ -127,10 +143,10 @@ const ContactsSummaryPanel = () => {
     yaxis: [
       {
         show: true,
-        tickAmount: 10,
+        tickAmount: 7,
         decimalsInFloat: 0,
-        min: 1,
-        max: 24,
+        min: 0,
+        max: 7,
         axisTicks: {
           show: false,
         },
@@ -209,9 +225,7 @@ const ContactsSummaryPanel = () => {
           <div slot='trigger' style={{ width, height }} />
           <ContactsSummaryTable
             title={title}
-            startTime={startTime}
-            endTime={endTime}
-            state={state}
+            filteredContacts={getFilteredContacts(filterLabel, filterState)}
           />
         </RuxPopUp>
       </div>
