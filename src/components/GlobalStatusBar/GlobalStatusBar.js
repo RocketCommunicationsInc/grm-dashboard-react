@@ -11,10 +11,17 @@ import {
 } from '@astrouxds/react';
 import useGlobalStatusBar from './useGlobalStatusBar';
 import AlertPopUp from './AlertPopUp/AlertPopUp';
+import { useTTCGRMAlerts } from '@astrouxds/mock-data';
+
 import './GlobalStatusBar.css';
 
 const GlobalStatusBar = () => {
   const { statusIcons, ucaCount } = useGlobalStatusBar();
+  const { dataArray: alerts } = useTTCGRMAlerts();
+
+  const softwareAlerts = alerts.filter(
+    (alert) => alert.category === 'software'
+  );
 
   return (
     <RuxGlobalStatusBar
@@ -54,7 +61,7 @@ const GlobalStatusBar = () => {
             slot='trigger'
             icon='mission'
             status='caution'
-            notifications={ucaCount}
+            notifications={softwareAlerts.length}
             label='SOFTWARE'
             className='software-popup-icon'
           />

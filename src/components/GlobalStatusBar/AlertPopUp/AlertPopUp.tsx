@@ -10,7 +10,6 @@ import {
 } from '@astrouxds/react';
 import { setHhMmSs } from '../../../util';
 import type { Alert } from '@astrouxds/mock-data';
-
 import './AlertPopUp.css';
 
 const AlertPopUp = () => {
@@ -22,15 +21,12 @@ const AlertPopUp = () => {
     modifyAllAlerts,
     modifyAlert,
   } = useTTCGRMActions();
-  console.log(alerts);
 
   const softwareAlerts = alerts.filter(
     (alert) => alert.category === 'software'
   );
 
   const allSelected = allAlertsHaveProp('selected', true);
-  // const selectAll = () => modifyAllAlerts({ selected: true });
-  // const selectNone = () => modifyAllAlerts({ selected: false });
   const anySelected = anyAlertsHaveProp('selected', true);
   const deleteSelectedAlerts = () => deleteAlertsWithProp('selected', true);
 
