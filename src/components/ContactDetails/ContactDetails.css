@@ -37,3 +37,8 @@
 .contact-details-log rux-log::part(log-notification) {
   max-width: 40.5rem;
 }
+
+.contact-details-page rux-container::part(body) {
+  /* reset a change made in App.css */
+  background-color: initial;
+}

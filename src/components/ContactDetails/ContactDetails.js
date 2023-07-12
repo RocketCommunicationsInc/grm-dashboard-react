@@ -18,7 +18,6 @@ import {
   DetailsGrid,
   EventLog,
   PanelBody,
-  PanelFooter,
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
@@ -339,7 +338,7 @@ const ContactDetails = () => {
           </DetailsCommonGrid>
         </PanelBody>
 
-        <PanelFooter>
+        <footer slot='footer'>
           <RuxButton secondary onClick={handleCancel}>
             Cancel
           </RuxButton>
@@ -348,7 +347,7 @@ const ContactDetails = () => {
           ) : (
             <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
           )}
-        </PanelFooter>
+        </footer>
       </RuxContainer>
     </main>
   );

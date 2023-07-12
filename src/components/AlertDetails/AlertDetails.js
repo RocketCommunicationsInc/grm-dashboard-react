@@ -7,7 +7,6 @@ import {
   DetailsCommonGrid,
   DetailsGrid,
   PanelBody,
-  PanelFooter,
   PanelSubContainer,
 } from '../../common';
 import './AlertDetails.css';
@@ -77,7 +76,6 @@ const AlertDetails = () => {
     <main className={`$alert-details-page`}>
       <RuxContainer>
         <header slot='header'>Alert Details</header>
-
         <PanelBody>
           <DetailsCommonGrid>
             <PanelSubContainer>
@@ -91,13 +89,12 @@ const AlertDetails = () => {
             <AffectedContacts contacts={state.affectedContacts} />
           </DetailsCommonGrid>
         </PanelBody>
-
-        <PanelFooter>
+        <footer slot='footer'>
           <RuxButton secondary onClick={handleClick}>
             Dismiss
           </RuxButton>
           <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
-        </PanelFooter>
+        </footer>
       </RuxContainer>
     </main>
   );
