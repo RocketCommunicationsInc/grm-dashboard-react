@@ -36,6 +36,7 @@
   gap: var(--spacing-2);
   border-bottom: none;
   padding-block: var(--spacing-1);
+  pointer-events: none;
 }
 
 .Equipment-status__legend ul li span {
