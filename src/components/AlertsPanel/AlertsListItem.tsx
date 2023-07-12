@@ -40,7 +40,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
   return (
     <li>
       <RuxAccordion>
-        <RuxAccordionItem>
+        <RuxAccordionItem id={alertItem.id}>
           <div className='accordion-item__content'>
             <div>{alertItem.message}</div>
             <RuxButton icon='launch' onClick={handleClick}>
