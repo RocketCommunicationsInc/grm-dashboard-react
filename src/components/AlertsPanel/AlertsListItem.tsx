@@ -39,7 +39,7 @@ const AlertListItem = ({ alertItem }: PropTypes) => {
 
   return (
     <li>
-      <RuxAccordion>
+      <RuxAccordion key={alertItem.id}>
         <RuxAccordionItem id={alertItem.id}>
           <div className='accordion-item__content'>
             <div>{alertItem.message}</div>

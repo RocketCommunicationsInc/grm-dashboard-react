@@ -40,8 +40,9 @@ const AlertPopUp = () => {
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
     if (checkbox.checked === true) {
-      modifyAllAlerts({ selected: true });
+      softwareAlerts.map((softwareAlerts) => (softwareAlerts.selected = true));
     } else {
+      softwareAlerts.map((softwareAlerts) => (softwareAlerts.selected = false));
       modifyAllAlerts({ selected: false });
     }
   };
@@ -63,7 +64,7 @@ const AlertPopUp = () => {
     []
   );
 
-  const handleClick = () => {
+  const handleSort = () => {
     if ('status' === sortProp) {
       if (sortDirection === 'ASC') {
         setSortDirection('DESC');
@@ -72,11 +73,10 @@ const AlertPopUp = () => {
       }
     } else {
       setSortProp('status');
-      setSortDirection('ASC');
     }
   };
 
-  const displayAlerts = useMemo(() => {
+  const sortedSoftwareAlerts = useMemo(() => {
     return sortAlerts(softwareAlerts, sortDirection);
   }, [softwareAlerts, sortAlerts, sortDirection]);
 
@@ -89,7 +89,7 @@ const AlertPopUp = () => {
             checked={allSelected}
             indeterminate={anySelected && !allSelected}
           />
-          <span data-sortprop='status' onClick={handleClick}>
+          <span data-sortprop='status' onClick={handleSort}>
             Severity
             <RuxIcon
               icon={
@@ -104,13 +104,14 @@ const AlertPopUp = () => {
         </div>
         <div className='popup-table-wrapper'>
           <RuxTableBody>
-            {displayAlerts.map((alert) => (
-              <RuxTableRow>
+            {sortedSoftwareAlerts.map((alert) => (
+              <RuxTableRow key={alert.contactRefId}>
                 <RuxTableCell>
                   <RuxCheckbox
                     id={alert.contactRefId}
                     checked={alert.selected}
                     onRuxinput={() => toggleSelected(alert)}
+                    className='popup-checkbox'
                   />
                 </RuxTableCell>
                 <RuxTableCell>
