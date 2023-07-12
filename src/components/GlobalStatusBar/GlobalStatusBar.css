@@ -1,15 +1,23 @@
-.Global-status-bar rux-icon::part(icon) {
-  padding-bottom: 1.75rem;
-}
-
 .Global-status-bar__status-indicators {
   align-items: center;
   display: flex;
   gap: var(--spacing-4);
 }
 
+rux-monitoring-progress-icon::part(monitoring-label) {
+  margin-top: var(--spacing-1);
+}
+
+rux-monitoring-progress-icon::part(radial-progress) {
+  height: 2.5rem;
+}
+
+rux-monitoring-progress-icon {
+  margin-bottom: var(--spacing-1);
+}
+
 .software-popup-icon {
   border-right: var(--border-width-xs) solid
-    var(--color-background-base-selected);
-  padding-right: var(--spacing-4);
+    var(--color-background-interactive-muted);
+  padding-right: var(--spacing-6);
 }

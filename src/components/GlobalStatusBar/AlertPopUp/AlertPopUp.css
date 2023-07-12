@@ -1,6 +1,6 @@
 .popup-wrapper {
   height: 16rem;
-  width: 18rem;
+  width: 18.75rem;
   color: var(--color-palette-neutral-000);
 }
 
@@ -13,9 +13,23 @@
   box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 40%);
 }
 
+.popup-wrapper div span,
+.popup-wrapper rux-checkbox:nth-of-type(1) {
+  display: flex;
+  align-items: center;
+}
+
+.popup-wrapper div span:nth-of-type(1) {
+  width: 4.25rem;
+}
+
+.popup-wrapper rux-icon {
+  margin-left: -0.25rem;
+}
+
 .popup-table-wrapper {
-  height: 10.25rem;
-  width: 18rem;
+  height: 9.75rem;
+  width: 18.75rem;
   overflow: auto;
 }
 
@@ -28,6 +42,22 @@
   rux-table-row
   rux-table-cell:nth-of-type(3) {
   padding-right: var(--spacing-4);
+}
+
+.popup-table-wrapper rux-status {
+  margin-right: 0.5rem;
+}
+
+.popup-wrapper div span .visible {
+  visibility: visible;
+}
+
+.popup-wrapper div span:nth-of-type(1):has(rux-icon.visible) {
+  color: var(--color-text-interactive-default);
+}
+
+.popup-wrapper div span .hidden {
+  visibility: hidden;
 }
 
 .popup-wrapper footer[slot='footer'] {

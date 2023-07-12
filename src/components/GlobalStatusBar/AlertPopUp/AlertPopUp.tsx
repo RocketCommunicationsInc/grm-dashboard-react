@@ -11,13 +11,14 @@ import {
 } from '@astrouxds/react';
 import { setHhMmSs } from '../../../util';
 import type { Alert } from '@astrouxds/mock-data';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import './AlertPopUp.css';
 
 type SortDirection = 'ASC' | 'DESC';
 
 const AlertPopUp = () => {
   const [sortDirection, setSortDirection] = useState<SortDirection>('ASC');
+  const [sortProp, setSortProp] = useState<keyof Alert>('status');
 
   const { dataArray: alerts } = useTTCGRMAlerts();
   const {
@@ -59,6 +60,42 @@ const AlertPopUp = () => {
     //setSortDirection(sortedAlertsAsc);
   };
 
+  const sortAlerts = useCallback(
+    (alerts: Alert[], property: keyof Alert, sortDirection: SortDirection) => {
+      const newSortedAlerts = [...softwareAlerts].sort((a, b) => {
+        // const firstAlert = alerts[a as any];
+        // const secondAlert = alerts[b as any];
+        // const firstAlertValue = firstAlert[property as keyof Alert];
+        // const secondAlertValue = secondAlert[property as keyof Alert];
+        if (sortDirection !== 'ASC') {
+          return a.status < b.status ? -1 : 1;
+        } else {
+          return a.status > b.status ? 1 : -1;
+        }
+      });
+      return newSortedAlerts;
+    },
+    [softwareAlerts]
+  );
+
+  const handleClick = (event: any) => {
+    const target = event.currentTarget as HTMLElement;
+    const sortProperty = target.dataset.sortprop as keyof Alert;
+    if (sortProperty === sortProp) {
+      if (sortDirection === 'ASC') {
+        setSortDirection('DESC');
+        sortAlerts(softwareAlerts, sortProperty, 'DESC');
+      } else {
+        setSortDirection('ASC');
+        sortAlerts(softwareAlerts, sortProperty, 'ASC');
+      }
+    } else {
+      setSortProp(sortProperty);
+      sortAlerts(softwareAlerts, sortProperty, 'ASC');
+      setSortDirection('ASC');
+    }
+  };
+
   return (
     <div className='popup-wrapper'>
       <RuxTable>
@@ -68,14 +105,14 @@ const AlertPopUp = () => {
             checked={allSelected}
             indeterminate={anySelected && !allSelected}
           />
-          <span onClick={handleSort}>
+          <span data-sortprop='status' onClick={handleClick}>
             Severity
             <RuxIcon
               icon={
                 sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'
               }
               size='small'
-              className={sortDirection ? 'visible' : 'hidden'}
+              className={sortProp === 'status' ? 'visible' : 'hidden'}
             />
           </span>
           <span>Alert ID</span>
