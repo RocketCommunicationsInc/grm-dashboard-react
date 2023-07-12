@@ -20,21 +20,21 @@
 }
 
 .popup-wrapper div span:nth-of-type(1) {
-  width: 4.25rem;
+  width: 3.5rem;
 }
 
 .popup-wrapper rux-icon {
-  margin-left: -0.25rem;
+  margin-left: -0.4rem;
 }
 
 .popup-table-wrapper {
   height: 9.75rem;
   width: 18.75rem;
-  overflow: auto;
+  overflow-y: scroll;
 }
 
 .popup-table-wrapper rux-table-body rux-table-row rux-table-cell {
-  width: 100%;
+  width: 3.25rem;
 }
 
 .popup-table-wrapper
@@ -42,10 +42,6 @@
   rux-table-row
   rux-table-cell:nth-of-type(3) {
   padding-right: var(--spacing-4);
-}
-
-.popup-table-wrapper rux-status {
-  margin-right: 0.5rem;
 }
 
 .popup-wrapper div span .visible {

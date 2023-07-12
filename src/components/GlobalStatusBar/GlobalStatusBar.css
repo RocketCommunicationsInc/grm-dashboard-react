@@ -13,7 +13,7 @@ rux-monitoring-progress-icon::part(radial-progress) {
 }
 
 rux-monitoring-progress-icon {
-  margin-bottom: var(--spacing-1);
+  margin-bottom: 0.325rem;
 }
 
 .software-popup-icon {

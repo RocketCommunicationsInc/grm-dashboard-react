@@ -11,14 +11,14 @@ import {
 } from '@astrouxds/react';
 import { setHhMmSs } from '../../../util';
 import type { Alert } from '@astrouxds/mock-data';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useMemo } from 'react';
 import './AlertPopUp.css';
 
 type SortDirection = 'ASC' | 'DESC';
 
 const AlertPopUp = () => {
   const [sortDirection, setSortDirection] = useState<SortDirection>('ASC');
-  const [sortProp, setSortProp] = useState<keyof Alert>('status');
+  const [sortProp, setSortProp] = useState('');
 
   const { dataArray: alerts } = useTTCGRMAlerts();
   const {
@@ -49,52 +49,36 @@ const AlertPopUp = () => {
   const toggleSelected = (alert: Alert) =>
     modifyAlert({ ...alert, selected: !alert.selected });
 
-  const sorteAlertsAsc = [...alerts].sort((a, b) =>
-    a.status < b.status ? -1 : 1
-  );
-  const sorteAlertsDesc = [...alerts].sort((a, b) =>
-    a.status > b.status ? 1 : -1
-  );
-
-  const handleSort = () => {
-    //setSortDirection(sortedAlertsAsc);
-  };
-
   const sortAlerts = useCallback(
-    (alerts: Alert[], property: keyof Alert, sortDirection: SortDirection) => {
+    (softwareAlerts: Alert[], sortDirection: SortDirection) => {
       const newSortedAlerts = [...softwareAlerts].sort((a, b) => {
-        // const firstAlert = alerts[a as any];
-        // const secondAlert = alerts[b as any];
-        // const firstAlertValue = firstAlert[property as keyof Alert];
-        // const secondAlertValue = secondAlert[property as keyof Alert];
         if (sortDirection !== 'ASC') {
-          return a.status < b.status ? -1 : 1;
+          return a.status > b.status ? -1 : 1;
         } else {
           return a.status > b.status ? 1 : -1;
         }
       });
       return newSortedAlerts;
     },
-    [softwareAlerts]
+    []
   );
 
-  const handleClick = (event: any) => {
-    const target = event.currentTarget as HTMLElement;
-    const sortProperty = target.dataset.sortprop as keyof Alert;
-    if (sortProperty === sortProp) {
+  const handleClick = () => {
+    if ('status' === sortProp) {
       if (sortDirection === 'ASC') {
         setSortDirection('DESC');
-        sortAlerts(softwareAlerts, sortProperty, 'DESC');
       } else {
         setSortDirection('ASC');
-        sortAlerts(softwareAlerts, sortProperty, 'ASC');
       }
     } else {
-      setSortProp(sortProperty);
-      sortAlerts(softwareAlerts, sortProperty, 'ASC');
+      setSortProp('status');
       setSortDirection('ASC');
     }
   };
+
+  const displayAlerts = useMemo(() => {
+    return sortAlerts(softwareAlerts, sortDirection);
+  }, [softwareAlerts, sortAlerts, sortDirection]);
 
   return (
     <div className='popup-wrapper'>
@@ -112,7 +96,7 @@ const AlertPopUp = () => {
                 sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'
               }
               size='small'
-              className={sortProp === 'status' ? 'visible' : 'hidden'}
+              className={sortProp ? 'visible' : 'hidden'}
             />
           </span>
           <span>Alert ID</span>
@@ -120,7 +104,7 @@ const AlertPopUp = () => {
         </div>
         <div className='popup-table-wrapper'>
           <RuxTableBody>
-            {softwareAlerts.map((alert) => (
+            {displayAlerts.map((alert) => (
               <RuxTableRow>
                 <RuxTableCell>
                   <RuxCheckbox
