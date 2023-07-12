@@ -7,7 +7,6 @@ export * from './DetailsGrid/DetailsGrid';
 export * from './EventLog/EventLog';
 export * from './HStack/HStack';
 export * from './Panel/PanelBody/PanelBody';
-export * from './Panel/PanelContainer/PanelContainer';
 export * from './Panel/PanelFooter/PanelFooter';
 export * from './Panel/PanelHeader/PanelHeader';
 export * from './Panel/PanelSubContainer/PanelSubContainer';

@@ -1,8 +1,6 @@
-import { RuxInput, RuxSegmentedButton } from '@astrouxds/react';
+import { RuxInput, RuxSegmentedButton, RuxContainer } from '@astrouxds/react';
 import {
-  PanelHeader,
   PanelBody,
-  PanelContainer,
   PanelSubContainer,
   DetailsCommonGrid,
   DetailsGrid,
@@ -36,8 +34,8 @@ const EquipmentDetailsPanel = () => {
   ];
 
   return (
-    <PanelContainer>
-      <PanelHeader heading='Equipment Details' />
+    <RuxContainer>
+      <header slot='header'>Equipment Details</header>
       <h2 className='p-4'>Black FEP 6566</h2>
       <PanelBody>
         <DetailsCommonGrid>
@@ -60,7 +58,7 @@ const EquipmentDetailsPanel = () => {
           </div>
         </DetailsCommonGrid>
       </PanelBody>
-    </PanelContainer>
+    </RuxContainer>
   );
 };
 

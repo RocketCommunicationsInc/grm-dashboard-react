@@ -1,4 +1,4 @@
-import { RuxButton, RuxInput } from '@astrouxds/react';
+import { RuxButton, RuxInput, RuxContainer } from '@astrouxds/react';
 import { capitalize, formatReadableTime } from '../../util/util';
 import { useAppContext } from '../../providers/AppProvider';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -7,9 +7,7 @@ import {
   DetailsCommonGrid,
   DetailsGrid,
   PanelBody,
-  PanelContainer,
   PanelFooter,
-  PanelHeader,
   PanelSubContainer,
 } from '../../common';
 import './AlertDetails.css';
@@ -77,8 +75,8 @@ const AlertDetails = () => {
 
   return (
     <main className={`$alert-details-page`}>
-      <PanelContainer>
-        <PanelHeader heading='Alert Details' />
+      <RuxContainer>
+        <header slot='header'>Alert Details</header>
 
         <PanelBody>
           <DetailsCommonGrid>
@@ -100,7 +98,7 @@ const AlertDetails = () => {
           </RuxButton>
           <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
         </PanelFooter>
-      </PanelContainer>
+      </RuxContainer>
     </main>
   );
 };

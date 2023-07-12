@@ -6,6 +6,7 @@ import {
   RuxOption,
   RuxSelect,
   RuxStatus,
+  RuxContainer,
 } from '@astrouxds/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTTCGRMContacts, useTTCGRMActions } from '@astrouxds/mock-data';
@@ -17,9 +18,7 @@ import {
   DetailsGrid,
   EventLog,
   PanelBody,
-  PanelContainer,
   PanelFooter,
-  PanelHeader,
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
@@ -300,8 +299,8 @@ const ContactDetails = () => {
 
   return (
     <main className={`contact-details-page`}>
-      <PanelContainer>
-        <PanelHeader heading='Contact Details' />
+      <RuxContainer>
+        <header slot='header'>Contact Details</header>
 
         <PanelBody>
           <h2 className='contact-details-sat'>
@@ -350,7 +349,7 @@ const ContactDetails = () => {
             <RuxButton onClick={() => setIsEditing(true)}>Modify</RuxButton>
           )}
         </PanelFooter>
-      </PanelContainer>
+      </RuxContainer>
     </main>
   );
 };
