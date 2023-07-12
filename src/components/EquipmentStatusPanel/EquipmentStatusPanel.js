@@ -4,7 +4,16 @@ import Chart from 'react-apexcharts';
 import { PanelHeader } from '../../common';
 import './EquipmentStatusPanel.css';
 
+const initialDonuts = [
+  { data: [37, 22, 21, 20], name: 'COMMS' },
+  { data: [43, 17, 25, 15], name: 'DIGITAL' },
+  { data: [26, 34, 30, 10], name: 'FACILITIES' },
+  { data: [27, 20, 33, 20], name: 'RF' },
+];
+
 const EquipmentStatus = () => {
+  const [chart, setChart] = useState(initialDonuts);
+
   const generate = useCallback((max, theCount) => {
     const randomArray = [];
     let currSum = 0;
@@ -30,15 +39,6 @@ const EquipmentStatus = () => {
 
     return randomData;
   }, [generate]);
-
-  const initialDonuts = [
-    { data: [37, 22, 21, 20], name: 'COMMS' },
-    { data: [43, 17, 25, 15], name: 'DIGITAL' },
-    { data: [26, 34, 30, 10], name: 'FACILITIES' },
-    { data: [27, 20, 33, 20], name: 'RF' },
-  ];
-
-  const [chart, setChart] = useState(initialDonuts);
 
   //App updates every 30 seconds
   useEffect(() => {

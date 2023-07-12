@@ -21,7 +21,6 @@ export const AffectedContacts = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(randomContacts);
   return (
     <PanelSubContainer
       className='Affected-contacts'

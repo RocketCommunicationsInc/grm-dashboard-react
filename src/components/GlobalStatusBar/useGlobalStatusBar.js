@@ -4,35 +4,29 @@ import { randInt, timeoutRepeater } from '../../util';
 const initialState = {
   ucaCount: 0,
   statusIcons: {
-    software: {
-      icon: 'processor',
-      label: 'Software',
+    comms: {
+      icon: 'antenna-receive',
+      label: 'COMMS',
       status: 'normal',
-      notifications: randInt(0, 3),
+      notifications: randInt(0, 1),
+    },
+    digital: {
+      icon: 'processor-alt',
+      label: 'DIGITAL',
+      status: 'normal',
+      notifications: randInt(0, 1),
+    },
+    facilities: {
+      icon: 'antenna-off',
+      label: 'FACILITIES',
+      status: 'normal',
+      notifications: randInt(0, 1),
     },
     rf: {
       icon: 'antenna',
       label: 'RF',
       status: 'normal',
-      notifications: randInt(0, 3),
-    },
-    digital: {
-      icon: 'processor-alt',
-      label: 'Digital',
-      status: 'normal',
-      notifications: randInt(0, 3),
-    },
-    comms: {
-      icon: 'antenna-transmit',
-      label: 'Comms',
-      status: 'normal',
-      notifications: randInt(0, 3),
-    },
-    facilities: {
-      icon: 'antenna-receive',
-      label: 'Facilities',
-      status: 'normal',
-      notifications: randInt(0, 3),
+      notifications: randInt(0, 1),
     },
   },
 };
@@ -42,18 +36,6 @@ const reducer = (state, action) => {
     case 'UPDATE_UCA': {
       const ucaCount = state.ucaCount < 100 ? state.ucaCount + 1 : 0;
       return { ...state, ucaCount };
-    }
-    case 'UPDATE_SOFTWARE': {
-      return {
-        ...state,
-        statusIcons: {
-          ...state.statusIcons,
-          software: {
-            ...state.statusIcons.software,
-            notifications: action.payload,
-          },
-        },
-      };
     }
     case 'UPDATE_RF': {
       return {
@@ -118,14 +100,6 @@ const useGlobalStatusBar = () => {
       clearInterval(interval);
     };
   }, []);
-  useEffect(() => {
-    return timeoutRepeater(() => {
-      dispatch({
-        type: 'UPDATE_SOFTWARE',
-        payload: state.statusIcons.software.notifications + 1,
-      });
-    });
-  }, [state.statusIcons.software.notifications]);
   useEffect(() => {
     return timeoutRepeater(() => {
       dispatch({
