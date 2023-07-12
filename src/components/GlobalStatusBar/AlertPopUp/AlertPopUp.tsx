@@ -1,4 +1,4 @@
-import { useTTCGRMAlerts, useTTCGRMActions } from '@astrouxds/mock-data';
+import { useTTCGRMActions } from '@astrouxds/mock-data';
 import {
   RuxButton,
   RuxCheckbox,
@@ -16,11 +16,13 @@ import './AlertPopUp.css';
 
 type SortDirection = 'ASC' | 'DESC';
 
-const AlertPopUp = () => {
+type PropTypes = {
+  softwareAlerts: Alert[];
+};
+
+const AlertPopUp = ({ softwareAlerts }: PropTypes) => {
   const [sortDirection, setSortDirection] = useState<SortDirection>('ASC');
   const [sortProp, setSortProp] = useState('');
-
-  const { dataArray: alerts } = useTTCGRMAlerts();
   const {
     deleteAlertsWithProp,
     anyAlertsHaveProp,
@@ -28,10 +30,6 @@ const AlertPopUp = () => {
     modifyAllAlerts,
     modifyAlert,
   } = useTTCGRMActions();
-
-  const softwareAlerts = alerts.filter(
-    (alert) => alert.category === 'software'
-  );
 
   const allSelected = allAlertsHaveProp('selected', true);
   const anySelected = anyAlertsHaveProp('selected', true);
