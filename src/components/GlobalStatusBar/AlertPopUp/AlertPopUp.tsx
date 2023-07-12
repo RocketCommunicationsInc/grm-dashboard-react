@@ -37,18 +37,18 @@ const AlertPopUp = () => {
   const anySelected = anyAlertsHaveProp('selected', true);
   const deleteSelectedAlerts = () => deleteAlertsWithProp('selected', true);
 
+  const toggleSelected = (alert: Alert) =>
+    modifyAlert({ ...alert, selected: !alert.selected });
+
   const selectAllHandler = (e: CustomEvent) => {
     const checkbox = e.target as HTMLRuxCheckboxElement;
     if (checkbox.checked === true) {
-      softwareAlerts.map((softwareAlerts) => (softwareAlerts.selected = true));
+      softwareAlerts.map((alerts) => toggleSelected(alerts));
     } else {
       softwareAlerts.map((softwareAlerts) => (softwareAlerts.selected = false));
       modifyAllAlerts({ selected: false });
     }
   };
-
-  const toggleSelected = (alert: Alert) =>
-    modifyAlert({ ...alert, selected: !alert.selected });
 
   const sortAlerts = useCallback(
     (softwareAlerts: Alert[], sortDirection: SortDirection) => {
