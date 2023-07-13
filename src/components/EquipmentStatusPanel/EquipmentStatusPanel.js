@@ -1,8 +1,7 @@
 import { Fragment, useCallback, useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
-
-import { PanelHeader } from '../../common';
 import './EquipmentStatusPanel.css';
+import { RuxContainer } from '@astrouxds/react';
 
 const EquipmentStatus = () => {
   const generate = useCallback((max, theCount) => {
@@ -107,8 +106,8 @@ const EquipmentStatus = () => {
   };
 
   return (
-    <>
-      <PanelHeader heading='Current Equipment Status' />
+    <RuxContainer>
+      <div slot='header'>Current Equipment Status</div>
       <div className='Equipment-status__parent'>
         <div className='Equipment-status__chart-container'>
           {chart.map(({ data, name }) => (
@@ -148,7 +147,7 @@ const EquipmentStatus = () => {
           </div>
         </div>
       </div>
-    </>
+    </RuxContainer>
   );
 };
 

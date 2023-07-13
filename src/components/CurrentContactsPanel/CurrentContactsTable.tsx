@@ -80,20 +80,19 @@ const CurrentContactsTable = () => {
     return filterContacts(contactsArray, stateSelection);
   }, [contactsArray, filterContacts, stateSelection]);
 
+  console.log('rerender!');
   return (
     <RuxContainer>
       <div slot='header'>Current Contacts</div>
-      <div className='Current-contacts-panel__header'>
-        <div className='Current-contacts-panel__group'>
-          <div className='summary-data'>
-            <span>{contactsArray.length}</span>Contacts
-          </div>
-          <div className='summary-data failed'>
-            <span>{numFailed}</span>Failed
-          </div>
-          <div className='summary-data'>
-            <span>{numExecuting}</span>Executing
-          </div>
+      <div className='Current-contacts-panel__group' slot='toolbar'>
+        <div className='summary-data'>
+          <span>{contactsArray.length}</span>Contacts
+        </div>
+        <div className='summary-data failed'>
+          <span>{numFailed}</span>Failed
+        </div>
+        <div className='summary-data'>
+          <span>{numExecuting}</span>Executing
         </div>
         <div>
           <RuxSelect
