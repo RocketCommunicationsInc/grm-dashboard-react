@@ -80,7 +80,6 @@ const CurrentContactsTable = () => {
     return filterContacts(contactsArray, stateSelection);
   }, [contactsArray, filterContacts, stateSelection]);
 
-  console.log('rerender!');
   return (
     <RuxContainer>
       <div slot='header'>Current Contacts</div>

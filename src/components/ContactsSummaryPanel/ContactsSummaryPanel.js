@@ -183,8 +183,7 @@ const ContactsSummaryPanel = () => {
   };
 
   return (
-    <RuxContainer>
-      {/* <div className='trending-equipment-panel'> */}
+    <RuxContainer className='trending-equipment-panel'>
       <div slot='header'>Contacts Summary</div>
       <div className='trending-equipment-panel__select' id='chart-container'>
         <div className='slider-wrapper'>
@@ -218,7 +217,6 @@ const ContactsSummaryPanel = () => {
           />
         </RuxPopUp>
       </div>
-      {/* </div> */}
     </RuxContainer>
   );
 };
