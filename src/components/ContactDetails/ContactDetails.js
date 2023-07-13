@@ -9,7 +9,6 @@ import {
 } from '@astrouxds/react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useTTCGRMContacts, useTTCGRMActions } from '@astrouxds/mock-data';
-import { useAppContext } from '../../providers/AppProvider';
 import {
   AffectedContacts,
   ContactLabel,
@@ -32,7 +31,6 @@ const ContactDetails = () => {
   const params = useParams();
   const { modifyContact } = useTTCGRMActions();
   const { dataById: contacts } = useTTCGRMContacts();
-  const { state } = useAppContext();
   const [isEditing, setIsEditing] = useState(false);
   const [contact, setContact] = useState(contacts[params.contactId]);
 
@@ -331,7 +329,7 @@ const ContactDetails = () => {
                   <DetailsGrid details={antDetails} />
                 </PanelSubContainer>
 
-                <AffectedContacts contacts={state.affectedContacts} />
+                <AffectedContacts />
               </div>
             </PanelSubContainer>
             <div className='contact-details-log'>
