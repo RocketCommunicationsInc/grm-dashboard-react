@@ -6,6 +6,5 @@ export * from './DetailsCommonGrid/DetailsCommonGrid';
 export * from './DetailsGrid/DetailsGrid';
 export * from './EventLog/EventLog';
 export * from './HStack/HStack';
-export * from './Panel/PanelHeader/PanelHeader';
 export * from './Panel/PanelSubContainer/PanelSubContainer';
 export * from './TwoDigitTime/TwoDigitTime';
