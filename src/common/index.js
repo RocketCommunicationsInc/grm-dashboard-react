@@ -6,5 +6,5 @@ export * from './DetailsCommonGrid/DetailsCommonGrid';
 export * from './DetailsGrid/DetailsGrid';
 export * from './EventLog/EventLog';
 export * from './HStack/HStack';
-export * from './Panel/PanelSubContainer/PanelSubContainer';
+export * from './RuxChildContainer/RuxChildContainer';
 export * from './TwoDigitTime/TwoDigitTime';

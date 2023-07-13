@@ -1,8 +1,8 @@
-import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
+import { RuxChildContainer } from '../RuxChildContainer/RuxChildContainer';
 import './AffectedContacts.css';
 
 export const AffectedContacts = ({ contacts }) => (
-  <PanelSubContainer
+  <RuxChildContainer
     className='Affected-contacts'
     heading={`Affected Contacts (${contacts.length})`}
   >
@@ -13,5 +13,5 @@ export const AffectedContacts = ({ contacts }) => (
         </li>
       ))}
     </ul>
-  </PanelSubContainer>
+  </RuxChildContainer>
 );

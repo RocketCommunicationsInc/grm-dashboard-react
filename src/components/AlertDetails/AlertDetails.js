@@ -6,7 +6,7 @@ import {
   AffectedContacts,
   DetailsCommonGrid,
   DetailsGrid,
-  PanelSubContainer,
+  RuxChildContainer,
 } from '../../common';
 import './AlertDetails.css';
 import { useTTCGRMAlerts, useTTCGRMActions } from '@astrouxds/mock-data';
@@ -76,13 +76,13 @@ const AlertDetails = () => {
       <RuxContainer>
         <header slot='header'>Alert Details</header>
         <DetailsCommonGrid>
-          <PanelSubContainer>
+          <RuxChildContainer>
             <DetailsGrid details={alertGeneralDetails} />
-          </PanelSubContainer>
+          </RuxChildContainer>
 
-          <PanelSubContainer heading='Description'>
+          <RuxChildContainer heading='Description'>
             <p>{currentAlert.longMessage}.</p>
-          </PanelSubContainer>
+          </RuxChildContainer>
 
           <AffectedContacts contacts={state.affectedContacts} />
         </DetailsCommonGrid>
