@@ -17,7 +17,6 @@ import {
   DetailsCommonGrid,
   DetailsGrid,
   EventLog,
-  PanelBody,
   PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
@@ -300,43 +299,40 @@ const ContactDetails = () => {
     <main className={`contact-details-page`}>
       <RuxContainer>
         <header slot='header'>Contact Details</header>
+        <h2 className='contact-details-sat'>
+          <RuxStatus status={contact.status} /> {contact.satellite}
+        </h2>
+        <ContactLabel contact={contact} />
 
-        <PanelBody>
-          <h2 className='contact-details-sat'>
-            <RuxStatus status={contact.status} /> {contact.satellite}
-          </h2>
-          <ContactLabel contact={contact} />
+        <DetailsCommonGrid className='Contact-details-grid'>
+          <PanelSubContainer>
+            <DetailsGrid details={generalDetails} />
+          </PanelSubContainer>
 
-          <DetailsCommonGrid className='Contact-details-grid'>
-            <PanelSubContainer>
-              <DetailsGrid details={generalDetails} />
+          <PanelSubContainer
+            heading='Equipment String'
+            className='Contact-details-grid__equipment-string'
+          >
+            <PanelSubContainer className='config-wrapper'>
+              <DetailsGrid details={configDetails} />
+
+              <span>{contact.equipment}</span>
+
+              <EquipmentIcons equipmentString={contact.equipment} />
             </PanelSubContainer>
 
-            <PanelSubContainer
-              heading='Equipment String'
-              className='Contact-details-grid__equipment-string'
-            >
-              <PanelSubContainer className='config-wrapper'>
-                <DetailsGrid details={configDetails} />
-
-                <span>{contact.equipment}</span>
-
-                <EquipmentIcons equipmentString={contact.equipment} />
+            <div className='sub-grid'>
+              <PanelSubContainer heading='ANT1 Details'>
+                <DetailsGrid details={antDetails} />
               </PanelSubContainer>
 
-              <div className='sub-grid'>
-                <PanelSubContainer heading='ANT1 Details'>
-                  <DetailsGrid details={antDetails} />
-                </PanelSubContainer>
-
-                <AffectedContacts contacts={state.affectedContacts} />
-              </div>
-            </PanelSubContainer>
-            <div className='contact-details-log'>
-              <EventLog />
+              <AffectedContacts contacts={state.affectedContacts} />
             </div>
-          </DetailsCommonGrid>
-        </PanelBody>
+          </PanelSubContainer>
+          <div className='contact-details-log'>
+            <EventLog />
+          </div>
+        </DetailsCommonGrid>
 
         <footer slot='footer'>
           <RuxButton secondary onClick={handleCancel}>

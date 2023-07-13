@@ -6,7 +6,6 @@ import {
   AffectedContacts,
   DetailsCommonGrid,
   DetailsGrid,
-  PanelBody,
   PanelSubContainer,
 } from '../../common';
 import './AlertDetails.css';
@@ -76,19 +75,17 @@ const AlertDetails = () => {
     <main className={`$alert-details-page`}>
       <RuxContainer>
         <header slot='header'>Alert Details</header>
-        <PanelBody>
-          <DetailsCommonGrid>
-            <PanelSubContainer>
-              <DetailsGrid details={alertGeneralDetails} />
-            </PanelSubContainer>
+        <DetailsCommonGrid>
+          <PanelSubContainer>
+            <DetailsGrid details={alertGeneralDetails} />
+          </PanelSubContainer>
 
-            <PanelSubContainer heading='Description'>
-              <p>{currentAlert.longMessage}.</p>
-            </PanelSubContainer>
+          <PanelSubContainer heading='Description'>
+            <p>{currentAlert.longMessage}.</p>
+          </PanelSubContainer>
 
-            <AffectedContacts contacts={state.affectedContacts} />
-          </DetailsCommonGrid>
-        </PanelBody>
+          <AffectedContacts contacts={state.affectedContacts} />
+        </DetailsCommonGrid>
         <footer slot='footer'>
           <RuxButton secondary onClick={handleClick}>
             Dismiss
