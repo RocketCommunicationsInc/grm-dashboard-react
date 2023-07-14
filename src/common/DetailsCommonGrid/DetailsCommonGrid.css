@@ -3,4 +3,5 @@
 
   display: grid;
   grid-template-columns: var(--columns);
+  gap: var(--spacing-4);
 }

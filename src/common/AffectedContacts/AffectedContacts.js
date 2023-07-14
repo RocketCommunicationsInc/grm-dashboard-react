@@ -4,7 +4,6 @@ import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import { randInt } from '../../util';
 import './AffectedContacts.css';
 import { useEffect } from 'react';
-import { RuxContainer } from '@astrouxds/react';
 
 export const AffectedContacts = () => {
   const navigate = useNavigate();
@@ -22,10 +21,8 @@ export const AffectedContacts = () => {
   }, []);
 
   return (
-    <RuxContainer className='child-container Affected-contacts'>
-      <header slot='header'>
-        Affected Contacts (${randomContacts.length})
-      </header>
+    <div className='Affected-contacts'>
+      <header>Affected Contacts ({randomContacts.length})</header>
       <ul>
         {randomContacts.map((c, i) => (
           <li key={c.id + i} onClick={() => navigate(`/contacts/${c.id}`)}>
@@ -33,6 +30,6 @@ export const AffectedContacts = () => {
           </li>
         ))}
       </ul>
-    </RuxContainer>
+    </div>
   );
 };

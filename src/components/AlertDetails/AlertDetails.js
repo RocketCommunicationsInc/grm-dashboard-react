@@ -1,4 +1,9 @@
-import { RuxButton, RuxInput, RuxContainer } from '@astrouxds/react';
+import {
+  RuxButton,
+  RuxInput,
+  RuxContainer,
+  RuxTextarea,
+} from '@astrouxds/react';
 import { capitalize, formatReadableTime } from '../../util/util';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AffectedContacts, DetailsCommonGrid, DetailsGrid } from '../../common';
@@ -64,18 +69,18 @@ const AlertDetails = () => {
   ];
 
   return (
-    <main className={`$alert-details-page`}>
+    <main className={`$alert-details-page alert-details-page`}>
       <RuxContainer>
         <header slot='header'>Alert Details</header>
         <DetailsCommonGrid>
-          <RuxContainer className='child-container'>
+          <div>
             <DetailsGrid details={alertGeneralDetails} />
-          </RuxContainer>
+          </div>
 
-          <RuxContainer className='child-container'>
-            <header slot='header'>Description</header>
-            <p>{currentAlert.longMessage}.</p>
-          </RuxContainer>
+          <div class='alert-description'>
+            <header>Description</header>
+            <RuxTextarea value={currentAlert.longMessage} />
+          </div>
 
           <AffectedContacts />
         </DetailsCommonGrid>

@@ -1,6 +1,32 @@
 .alert-details-page {
   display: flex;
-  flex-direction: column;
+  flex-flow: column;
   padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
   gap: var(--spacing-3);
+
+  & rux-container::part(body) {
+    padding: var(--spacing-4);
+  }
+
+  & rux-textarea {
+    height: 100%;
+
+    &::part(textarea) {
+      resize: none;
+      height: 100%;
+    }
+    &::part(form-field) {
+      height: 100%;
+    }
+  }
+
+  & .alert-description {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+
+    &::last-child {
+      flex: 1;
+    }
+  }
 }
