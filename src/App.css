@@ -46,3 +46,16 @@ rux-status {
 rux-status::part(status) {
   margin-inline: auto;
 }
+
+/* Global Filter Notification Style */
+.filter-notification {
+  background-color: var(--color-background-surface-default);
+  padding: var(--spacing-2);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  & rux-button::part(container) {
+    padding-inline: var(--spacing-2);
+    box-shadow: none;
+  }
+}
