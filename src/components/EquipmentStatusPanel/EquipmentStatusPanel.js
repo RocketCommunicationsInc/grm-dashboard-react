@@ -4,10 +4,10 @@ import './EquipmentStatusPanel.css';
 import { RuxContainer } from '@astrouxds/react';
 
 const initialDonuts = [
-  { data: [37, 22, 21, 20], name: 'COMMS' },
-  { data: [43, 17, 25, 15], name: 'DIGITAL' },
-  { data: [26, 34, 30, 10], name: 'FACILITIES' },
-  { data: [27, 20, 33, 20], name: 'RF' },
+  { data: [37, 22, 21, 20], label: 'COMMS' },
+  { data: [43, 17, 25, 15], label: 'DIGITAL' },
+  { data: [26, 34, 30, 10], label: 'FACILITIES' },
+  { data: [27, 20, 33, 20], label: 'RF' },
 ];
 
 const EquipmentStatus = () => {
@@ -110,17 +110,17 @@ const EquipmentStatus = () => {
       <div slot='header'>Current Equipment Status</div>
       <div className='Equipment-status__parent'>
         <div className='Equipment-status__chart-container'>
-          {chart.map(({ data, name }) => (
-            <Fragment key={name}>
+          {chart.map(({ data, label }) => (
+            <Fragment key={label}>
               <div className='Equipment-status__pie-container'>
-                <span>{name}</span>
+                <span>{label}</span>
                 <Chart
                   type='pie'
                   width={250}
                   height={250}
                   series={data}
                   options={options}
-                  key={name}
+                  key={label}
                 />
               </div>
             </Fragment>
