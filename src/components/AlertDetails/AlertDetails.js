@@ -1,14 +1,10 @@
-import { RuxButton, RuxInput } from '@astrouxds/react';
+import { RuxButton, RuxInput, RuxContainer } from '@astrouxds/react';
 import { capitalize, formatReadableTime } from '../../util/util';
 import { useNavigate, useParams } from 'react-router-dom';
 import {
   AffectedContacts,
   DetailsCommonGrid,
   DetailsGrid,
-  PanelBody,
-  PanelContainer,
-  PanelFooter,
-  PanelHeader,
   PanelSubContainer,
 } from '../../common';
 import './AlertDetails.css';
@@ -74,30 +70,26 @@ const AlertDetails = () => {
 
   return (
     <main className={`$alert-details-page`}>
-      <PanelContainer>
-        <PanelHeader heading='Alert Details' />
+      <RuxContainer>
+        <header slot='header'>Alert Details</header>
+        <DetailsCommonGrid>
+          <PanelSubContainer>
+            <DetailsGrid details={alertGeneralDetails} />
+          </PanelSubContainer>
 
-        <PanelBody>
-          <DetailsCommonGrid>
-            <PanelSubContainer>
-              <DetailsGrid details={alertGeneralDetails} />
-            </PanelSubContainer>
+          <PanelSubContainer heading='Description'>
+            <p>{currentAlert.longMessage}.</p>
+          </PanelSubContainer>
 
-            <PanelSubContainer heading='Description'>
-              <p>{currentAlert.longMessage}.</p>
-            </PanelSubContainer>
-
-            <AffectedContacts />
-          </DetailsCommonGrid>
-        </PanelBody>
-
-        <PanelFooter>
+          <AffectedContacts />
+        </DetailsCommonGrid>
+        <footer slot='footer'>
           <RuxButton secondary onClick={handleClick}>
             Dismiss
           </RuxButton>
           <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
-        </PanelFooter>
-      </PanelContainer>
+        </footer>
+      </RuxContainer>
     </main>
   );
 };

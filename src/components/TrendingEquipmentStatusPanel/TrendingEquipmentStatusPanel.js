@@ -1,8 +1,8 @@
 import { memo } from 'react';
 import Chart from 'react-apexcharts';
-import { PanelHeader } from '../../common';
 import { randInt } from '../../util';
 import './TrendingEquipmentStatusPanel.css';
+import { RuxContainer } from '@astrouxds/react';
 
 const TrendingEquipmentStatusPanel = () => {
   const labels = [
@@ -176,12 +176,12 @@ const TrendingEquipmentStatusPanel = () => {
   };
 
   return (
-    <div className='trending-equipment-panel'>
-      <PanelHeader heading='Trending Equipment Status' />
+    <RuxContainer className='trending-equipment-panel'>
+      <div slot='header'>Trending Equipment Status</div>
       <div className='trending-equipment-panel__select'>
         <Chart type='line' options={options} series={series} height='100%' />
       </div>
-    </div>
+    </RuxContainer>
   );
 };
 

@@ -1,8 +1,5 @@
-import { RuxInput, RuxSegmentedButton } from '@astrouxds/react';
+import { RuxInput, RuxSegmentedButton, RuxContainer } from '@astrouxds/react';
 import {
-  PanelHeader,
-  PanelBody,
-  PanelContainer,
   PanelSubContainer,
   DetailsCommonGrid,
   DetailsGrid,
@@ -36,31 +33,29 @@ const EquipmentDetailsPanel = () => {
   ];
 
   return (
-    <PanelContainer>
-      <PanelHeader heading='Equipment Details' />
+    <RuxContainer>
+      <header slot='header'>Equipment Details</header>
       <h2 className='p-4'>Black FEP 6566</h2>
-      <PanelBody>
-        <DetailsCommonGrid>
-          <PanelSubContainer>
-            <section className='segmented-button-group'>
-              <RuxSegmentedButton size='small' data={firstButton} />
-              <RuxSegmentedButton size='small' data={secondButton} />
-            </section>
-            <DetailsGrid details={equipmentGeneralDetails} />
-          </PanelSubContainer>
-          <PanelSubContainer heading='Description'>
-            <p>
-              Aenean ac sagittis odio. Pellentesque vehicula, justo et
-              sollicitudin bibendum, urna libero ornare augue, a bibendum nulla
-              ipsum eu ante…
-            </p>
-          </PanelSubContainer>
-          <div className='equpiment-details-log'>
-            <EventLog />
-          </div>
-        </DetailsCommonGrid>
-      </PanelBody>
-    </PanelContainer>
+      <DetailsCommonGrid>
+        <PanelSubContainer>
+          <section className='segmented-button-group'>
+            <RuxSegmentedButton size='small' data={firstButton} />
+            <RuxSegmentedButton size='small' data={secondButton} />
+          </section>
+          <DetailsGrid details={equipmentGeneralDetails} />
+        </PanelSubContainer>
+        <PanelSubContainer heading='Description'>
+          <p>
+            Aenean ac sagittis odio. Pellentesque vehicula, justo et
+            sollicitudin bibendum, urna libero ornare augue, a bibendum nulla
+            ipsum eu ante…
+          </p>
+        </PanelSubContainer>
+        <div className='equpiment-details-log'>
+          <EventLog />
+        </div>
+      </DetailsCommonGrid>
+    </RuxContainer>
   );
 };
 

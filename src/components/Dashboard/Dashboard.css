@@ -2,34 +2,53 @@
   display: grid;
   /* Screen height minus the height of the Global Status Bar */
   height: calc(100vh - 6rem);
-  padding: var(--spacing-4) var(--spacing-6);
+  padding: var(--spacing-3);
   gap: var(--spacing-3);
   grid-template-columns: minmax(37.5rem, 1fr) minmax(0, 2fr);
-  grid-template-rows: 3.75rem repeat(2, minmax(0, 1fr));
+  grid-template-rows: 3.75rem minmax(0, 1fr);
   grid-template-areas:
     'left-panel tabs-bar'
-    'left-panel right-top-panel'
-    'left-panel right-bottom-panel';
+    'left-panel right-panel'
+    'left-panel right-panel';
 }
 
 .Dashboard-page__left-panel {
   grid-area: left-panel;
-  background-color: var(--color-background-surface-default);
-  box-shadow: var(--container-color-border) 0 0 0 1px;
 }
 
 .Dashboard-page__tabs-bar {
   grid-area: tabs-bar;
 }
 
-.Dashboard-page__right-top-panel {
-  grid-area: right-top-panel;
-  background-color: var(--color-background-surface-default);
-  box-shadow: var(--container-color-border) 0 0 0 1px;
+rux-tab-panels {
+  grid-area: right-panel;
+  display: grid;
+  grid-template-areas: 'panel-area';
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  overflow: hidden;
 }
 
-.Dashboard-page__right-bottom-panel {
-  grid-area: right-bottom-panel;
-  background-color: var(--color-background-surface-default);
-  box-shadow: var(--container-color-border) 0 0 0 1px;
+rux-tab-panel {
+  grid-area: panel-area;
+  display: grid;
+  grid-template-areas:
+    'panel-top'
+    'panel-bottom';
+  gap: var(--spacing-3);
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr);
+  overflow: hidden;
+}
+
+rux-tab-panel.hidden {
+  display: none;
+}
+
+rux-tab-panel .Dashboard-page__right-top-panel {
+  grid-area: panel-top;
+}
+
+rux-tab-panel .Dashboard-page__right-bottom-panel {
+  grid-area: panel-bottom;
 }

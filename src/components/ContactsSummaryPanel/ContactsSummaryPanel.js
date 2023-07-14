@@ -1,8 +1,7 @@
 import { useState, useCallback } from 'react';
-import { PanelHeader } from '../../common';
 import ContactsSummaryTable from './ContactsSummaryTable';
 import Chart from 'react-apexcharts';
-import { RuxPopUp, RuxSlider, RuxIcon } from '@astrouxds/react';
+import { RuxPopUp, RuxSlider, RuxIcon, RuxContainer } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 
@@ -184,8 +183,8 @@ const ContactsSummaryPanel = () => {
   };
 
   return (
-    <div className='trending-equipment-panel'>
-      <PanelHeader heading='Contacts Summary' />
+    <RuxContainer className='trending-equipment-panel'>
+      <div slot='header'>Contacts Summary</div>
       <div className='trending-equipment-panel__select' id='chart-container'>
         <div className='slider-wrapper'>
           <RuxIcon icon='search' size='extra-small' />
@@ -218,7 +217,7 @@ const ContactsSummaryPanel = () => {
           />
         </RuxPopUp>
       </div>
-    </div>
+    </RuxContainer>
   );
 };
 

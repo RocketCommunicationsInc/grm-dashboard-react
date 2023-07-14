@@ -15,8 +15,12 @@ rux-container::part(body) {
   flex-direction: column;
   overflow-y: hidden;
   padding: 0;
-  /* to color small space above scrollbar */
-  background-color: var(--color-background-base-header);
+}
+
+rux-container footer[slot='footer'] {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: flex-end;
 }
 
 /* GlOBAL TABLE STYLES */

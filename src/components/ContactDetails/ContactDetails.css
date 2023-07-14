@@ -12,7 +12,7 @@
 }
 
 .Contact-details-page {
-  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
+  padding: var(--spacing-0) var(--spacing-3) var(--spacing-3);
 }
 
 .contact-details-sat {
@@ -27,7 +27,7 @@
 
 .contact-details-page {
   height: calc(100vh - 10.25rem);
-  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
+  padding: var(--spacing-0) var(--spacing-3) var(--spacing-3);
 }
 
 .contact-details-log {
@@ -36,4 +36,9 @@
 
 .contact-details-log rux-log::part(log-notification) {
   max-width: 40.5rem;
+}
+
+.contact-details-page rux-container::part(body) {
+  /* reset a change made in App.css */
+  background-color: initial;
 }

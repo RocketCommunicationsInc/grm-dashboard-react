@@ -4,11 +4,12 @@
   height: 100%;
 }
 
+.trending-equipment-panel::part(body) {
+  overflow: hidden;
+}
+
 .trending-equipment-panel__select {
-  /* display: flex;
-  flex-direction: row-reverse; */
   width: 100%;
-  padding: var(--spacing-4);
   height: 100%;
 }
 
