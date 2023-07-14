@@ -24,10 +24,6 @@ const MaintenancePanel = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  const handleClick = () => {
-    navigate('schedule-job');
-  };
-
   const handleJobDetailsClick = (job) => {
     dispatch({ type: 'EDIT_JOB', payload: job });
     navigate('job-details');
@@ -39,7 +35,9 @@ const MaintenancePanel = () => {
       <RuxContainer className='jobs-section'>
         <h2>Jobs</h2>
         <div className='job-card-wrapper'>
-          <RuxButton onClick={handleClick}>Schedule Job</RuxButton>
+          <RuxButton onClick={() => navigate('schedule-job')}>
+            Schedule Job
+          </RuxButton>
           {state.scheduledJobs.map((job) => (
             <JobIDCard
               key={job.jobId}

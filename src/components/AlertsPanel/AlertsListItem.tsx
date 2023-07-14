@@ -6,12 +6,8 @@ import {
   RuxAccordionItem,
 } from '@astrouxds/react';
 import { useNavigate } from 'react-router-dom';
-import { useAppContext } from '../../providers/AppProvider';
-import { useTTCGRMActions, useTTCGRMContacts } from '@astrouxds/mock-data';
+import { useTTCGRMActions } from '@astrouxds/mock-data';
 import type { Alert } from '@astrouxds/mock-data';
-
-import { randInt } from '../../util';
-import { randomContact } from '../../data/data';
 
 type PropTypes = {
   alertItem: Alert;
@@ -19,21 +15,11 @@ type PropTypes = {
 
 const AlertListItem = ({ alertItem }: PropTypes) => {
   const navigate = useNavigate();
-  const { dispatch } = useAppContext() as any;
   const { modifyAlert } = useTTCGRMActions();
-  const { dataById: contactsById } = useTTCGRMContacts();
   const toggleSelected = (alert: Alert) =>
     modifyAlert({ ...alert, selected: !alertItem.selected });
 
   const handleClick = () => {
-    dispatch({
-      type: 'INVESTIGATE_ALERT',
-      payload: {
-        currentAlert: alertItem,
-        currentContact: contactsById[alertItem.contactRefId],
-        affectedContacts: Array.from({ length: randInt(2, 6) }, randomContact),
-      },
-    });
     navigate(`alerts/${alertItem.id}`);
   };
 

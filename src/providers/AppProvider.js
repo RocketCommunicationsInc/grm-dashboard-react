@@ -1,19 +1,7 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useReducer,
-} from 'react';
+import { createContext, useContext, useReducer } from 'react';
 
 import { appReducer } from './AppReducer';
-import { randInt, timeoutRepeater } from '../util/util';
-import {
-  getRandomAlert,
-  getRandomContact,
-  randomContact,
-  dummyJob,
-} from '../data/data';
+import { dummyJob } from '../data/data';
 
 export const initialState = {
   contacts: [],
@@ -32,22 +20,6 @@ export const useAppContext = () => useContext(AppContext);
 const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
-  useEffect(() => {
-    return timeoutRepeater(() => {
-      if (state.alerts.length < 40) {
-        dispatch({ type: 'ADD_ALERT', payload: getRandomAlert() });
-      }
-    });
-  }, [state.alerts.length]);
-
-  useEffect(() => {
-    return timeoutRepeater(() => {
-      if (state.contacts.length < 40) {
-        dispatch({ type: 'ADD_CONTACT', payload: getRandomContact() });
-      }
-    });
-  }, [state.contacts.length]);
-
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}
@@ -56,27 +28,3 @@ const AppProvider = ({ children }) => {
 };
 
 export default AppProvider;
-
-export const useAppActions = () => {
-  const { dispatch } = useAppContext();
-
-  const investigateContact = useCallback(
-    (row) => {
-      dispatch({
-        type: 'INVESTIGATE_CONTACT',
-        payload: {
-          currentContact: row,
-          affectedContacts: Array.from(
-            { length: randInt(2, 6) },
-            randomContact
-          ),
-        },
-      });
-    },
-    [dispatch]
-  );
-
-  return {
-    investigateContact,
-  };
-};
