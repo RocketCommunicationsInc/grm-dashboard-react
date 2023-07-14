@@ -17,8 +17,8 @@
 
 .contact-details-sat {
   display: flex;
-  margin-top: var(--spacing-6);
-  margin-bottom: -1.5rem;
+  margin-top: var(--spacing-4);
+  align-items: center;
 }
 
 .contact-details-sat rux-status {

@@ -12,7 +12,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { useTTCGRMContacts, useTTCGRMActions } from '@astrouxds/mock-data';
 import {
   AffectedContacts,
-  ContactLabel,
   DetailsCommonGrid,
   DetailsGrid,
   EventLog,
@@ -300,7 +299,6 @@ const ContactDetails = () => {
         <h2 className='contact-details-sat'>
           <RuxStatus status={contact.status} /> {contact.satellite}
         </h2>
-        <ContactLabel contact={contact} />
 
         <DetailsCommonGrid className='Contact-details-grid'>
           <PanelSubContainer>
