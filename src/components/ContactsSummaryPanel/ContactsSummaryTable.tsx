@@ -19,7 +19,7 @@ type PropTypes = {
 const ContactsSummaryTable = ({ title, filteredContacts }: PropTypes) => {
   return (
     <>
-      <div className='pop-up__header space-between p-2'>
+      <div className='pop-up__header'>
         <p>{title}</p>
         <Link to='/contacts'>View All</Link>
       </div>

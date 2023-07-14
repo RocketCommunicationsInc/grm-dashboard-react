@@ -20,6 +20,9 @@
 
 .Contacts-summary-panel__pop-up .pop-up__header {
   background-color: var(--color-background-base-default);
+  display: flex;
+  justify-content: space-between;
+  padding: var(--spacing-2);
 }
 
 .Contacts-summary-panel__table-container {
