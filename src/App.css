@@ -39,10 +39,6 @@ rux-table-header {
   z-index: 10;
 }
 
-rux-status {
-  padding-right: 32px;
-}
-
 rux-status::part(status) {
   margin-inline: auto;
 }

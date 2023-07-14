@@ -2,7 +2,6 @@ import type { Contact } from '@astrouxds/mock-data';
 import { determineTimeString } from '../../util/index';
 import Table from '../../common/Table/Table';
 import type { ColumnDef } from '../../common/Table/Table';
-import { HStack } from '../../common';
 import { Link } from 'react-router-dom';
 
 const columnDefs: ColumnDef[] = [
@@ -20,10 +19,10 @@ type PropTypes = {
 const ContactsSummaryTable = ({ title, filteredContacts }: PropTypes) => {
   return (
     <>
-      <HStack spacing={3} className='pop-up__header space-between p-2'>
+      <div className='pop-up__header space-between p-2'>
         <p>{title}</p>
         <Link to='/contacts'>View All</Link>
-      </HStack>
+      </div>
       <Table columnDefs={columnDefs} filteredData={filteredContacts} />
     </>
   );
