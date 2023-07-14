@@ -44,7 +44,8 @@ const EquipmentDetailsPanel = () => {
           </section>
           <DetailsGrid details={equipmentGeneralDetails} />
         </RuxChildContainer>
-        <RuxChildContainer heading='Description'>
+        <RuxChildContainer>
+          <header slot='header'>Description</header>
           <p>
             Aenean ac sagittis odio. Pellentesque vehicula, justo et
             sollicitudin bibendum, urna libero ornare augue, a bibendum nulla

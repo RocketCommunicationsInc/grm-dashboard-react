@@ -22,10 +22,10 @@ export const AffectedContacts = () => {
   }, []);
 
   return (
-    <RuxChildContainer
-      className='Affected-contacts'
-      heading={`Affected Contacts (${randomContacts.length})`}
-    >
+    <RuxChildContainer className='Affected-contacts'>
+      <header slot='header'>
+        Affected Contacts (${randomContacts.length})
+      </header>
       <ul>
         {randomContacts.map((c, i) => (
           <li key={c.id + i} onClick={() => navigate(`/contacts/${c.id}`)}>

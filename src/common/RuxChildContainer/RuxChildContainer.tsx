@@ -3,19 +3,15 @@ import './RuxChildContainer.css';
 import { RuxContainer } from '@astrouxds/react';
 
 type PropTypes = {
-  children: any;
+  children: React.ReactElement[];
   className: string;
-  heading: string;
 };
 
 export const RuxChildContainer = (props: any) => {
-  console.log(props);
-  const { children, className, heading }: PropTypes = props;
-
+  const { children, className }: PropTypes = props;
   return (
     <RuxContainer className={setClassName('child-container', className)}>
-      {heading && <h3>{heading}</h3>}
-      <div className='child-container__body'>{children}</div>
+      {children}
     </RuxContainer>
   );
 };

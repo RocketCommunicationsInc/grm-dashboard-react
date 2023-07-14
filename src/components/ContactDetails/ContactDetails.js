@@ -307,10 +307,8 @@ const ContactDetails = () => {
             <DetailsGrid details={generalDetails} />
           </RuxChildContainer>
 
-          <RuxChildContainer
-            heading='Equipment String'
-            className='Contact-details-grid__equipment-string'
-          >
+          <RuxChildContainer className='Contact-details-grid__equipment-string'>
+            <header slot='header'>Equipment String</header>
             <RuxChildContainer className='config-wrapper'>
               <DetailsGrid details={configDetails} />
 
@@ -320,7 +318,8 @@ const ContactDetails = () => {
             </RuxChildContainer>
 
             <div className='sub-grid'>
-              <RuxChildContainer heading='ANT1 Details'>
+              <RuxChildContainer>
+                <header slot='header'>ANT1 Details</header>
                 <DetailsGrid details={antDetails} />
               </RuxChildContainer>
 

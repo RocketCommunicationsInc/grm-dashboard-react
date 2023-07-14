@@ -77,7 +77,8 @@ const AlertDetails = () => {
             <DetailsGrid details={alertGeneralDetails} />
           </RuxChildContainer>
 
-          <RuxChildContainer heading='Description'>
+          <RuxChildContainer>
+            <header slot='header'>Description</header>
             <p>{currentAlert.longMessage}.</p>
           </RuxChildContainer>
 
