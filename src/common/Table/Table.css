@@ -34,3 +34,8 @@
 .table-wrapper rux-table-header-cell[data-sortprop='status'] {
   text-align: center;
 }
+
+rux-container .table-wrapper {
+  /* to color small space above scrollbar */
+  background-color: var(--color-background-base-header);
+}

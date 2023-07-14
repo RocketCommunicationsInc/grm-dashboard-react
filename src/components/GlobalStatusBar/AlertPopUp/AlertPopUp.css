@@ -1,0 +1,70 @@
+.popup-wrapper {
+  height: 16rem;
+  width: 18.75rem;
+  color: var(--color-palette-neutral-000);
+}
+
+.popup-wrapper div:nth-of-type(1) {
+  background-color: var(--color-background-base-header);
+  padding: var(--spacing-2);
+  display: flex;
+  justify-content: space-between;
+  padding-right: var(--spacing-12);
+  box-shadow: 0px 3px 3px 0px rgb(0 0 0 / 40%);
+}
+
+.popup-wrapper div span,
+.popup-wrapper rux-checkbox:nth-of-type(1) {
+  display: flex;
+  align-items: center;
+}
+
+.popup-wrapper div span:nth-of-type(1) {
+  width: 3.5rem;
+}
+
+.popup-wrapper rux-icon {
+  margin-left: -0.4rem;
+}
+
+.popup-table-wrapper {
+  height: 9.75rem;
+  width: 18.75rem;
+  overflow-y: scroll;
+}
+
+.popup-table-wrapper rux-table-body rux-table-row rux-table-cell {
+  width: 3.15rem;
+}
+
+.popup-table-wrapper
+  rux-table-body
+  rux-table-row
+  rux-table-cell:nth-of-type(3) {
+  padding-right: var(--spacing-4);
+}
+
+.popup-wrapper div span .visible {
+  visibility: visible;
+}
+
+.popup-wrapper div span:nth-of-type(1):has(rux-icon.visible) {
+  color: var(--color-text-interactive-default);
+}
+
+.popup-wrapper div span .hidden {
+  visibility: hidden;
+}
+
+.popup-wrapper footer[slot='footer'] {
+  display: flex;
+  gap: var(--spacing-3);
+  position: fixed;
+  bottom: 0;
+  background-color: var(--color-background-surface-default);
+  align-items: center;
+  justify-content: flex-end;
+  padding: var(--spacing-2);
+  width: 95%;
+  border-top: 1px solid black;
+}
