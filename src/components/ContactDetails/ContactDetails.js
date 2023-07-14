@@ -16,7 +16,6 @@ import {
   DetailsCommonGrid,
   DetailsGrid,
   EventLog,
-  RuxChildContainer,
 } from '../../common';
 import { options } from '../../data/options';
 import { formatReadableTime, capitalize } from '../../util';
@@ -303,29 +302,29 @@ const ContactDetails = () => {
         <ContactLabel contact={contact} />
 
         <DetailsCommonGrid className='Contact-details-grid'>
-          <RuxChildContainer>
+          <RuxContainer className='child-container'>
             <DetailsGrid details={generalDetails} />
-          </RuxChildContainer>
+          </RuxContainer>
 
-          <RuxChildContainer className='Contact-details-grid__equipment-string'>
+          <RuxContainer className='child-container Contact-details-grid__equipment-string'>
             <header slot='header'>Equipment String</header>
-            <RuxChildContainer className='config-wrapper'>
+            <RuxContainer className='child-container config-wrapper'>
               <DetailsGrid details={configDetails} />
 
               <span>{contact.equipment}</span>
 
               <EquipmentIcons equipmentString={contact.equipment} />
-            </RuxChildContainer>
+            </RuxContainer>
 
             <div className='sub-grid'>
-              <RuxChildContainer>
+              <RuxContainer className='child-container'>
                 <header slot='header'>ANT1 Details</header>
                 <DetailsGrid details={antDetails} />
-              </RuxChildContainer>
+              </RuxContainer>
 
               <AffectedContacts />
             </div>
-          </RuxChildContainer>
+          </RuxContainer>
           <div className='contact-details-log'>
             <EventLog />
           </div>

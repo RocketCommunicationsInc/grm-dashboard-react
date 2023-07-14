@@ -46,3 +46,37 @@ rux-status {
 rux-status::part(status) {
   margin-inline: auto;
 }
+
+/* Global RuxContainer child styles */
+.child-container {
+  padding: var(--spacing-4);
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  box-sizing: border-box;
+  height: initial;
+}
+
+.child-container::part(container) {
+  border-width: 0;
+  height: 100%;
+}
+
+.child-container::part(header) {
+  background-color: transparent;
+  font-size: var(--font-heading-3-font-size);
+  font-weight: var(--font-heading-3-font-weight);
+  letter-spacing: var(--font-heading-3-letter-spacing);
+  line-height: var(--font-heading-3-line-height);
+  padding-block: var(--spacing-3);
+  padding-inline: var(--spacing-0);
+}
+
+.child-container::part(body) {
+  gap: var(--spacing-3);
+  box-shadow: 0 0 0 1px inset var(--color-border-interactive-muted);
+  flex-grow: 1;
+  padding: var(--spacing-4);
+  overflow: auto;
+}

@@ -1,10 +1,5 @@
 import { RuxInput, RuxSegmentedButton, RuxContainer } from '@astrouxds/react';
-import {
-  RuxChildContainer,
-  DetailsCommonGrid,
-  DetailsGrid,
-  EventLog,
-} from '../../common';
+import { DetailsCommonGrid, DetailsGrid, EventLog } from '../../common';
 import { capitalize } from '../../util';
 import './EquipmentDetailsPanel.css';
 
@@ -37,21 +32,21 @@ const EquipmentDetailsPanel = () => {
       <header slot='header'>Equipment Details</header>
       <h2 className='p-4'>Black FEP 6566</h2>
       <DetailsCommonGrid>
-        <RuxChildContainer>
+        <RuxContainer className='child-container'>
           <section className='segmented-button-group'>
             <RuxSegmentedButton size='small' data={firstButton} />
             <RuxSegmentedButton size='small' data={secondButton} />
           </section>
           <DetailsGrid details={equipmentGeneralDetails} />
-        </RuxChildContainer>
-        <RuxChildContainer>
+        </RuxContainer>
+        <RuxContainer className='child-container'>
           <header slot='header'>Description</header>
           <p>
             Aenean ac sagittis odio. Pellentesque vehicula, justo et
             sollicitudin bibendum, urna libero ornare augue, a bibendum nulla
             ipsum eu ante…
           </p>
-        </RuxChildContainer>
+        </RuxContainer>
         <div className='equpiment-details-log'>
           <EventLog />
         </div>
