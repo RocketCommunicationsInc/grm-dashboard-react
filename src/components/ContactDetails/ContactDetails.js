@@ -302,26 +302,21 @@ const ContactDetails = () => {
         <ContactLabel contact={contact} />
 
         <DetailsCommonGrid className='Contact-details-grid'>
-          <RuxContainer className='child-container'>
-            <DetailsGrid details={generalDetails} />
-          </RuxContainer>
+          <DetailsGrid details={generalDetails} />
 
           <RuxContainer className='child-container Contact-details-grid__equipment-string'>
             <header slot='header'>Equipment String</header>
-            <RuxContainer className='child-container config-wrapper'>
-              <DetailsGrid details={configDetails} />
+            <DetailsGrid details={configDetails} />
 
-              <span>{contact.equipment}</span>
+            <span>{contact.equipment}</span>
 
-              <EquipmentIcons equipmentString={contact.equipment} />
-            </RuxContainer>
+            <EquipmentIcons equipmentString={contact.equipment} />
 
-            <div className='sub-grid'>
-              <RuxContainer className='child-container'>
-                <header slot='header'>ANT1 Details</header>
+            <div className='sub-grid' slot='footer'>
+              <div>
+                <header>ANT1 Details</header>
                 <DetailsGrid details={antDetails} />
-              </RuxContainer>
-
+              </div>
               <AffectedContacts />
             </div>
           </RuxContainer>
