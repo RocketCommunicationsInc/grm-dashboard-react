@@ -3,7 +3,7 @@ import AlertDetails from '../AlertDetails/AlertDetails';
 
 const JobDetailsPage = () => {
   return (
-    <main className={`$job-details-page`}>
+    <main className={`$job-details-page page`}>
       <AlertDetails />
       <JobDetails />
     </main>

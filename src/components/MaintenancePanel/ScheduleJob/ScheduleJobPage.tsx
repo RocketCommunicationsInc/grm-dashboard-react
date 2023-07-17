@@ -4,7 +4,7 @@ import ScheduleJob from './ScehduleJob';
 
 const ScheduleJobPage = () => {
   return (
-    <main className={`$schedule-job-page`}>
+    <main className={`$schedule-job-page page`}>
       <AlertDetails />
       <ScheduleJob />
     </main>

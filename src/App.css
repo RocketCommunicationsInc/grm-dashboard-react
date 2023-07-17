@@ -22,6 +22,16 @@ rux-container footer[slot='footer'] {
   justify-content: flex-end;
 }
 
+/* GLOBAL PAGE STYLES */
+
+.page {
+  /* calculated height of interior pages so that gsb doesn't have scrollbar */
+  max-height: calc(100vh - 10.25rem);
+  display: flex;
+  flex-flow: column;
+  overflow: overlay;
+}
+
 /* GlOBAL TABLE STYLES */
 
 .table-wrapper {
