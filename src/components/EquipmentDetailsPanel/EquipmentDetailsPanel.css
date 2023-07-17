@@ -6,12 +6,22 @@
   margin: var(--spacing-2);
 }
 
-.equpiment-details-log {
+.equipment-details-log {
   min-height: 16.5rem;
   max-height: 17rem;
   height: calc(100% - 0.5rem);
 }
 
-.equpiment-details-log rux-log::part(log-notification) {
+.equipment-details-log rux-log::part(log-notification) {
   max-width: 42rem;
+}
+
+.alert-description {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+
+  &::last-child {
+    flex: 1;
+  }
 }

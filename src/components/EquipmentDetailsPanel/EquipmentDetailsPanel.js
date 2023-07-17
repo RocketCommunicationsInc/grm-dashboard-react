@@ -28,29 +28,39 @@ const EquipmentDetailsPanel = () => {
   ];
 
   return (
-    <RuxContainer>
+    <RuxContainer className='equipment-details'>
       <header slot='header'>Equipment Details</header>
-      <h2 className='p-4'>Black FEP 6566</h2>
-      <DetailsCommonGrid>
-        <RuxContainer className='child-container'>
-          <section className='segmented-button-group'>
-            <RuxSegmentedButton size='small' data={firstButton} />
-            <RuxSegmentedButton size='small' data={secondButton} />
-          </section>
-          <DetailsGrid details={equipmentGeneralDetails} />
-        </RuxContainer>
-        <RuxContainer className='child-container'>
-          <header slot='header'>Description</header>
-          <p>
-            Aenean ac sagittis odio. Pellentesque vehicula, justo et
-            sollicitudin bibendum, urna libero ornare augue, a bibendum nulla
-            ipsum eu ante…
-          </p>
-        </RuxContainer>
-        <div className='equpiment-details-log'>
-          <EventLog />
-        </div>
-      </DetailsCommonGrid>
+      <RuxContainer className='child-container'>
+        <header slot='header'>Black FEP 6566</header>
+        <DetailsCommonGrid>
+          <div>
+            <section className='segmented-button-group'>
+              <RuxSegmentedButton size='small' data={firstButton} />
+              <RuxSegmentedButton size='small' data={secondButton} />
+            </section>
+            <DetailsGrid details={equipmentGeneralDetails} />
+          </div>
+          <div class='alert-description'>
+            <header>Description</header>
+            <div
+              className='description-message'
+              tabindex='0'
+              aria-readonly='true'
+              role='textbox'
+            >
+              <p>
+                Aenean ac sagittis odio. Pellentesque vehicula, justo et
+                sollicitudin bibendum, urna libero ornare augue, a bibendum
+                nulla ipsum eu ante…
+              </p>
+            </div>
+          </div>
+
+          <div className='equipment-details-log'>
+            <EventLog />
+          </div>
+        </DetailsCommonGrid>
+      </RuxContainer>
     </RuxContainer>
   );
 };

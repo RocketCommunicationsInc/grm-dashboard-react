@@ -64,32 +64,30 @@ const AlertDetails = () => {
   ];
 
   return (
-    <main className={`$alert-details-page alert-details-page`}>
-      <RuxContainer>
-        <header slot='header'>Alert Details</header>
-        <DetailsCommonGrid>
-          <DetailsGrid details={alertGeneralDetails} />
-          <div class='alert-description'>
-            <header>Description</header>
-            <div
-              className='description-message'
-              tabindex='0'
-              aria-readonly='true'
-              role='textbox'
-            >
-              {currentAlert.longMessage}
-            </div>
+    <RuxContainer>
+      <header slot='header'>Alert Details</header>
+      <DetailsCommonGrid>
+        <DetailsGrid details={alertGeneralDetails} />
+        <div class='alert-description'>
+          <header>Description</header>
+          <div
+            className='description-message'
+            tabindex='0'
+            aria-readonly='true'
+            role='textbox'
+          >
+            {currentAlert.longMessage}
           </div>
-          <AffectedContacts />
-        </DetailsCommonGrid>
-        <footer slot='footer'>
-          <RuxButton secondary onClick={handleClick}>
-            Dismiss
-          </RuxButton>
-          <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
-        </footer>
-      </RuxContainer>
-    </main>
+        </div>
+        <AffectedContacts />
+      </DetailsCommonGrid>
+      <footer slot='footer'>
+        <RuxButton secondary onClick={handleClick}>
+          Dismiss
+        </RuxButton>
+        <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
+      </footer>
+    </RuxContainer>
   );
 };
 

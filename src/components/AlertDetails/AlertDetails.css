@@ -8,18 +8,6 @@
     padding: var(--spacing-4);
   }
 
-  & rux-textarea {
-    height: 100%;
-
-    &::part(textarea) {
-      resize: none;
-      height: 100%;
-    }
-    &::part(form-field) {
-      height: 100%;
-    }
-  }
-
   & .alert-description {
     display: flex;
     flex-direction: column;
