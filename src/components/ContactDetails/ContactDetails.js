@@ -15,7 +15,6 @@ import {
   DetailsCommonGrid,
   DetailsGrid,
   EventLog,
-  PanelSubContainer,
 } from '../../common';
 import { options } from '../../data/options';
 import { formatReadableTime, capitalize } from '../../util';
@@ -301,30 +300,24 @@ const ContactDetails = () => {
         </h2>
 
         <DetailsCommonGrid className='Contact-details-grid'>
-          <PanelSubContainer>
-            <DetailsGrid details={generalDetails} />
-          </PanelSubContainer>
+          <DetailsGrid details={generalDetails} />
 
-          <PanelSubContainer
-            heading='Equipment String'
-            className='Contact-details-grid__equipment-string'
-          >
-            <PanelSubContainer className='config-wrapper'>
-              <DetailsGrid details={configDetails} />
+          <RuxContainer className='child-container Contact-details-grid__equipment-string'>
+            <header slot='header'>Equipment String</header>
+            <DetailsGrid details={configDetails} />
 
-              <span>{contact.equipment}</span>
+            <span>{contact.equipment}</span>
 
-              <EquipmentIcons equipmentString={contact.equipment} />
-            </PanelSubContainer>
+            <EquipmentIcons equipmentString={contact.equipment} />
 
-            <div className='sub-grid'>
-              <PanelSubContainer heading='ANT1 Details'>
+            <div className='sub-grid' slot='footer'>
+              <div>
+                <header>ANT1 Details</header>
                 <DetailsGrid details={antDetails} />
-              </PanelSubContainer>
-
+              </div>
               <AffectedContacts />
             </div>
-          </PanelSubContainer>
+          </RuxContainer>
           <div className='contact-details-log'>
             <EventLog />
           </div>

@@ -21,3 +21,7 @@ rux-monitoring-progress-icon {
     var(--color-background-interactive-muted);
   padding-right: var(--spacing-6);
 }
+
+#grm-popup-menu > rux-icon::part(icon) {
+  height: calc(var(--spacing-14) + var(--spacing-050));
+}

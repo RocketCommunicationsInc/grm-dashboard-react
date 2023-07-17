@@ -29,6 +29,7 @@ const GlobalStatusBar = () => {
       app-domain='GRM'
       app-name='Dashboard'
       username='J. Smith'
+      app-state='Demo'
     >
       <div slot='left-side'>
         <RuxPopUp id='grm-popup-menu' placement='bottom-start'>
