@@ -29,26 +29,30 @@ const GlobalStatusBar = () => {
       app-domain='GRM'
       app-name='Dashboard'
       username='J. Smith'
-      app-state='Demo'
+      appState='Demo'
+      appStateColor='tag1'
     >
-      <div slot='left-side'>
-        <RuxPopUp id='grm-popup-menu' placement='bottom-start'>
-          <RuxIcon
-            icon='apps'
-            aria-controls='grm-popup-menu'
-            slot='trigger'
-            size='2rem'
-          />
-          <RuxMenu>
-            <RuxMenuItem>GRM Dashboard</RuxMenuItem>
-            <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
-            <RuxMenuItem>GRM Schedule</RuxMenuItem>
-            <RuxMenuItemDivider />
-            <RuxMenuItem>Preferences...</RuxMenuItem>
-            <RuxMenuItem>Sign Out...</RuxMenuItem>
-          </RuxMenu>
-        </RuxPopUp>
-      </div>
+      <RuxPopUp
+        id='grm-popup-menu'
+        slot='left-side'
+        placement='bottom-start'
+        closeOnSelect
+      >
+        <RuxIcon
+          icon='apps'
+          aria-controls='grm-popup-menu'
+          slot='trigger'
+          size='2rem'
+        />
+        <RuxMenu>
+          <RuxMenuItem>GRM Dashboard</RuxMenuItem>
+          <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
+          <RuxMenuItem>GRM Schedule</RuxMenuItem>
+          <RuxMenuItemDivider />
+          <RuxMenuItem>Preferences...</RuxMenuItem>
+          <RuxMenuItem>Sign Out...</RuxMenuItem>
+        </RuxMenu>
+      </RuxPopUp>
 
       <RuxClock />
 

@@ -20,9 +20,7 @@
   display: flex;
   gap: var(--spacing-2);
   align-items: center;
-  & rux-status {
-    padding-inline-end: 0;
-  }
+  padding-block-end: var(--spacing-4);
 }
 
 .contact-details-page {
