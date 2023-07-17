@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import type { Contact } from '@astrouxds/mock-data';
 import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
 import { randInt } from '../../util';
 import './AffectedContacts.css';
@@ -9,10 +10,10 @@ import { useEffect } from 'react';
 export const AffectedContacts = () => {
   const navigate = useNavigate();
   const { dataArray: contacts } = useTTCGRMContacts();
-  const [randomContacts, setRandomContacts] = useState([]);
+  const [randomContacts, setRandomContacts] = useState<Contact[]>([]);
 
   useEffect(() => {
-    const emptyArray = [...Array(randInt(3, 6))];
+    const emptyArray: number[] = [...Array(randInt(3, 6))];
     setRandomContacts(
       emptyArray.map((u, i) => {
         return contacts[randInt(0, 10)];
@@ -27,9 +28,13 @@ export const AffectedContacts = () => {
       heading={`Affected Contacts (${randomContacts.length})`}
     >
       <ul>
-        {randomContacts.map((c, i) => (
-          <li key={c.id + i} onClick={() => navigate(`/contacts/${c.id}`)}>
-            IRON: {c.satellite} -- GS: {c.ground} -- REV: {c.rev}
+        {randomContacts.map((contact: Contact, index: number) => (
+          <li
+            key={contact.id + index}
+            onClick={() => navigate(`/contacts/${contact.id}`)}
+          >
+            IRON: {contact.satellite} -- GS: {contact.ground} -- REV:{' '}
+            {contact.rev}
           </li>
         ))}
       </ul>

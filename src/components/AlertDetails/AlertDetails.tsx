@@ -12,7 +12,7 @@ import { useTTCGRMAlerts, useTTCGRMActions } from '@astrouxds/mock-data';
 
 const AlertDetails = () => {
   const navigate = useNavigate();
-  const params = useParams();
+  const params: { [key: string]: any } = useParams();
   const { dataById: alerts } = useTTCGRMAlerts();
   const { deleteAlert } = useTTCGRMActions();
   const currentAlert = alerts[params.alertId];
