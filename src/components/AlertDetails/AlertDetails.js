@@ -69,28 +69,26 @@ const AlertDetails = () => {
   ];
 
   return (
-    <main className={`$alert-details-page`}>
-      <RuxContainer>
-        <header slot='header'>Alert Details</header>
-        <DetailsCommonGrid>
-          <PanelSubContainer>
-            <DetailsGrid details={alertGeneralDetails} />
-          </PanelSubContainer>
+    <RuxContainer className='alert-details-page'>
+      <header slot='header'>Alert Details</header>
+      <DetailsCommonGrid>
+        <PanelSubContainer>
+          <DetailsGrid details={alertGeneralDetails} />
+        </PanelSubContainer>
 
-          <PanelSubContainer heading='Description'>
-            <p>{currentAlert.longMessage}.</p>
-          </PanelSubContainer>
+        <PanelSubContainer heading='Description'>
+          <p>{currentAlert.longMessage}.</p>
+        </PanelSubContainer>
 
-          <AffectedContacts />
-        </DetailsCommonGrid>
-        <footer slot='footer'>
-          <RuxButton secondary onClick={handleClick}>
-            Dismiss
-          </RuxButton>
-          <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
-        </footer>
-      </RuxContainer>
-    </main>
+        <AffectedContacts />
+      </DetailsCommonGrid>
+      <footer slot='footer'>
+        <RuxButton secondary onClick={handleClick}>
+          Dismiss
+        </RuxButton>
+        <RuxButton onClick={handleClick}>Acknowledge</RuxButton>
+      </footer>
+    </RuxContainer>
   );
 };
 

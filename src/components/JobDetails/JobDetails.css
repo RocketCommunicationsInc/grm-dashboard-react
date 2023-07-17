@@ -1,5 +1,6 @@
 .jobs-wrapper {
   display: flex;
+  padding: var(--spacing-4);
 }
 
 .jobs-wrapper rux-textarea {
@@ -29,7 +30,7 @@
 }
 
 .jobs-details-section {
-  padding-inline: var(--spacing-6);
+  padding-inline-end: var(--spacing-6);
 }
 
 .jobs-details-section rux-checkbox {
@@ -43,6 +44,10 @@
 
 .job-details-conflicts-section h2 {
   margin: var(--spacing-4);
+}
+
+.job-details-panel {
+  padding: var(--spacing-0) var(--spacing-3) var(--spacing-3) var(--spacing-3);
 }
 
 .job-details-panel footer[slot='footer'] {

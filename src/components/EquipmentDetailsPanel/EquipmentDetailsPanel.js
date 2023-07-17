@@ -33,7 +33,7 @@ const EquipmentDetailsPanel = () => {
   ];
 
   return (
-    <RuxContainer>
+    <RuxContainer className='equipment-details'>
       <header slot='header'>Equipment Details</header>
       <h2 className='p-4'>Black FEP 6566</h2>
       <DetailsCommonGrid>
