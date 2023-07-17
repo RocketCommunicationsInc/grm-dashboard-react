@@ -1,9 +1,4 @@
-import {
-  RuxButton,
-  RuxInput,
-  RuxContainer,
-  RuxTextarea,
-} from '@astrouxds/react';
+import { RuxButton, RuxInput, RuxContainer } from '@astrouxds/react';
 import { capitalize, formatReadableTime } from '../../util/util';
 import { useNavigate, useParams } from 'react-router-dom';
 import { AffectedContacts, DetailsCommonGrid, DetailsGrid } from '../../common';
@@ -73,15 +68,18 @@ const AlertDetails = () => {
       <RuxContainer>
         <header slot='header'>Alert Details</header>
         <DetailsCommonGrid>
-          <div>
-            <DetailsGrid details={alertGeneralDetails} />
-          </div>
-
+          <DetailsGrid details={alertGeneralDetails} />
           <div class='alert-description'>
             <header>Description</header>
-            <RuxTextarea value={currentAlert.longMessage} />
+            <div
+              className='description-message'
+              tabindex='0'
+              aria-readonly='true'
+              role='textbox'
+            >
+              {currentAlert.longMessage}
+            </div>
           </div>
-
           <AffectedContacts />
         </DetailsCommonGrid>
         <footer slot='footer'>

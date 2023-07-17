@@ -80,3 +80,20 @@ rux-status::part(status) {
   padding: var(--spacing-4);
   overflow: auto;
 }
+
+/* readonly textarea/fake */
+
+.description-message {
+  height: 100%;
+  box-sizing: border-box;
+  border: 1px solid var(--color-border-interactive-muted);
+  background-color: var(--color-background-base-default);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-base);
+  padding: var(--spacing-4);
+
+  &:focus-visible {
+    outline: 1px solid var(--color-border-focus-default);
+    outline-offset: var(--spacing-focus-default);
+  }
+}
