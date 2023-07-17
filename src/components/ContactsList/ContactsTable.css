@@ -1,3 +1,7 @@
+.contacts-table {
+  padding: var(--spacing-0) var(--spacing-3) var(--spacing-4);
+}
+
 /* HEADER STYLES */
 
 .Current-contacts-panel__header {

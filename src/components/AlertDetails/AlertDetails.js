@@ -68,11 +68,11 @@ const AlertDetails = () => {
       <header slot='header'>Alert Details</header>
       <DetailsCommonGrid>
         <DetailsGrid details={alertGeneralDetails} />
-        <div class='alert-description'>
+        <div className='alert-description'>
           <header>Description</header>
           <div
             className='description-message'
-            tabindex='0'
+            tabIndex='0'
             aria-readonly='true'
             role='textbox'
           >

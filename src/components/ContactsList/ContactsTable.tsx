@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from 'react';
-import { RuxContainer, RuxButton } from '@astrouxds/react';
+import { RuxButton } from '@astrouxds/react';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
 import type { ColumnDef } from '../../common/Table/Table';
@@ -77,7 +77,7 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
   }, [contacts, filterContacts, searchValue]);
 
   return (
-    <RuxContainer>
+    <main className='contacts-table'>
       <div className='filter-notification' hidden={searchValue === ''}>
         One or more filters selected.
         <RuxButton
@@ -91,7 +91,7 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
         to display all alerts.
       </div>
       <Table columnDefs={columnDefs} filteredData={filteredContacts} />
-    </RuxContainer>
+    </main>
   );
 };
 
