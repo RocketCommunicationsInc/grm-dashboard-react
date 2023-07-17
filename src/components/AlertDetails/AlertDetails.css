@@ -4,13 +4,13 @@
   padding: var(--spacing-0) var(--spacing-3) var(--spacing-4);
   flex-flow: column;
 
-  & .alert-description {
+  .alert-description {
     display: flex;
     flex-direction: column;
     align-content: stretch;
+  }
 
-    &::last-child {
-      flex: 1;
-    }
+  .alert-description::last-child {
+    flex: 1;
   }
 }
