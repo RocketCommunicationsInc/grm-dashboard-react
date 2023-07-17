@@ -1,3 +1,8 @@
+.equipment-details {
+  padding: var(--spacing-0) var(--spacing-3) var(--spacing-4);
+  gap: var(--spacing-3);
+}
+
 .segmented-button-group {
   padding-bottom: var(--spacing-4);
 }
@@ -6,12 +11,22 @@
   margin: var(--spacing-2);
 }
 
-.equpiment-details-log {
+.equipment-details-log {
   min-height: 16.5rem;
   max-height: 17rem;
   height: calc(100% - 0.5rem);
 }
 
-.equpiment-details-log rux-log::part(log-notification) {
+.equipment-details-log rux-log::part(log-notification) {
   max-width: 42rem;
+}
+
+.alert-description {
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+
+  &::last-child {
+    flex: 1;
+  }
 }

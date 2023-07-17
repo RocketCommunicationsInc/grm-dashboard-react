@@ -32,6 +32,10 @@
   text-overflow: ellipsis;
 }
 
+.table-wrapper rux-table-cell rux-status {
+  padding-right: var(--spacing-8);
+}
+
 .table-wrapper rux-table-header-cell[data-sortprop='status'] {
   text-align: center;
 }

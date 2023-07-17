@@ -1,6 +1,16 @@
-.alert-details-page {
+.alert-details-panel {
   display: flex;
-  flex-direction: column;
-  padding: var(--spacing-0) var(--spacing-6) var(--spacing-4);
-  gap: var(--spacing-3);
+
+  padding: var(--spacing-0) var(--spacing-3) var(--spacing-4);
+  flex-flow: column;
+
+  & .alert-description {
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+
+    &::last-child {
+      flex: 1;
+    }
+  }
 }

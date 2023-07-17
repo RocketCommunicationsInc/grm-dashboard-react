@@ -3,4 +3,9 @@
 
   display: grid;
   grid-template-columns: var(--columns);
+  gap: var(--spacing-4);
+
+  & header {
+    padding-block-end: var(--spacing-2);
+  }
 }
