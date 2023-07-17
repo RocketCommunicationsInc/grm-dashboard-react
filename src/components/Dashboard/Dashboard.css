@@ -10,6 +10,10 @@
     'left-panel tabs-bar'
     'left-panel right-panel'
     'left-panel right-panel';
+
+  & rux-container::part(body) {
+    padding: 0;
+  }
 }
 
 .Dashboard-page__left-panel {

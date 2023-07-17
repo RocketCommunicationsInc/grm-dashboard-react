@@ -64,7 +64,7 @@ const AlertDetails = () => {
   ];
 
   return (
-    <RuxContainer>
+    <RuxContainer className='alert-details-panel'>
       <header slot='header'>Alert Details</header>
       <DetailsCommonGrid>
         <DetailsGrid details={alertGeneralDetails} />

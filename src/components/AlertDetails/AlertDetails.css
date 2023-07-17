@@ -1,14 +1,8 @@
-.alert-details-page {
+.alert-details-panel {
   display: flex;
 
   padding: var(--spacing-0) var(--spacing-3) var(--spacing-4);
   flex-flow: column;
-
-  gap: var(--spacing-3);
-
-  & rux-container::part(body) {
-    padding: var(--spacing-4);
-  }
 
   & .alert-description {
     display: flex;
