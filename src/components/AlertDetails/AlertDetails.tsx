@@ -72,7 +72,7 @@ const AlertDetails = () => {
           <header>Description</header>
           <div
             className='description-message'
-            tabIndex='0'
+            tabIndex={0}
             aria-readonly='true'
             role='textbox'
           >
