@@ -1,10 +1,5 @@
 import { RuxInput, RuxSegmentedButton, RuxContainer } from '@astrouxds/react';
-import {
-  PanelSubContainer,
-  DetailsCommonGrid,
-  DetailsGrid,
-  EventLog,
-} from '../../common';
+import { DetailsCommonGrid, DetailsGrid, EventLog } from '../../common';
 import { capitalize } from '../../util';
 import './EquipmentDetailsPanel.css';
 
@@ -33,28 +28,39 @@ const EquipmentDetailsPanel = () => {
   ];
 
   return (
-    <RuxContainer>
+    <RuxContainer className='equipment-details'>
       <header slot='header'>Equipment Details</header>
-      <h2 className='p-4'>Black FEP 6566</h2>
-      <DetailsCommonGrid>
-        <PanelSubContainer>
-          <section className='segmented-button-group'>
-            <RuxSegmentedButton size='small' data={firstButton} />
-            <RuxSegmentedButton size='small' data={secondButton} />
-          </section>
-          <DetailsGrid details={equipmentGeneralDetails} />
-        </PanelSubContainer>
-        <PanelSubContainer heading='Description'>
-          <p>
-            Aenean ac sagittis odio. Pellentesque vehicula, justo et
-            sollicitudin bibendum, urna libero ornare augue, a bibendum nulla
-            ipsum eu ante…
-          </p>
-        </PanelSubContainer>
-        <div className='equpiment-details-log'>
-          <EventLog />
-        </div>
-      </DetailsCommonGrid>
+      <RuxContainer className='child-container'>
+        <header slot='header'>Black FEP 6566</header>
+        <DetailsCommonGrid>
+          <div>
+            <section className='segmented-button-group'>
+              <RuxSegmentedButton size='small' data={firstButton} />
+              <RuxSegmentedButton size='small' data={secondButton} />
+            </section>
+            <DetailsGrid details={equipmentGeneralDetails} />
+          </div>
+          <div className='alert-description'>
+            <header>Description</header>
+            <div
+              className='description-message'
+              tabIndex='0'
+              aria-readonly='true'
+              role='textbox'
+            >
+              <p>
+                Aenean ac sagittis odio. Pellentesque vehicula, justo et
+                sollicitudin bibendum, urna libero ornare augue, a bibendum
+                nulla ipsum eu ante…
+              </p>
+            </div>
+          </div>
+
+          <div className='equipment-details-log'>
+            <EventLog />
+          </div>
+        </DetailsCommonGrid>
+      </RuxContainer>
     </RuxContainer>
   );
 };

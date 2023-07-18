@@ -4,11 +4,11 @@ import EquipmentDetailsPanel from '../EquipmentDetailsPanel/EquipmentDetailsPane
 
 const AlertDetailsPage = () => {
   return (
-    <>
+    <main className={`$alert-details-page`}>
       <AlertDetails />
       <EquipmentDetailsPanel />
       <MaintenancePanel />
-    </>
+    </main>
   );
 };
 

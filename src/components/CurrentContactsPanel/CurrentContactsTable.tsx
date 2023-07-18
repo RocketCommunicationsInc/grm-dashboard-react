@@ -1,7 +1,6 @@
 import { useState, useMemo, useCallback } from 'react';
 import {
   RuxContainer,
-  RuxNotification,
   RuxButton,
   RuxSelect,
   RuxOption,
@@ -106,7 +105,7 @@ const CurrentContactsTable = () => {
           </RuxSelect>
         </div>
       </div>
-      <RuxNotification open={stateSelection !== 'all'} small hide-close>
+      <div className='filter-notification' hidden={stateSelection === 'all'}>
         One or more filters selected.
         <RuxButton
           onClick={handleClearFilter}
@@ -117,7 +116,7 @@ const CurrentContactsTable = () => {
           Clear filters
         </RuxButton>
         to display all alerts.
-      </RuxNotification>
+      </div>
       <Table columnDefs={columnDefs} filteredData={filteredContacts} />
     </RuxContainer>
   );

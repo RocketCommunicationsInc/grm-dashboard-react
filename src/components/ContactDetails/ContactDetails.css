@@ -9,6 +9,7 @@
 .Contact-details-grid__equipment-string .sub-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-4);
 }
 
 .Contact-details-page {
@@ -17,17 +18,32 @@
 
 .contact-details-sat {
   display: flex;
-  margin-top: var(--spacing-4);
+  gap: var(--spacing-2);
   align-items: center;
-}
-
-.contact-details-sat rux-status {
-  margin-inline: var(--spacing-4);
+  padding-block-end: var(--spacing-4);
 }
 
 .contact-details-page {
   height: calc(100vh - 10.25rem);
   padding: var(--spacing-0) var(--spacing-3) var(--spacing-3);
+
+  & rux-container::part(body) {
+    padding: var(--spacing-4);
+    overflow-y: overlay;
+  }
+
+  & .Contact-details-grid__equipment-string::part(container) {
+    border-width: 0;
+  }
+  & .Contact-details-grid__equipment-string::part(header) {
+    padding-inline: 0;
+    padding-top: 0;
+  }
+
+  & .Contact-details-grid__equipment-string::part(body),
+  & .Contact-details-grid__equipment-string::part(footer) {
+    box-shadow: 0 0 0 1px inset var(--color-border-interactive-muted);
+  }
 }
 
 .contact-details-log {
@@ -36,9 +52,4 @@
 
 .contact-details-log rux-log::part(log-notification) {
   max-width: 40.5rem;
-}
-
-.contact-details-page rux-container::part(body) {
-  /* reset a change made in App.css */
-  background-color: initial;
 }

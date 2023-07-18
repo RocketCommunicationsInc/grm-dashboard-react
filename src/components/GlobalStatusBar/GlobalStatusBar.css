@@ -1,3 +1,12 @@
+.Global-status-bar {
+  /* fix for popup sometimes appearing beneath items in the body */
+  z-index: 100;
+
+  & rux-pop-up {
+    height: calc(var(--spacing-14, 3.5rem) + var(--spacing-050, 0.125rem));
+  }
+}
+
 .Global-status-bar__status-indicators {
   align-items: center;
   display: flex;
@@ -20,4 +29,8 @@ rux-monitoring-progress-icon {
   border-right: var(--border-width-xs) solid
     var(--color-background-interactive-muted);
   padding-right: var(--spacing-6);
+}
+
+#grm-popup-menu > rux-icon::part(icon) {
+  height: calc(var(--spacing-14) + var(--spacing-050));
 }

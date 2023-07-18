@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
-import type { Contact } from '@astrouxds/mock-data';
-import { PanelSubContainer } from '../Panel/PanelSubContainer/PanelSubContainer';
 import { randInt } from '../../util';
 import './AffectedContacts.css';
+import type { Contact } from '@astrouxds/mock-data';
 import { useEffect } from 'react';
 
 export const AffectedContacts = () => {
@@ -23,10 +22,8 @@ export const AffectedContacts = () => {
   }, []);
 
   return (
-    <PanelSubContainer
-      className='Affected-contacts'
-      heading={`Affected Contacts (${randomContacts.length})`}
-    >
+    <div className='Affected-contacts'>
+      <header>Affected Contacts ({randomContacts.length})</header>
       <ul>
         {randomContacts.map((contact: Contact, index: number) => (
           <li
@@ -38,6 +35,6 @@ export const AffectedContacts = () => {
           </li>
         ))}
       </ul>
-    </PanelSubContainer>
+    </div>
   );
 };

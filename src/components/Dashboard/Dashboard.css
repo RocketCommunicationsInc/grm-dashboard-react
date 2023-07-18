@@ -12,6 +12,9 @@
     'left-panel right-panel';
 }
 
+.dashboard-page rux-container::part(body) {
+  padding: 0;
+}
 .Dashboard-page__left-panel {
   grid-area: left-panel;
 }
