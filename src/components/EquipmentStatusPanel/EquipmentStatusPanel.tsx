@@ -13,7 +13,7 @@ const initialDonuts = [
 const EquipmentStatus = () => {
   const [chart, setChart] = useState(initialDonuts);
 
-  const generate = useCallback((max, theCount) => {
+  const generate = useCallback((max: number, theCount: number) => {
     const randomArray = [];
     let currSum = 0;
     for (let i = 0; i < theCount - 1; i++) {
@@ -25,7 +25,7 @@ const EquipmentStatus = () => {
     return randomArray;
   }, []);
 
-  const randomBetween = (min, max) => {
+  const randomBetween = (min: number, max: number) => {
     return Math.floor(Math.random() * (max - min + 1) + min);
   };
 
@@ -119,7 +119,7 @@ const EquipmentStatus = () => {
                   width={250}
                   height={250}
                   series={data}
-                  options={options}
+                  options={options as object}
                   key={label}
                 />
               </div>

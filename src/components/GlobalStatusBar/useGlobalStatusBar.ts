@@ -31,7 +31,7 @@ const initialState = {
   },
 };
 
-const reducer = (state, action) => {
+const reducer = (state: any, action: any) => {
   switch (action.type) {
     case 'UPDATE_UCA': {
       const ucaCount = state.ucaCount < 100 ? state.ucaCount + 1 : 0;

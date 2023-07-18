@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, ReactNode, useContext, useReducer } from 'react';
 
 import { appReducer } from './AppReducer';
 import { dummyJob } from '../data/data';
@@ -13,11 +13,16 @@ export const initialState = {
   currentJob: null,
 };
 
-const AppContext = createContext({});
+interface CurrentContextType {
+  state: {};
+  dispatch: () => void;
+}
+
+const AppContext = createContext<CurrentContextType | {}>({});
 
 export const useAppContext = () => useContext(AppContext);
 
-const AppProvider = ({ children }) => {
+const AppProvider = ({ children }: { children: ReactNode }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
 
   return (

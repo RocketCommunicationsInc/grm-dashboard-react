@@ -1,7 +1,12 @@
+import { ReactNode } from 'react';
 import { setClassName } from '../../../util';
 import './PanelSubContainer.css';
 
-export const PanelSubContainer = (props) => {
+export const PanelSubContainer = (props: {
+  children: ReactNode;
+  className?: string;
+  heading?: string;
+}) => {
   const { children, className, heading } = props;
 
   return (

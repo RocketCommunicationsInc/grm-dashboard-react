@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { RuxButton, RuxContainer } from '@astrouxds/react';
-import { useMemo } from 'react';
+import { Key, useMemo } from 'react';
 import { columnDefs } from './MaintenanceHistoryColumns';
 import { useAppContext } from '../../providers/AppProvider';
 import { AstroReactTable } from '../../common';
@@ -15,7 +15,7 @@ import './MaintenancePanel.css';
 const MaintenancePanel = () => {
   const navigate = useNavigate();
   const columns = useMemo(() => columnDefs, []);
-  const { state, dispatch } = useAppContext();
+  const { state, dispatch } = useAppContext() as any;
 
   const table = useReactTable({
     data: state.scheduledJobs,
@@ -24,7 +24,7 @@ const MaintenancePanel = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  const handleJobDetailsClick = (job) => {
+  const handleJobDetailsClick = (job: any) => {
     dispatch({ type: 'EDIT_JOB', payload: job });
     navigate('job-details');
   };
@@ -38,17 +38,25 @@ const MaintenancePanel = () => {
           <RuxButton onClick={() => navigate('schedule-job')}>
             Schedule Job
           </RuxButton>
-          {state.scheduledJobs.map((job) => (
-            <JobIDCard
-              key={job.jobId}
-              type={job.jobType}
-              id={job.jobId}
-              startTime={job.startTime}
-              stopTime={job.stopTime}
-              status={job.status}
-              viewJob={() => handleJobDetailsClick(job)}
-            />
-          ))}
+          {state.scheduledJobs.map(
+            (job: {
+              jobId: Key | null | undefined;
+              jobType: any;
+              startTime: any;
+              stopTime: any;
+              status: any;
+            }) => (
+              <JobIDCard
+                key={job.jobId}
+                type={job.jobType}
+                id={job.jobId}
+                startTime={job.startTime}
+                stopTime={job.stopTime}
+                status={job.status}
+                viewJob={() => handleJobDetailsClick(job)}
+              />
+            )
+          )}
         </div>
       </RuxContainer>
       <RuxContainer>

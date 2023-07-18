@@ -24,7 +24,7 @@ import EquipmentIcons from './EquipmentIcons/EqupimentIcons';
 
 const ContactDetails = () => {
   const navigate = useNavigate();
-  const params = useParams();
+  const params: { [key: string]: any } = useParams();
   const { modifyContact } = useTTCGRMActions();
   const { dataById: contacts } = useTTCGRMContacts();
   const [isEditing, setIsEditing] = useState(false);
@@ -39,13 +39,13 @@ const ContactDetails = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     setIsEditing(false);
     modifyContact(contact);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setContact((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -115,7 +115,7 @@ const ContactDetails = () => {
       label: 'REV',
       node: (
         <RuxInput
-          value={contact.rev}
+          value={contact.rev.toString()}
           readonly={!isEditing}
           size='small'
           name='rev'
@@ -127,7 +127,7 @@ const ContactDetails = () => {
       label: 'DOY',
       node: (
         <RuxInput
-          value={contact.dayOfYear}
+          value={contact.dayOfYear.toString()}
           readonly={!isEditing}
           size='small'
           name='dayOfYear'
@@ -139,7 +139,7 @@ const ContactDetails = () => {
       label: 'Start Time',
       node: isEditing ? (
         <RuxInput
-          value={contact.beginTimestamp}
+          value={contact.beginTimestamp.toString()}
           readonly={!isEditing}
           size='small'
           type='datetime-local'
@@ -158,7 +158,7 @@ const ContactDetails = () => {
       label: 'AOS',
       node: isEditing ? (
         <RuxInput
-          value={contact.aos}
+          value={contact.aos.toString()}
           readonly={!isEditing}
           size='small'
           type='datetime-local'
@@ -177,7 +177,7 @@ const ContactDetails = () => {
       label: 'LOS',
       node: isEditing ? (
         <RuxInput
-          value={contact.los}
+          value={contact.los.toString()}
           readonly={!isEditing}
           size='small'
           type='datetime-local'
@@ -196,7 +196,7 @@ const ContactDetails = () => {
       label: 'Stop Time',
       node: isEditing ? (
         <RuxInput
-          value={contact.endTimestamp}
+          value={contact.endTimestamp.toString()}
           readonly={!isEditing}
           size='small'
           type='datetime-local'

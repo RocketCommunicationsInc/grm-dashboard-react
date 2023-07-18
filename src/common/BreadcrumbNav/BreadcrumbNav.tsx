@@ -13,7 +13,7 @@ export const BreadcrumbNav = () => {
     (match) => match.pathname.slice(-1) !== '/' && match.pathname !== '/alerts'
   );
 
-  const getLastPath = (pathname) => {
+  const getLastPath = (pathname: string) => {
     const index = pathname.lastIndexOf('/');
     const lastPath = pathname.substring(index + 1);
 
