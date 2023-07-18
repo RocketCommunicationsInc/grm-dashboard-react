@@ -7,7 +7,7 @@ export const getDayOfYear = (date: Date) => {
   return day;
 };
 
-export const setHhMmSs = (time: Date) => {
+export const setHhMmSs = (time: number | string) => {
   const date = new Date(time);
   const hour = String(date.getHours()).padStart(2, '0');
   const minute = String(date.getMinutes()).padStart(2, '0');
