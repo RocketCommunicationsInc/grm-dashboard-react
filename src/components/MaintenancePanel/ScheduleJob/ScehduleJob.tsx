@@ -22,7 +22,7 @@ const ScheduleJob = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { dataArray: contacts } = useTTCGRMContacts();
-  const { dispatch } = useAppContext();
+  const { dispatch } = useAppContext() as any;
   const [calculateConflicts, setCalculateConflicts] = useState(false);
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
 
@@ -55,13 +55,13 @@ const ScheduleJob = () => {
     navigate(`/alerts/${params.alertId}`);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch({ type: 'SCHEDULE_NEW_JOB', payload: newJob });
     navigate(`/alerts/${params.alertId}`);
   };
 
-  const handleChange = (e) => {
+  const handleChange = (e: any) => {
     setNewJob((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -83,7 +83,7 @@ const ScheduleJob = () => {
               value={newJob.jobType}
               name='jobType'
             >
-              <RuxOption label='- Select -'></RuxOption>
+              <RuxOption value='' label='- Select -'></RuxOption>
               <RuxOption value='Maintenence' label='Maintenence'></RuxOption>
               <RuxOption value='IT Support' label='IT Support'></RuxOption>
               <RuxOption value='Hardware' label='Hardware'></RuxOption>
