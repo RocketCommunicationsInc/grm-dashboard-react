@@ -57,7 +57,7 @@ const GlobalStatusBar = () => {
       <RuxClock />
 
       <div className='Global-status-bar__status-indicators' slot='right-side'>
-        <RuxMonitoringProgressIcon label='UCA' progress={ucaCount} />
+        <RuxMonitoringProgressIcon label='UCA' progress={ucaCount} range={[]} />
         <RuxPopUp placement='bottom'>
           <RuxMenu>
             <AlertPopUp softwareAlerts={softwareAlerts} />

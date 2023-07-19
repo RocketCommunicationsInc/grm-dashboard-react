@@ -51,7 +51,7 @@ const ContactsTable = ({ searchValue = '', setSearchValue }: PropTypes) => {
       const propertyArray = columnDefs.map((def) => def.property);
       const filteredForStateContacts = contactsArray.filter((contact) =>
         propertyArray.some((key) => {
-          const contactVal = contact[key];
+          const contactVal = contact[key] as string;
           if (
             key === 'beginTimestamp' ||
             key === 'endTimestamp' ||

@@ -1,6 +1,10 @@
 import { RuxDatetime } from '@astrouxds/react';
 
-export const TwoDigitTime = ({ time }) => (
+type PropTypes = {
+  time: any;
+};
+
+export const TwoDigitTime = ({ time }: PropTypes) => (
   <RuxDatetime
     date={new Date(time)}
     hour='2-digit'

@@ -1,8 +1,8 @@
-export function randInt(min, max) {
+export function randInt(min: number, max: number) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export function capitalize(str) {
+export function capitalize(str: string) {
   if (!str) return;
   let arr = str.split('-');
   let capitalized = arr.map(
@@ -11,7 +11,7 @@ export function capitalize(str) {
   return capitalized.join(' ');
 }
 
-export function formatReadableTime(timestamp) {
+export function formatReadableTime(timestamp: Date | number) {
   // assumes timestamp is a UTC Epoch
   const time = new Date(timestamp);
 
@@ -23,8 +23,12 @@ export function formatReadableTime(timestamp) {
   });
 }
 
-export function timeoutRepeater(callback, minDelay = 1000, maxDelay = 10000) {
-  let timeout;
+export function timeoutRepeater(
+  callback: () => void,
+  minDelay = 1000,
+  maxDelay = 10000
+) {
+  let timeout: any;
   function update() {
     timeout = setTimeout(() => {
       callback();
@@ -39,6 +43,6 @@ export function timeoutRepeater(callback, minDelay = 1000, maxDelay = 10000) {
   };
 }
 
-export const randomIndex = (arr) => {
+export const randomIndex = (arr: number[]) => {
   return randInt(0, arr.length - 1);
 };

@@ -1,7 +1,12 @@
 import { RuxInput } from '@astrouxds/react';
 import './Searchbar.css';
 
-const SearchBar = ({ searchValue, setSearchValue }) => {
+type PropTypes = {
+  searchValue: string;
+  setSearchValue: (value: string) => void;
+};
+
+const SearchBar = ({ searchValue, setSearchValue }: PropTypes) => {
   return (
     <div className='search-bar-container'>
       <RuxInput

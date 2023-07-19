@@ -13,6 +13,7 @@ import {
 } from '@astrouxds/react';
 import { useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { useAppContext } from '../../../providers/AppProvider';
 import ConflictsTable from '../../JobDetails/ConflictsTable';
 import './ScheduleJob.css';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
@@ -21,9 +22,9 @@ const ScheduleJob = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { dataArray: contacts } = useTTCGRMContacts();
+  const { dispatch } = useAppContext() as any;
   const [calculateConflicts, setCalculateConflicts] = useState(false);
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
-  const [jobs, setJobs] = useState([]);
 
   const uniqueJobId = Math.floor(Math.random() * 90000) + 10000;
   const statusValues = [
@@ -54,26 +55,14 @@ const ScheduleJob = () => {
     navigate(`/alerts/${params.alertId}`);
   };
 
-  const scheduleJob = (state: any, { type, payload }: any) => {
-    switch (type) {
-      case 'SCHEDULE_NEW_JOB': {
-        return {
-          ...state,
-          scheduledJobs: [...state.scheduledJobs, payload],
-        };
-      }
-    }
-  };
-
   const handleSubmit = (e: any) => {
     e.preventDefault();
-    setNewJob(newJob);
-    // scheduleJob(newJob, { type: 'SCHEDULE_NEW_JOB', payload: newJob });
+    dispatch({ type: 'SCHEDULE_NEW_JOB', payload: newJob });
     navigate(`/alerts/${params.alertId}`);
   };
 
   const handleChange = (e: any) => {
-    setNewJob((prevState: any) => ({
+    setNewJob((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
     }));
