@@ -4,7 +4,7 @@ import EquipmentDetailsPanel from '../EquipmentDetailsPanel/EquipmentDetailsPane
 
 const AlertDetailsPage = () => {
   return (
-    <main className={`$alert-details-page`}>
+    <main className={`$alert-details-page page`}>
       <AlertDetails />
       <EquipmentDetailsPanel />
       <MaintenancePanel />

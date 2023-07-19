@@ -27,23 +27,23 @@
   height: calc(100vh - 10.25rem);
   padding: var(--spacing-0) var(--spacing-3) var(--spacing-3);
 
-  & rux-container::part(body) {
-    padding: var(--spacing-4);
-    overflow-y: overlay;
-  }
-
-  & .Contact-details-grid__equipment-string::part(container) {
+  .Contact-details-grid__equipment-string::part(container) {
     border-width: 0;
   }
-  & .Contact-details-grid__equipment-string::part(header) {
+  .Contact-details-grid__equipment-string::part(header) {
     padding-inline: 0;
     padding-top: 0;
   }
 
-  & .Contact-details-grid__equipment-string::part(body),
-  & .Contact-details-grid__equipment-string::part(footer) {
+  .Contact-details-grid__equipment-string::part(body),
+  .Contact-details-grid__equipment-string::part(footer) {
     box-shadow: 0 0 0 1px inset var(--color-border-interactive-muted);
   }
+}
+
+.contact-details-page rux-container::part(body) {
+  padding: var(--spacing-4);
+  overflow-y: overlay;
 }
 
 .contact-details-log {

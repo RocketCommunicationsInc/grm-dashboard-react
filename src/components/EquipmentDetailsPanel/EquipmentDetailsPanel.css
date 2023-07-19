@@ -25,8 +25,8 @@
   display: flex;
   flex-direction: column;
   align-content: stretch;
+}
 
-  &::last-child {
-    flex: 1;
-  }
+.alert-description::last-child {
+  flex: 1;
 }

@@ -22,6 +22,16 @@ rux-container footer[slot='footer'] {
   justify-content: flex-end;
 }
 
+/* GLOBAL PAGE STYLES */
+
+.page {
+  /* calculated height of interior pages so that gsb doesn't have scrollbar */
+  max-height: calc(100vh - 10.25rem);
+  display: flex;
+  flex-flow: column;
+  overflow: overlay;
+}
+
 /* GlOBAL TABLE STYLES */
 
 .table-wrapper {
@@ -79,11 +89,11 @@ rux-status::part(status) {
   color: var(--color-text-primary);
   border-radius: var(--radius-base);
   padding: var(--spacing-2);
+}
 
-  &:focus-visible {
-    outline: 1px solid var(--color-border-focus-default);
-    outline-offset: var(--spacing-focus-default);
-  }
+.description-message:focus-visible {
+  outline: 1px solid var(--color-border-focus-default);
+  outline-offset: var(--spacing-focus-default);
 }
 
 /* Global Filter Notification Style */
@@ -92,9 +102,8 @@ rux-status::part(status) {
   padding: var(--spacing-2);
   text-overflow: ellipsis;
   white-space: nowrap;
-
-  & rux-button::part(container) {
-    padding-inline: var(--spacing-2);
-    box-shadow: none;
-  }
+}
+.filter-notification rux-button::part(container) {
+  padding-inline: var(--spacing-2);
+  box-shadow: none;
 }
