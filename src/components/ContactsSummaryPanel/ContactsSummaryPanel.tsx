@@ -13,6 +13,8 @@ const initialPopup = {
   width: 0,
   height: 0,
   open: false,
+  filterLabel: '',
+  filterState: '',
 };
 
 const initialDataset = [
@@ -53,7 +55,7 @@ const ContactsSummaryPanel = () => {
   const labelsShown = labels.slice(0, labelsArr);
 
   const getFilteredContacts = useCallback(
-    (timeLabel, desiredState) => {
+    (timeLabel: any, desiredState: any) => {
       if (!timeLabel || !desiredState) return [];
       const filteredContacts = contacts.filter((contact) => {
         const timeStampHour = new Date(contact.beginTimestamp).getHours();
@@ -75,28 +77,28 @@ const ContactsSummaryPanel = () => {
   }));
 
   const onClick = useCallback(
-    (event, chartContext, config) => {
+    (event: any, chartContext: any, config: any) => {
       setTimeout(() => {
         const { seriesIndex, dataPointIndex } = config;
         const chart = document.getElementById('chart-container');
-        const rect = chart.getBoundingClientRect();
+        const rect = chart?.getBoundingClientRect();
 
         setPopup({
           title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
           open: true,
-          top: event.pageY - rect.top,
-          left: event.pageX - rect.left,
+          top: event.pageY - (rect as any).top,
+          left: event.pageX - (rect as any).left,
           height,
           width,
           filterLabel: labelsShown[dataPointIndex],
           filterState: datasets[seriesIndex].name,
-        });
+        } as any);
       });
     },
     [datasets, height, labelsShown, width]
   );
 
-  const handleZoom = (e) => {
+  const handleZoom = (e: any) => {
     setZoomLevel(parseInt(e.target.value));
   };
 
@@ -198,7 +200,7 @@ const ContactsSummaryPanel = () => {
         </div>
         <Chart
           type='bar'
-          options={options}
+          options={options as object}
           series={datasets}
           height='100%'
           id='contacts-summary-chart'

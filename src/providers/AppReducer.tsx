@@ -1,4 +1,7 @@
-export const appReducer = (state, { type, payload }) => {
+export const appReducer = (
+  state: { scheduledJobs: any[] },
+  { type, payload }: any
+) => {
   switch (type) {
     case 'SCHEDULE_NEW_JOB': {
       return {

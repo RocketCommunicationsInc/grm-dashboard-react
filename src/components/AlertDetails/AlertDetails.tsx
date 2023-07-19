@@ -7,7 +7,7 @@ import { useTTCGRMAlerts, useTTCGRMActions } from '@astrouxds/mock-data';
 
 const AlertDetails = () => {
   const navigate = useNavigate();
-  const params = useParams();
+  const params: { [key: string]: any } = useParams();
   const { dataById: alerts } = useTTCGRMAlerts();
   const { deleteAlert } = useTTCGRMActions();
   const currentAlert = alerts[params.alertId];
@@ -72,7 +72,7 @@ const AlertDetails = () => {
           <header>Description</header>
           <div
             className='description-message'
-            tabIndex='0'
+            tabIndex={0}
             aria-readonly='true'
             role='textbox'
           >
