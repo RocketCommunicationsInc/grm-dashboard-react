@@ -70,9 +70,14 @@ const EquipmentStatus = () => {
     dataLabels: {
       hideOverflowingLabels: true,
       enabled: true,
+      offsetX: 0,
+      offsetY: 0,
       style: {
         colors: ['var(--color-text-primary)'],
-        fontWeight: 'normal',
+        fontWeight: 'bold',
+      },
+      dropShadow: {
+        enabled: false,
       },
     },
     plotOptions: {
