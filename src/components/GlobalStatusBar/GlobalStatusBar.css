@@ -30,3 +30,11 @@ rux-monitoring-progress-icon {
 #grm-popup-menu {
   height: calc(var(--spacing-14) + var(--spacing-050));
 }
+
+rux-toast-stack {
+  top: 96px;
+}
+
+rux-toast:nth-child(n + 5) {
+  display: none;
+}
