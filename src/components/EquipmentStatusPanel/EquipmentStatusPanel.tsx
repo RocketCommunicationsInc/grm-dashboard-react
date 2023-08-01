@@ -72,7 +72,7 @@ const EquipmentStatus = () => {
       enabled: true,
       style: {
         colors: ['var(--color-text-primary)'],
-        fontWeight: 'bold',
+        fontWeight: 'var(--font-heading-1-bold-font-weight)',
       },
       dropShadow: {
         enabled: false,
