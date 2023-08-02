@@ -72,7 +72,10 @@ const EquipmentStatus = () => {
       enabled: true,
       style: {
         colors: ['var(--color-text-primary)'],
-        fontFamily: 'var(--font-monospace-1-font-family)',
+        fontWeight: 'var(--font-heading-1-bold-font-weight)',
+      },
+      dropShadow: {
+        enabled: false,
       },
     },
     plotOptions: {

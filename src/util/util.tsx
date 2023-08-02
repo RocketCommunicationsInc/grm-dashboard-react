@@ -53,7 +53,7 @@ export const addToast = (
   closeAfter: number
 ) => {
   const toastStack = document.querySelector(
-    "rux-toast-stack"
+    'rux-toast-stack'
   ) as HTMLRuxToastStackElement;
 
   toastStack.addToast({
