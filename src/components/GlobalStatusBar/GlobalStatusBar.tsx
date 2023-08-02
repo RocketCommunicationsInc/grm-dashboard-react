@@ -13,30 +13,34 @@ import {
 import useGlobalStatusBar from './useGlobalStatusBar';
 import AlertPopUp from './AlertPopUp/AlertPopUp';
 import { useTTCGRMAlerts } from '@astrouxds/mock-data';
-import { addToast } from '../../util';
+import { addToast } from '../../util/util';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import './GlobalStatusBar.css';
-import { useState } from 'react';
 
 const GlobalStatusBar = () => {
   const [lightTheme, setLightTheme] = useState(false);
   const { statusIcons, ucaCount } = useGlobalStatusBar();
   const { dataArray: alerts } = useTTCGRMAlerts();
+  const navigate = useNavigate();
 
   const softwareAlerts = alerts.filter(
     (alert) => alert.category === 'software'
   );
 
-  const menuSelect = (e: CustomEvent) => {
+  function menuSelect(e: CustomEvent) {
     const { detail } = e;
+    if (detail.value === 'notImplemented') {
+      addToast('This feature has not been implemented', false, 3000);
+      return;
+    }
     if (detail.value === 'themeToggle') {
       setLightTheme(!lightTheme);
       document.body.classList.toggle('light-theme');
       return;
-    } else {
-      addToast('This feature has not been implemented', false, 3000);
     }
-  };
+  }
 
   return (
     <>
@@ -61,16 +65,26 @@ const GlobalStatusBar = () => {
             slot='trigger'
             size='2rem'
           />
-          <RuxMenu onRuxmenuselected={menuSelect}>
-            <RuxMenuItem>GRM Dashboard</RuxMenuItem>
-            <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
-            <RuxMenuItem>GRM Schedule</RuxMenuItem>
+          <RuxMenu onRuxmenuselected={(e) => menuSelect(e)}>
+            <RuxMenuItem
+              onClick={() => {
+                navigate('/');
+              }}
+            >
+              GRM Dashboard
+            </RuxMenuItem>
+            <RuxMenuItem href='https://grm-equipment-react.netlify.app'>
+              GRM Equipment Manager
+            </RuxMenuItem>
+            <RuxMenuItem href='https://grm-schedule-react.netlify.app/'>
+              GRM Schedule
+            </RuxMenuItem>
             <RuxMenuItemDivider />
             <RuxMenuItem value='themeToggle'>
               {lightTheme ? 'Dark' : 'Light'} Theme
             </RuxMenuItem>
-            <RuxMenuItem>Preferences...</RuxMenuItem>
-            <RuxMenuItem>Sign Out...</RuxMenuItem>
+            <RuxMenuItem value='notImplemented'>Preferences...</RuxMenuItem>
+            <RuxMenuItem value='notImplemented'>Sign Out...</RuxMenuItem>
           </RuxMenu>
         </RuxPopUp>
 
