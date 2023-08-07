@@ -9,6 +9,10 @@
   gap: var(--spacing-4);
 }
 
+rux-monitoring-icon {
+  padding-right: var(--spacing-1);
+}
+
 rux-monitoring-progress-icon::part(monitoring-label) {
   margin-top: var(--spacing-1);
 }
