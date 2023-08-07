@@ -16,12 +16,15 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../../providers/AppProvider';
 import ConflictsTable from '../../JobDetails/ConflictsTable';
 import './ScheduleJob.css';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { Contact } from '@astrouxds/mock-data';
 
-const ScheduleJob = () => {
+type PropTypes = {
+  filteredData: Contact[];
+};
+
+const ScheduleJob = ({ filteredData }: PropTypes) => {
   const navigate = useNavigate();
   const params = useParams();
-  const { dataArray: contacts } = useTTCGRMContacts();
   const { dispatch } = useAppContext() as any;
   const [calculateConflicts, setCalculateConflicts] = useState(false);
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
@@ -155,7 +158,7 @@ const ScheduleJob = () => {
           {!calculateConflicts ? (
             <h2>Conflicts (0)</h2>
           ) : (
-            <h2>Conflicts ({contacts.length})</h2>
+            <h2>Conflicts ({filteredData.length})</h2>
           )}
           <span>
             This equpiment may be allocated to contacts within the timeframe of
@@ -172,7 +175,7 @@ const ScheduleJob = () => {
 
           <div className='table-section'>
             {calculateConflicts ? (
-              <ConflictsTable />
+              <ConflictsTable filteredData={filteredData} />
             ) : (
               <RuxTable>
                 <RuxTableHeader>

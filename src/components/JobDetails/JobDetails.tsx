@@ -15,13 +15,16 @@ import ConflictsTable from './ConflictsTable';
 
 import './JobDetails.css';
 import Stepper from './Stepper/Stepper';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { Contact } from '@astrouxds/mock-data';
 
-const JobDetails = () => {
+type PropTypes = {
+  filteredData: Contact[];
+};
+
+const JobDetails = ({ filteredData }: PropTypes) => {
   const { state, dispatch }: any = useAppContext();
   const navigate = useNavigate();
   const params = useParams();
-  const { dataArray: contacts } = useTTCGRMContacts();
   const [job, setJob] = useState(state.currentJob);
   const [isModifying, setIsModifying] = useState(false);
 
@@ -167,8 +170,8 @@ const JobDetails = () => {
           )}
         </div>
         <RuxContainer className='job-details-conflicts-section'>
-          <h2>Conflicts ({contacts.length})</h2>
-          <ConflictsTable />
+          <h2>Conflicts ({filteredData.length})</h2>
+          <ConflictsTable filteredData={filteredData} />
         </RuxContainer>
       </div>
 
