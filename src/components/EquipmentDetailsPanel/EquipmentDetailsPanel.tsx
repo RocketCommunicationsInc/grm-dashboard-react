@@ -30,8 +30,8 @@ const EquipmentDetailsPanel = () => {
   return (
     <RuxContainer className='equipment-details'>
       <header slot='header'>Equipment Details</header>
-      <RuxContainer className='child-container'>
-        <header slot='header'>Black FEP 6566</header>
+      <RuxContainer>
+        <header className='alert-title'>Black FEP 6566</header>
         <DetailsCommonGrid>
           <div>
             <section className='segmented-button-group'>
@@ -55,7 +55,6 @@ const EquipmentDetailsPanel = () => {
               </p>
             </div>
           </div>
-
           <div className='equipment-details-log'>
             <EventLog />
           </div>

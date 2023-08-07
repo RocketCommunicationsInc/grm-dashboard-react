@@ -26,7 +26,6 @@ const JobDetailsPage = () => {
   return (
     <>
       <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
-
       <main className={`$job-details-page page`}>
         <AlertDetails />
         <JobDetails filteredData={filteredContacts} />

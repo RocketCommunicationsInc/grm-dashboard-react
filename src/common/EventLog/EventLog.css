@@ -1,17 +1,13 @@
 .log-wrapper {
-  height: 98%;
+  height: 100%;
   width: 100%;
   display: flex;
 }
 
 rux-log {
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   height: 100%;
   flex: 1;
-  min-width: 40rem;
+  min-width: 41rem;
 }
-/* 
-.log-wrapper rux-log::part(log-notification) {
-  max-width: 38.5rem;
-  padding-right: none;
-} */

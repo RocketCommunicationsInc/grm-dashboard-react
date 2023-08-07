@@ -13,21 +13,6 @@ import { setHhMmSs } from '../../util';
 const Dashboard = () => {
   const [searchValue, setSearchValue] = useState('');
   const { dataArray: contacts } = useTTCGRMContacts();
-  const searchKeys = [
-    'contactAOS',
-    'contactLOS',
-    'contactDOY',
-    'contactBeginTimestamp',
-    'contactEndTimestamp',
-    'contactEquipment',
-    'contactGround',
-    'contactName',
-    'contactPriority',
-    'contactREV',
-    'contactSatellite',
-    'contactState',
-    'contactStatus',
-  ];
 
   const filteredContacts = contacts.filter((contact: any) =>
     contact === 'beginTimestamp' ||

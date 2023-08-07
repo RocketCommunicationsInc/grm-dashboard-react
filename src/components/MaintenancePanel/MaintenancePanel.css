@@ -15,11 +15,11 @@ rux-container.jobs-section {
   flex-direction: row;
 }
 
-.job-card-wrapper {
+.job-section-wrapper {
   margin: var(--spacing-4);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-3);
+  justify-content: space-between;
 }
 
 .maintenance-history-panel {
