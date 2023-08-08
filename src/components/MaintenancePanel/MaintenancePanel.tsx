@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { RuxButton, RuxContainer } from '@astrouxds/react';
 import { useAppContext } from '../../providers/AppProvider';
 import JobIDCard from './JobIDCard/JobIDCard';
-import Table from '../../common/Table/Table';
+import JobsTable from './JobsTable/JobsTable';
 import './MaintenancePanel.css';
 
 const MaintenancePanel = () => {
@@ -13,16 +13,6 @@ const MaintenancePanel = () => {
     dispatch({ type: 'EDIT_JOB', payload: job });
     navigate('job-details');
   };
-
-  const columnDefs: any[] = [
-    { label: 'Job ID', property: 'jobId' },
-    { label: 'Type', property: 'jobType' },
-    { label: 'Created On', property: 'createdOn' },
-    { label: 'Started On', property: 'startTime' },
-    { label: 'Completed On', property: 'stopTime' },
-    { label: 'Technician', property: 'technician' },
-    { label: 'Description', property: 'description' },
-  ];
 
   const jobs = state.scheduledJobs.map((job: any) => job);
 
@@ -51,7 +41,7 @@ const MaintenancePanel = () => {
       <RuxContainer className='maintenance-history-panel'>
         <div className='maintenance-wrapper'>
           <h2>Maintenance History</h2>
-          <Table columnDefs={columnDefs} filteredData={jobs} />
+          <JobsTable jobs={jobs} />
         </div>
       </RuxContainer>
     </RuxContainer>
