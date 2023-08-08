@@ -13,10 +13,15 @@ import { filterContacts } from '../../util/filterContacts';
 const Dashboard = () => {
   const [searchValue, setSearchValue] = useState('');
   const { dataArray: contacts } = useTTCGRMContacts();
+  const [selectedTab, setSelectedTab] = useState(false);
 
   const filteredContacts = useMemo(() => {
     return filterContacts(contacts, searchValue);
   }, [contacts, searchValue]);
+
+  const handleSelectedTab = (tab: number) => {
+    setSelectedTab(tab === 2);
+  };
 
   return (
     <main className={`dashboard-page`}>
@@ -25,10 +30,26 @@ const Dashboard = () => {
       </aside>
       <nav className='Dashboard-page__tabs-bar'>
         <RuxTabs id='dashboard-tabs' small>
-          <RuxTab id='contacts-tab'>Contacts</RuxTab>
-          <RuxTab id='equipment-tab'>Equipment</RuxTab>
+          <RuxTab
+            onRuxtabselected={() => handleSelectedTab(1)}
+            id='contacts-tab'
+          >
+            Contacts
+          </RuxTab>
+          <RuxTab
+            id='equipment-tab'
+            onRuxtabselected={() => handleSelectedTab(2)}
+          >
+            Equipment
+          </RuxTab>
         </RuxTabs>
-        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+
+        <SearchBar
+          placeholder='Search...'
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+          disabled={selectedTab}
+        />
       </nav>
       <RuxTabPanels aria-labelledby='dashboard-tabs'>
         <RuxTabPanel aria-labelledby='contacts-tab'>

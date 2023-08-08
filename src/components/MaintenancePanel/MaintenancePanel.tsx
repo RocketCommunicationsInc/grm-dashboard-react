@@ -2,32 +2,21 @@ import { useNavigate } from 'react-router-dom';
 import { RuxButton, RuxContainer } from '@astrouxds/react';
 import { useAppContext } from '../../providers/AppProvider';
 import JobIDCard from './JobIDCard/JobIDCard';
-import Table from '../../common/Table/Table';
+import JobsTable from './JobsTable/JobsTable';
 import './MaintenancePanel.css';
 import { setHhMmSs } from '../../util';
+import SearchBar from '../../common/SearchBar/SearchBar';
+import { useState } from 'react';
 
-type PropTypes = {
-  searchValue: string;
-};
-
-const MaintenancePanel = ({ searchValue = '' }: PropTypes) => {
+const MaintenancePanel = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useAppContext() as any;
+  const [searchValue, setSearchValue] = useState('');
 
   const handleJobDetailsClick = (job: any) => {
     dispatch({ type: 'EDIT_JOB', payload: job });
     navigate('job-details');
   };
-
-  const columnDefs: any[] = [
-    { label: 'Job ID', property: 'jobId' },
-    { label: 'Type', property: 'jobType' },
-    { label: 'Created On', property: 'createdOn' },
-    { label: 'Started On', property: 'startTime' },
-    { label: 'Completed On', property: 'stopTime' },
-    { label: 'Technician', property: 'technician' },
-    { label: 'Description', property: 'description' },
-  ];
 
   const filteredJobs = state.scheduledJobs.filter((job: any) =>
     job === 'startTime' || job === 'stopTime' || job === 'createdOn'
@@ -43,7 +32,14 @@ const MaintenancePanel = ({ searchValue = '' }: PropTypes) => {
 
   return (
     <RuxContainer className='maintenance-panel'>
-      <header slot='header'>Maintenance</header>
+      <header slot='header'>
+        Maintenance
+        <SearchBar
+          placeholder='Search jobs...'
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />{' '}
+      </header>
       <RuxContainer className='jobs-section'>
         <h2>Jobs</h2>
         <div className='job-section-wrapper'>
@@ -66,7 +62,7 @@ const MaintenancePanel = ({ searchValue = '' }: PropTypes) => {
       <RuxContainer className='maintenance-history-panel'>
         <div className='maintenance-wrapper'>
           <h2>Maintenance History</h2>
-          <Table columnDefs={columnDefs} filteredData={filteredJobs} />
+          <JobsTable jobs={filteredJobs} />
         </div>
       </RuxContainer>
     </RuxContainer>

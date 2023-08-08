@@ -4,10 +4,16 @@ import './Searchbar.css';
 type PropTypes = {
   searchValue: string;
   setSearchValue: (value: string) => void;
-  placeholder?: string;
+  placeholder: string;
+  disabled?: boolean;
 };
 
-const SearchBar = ({ searchValue, setSearchValue, placeholder }: PropTypes) => {
+const SearchBar = ({
+  searchValue,
+  setSearchValue,
+  placeholder,
+  disabled,
+}: PropTypes) => {
   return (
     <div className='search-bar-container'>
       <RuxInput
@@ -15,6 +21,7 @@ const SearchBar = ({ searchValue, setSearchValue, placeholder }: PropTypes) => {
         placeholder={placeholder}
         onRuxinput={(e) => setSearchValue(e.target.value)}
         value={searchValue}
+        disabled={disabled}
       />
     </div>
   );
