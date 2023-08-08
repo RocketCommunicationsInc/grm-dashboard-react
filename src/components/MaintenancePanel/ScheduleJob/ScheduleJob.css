@@ -51,6 +51,10 @@
   font-size: var(--font-size-xl);
 }
 
+.conflicts-wrapper {
+  height: 100%;
+}
+
 .job-request-section {
   width: 40rem;
   padding-inline-end: var(--spacing-4);

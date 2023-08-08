@@ -186,7 +186,9 @@ const ScheduleJob = () => {
 
           <div className='table-section'>
             {calculateConflicts ? (
-              <ConflictsTable filteredData={filteredContacts} />
+              <div className='conflicts-wrapper'>
+                <ConflictsTable filteredData={filteredContacts} />
+              </div>
             ) : (
               <RuxTable>
                 <RuxTableHeader>
