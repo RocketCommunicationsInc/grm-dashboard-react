@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
   RuxCheckbox,
   RuxContainer,
@@ -12,21 +12,24 @@ import { useAppContext } from '../../providers/AppProvider';
 import { useParams, useNavigate } from 'react-router-dom';
 import { EventLog } from '../../common';
 import ConflictsTable from './ConflictsTable';
-
-import './JobDetails.css';
 import Stepper from './Stepper/Stepper';
-import { Contact } from '@astrouxds/mock-data';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { filterContacts } from '../../util/filterContacts';
+import './JobDetails.css';
+import SearchBar from '../../common/SearchBar/SearchBar';
 
-type PropTypes = {
-  filteredData: Contact[];
-};
-
-const JobDetails = ({ filteredData }: PropTypes) => {
+const JobDetails = () => {
   const { state, dispatch }: any = useAppContext();
+  const { dataArray: contacts } = useTTCGRMContacts();
   const navigate = useNavigate();
   const params = useParams();
   const [job, setJob] = useState(state.currentJob);
   const [isModifying, setIsModifying] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  const filteredContacts = useMemo(() => {
+    return filterContacts(contacts, searchValue);
+  }, [contacts, searchValue]);
 
   const handleCancel = () => {
     if (isModifying) {
@@ -67,6 +70,11 @@ const JobDetails = ({ filteredData }: PropTypes) => {
     <RuxContainer className='job-details-panel'>
       <header slot='header'>
         [{job.equpiment}] Maintenance Job ID {job.jobId}
+        <SearchBar
+          placeholder='Search conflicts...'
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
       </header>
       <div className='jobs-wrapper'>
         <div className='jobs-details-section'>
@@ -170,8 +178,8 @@ const JobDetails = ({ filteredData }: PropTypes) => {
           )}
         </div>
         <RuxContainer className='job-details-conflicts-section'>
-          <h2>Conflicts ({filteredData.length})</h2>
-          <ConflictsTable filteredData={filteredData} />
+          <h2>Conflicts ({filteredContacts.length})</h2>
+          <ConflictsTable filteredData={filteredContacts} />
         </RuxContainer>
       </div>
 

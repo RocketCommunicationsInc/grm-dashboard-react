@@ -11,23 +11,23 @@ import {
   RuxTable,
   RuxTableHeaderRow,
 } from '@astrouxds/react';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../../providers/AppProvider';
 import ConflictsTable from '../../JobDetails/ConflictsTable';
 import './ScheduleJob.css';
-import { Contact } from '@astrouxds/mock-data';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import SearchBar from '../../../common/SearchBar/SearchBar';
+import { filterContacts } from '../../../util/filterContacts';
 
-type PropTypes = {
-  filteredData: Contact[];
-};
-
-const ScheduleJob = ({ filteredData }: PropTypes) => {
+const ScheduleJob = () => {
   const navigate = useNavigate();
   const params = useParams();
   const { dispatch } = useAppContext() as any;
+  const { dataArray: contacts } = useTTCGRMContacts();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   const uniqueJobId = Math.floor(Math.random() * 90000) + 10000;
   const statusValues = [
@@ -72,9 +72,20 @@ const ScheduleJob = ({ filteredData }: PropTypes) => {
     setInputsFilledOut(true);
   };
 
+  const filteredContacts = useMemo(() => {
+    return filterContacts(contacts, searchValue);
+  }, [contacts, searchValue]);
+
   return (
     <RuxContainer className='schedule-job'>
-      <header slot='header'>Job Request</header>
+      <header slot='header'>
+        Job Request
+        <SearchBar
+          placeholder='Search conflicts...'
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
+      </header>
       <div className='schedule-job-wrapper'>
         <div className='job-request-section'>
           <ul>
@@ -158,7 +169,7 @@ const ScheduleJob = ({ filteredData }: PropTypes) => {
           {!calculateConflicts ? (
             <h2>Conflicts (0)</h2>
           ) : (
-            <h2>Conflicts ({filteredData.length})</h2>
+            <h2>Conflicts ({filteredContacts.length})</h2>
           )}
           <span>
             This equpiment may be allocated to contacts within the timeframe of
@@ -175,7 +186,7 @@ const ScheduleJob = ({ filteredData }: PropTypes) => {
 
           <div className='table-section'>
             {calculateConflicts ? (
-              <ConflictsTable filteredData={filteredData} />
+              <ConflictsTable filteredData={filteredContacts} />
             ) : (
               <RuxTable>
                 <RuxTableHeader>
