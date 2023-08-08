@@ -12,10 +12,6 @@
   gap: var(--spacing-4);
 }
 
-.Contact-details-page {
-  padding: var(--spacing-0) var(--spacing-3) var(--spacing-3);
-}
-
 .contact-details-sat {
   display: flex;
   gap: var(--spacing-2);
@@ -27,17 +23,13 @@
   height: calc(100vh - 10.25rem);
   padding: var(--spacing-0) var(--spacing-3) var(--spacing-3);
 
-  .Contact-details-grid__equipment-string::part(container) {
-    border-width: 0;
-  }
   .Contact-details-grid__equipment-string::part(header) {
     padding-inline: 0;
     padding-top: 0;
   }
 
-  .Contact-details-grid__equipment-string::part(body),
-  .Contact-details-grid__equipment-string::part(footer) {
-    box-shadow: 0 0 0 1px inset var(--color-border-interactive-muted);
+  .Contact-details-grid__equipment-string header:nth-of-type(1) {
+    font-size: var(--font-size-2xl);
   }
 }
 

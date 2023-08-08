@@ -23,6 +23,7 @@ const JobDetailsPage = () => {
           .toLowerCase()
           .includes(searchValue.toLowerCase())
   );
+
   return (
     <>
       <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />

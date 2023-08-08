@@ -12,10 +12,10 @@ export const AffectedContacts = () => {
   const [randomContacts, setRandomContacts] = useState<Contact[]>([]);
 
   useEffect(() => {
-    const emptyArray: number[] = [...Array(randInt(3, 6))];
+    const emptyArray: number[] = [...Array(randInt(1, 3))];
     setRandomContacts(
       emptyArray.map((u, i) => {
-        return contacts[randInt(0, 10)];
+        return contacts[randInt(0, 3)];
       })
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
