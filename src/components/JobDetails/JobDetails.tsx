@@ -179,6 +179,18 @@ const JobDetails = () => {
         </div>
         <RuxContainer className='job-details-conflicts-section'>
           <h2>Conflicts ({filteredContacts.length})</h2>
+          <span>
+            This equpiment may be allocated to contacts within the timeframe of
+            this maintenance job. A list of these contacts is provided below
+            after clicking "Calculate Conflicts".
+            <br />
+          </span>
+          <span>
+            To ensure that these contacts have the equpiment they need to
+            execute, change the timeframe of the maintenance job using the
+            Start/Stop fields, or change the equipment allocated to these
+            contacts in the GRM Schedule app.
+          </span>
           <ConflictsTable filteredData={filteredContacts} />
         </RuxContainer>
       </div>

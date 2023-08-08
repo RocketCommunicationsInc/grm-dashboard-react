@@ -1,4 +1,3 @@
-import { RuxContainer } from '@astrouxds/react';
 import { Contact } from '@astrouxds/mock-data';
 import { capitalize, determineTimeString } from '../../util';
 import Table from '../../common/Table/Table';
@@ -34,11 +33,7 @@ const columnDefs: ColumnDef[] = [
 ];
 
 const ConflictsTable = ({ filteredData }: PropTypes) => {
-  return (
-    <RuxContainer>
-      <Table columnDefs={columnDefs} filteredData={filteredData} />
-    </RuxContainer>
-  );
+  return <Table columnDefs={columnDefs} filteredData={filteredData} />;
 };
 
 export default ConflictsTable;
