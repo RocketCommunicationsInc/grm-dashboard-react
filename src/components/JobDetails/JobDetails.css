@@ -46,6 +46,11 @@
   margin: var(--spacing-4);
 }
 
+.job-details-conflicts-section span {
+  margin-inline: var(--spacing-4);
+  margin-bottom: var(--spacing-6);
+}
+
 .job-details-panel {
   padding: var(--spacing-0) var(--spacing-3) var(--spacing-3) var(--spacing-3);
 }
@@ -66,4 +71,9 @@
 
 .job-details-log rux-log::part(log-notification) {
   max-width: 38.5rem;
+}
+
+.job-details-panel header[slot='header'] {
+  display: flex;
+  justify-content: space-between;
 }

@@ -7,7 +7,11 @@ const ContactsTablePage = () => {
 
   return (
     <>
-      <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
+      <SearchBar
+        placeholder='Search...'
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <ContactsTable
         searchValue={searchValue}
         setSearchValue={setSearchValue}

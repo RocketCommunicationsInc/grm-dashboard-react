@@ -3,7 +3,11 @@ import ContactsSummaryTable from './ContactsSummaryTable';
 import Chart from 'react-apexcharts';
 import { RuxPopUp, RuxSlider, RuxIcon, RuxContainer } from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { Contact } from '@astrouxds/mock-data';
+
+type PropTypes = {
+  filteredData: Contact[];
+};
 
 const initialPopup = {
   title: '',
@@ -44,8 +48,7 @@ const labels = [
   '1900',
 ];
 
-const ContactsSummaryPanel = () => {
-  const { dataArray: contacts } = useTTCGRMContacts();
+const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
   const [zoomLevel, setZoomLevel] = useState(6);
   const [popup, setPopup] = useState(initialPopup);
   const { title, open, height, left, top, width, filterLabel, filterState } =
@@ -57,7 +60,7 @@ const ContactsSummaryPanel = () => {
   const getFilteredContacts = useCallback(
     (timeLabel: any, desiredState: any) => {
       if (!timeLabel || !desiredState) return [];
-      const filteredContacts = contacts.filter((contact) => {
+      const filteredContacts = filteredData.filter((contact) => {
         const timeStampHour = new Date(contact.beginTimestamp).getHours();
         return (
           timeStampHour === Number(timeLabel.slice(0, 2)) &&
@@ -66,7 +69,7 @@ const ContactsSummaryPanel = () => {
       });
       return filteredContacts;
     },
-    [contacts]
+    [filteredData]
   );
 
   const datasets = initialDataset.map((dataset) => ({

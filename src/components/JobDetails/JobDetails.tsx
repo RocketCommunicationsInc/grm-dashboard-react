@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 import {
   RuxCheckbox,
   RuxContainer,
@@ -12,18 +12,24 @@ import { useAppContext } from '../../providers/AppProvider';
 import { useParams, useNavigate } from 'react-router-dom';
 import { EventLog } from '../../common';
 import ConflictsTable from './ConflictsTable';
-
-import './JobDetails.css';
 import Stepper from './Stepper/Stepper';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
+import { filterContacts } from '../../util/filterContacts';
+import './JobDetails.css';
+import SearchBar from '../../common/SearchBar/SearchBar';
 
 const JobDetails = () => {
   const { state, dispatch }: any = useAppContext();
+  const { dataArray: contacts } = useTTCGRMContacts();
   const navigate = useNavigate();
   const params = useParams();
-  const { dataArray: contacts } = useTTCGRMContacts();
   const [job, setJob] = useState(state.currentJob);
   const [isModifying, setIsModifying] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
+
+  const filteredContacts = useMemo(() => {
+    return filterContacts(contacts, searchValue);
+  }, [contacts, searchValue]);
 
   const handleCancel = () => {
     if (isModifying) {
@@ -64,6 +70,11 @@ const JobDetails = () => {
     <RuxContainer className='job-details-panel'>
       <header slot='header'>
         [{job.equpiment}] Maintenance Job ID {job.jobId}
+        <SearchBar
+          placeholder='Search conflicts...'
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />
       </header>
       <div className='jobs-wrapper'>
         <div className='jobs-details-section'>
@@ -167,8 +178,20 @@ const JobDetails = () => {
           )}
         </div>
         <RuxContainer className='job-details-conflicts-section'>
-          <h2>Conflicts ({contacts.length})</h2>
-          <ConflictsTable />
+          <h2>Conflicts ({filteredContacts.length})</h2>
+          <span>
+            This equpiment may be allocated to contacts within the timeframe of
+            this maintenance job. A list of these contacts is provided below
+            after clicking "Calculate Conflicts".
+            <br />
+          </span>
+          <span>
+            To ensure that these contacts have the equpiment they need to
+            execute, change the timeframe of the maintenance job using the
+            Start/Stop fields, or change the equipment allocated to these
+            contacts in the GRM Schedule app.
+          </span>
+          <ConflictsTable filteredData={filteredContacts} />
         </RuxContainer>
       </div>
 

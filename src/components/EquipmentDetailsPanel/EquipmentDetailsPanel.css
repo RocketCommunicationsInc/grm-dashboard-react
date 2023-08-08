@@ -18,7 +18,7 @@
 }
 
 .equipment-details-log rux-log::part(log-notification) {
-  max-width: 42rem;
+  max-width: 40rem;
 }
 
 .alert-description {
@@ -29,4 +29,9 @@
 
 .alert-description::last-child {
   flex: 1;
+}
+
+.alert-title {
+  padding-bottom: var(--spacing-3);
+  font-size: var(--font-size-2xl);
 }

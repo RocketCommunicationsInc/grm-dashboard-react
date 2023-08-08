@@ -302,8 +302,8 @@ const ContactDetails = () => {
         <DetailsCommonGrid className='Contact-details-grid'>
           <DetailsGrid details={generalDetails} />
 
-          <RuxContainer className='child-container Contact-details-grid__equipment-string'>
-            <header slot='header'>Equipment String</header>
+          <RuxContainer className='Contact-details-grid__equipment-string'>
+            <header>Equipment String</header>
             <DetailsGrid details={configDetails} />
 
             <span>{contact.equipment}</span>

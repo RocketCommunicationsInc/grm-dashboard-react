@@ -6,11 +6,14 @@ import {
   RuxOption,
 } from '@astrouxds/react';
 import Table from '../../common/Table/Table';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
 import { determineTimeString, capitalize } from '../../util';
 import './CurrentContactsTable.css';
 import type { ColumnDef } from '../../common/Table/Table';
+
+type PropTypes = {
+  filteredData: Contact[];
+};
 
 const statuses = [
   { label: 'All', value: 'all' },
@@ -43,16 +46,15 @@ const columnDefs: ColumnDef[] = [
   },
 ];
 
-const CurrentContactsTable = () => {
-  const { dataArray: contactsArray } = useTTCGRMContacts();
+const CurrentContactsTable = ({ filteredData }: PropTypes) => {
   const [stateSelection, setStateSelection] = useState<
     'executing' | 'failed' | 'all'
   >('all');
 
-  const numFailed = contactsArray.filter(
+  const numFailed = filteredData.filter(
     (contact) => contact.state === 'failed'
   ).length;
-  const numExecuting = contactsArray.filter(
+  const numExecuting = filteredData.filter(
     (contact) => contact.state === 'executing'
   ).length;
 
@@ -76,15 +78,15 @@ const CurrentContactsTable = () => {
   );
 
   const filteredContacts = useMemo(() => {
-    return filterContacts(contactsArray, stateSelection);
-  }, [contactsArray, filterContacts, stateSelection]);
+    return filterContacts(filteredData, stateSelection);
+  }, [filteredData, filterContacts, stateSelection]);
 
   return (
     <RuxContainer>
       <div slot='header'>Current Contacts</div>
       <div className='Current-contacts-panel__group' slot='toolbar'>
         <div className='summary-data'>
-          <span>{contactsArray.length}</span>Contacts
+          <span>{filteredData.length}</span>Contacts
         </div>
         <div className='summary-data failed'>
           <span>{numFailed}</span>Failed

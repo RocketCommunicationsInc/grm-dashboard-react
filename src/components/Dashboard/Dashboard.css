@@ -21,6 +21,8 @@
 
 .Dashboard-page__tabs-bar {
   grid-area: tabs-bar;
+  display: flex;
+  justify-content: space-between;
 }
 
 rux-tab-panels {

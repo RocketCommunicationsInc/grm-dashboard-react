@@ -4,28 +4,49 @@ import { useAppContext } from '../../providers/AppProvider';
 import JobIDCard from './JobIDCard/JobIDCard';
 import JobsTable from './JobsTable/JobsTable';
 import './MaintenancePanel.css';
+import { setHhMmSs } from '../../util';
+import SearchBar from '../../common/SearchBar/SearchBar';
+import { useState } from 'react';
 
 const MaintenancePanel = () => {
   const navigate = useNavigate();
   const { state, dispatch } = useAppContext() as any;
+  const [searchValue, setSearchValue] = useState('');
 
   const handleJobDetailsClick = (job: any) => {
     dispatch({ type: 'EDIT_JOB', payload: job });
     navigate('job-details');
   };
 
-  const jobs = state.scheduledJobs.map((job: any) => job);
+  const filteredJobs = state.scheduledJobs.filter((job: any) =>
+    job === 'startTime' || job === 'stopTime' || job === 'createdOn'
+      ? Object.values(setHhMmSs(job))
+          .toString()
+          .toLowerCase()
+          .includes(searchValue.toLowerCase())
+      : Object.values(job)
+          .toString()
+          .toLowerCase()
+          .includes(searchValue.toLowerCase())
+  );
 
   return (
     <RuxContainer className='maintenance-panel'>
-      <header slot='header'>Maintenance</header>
+      <header slot='header'>
+        Maintenance
+        <SearchBar
+          placeholder='Search jobs...'
+          searchValue={searchValue}
+          setSearchValue={setSearchValue}
+        />{' '}
+      </header>
       <RuxContainer className='jobs-section'>
         <h2>Jobs</h2>
-        <div className='job-card-wrapper'>
+        <div className='job-section-wrapper'>
           <RuxButton onClick={() => navigate('schedule-job')}>
             Schedule Job
           </RuxButton>
-          {state.scheduledJobs.map((job: any) => (
+          {filteredJobs.map((job: any) => (
             <JobIDCard
               key={job.jobId}
               type={job.jobType}
@@ -41,7 +62,7 @@ const MaintenancePanel = () => {
       <RuxContainer className='maintenance-history-panel'>
         <div className='maintenance-wrapper'>
           <h2>Maintenance History</h2>
-          <JobsTable jobs={jobs} />
+          <JobsTable jobs={filteredJobs} />
         </div>
       </RuxContainer>
     </RuxContainer>

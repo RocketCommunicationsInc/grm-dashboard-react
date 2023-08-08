@@ -15,11 +15,11 @@ rux-container.jobs-section {
   flex-direction: row;
 }
 
-.job-card-wrapper {
+.job-section-wrapper {
   margin: var(--spacing-4);
   display: flex;
   flex-wrap: wrap;
-  gap: var(--spacing-3);
+  justify-content: space-between;
 }
 
 .maintenance-history-panel {
@@ -34,4 +34,9 @@ rux-container.jobs-section {
 .maintenance-wrapper h2,
 .jobs-section h2 {
   margin: var(--spacing-3);
+}
+
+.maintenance-panel header[slot='header'] {
+  display: flex;
+  justify-content: space-between;
 }

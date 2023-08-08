@@ -1,4 +1,3 @@
-import React from 'react';
 import AlertDetails from '../../AlertDetails/AlertDetails';
 import ScheduleJob from './ScehduleJob';
 
