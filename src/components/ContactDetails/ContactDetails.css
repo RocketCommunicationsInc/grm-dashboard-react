@@ -39,7 +39,8 @@
 }
 
 .contact-details-log {
-  max-height: 34.5rem;
+  max-height: 31.4rem;
+  border: 1px solid var(--container-color-border);
 }
 
 .contact-details-log rux-log::part(log-notification) {
