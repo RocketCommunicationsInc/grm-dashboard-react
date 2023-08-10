@@ -13,8 +13,9 @@
 
 .equipment-details-log {
   min-height: 16.5rem;
-  max-height: 17rem;
-  height: calc(100% - 0.5rem);
+  max-height: 16.5rem;
+  height: 100%;
+  border: 1px solid var(--container-color-border);
 }
 
 .equipment-details-log rux-log::part(log-notification) {
