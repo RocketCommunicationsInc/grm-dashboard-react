@@ -18,9 +18,5 @@ export const EventLog = memo(() => {
     };
   });
 
-  return (
-    <div className='log-wrapper'>
-      <RuxLog data={modifiedEvents} filter={''} />
-    </div>
-  );
+  return <RuxLog data={modifiedEvents} filter={''} />;
 });

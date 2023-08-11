@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: var(--columns);
   gap: var(--spacing-4);
+  height: 100%;
 }
 
 .Details-common-grid header {
