@@ -167,6 +167,7 @@ const TrendingEquipmentStatusPanel = () => {
     colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
     legend: {
       position: 'top',
+      offsetY: 7,
       horizontalAlign: 'left',
       floating: false,
       fontSize: 'var(--font-size-lg)',

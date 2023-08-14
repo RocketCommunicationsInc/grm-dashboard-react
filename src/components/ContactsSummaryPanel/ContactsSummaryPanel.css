@@ -54,6 +54,7 @@
   width: 18rem;
   margin-left: calc(100% - 20.5rem);
   position: absolute;
+  padding-top: var(--spacing-2);
 }
 
 .slider-wrapper rux-icon {
