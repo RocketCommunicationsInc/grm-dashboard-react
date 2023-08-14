@@ -1,4 +1,4 @@
-export const setClassName = (defaultClassName, className) => {
+export const setClassName = (defaultClassName: string, className: string) => {
   if (className) return `${defaultClassName} ${className}`;
   return defaultClassName;
 };

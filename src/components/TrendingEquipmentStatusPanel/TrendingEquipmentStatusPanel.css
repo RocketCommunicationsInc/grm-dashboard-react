@@ -5,6 +5,7 @@
 }
 
 .trending-equipment-panel::part(body) {
+  background-color: var(--color-background-base-default);
   overflow: hidden;
 }
 
