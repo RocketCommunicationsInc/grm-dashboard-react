@@ -77,8 +77,8 @@ const JobDetails = () => {
         />
       </header>
       <div className='jobs-wrapper'>
-        <div className='jobs-details-section'>
-          <h2 slot='toolbar'>Job Details</h2>
+        <RuxContainer className='jobs-details-section'>
+          <span>Job Details</span>
           <Stepper />
           {isModifying ? (
             <>
@@ -176,7 +176,7 @@ const JobDetails = () => {
               </div>
             </>
           )}
-        </div>
+        </RuxContainer>
         <RuxContainer className='job-details-conflicts-section'>
           <h2>Conflicts ({filteredContacts.length})</h2>
           <span>

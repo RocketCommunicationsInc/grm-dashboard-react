@@ -1,7 +1,8 @@
 .Equipment-status__parent {
-  height: calc(100% - 3.75rem);
+  height: 100%;
   padding: var(--spacing-6);
   position: relative;
+  background: var(--color-background-base-default);
 }
 
 .Equipment-status__chart-container {

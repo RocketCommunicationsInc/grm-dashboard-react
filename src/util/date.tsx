@@ -1,4 +1,4 @@
-export const getDayOfYear = (date: Date) => {
+export const getDayOfYear = (date: Date | number) => {
   const now = new Date(date);
   const start = new Date(now.getFullYear(), 0, 0);
   const diff = Number(now) - Number(start);

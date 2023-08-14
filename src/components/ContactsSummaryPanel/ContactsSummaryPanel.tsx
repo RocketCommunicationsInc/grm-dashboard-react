@@ -107,6 +107,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
 
   const options = {
     chart: {
+      background: 'var(--color-background-base-default)',
       stacked: true,
       animations: {
         enabled: false,
