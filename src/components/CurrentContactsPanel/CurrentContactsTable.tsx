@@ -25,24 +25,47 @@ const columnDefs: ColumnDef[] = [
   { label: 'Status', property: 'status' },
   { label: 'IRON', property: 'satellite' },
   { label: 'Ground Station', property: 'ground' },
-  { label: 'REV', property: 'rev' },
+  {
+    label: 'REV',
+    property: 'rev',
+    headerCellClass: 'align-header',
+    cellClass: 'rev-cell-align',
+  },
   { label: 'Equipment String', property: 'equipment' },
   { label: 'State', property: 'state', valueFn: capitalize },
   {
     label: 'DOY',
     property: 'dayOfYear',
+    cellClass: 'align-cell',
+    headerCellClass: 'align-header',
   },
   {
     label: 'Start Time',
     property: 'beginTimestamp',
     valueFn: determineTimeString,
+    headerCellClass: 'align-header',
+    cellClass: 'align-conflicts-cell',
   },
-  { label: 'AOS', property: 'aos', valueFn: determineTimeString },
-  { label: 'LOS', property: 'los', valueFn: determineTimeString },
+  {
+    label: 'AOS',
+    property: 'aos',
+    valueFn: determineTimeString,
+    headerCellClass: 'align-header',
+    cellClass: 'align-conflicts-cell',
+  },
+  {
+    label: 'LOS',
+    property: 'los',
+    valueFn: determineTimeString,
+    headerCellClass: 'align-header',
+    cellClass: 'align-conflicts-cell',
+  },
   {
     label: 'Stop Time',
     property: 'endTimestamp',
     valueFn: determineTimeString,
+    headerCellClass: 'align-header',
+    cellClass: 'align-conflicts-cell',
   },
 ];
 
@@ -82,7 +105,7 @@ const CurrentContactsTable = ({ filteredData }: PropTypes) => {
   }, [filteredData, filterContacts, stateSelection]);
 
   return (
-    <RuxContainer>
+    <RuxContainer className='current-contacts'>
       <div slot='header'>Current Contacts</div>
       <div className='Current-contacts-panel__group' slot='toolbar'>
         <div className='summary-data'>

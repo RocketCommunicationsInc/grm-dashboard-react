@@ -10,6 +10,10 @@
   padding: 0;
 }
 
+.contacts-table.table-wrapper rux-table-cell:nth-of-type(3) {
+  background-color: aliceblue;
+}
+
 /* HEADER STYLES */
 
 .Current-contacts-panel__header {

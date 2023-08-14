@@ -44,3 +44,19 @@ rux-container .table-wrapper {
   /* to color small space above scrollbar */
   background-color: var(--color-background-base-header);
 }
+
+.align-cell {
+  text-align: right;
+  border-right: transparent var(--spacing-8) solid;
+  width: 8%;
+}
+
+.align-header {
+  text-align: right;
+}
+
+.align-conflicts-cell {
+  text-align: right;
+  border-right: transparent var(--spacing-8) solid;
+  width: 10%;
+}

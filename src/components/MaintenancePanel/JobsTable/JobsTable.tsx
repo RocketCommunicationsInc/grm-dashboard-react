@@ -11,6 +11,7 @@ import {
 } from '@astrouxds/react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../../providers/AppProvider';
+import './JobsTable.css';
 
 type Job = {
   jobId: string;
@@ -98,6 +99,7 @@ const JobsTable = ({ jobs }: PropTypes) => {
               <RuxTableHeaderCell
                 data-sortprop={colDef.property}
                 onClick={handleHeaderCellClick}
+                className='jobs-header-cell'
               >
                 {colDef.label}
                 <RuxIcon
@@ -125,7 +127,7 @@ const JobsTable = ({ jobs }: PropTypes) => {
                 {columnDefs.map((colDef, index) => {
                   const property: keyof Job = colDef.property;
                   return (
-                    <RuxTableCell key={colDef.label}>
+                    <RuxTableCell className='jobs-cell' key={colDef.label}>
                       {job[property]}
                     </RuxTableCell>
                   );
