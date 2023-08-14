@@ -12,7 +12,7 @@ export const DetailsCommonGrid = ({
   children,
   className,
 }: DetailsCommonGridTypes) => (
-  <div className={setClassName('Details-common-grid', className)}>
+  <div className={setClassName('Details-common-grid', className as string)}>
     {children}
   </div>
 );
