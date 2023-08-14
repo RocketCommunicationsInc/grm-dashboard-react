@@ -55,3 +55,7 @@
   margin-left: calc(100% - 20.5rem);
   position: absolute;
 }
+
+.slider-wrapper rux-icon {
+  z-index: 1;
+}
