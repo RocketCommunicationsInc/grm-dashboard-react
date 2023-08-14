@@ -1,6 +1,6 @@
 .schedule-job-wrapper {
   display: flex;
-  padding: var(--spacing-4);
+  padding-right: var(--spacing-4);
 }
 
 .schedule-job-wrapper rux-textarea {

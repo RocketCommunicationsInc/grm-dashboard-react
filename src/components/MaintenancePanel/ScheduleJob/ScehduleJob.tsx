@@ -12,53 +12,56 @@ import {
   RuxTableHeaderRow,
 } from '@astrouxds/react';
 import { useMemo, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../../providers/AppProvider';
 import ConflictsTable from '../../JobDetails/ConflictsTable';
+import './ScheduleJob.css';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import SearchBar from '../../../common/SearchBar/SearchBar';
 import { filterContacts } from '../../../util/filterContacts';
-import './ScheduleJob.css';
 
 const ScheduleJob = () => {
   const navigate = useNavigate();
+  const params = useParams();
   const { dispatch } = useAppContext() as any;
   const { dataArray: contacts } = useTTCGRMContacts();
   const [calculateConflicts, setCalculateConflicts] = useState(false);
   const [inputsFilledOut, setInputsFilledOut] = useState(false);
   const [searchValue, setSearchValue] = useState('');
 
-  const statusValues = ['off', 'caution', 'normal', 'standby'];
   const uniqueJobId = Math.floor(Math.random() * 90000) + 10000;
-  const jobValues = ['Approved', 'Started', 'Stopped', 'Submitted', 'Online'];
-
+  const statusValues = [
+    'Approved',
+    'Started',
+    'Stopped',
+    'Submitted',
+    'Online',
+  ];
   const randomStatus = Math.floor(Math.random() * statusValues.length);
-  const randomJobStatus = Math.floor(Math.random() * jobValues.length);
   const equipmentValues = ['ANT3', 'BAFB4', 'ANT9', 'BAFB5', 'ANT12', 'BAFB8'];
   const randomEqupiment = Math.floor(Math.random() * equipmentValues.length);
 
   const [newJob, setNewJob] = useState({
     jobId: uniqueJobId,
     jobType: '',
-    jobDescription: '',
+    description: '',
     startTime: '',
     stopTime: '',
     technician: '',
     follow: true,
-    jobStatus: jobValues[randomJobStatus],
+    status: statusValues[randomStatus],
     createdOn: Date.now(),
-    equipment: equipmentValues[randomEqupiment],
-    equipmentStatus: statusValues[randomStatus],
+    equpiment: equipmentValues[randomEqupiment],
   });
 
   const handleCancel = () => {
-    navigate('/');
+    navigate(`/alerts/${params.alertId}`);
   };
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
     dispatch({ type: 'SCHEDULE_NEW_JOB', payload: newJob });
-    navigate('/');
+    navigate(`/alerts/${params.alertId}`);
   };
 
   const handleChange = (e: any) => {
@@ -104,8 +107,8 @@ const ScheduleJob = () => {
               onRuxinput={handleChange}
               placeholder='Enter Description'
               label='Description'
-              value={newJob.jobDescription}
-              name='jobDescription'
+              value={newJob.description}
+              name='description'
             />
 
             <li>2. Select Time</li>
