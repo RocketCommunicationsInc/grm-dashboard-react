@@ -178,7 +178,7 @@ const JobDetails = () => {
           )}
         </RuxContainer>
         <RuxContainer className='job-details-conflicts-section'>
-          <h2>Conflicts ({filteredContacts.length})</h2>
+          <span>Conflicts ({filteredContacts.length})</span>
           <span>
             This equpiment may be allocated to contacts within the timeframe of
             this maintenance job. A list of these contacts is provided below
