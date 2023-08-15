@@ -47,7 +47,7 @@ rux-container .table-wrapper {
 
 .right-align-standard-space {
   text-align: right;
-  border-right: transparent var(--spacing-8) solid;
+  border-right: transparent var(--spacing-8) solid; /* this is to make up for the sort icon */
   width: 8%;
 }
 
