@@ -113,6 +113,7 @@ const GlobalStatusBar = () => {
             <RuxMonitoringIcon
               {...statusIcons[key]}
               key={statusIcons[key].label}
+              className='monitoring-icons'
             />
           ))}
         </div>
