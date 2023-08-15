@@ -103,7 +103,7 @@ const CurrentContactsTable = ({ filteredData }: PropTypes) => {
   }, [filteredData, filterContacts, stateSelection]);
 
   return (
-    <RuxContainer className='current-contacts'>
+    <RuxContainer>
       <div slot='header'>Current Contacts</div>
       <div className='Current-contacts-panel__group' slot='toolbar'>
         <div className='summary-data'>

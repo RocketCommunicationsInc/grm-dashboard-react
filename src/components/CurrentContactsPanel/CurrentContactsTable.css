@@ -40,8 +40,3 @@
 .table-wrapper rux-table-header-row .hidden {
   visibility: hidden;
 }
-
-.current-contacts .rev-cell-align {
-  text-align: center;
-  padding-left: 0.01rem;
-}
