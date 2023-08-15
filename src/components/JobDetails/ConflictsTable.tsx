@@ -11,10 +11,7 @@ const columnDefs: ColumnDef[] = [
   { label: 'Status', property: 'status' },
   { label: 'IRON', property: 'satellite' },
   { label: 'Ground Station', property: 'ground' },
-  {
-    label: 'REV',
-    property: 'rev',
-  },
+  { label: 'REV', property: 'rev' },
   { label: 'Equipment String', property: 'equipment' },
   { label: 'State', property: 'state', valueFn: capitalize },
   {
