@@ -45,18 +45,30 @@ rux-container .table-wrapper {
   background-color: var(--color-background-base-header);
 }
 
-.align-cell {
+.right-align-standard-space {
   text-align: right;
   border-right: transparent var(--spacing-8) solid;
   width: 8%;
 }
 
-.align-header {
+.right-align {
   text-align: right;
 }
 
-.align-conflicts-cell {
+.right-align-current-c {
   text-align: right;
-  border-right: transparent var(--spacing-8) solid;
-  width: 10%;
+  border-right: transparent var(--spacing-4) solid;
+  width: 9.5%;
+}
+
+.right-align-conflicts {
+  text-align: right;
+  border-right: transparent var(--spacing-3) solid;
+  width: 6.75%;
+}
+
+.right-align-conflicts-time {
+  text-align: right;
+  border-right: transparent var(--spacing-2) solid;
+  width: 8.4%;
 }
