@@ -3,7 +3,7 @@
   /* Screen height minus the height of the Global Status Bar */
   height: calc(100vh - 6rem);
   padding: var(--spacing-3);
-  gap: var(--spacing-3);
+  gap: var(--spacing-2);
   grid-template-columns: minmax(37.5rem, 1fr) minmax(0, 2fr);
   grid-template-rows: 3.75rem minmax(0, 1fr);
   grid-template-areas:
@@ -40,7 +40,7 @@ rux-tab-panel {
   grid-template-areas:
     'panel-top'
     'panel-bottom';
-  gap: var(--spacing-3);
+  gap: var(--spacing-2);
   grid-template-rows: repeat(2, minmax(0, 1fr));
   grid-template-columns: minmax(0, 1fr);
   overflow: hidden;
