@@ -26,9 +26,9 @@ type Job = {
 const columnDefs: any[] = [
   { label: 'Job ID', property: 'jobId' },
   { label: 'Type', property: 'jobType' },
-  { label: 'Created On', property: 'createdOn' },
-  { label: 'Started On', property: 'startTime' },
-  { label: 'Completed On', property: 'stopTime' },
+  { label: 'Created On', property: 'createdOn', extraSpace: true },
+  { label: 'Started On', property: 'startTime', extraSpace: true },
+  { label: 'Completed On', property: 'stopTime', extraSpace: true },
   { label: 'Technician', property: 'technician' },
   { label: 'Description', property: 'description' },
 ];
@@ -129,6 +129,9 @@ const JobsTable = ({ jobs }: PropTypes) => {
                   return (
                     <RuxTableCell className='jobs-cell' key={colDef.label}>
                       {job[property]}
+                      {colDef.extraSpace ? (
+                        <div className='extra-space'>{colDef.extraSpace}</div>
+                      ) : null}
                     </RuxTableCell>
                   );
                 })}

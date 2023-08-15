@@ -9,7 +9,7 @@
 
 .table-wrapper rux-table-header-row rux-icon {
   vertical-align: middle;
-  width: 32px;
+  /* width: 32px; */
 }
 
 .table-wrapper rux-table-header-row .visible {
@@ -45,30 +45,14 @@ rux-container .table-wrapper {
   background-color: var(--color-background-base-header);
 }
 
-.right-align-standard-space {
-  text-align: right;
-  border-right: transparent var(--spacing-8) solid; /* this is to make up for the sort icon */
-  width: 8%;
-}
-
 .right-align {
   text-align: right;
 }
 
-.right-align-current-c {
-  text-align: right;
-  border-right: transparent var(--spacing-4) solid;
-  width: 9.5%;
-}
-
-.right-align-conflicts {
-  text-align: right;
-  border-right: transparent var(--spacing-3) solid;
-  width: 6.75%;
-}
-
-.right-align-conflicts-time {
-  text-align: right;
-  border-right: transparent var(--spacing-2) solid;
-  width: 8.4%;
+/* to make up the difference for the sort icon in header cell */
+.extra-space {
+  width: var(--spacing-8);
+  height: 100%;
+  margin-left: auto;
+  display: inline-block;
 }

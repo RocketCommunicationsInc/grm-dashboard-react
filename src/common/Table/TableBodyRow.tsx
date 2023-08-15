@@ -24,6 +24,9 @@ const ContactsTable = ({ columnDefs, rowData, handleRowClick }: PropTypes) => {
             ) : (
               cellValue
             )}
+            {colDef.extraSpace ? (
+              <div className='extra-space'>{colDef.extraSpace}</div>
+            ) : null}
           </RuxTableCell>
         );
       })}

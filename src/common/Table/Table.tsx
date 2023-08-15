@@ -11,6 +11,7 @@ export type ColumnDef = {
   valueFn?: Function;
   cellClass?: string;
   headerCellClass?: string;
+  extraSpace?: boolean;
 };
 
 type PropTypes = {
