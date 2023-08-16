@@ -1,6 +1,6 @@
 .table-wrapper {
   min-width: 350px;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .table-wrapper rux-table {

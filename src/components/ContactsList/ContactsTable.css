@@ -1,6 +1,5 @@
 .contacts-table {
   padding: var(--spacing-0) var(--spacing-3) var(--spacing-4);
-  height: 100%;
   overflow: hidden;
   display: flex;
   flex-flow: column;
