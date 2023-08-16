@@ -60,6 +60,7 @@ const GlobalStatusBar = () => {
           closeOnSelect
         >
           <RuxIcon
+            className='app-switcher-icon'
             icon='apps'
             aria-controls='grm-popup-menu'
             slot='trigger'

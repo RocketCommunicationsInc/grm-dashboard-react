@@ -3,9 +3,13 @@
   z-index: 100;
 }
 
+.app-switcher-icon:focus {
+  outline-offset: -1px;
+}
+
 .Global-status-bar__status-indicators {
-  align-items: center;
   display: flex;
+  align-items: center;
   gap: var(--spacing-4);
 }
 
