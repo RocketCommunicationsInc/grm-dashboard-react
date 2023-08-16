@@ -27,9 +27,6 @@ const ContactsTable = ({ columnDefs, rowData, handleRowClick }: PropTypes) => {
             ) : (
               cellValue
             )}
-            {colDef.isRightAligned ? (
-              <div className='extra-space'>{colDef.isRightAligned}</div>
-            ) : null}
           </RuxTableCell>
         );
       })}

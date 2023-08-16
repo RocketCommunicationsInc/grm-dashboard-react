@@ -50,9 +50,7 @@ rux-container .table-wrapper {
 }
 
 /* to make up the difference for the sort icon in header cell */
-.extra-space {
-  width: var(--spacing-8);
-  height: 100%;
-  margin-left: auto;
-  display: inline-block;
+.table-wrapper rux-table-cell.right-align::after {
+  content: '';
+  padding-right: var(--spacing-8);
 }
