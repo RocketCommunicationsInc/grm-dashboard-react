@@ -43,7 +43,7 @@ export function timeoutRepeater(
   };
 }
 
-export const randomIndex = (arr: number[]) => {
+export const randomIndex = (arr: number[] | string[]) => {
   return randInt(0, arr.length - 1);
 };
 

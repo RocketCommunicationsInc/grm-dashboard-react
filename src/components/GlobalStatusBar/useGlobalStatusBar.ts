@@ -94,7 +94,7 @@ const useGlobalStatusBar = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       dispatch({ type: 'UPDATE_UCA' });
-    }, 1000);
+    }, 13000);
 
     return () => {
       clearInterval(interval);

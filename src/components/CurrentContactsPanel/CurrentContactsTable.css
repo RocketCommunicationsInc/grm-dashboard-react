@@ -36,6 +36,7 @@
 .table-wrapper rux-table-header-row .visible {
   visibility: visible;
 }
+
 .table-wrapper rux-table-header-row .hidden {
   visibility: hidden;
 }

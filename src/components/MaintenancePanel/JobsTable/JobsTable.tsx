@@ -11,6 +11,7 @@ import {
 } from '@astrouxds/react';
 import { useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../../providers/AppProvider';
+import './JobsTable.css';
 
 type Job = {
   jobId: string;
@@ -25,9 +26,9 @@ type Job = {
 const columnDefs: any[] = [
   { label: 'Job ID', property: 'jobId' },
   { label: 'Type', property: 'jobType' },
-  { label: 'Created On', property: 'createdOn' },
-  { label: 'Started On', property: 'startTime' },
-  { label: 'Completed On', property: 'stopTime' },
+  { label: 'Created On', property: 'createdOn', extraSpace: true },
+  { label: 'Started On', property: 'startTime', extraSpace: true },
+  { label: 'Completed On', property: 'stopTime', extraSpace: true },
   { label: 'Technician', property: 'technician' },
   { label: 'Description', property: 'description' },
 ];
@@ -99,6 +100,7 @@ const JobsTable = ({ jobs }: PropTypes) => {
                 data-sortprop={colDef.property}
                 onClick={handleHeaderCellClick}
                 key={colDef.label}
+                className='jobs-header-cell'
               >
                 {colDef.label}
                 <RuxIcon
@@ -126,8 +128,11 @@ const JobsTable = ({ jobs }: PropTypes) => {
                 {columnDefs.map((colDef, index) => {
                   const property: keyof Job = colDef.property;
                   return (
-                    <RuxTableCell key={colDef.label}>
+                    <RuxTableCell className='jobs-cell' key={colDef.label}>
                       {job[property]}
+                      {colDef.extraSpace ? (
+                        <div className='extra-space'>{colDef.extraSpace}</div>
+                      ) : null}
                     </RuxTableCell>
                   );
                 })}

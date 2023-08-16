@@ -41,6 +41,7 @@ const TrendingEquipmentStatusPanel = () => {
 
   var options = {
     chart: {
+      background: 'var(--color-background-base-default)',
       stacked: false,
       zoom: {
         enabled: false,
@@ -87,7 +88,7 @@ const TrendingEquipmentStatusPanel = () => {
           color: 'var(--color-text-primary)',
         },
         labels: {
-          formatter: function (value) {
+          formatter: function (value: number) {
             return value + '%';
           },
           enabled: true,
@@ -109,7 +110,7 @@ const TrendingEquipmentStatusPanel = () => {
         show: false,
       },
       theme: '',
-      custom: function ({ series, seriesIndex, dataPointIndex, w }) {
+      custom: function ({ series, seriesIndex, dataPointIndex, w }: any) {
         return (
           '<div class="tooltip-box">' +
           '<span>' +
@@ -127,7 +128,7 @@ const TrendingEquipmentStatusPanel = () => {
       fillSeriesColor: true,
       style: {
         color: 'var(--color-text-primary)',
-        background: 'blue',
+        background: 'var(--color-background-base-default)',
       },
       shared: false,
       intersect: false,
@@ -141,7 +142,7 @@ const TrendingEquipmentStatusPanel = () => {
     theme: {
       pallete: 'palette1',
       tooltip: {
-        background: 'blue',
+        background: 'var(--color-background-base-default)',
       },
     },
     annotations: {
@@ -166,6 +167,7 @@ const TrendingEquipmentStatusPanel = () => {
     colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
     legend: {
       position: 'top',
+      offsetY: 7,
       horizontalAlign: 'left',
       floating: false,
       fontSize: 'var(--font-size-lg)',
@@ -179,7 +181,12 @@ const TrendingEquipmentStatusPanel = () => {
     <RuxContainer className='trending-equipment-panel'>
       <div slot='header'>Trending Equipment Status</div>
       <div className='trending-equipment-panel__select'>
-        <Chart type='line' options={options} series={series} height='100%' />
+        <Chart
+          type='line'
+          options={options as any}
+          series={series}
+          height='100%'
+        />
       </div>
     </RuxContainer>
   );

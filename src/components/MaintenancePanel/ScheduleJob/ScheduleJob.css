@@ -1,10 +1,6 @@
-.schedule-job {
-  padding: var(--spacing-0) var(--spacing-3) var(--spacing-3) var(--spacing-3);
-}
-
 .schedule-job-wrapper {
   display: flex;
-  padding: var(--spacing-4);
+  padding-right: var(--spacing-4);
 }
 
 .schedule-job-wrapper rux-textarea {
@@ -28,22 +24,6 @@
   margin-top: var(--spacing-1);
 }
 
-.conflicts-section h2 {
-  margin: var(--spacing-4);
-}
-
-.conflicts-section span {
-  padding-inline: var(--spacing-4);
-}
-
-.table-section {
-  margin-top: var(--spacing-6);
-}
-
-.table-section {
-  height: 30rem;
-}
-
 .conflicts-placeholder {
   display: flex;
   justify-content: center;
@@ -51,12 +31,8 @@
   font-size: var(--font-size-xl);
 }
 
-.conflicts-wrapper {
-  height: 100%;
-}
-
 .job-request-section {
-  width: 40rem;
+  width: 44rem;
   padding-inline-end: var(--spacing-4);
 }
 
@@ -65,7 +41,7 @@
 }
 
 .job-request-section rux-button {
-  padding-top: var(--spacing-12);
+  margin-top: var(--spacing-12);
   display: flex;
   justify-content: center;
   margin-inline: auto;
@@ -74,6 +50,7 @@
 
 .conflicts-section {
   flex: 1;
+  height: 43.75rem;
 }
 
 .schedule-job footer[slot='footer'] {
@@ -82,8 +59,13 @@
   gap: var(--spacing-3);
 }
 
+.schedule-job ul {
+  padding-left: 0;
+}
+
 .schedule-job ul li {
   border-bottom: none;
+  margin-bottom: var(--spacing-3);
 }
 
 .schedule-job ul li:nth-of-type(2),
@@ -95,4 +77,14 @@
 .schedule-job header[slot='header'] {
   display: flex;
   justify-content: space-between;
+  margin-left: var(--spacing-4);
+}
+
+.conflicts-section span:nth-of-type(1) {
+  font-size: var(--font-size-2xl);
+}
+
+.conflicts-section span:nth-of-type(2),
+.conflicts-section span:nth-of-type(3) {
+  margin: var(--spacing-4);
 }

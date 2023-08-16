@@ -7,13 +7,13 @@ export const randomContact = () => contacts[randInt(0, contacts.length - 1)];
 
 let lastAlertId = 1;
 const alertBlueprints = contacts.reduce((alerts, contact) => {
-  return alerts.concat(contact.alerts);
+  return alerts.concat(contact.alerts as any);
 }, []);
 
 export function getRandomAlert() {
   const bp = alertBlueprints[randInt(0, alertBlueprints.length - 1)];
   const alert = Object.assign({}, bp);
-  alert.errorId = lastAlertId++;
+  (alert as any).errorId = lastAlertId++;
   return alert;
 }
 
@@ -21,8 +21,9 @@ let lastContactId = 1;
 export function getRandomContact() {
   const bp = randomContact();
   const contact = Object.assign({}, bp);
+  //@ts-ignore
   delete contact.alerts;
-  contact.contactId = lastContactId++;
+  (contact as any).contactId = lastContactId++;
   return {
     ...contact,
     contactBeginTimestamp: contact.contactBeginTimestamp * 1000,
@@ -40,7 +41,7 @@ export function getRandomContact() {
 export function generateEvents() {
   return contacts.slice(0, randInt(10, 100)).map((c) => ({
     timestamp: c.contactBeginTimestamp * 1000,
-    status: c.status,
+    status: (c as any).status,
     message: c.contactDetail,
   }));
 }
