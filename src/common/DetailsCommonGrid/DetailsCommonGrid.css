@@ -3,6 +3,7 @@
 
   display: grid;
   grid-template-columns: var(--columns);
+  grid-template-rows: 1fr;
   gap: var(--spacing-4);
   height: 100%;
 }

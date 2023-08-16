@@ -99,6 +99,7 @@ const JobsTable = ({ jobs }: PropTypes) => {
               <RuxTableHeaderCell
                 data-sortprop={colDef.property}
                 onClick={handleHeaderCellClick}
+                key={colDef.label}
                 className='jobs-header-cell'
               >
                 {colDef.label}

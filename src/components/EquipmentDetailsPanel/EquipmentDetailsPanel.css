@@ -14,7 +14,7 @@
 .equipment-details-log {
   min-height: 16.5rem;
   max-height: 16.5rem;
-  height: 100%;
+  height: 16.5rem;
   border: 1px solid var(--container-color-border);
 }
 
