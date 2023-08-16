@@ -60,6 +60,7 @@ const GlobalStatusBar = () => {
           closeOnSelect
         >
           <RuxIcon
+            className='app-switcher-icon'
             icon='apps'
             aria-controls='grm-popup-menu'
             slot='trigger'
@@ -113,6 +114,7 @@ const GlobalStatusBar = () => {
             <RuxMonitoringIcon
               {...statusIcons[key]}
               key={statusIcons[key].label}
+              className='monitoring-icons'
             />
           ))}
         </div>

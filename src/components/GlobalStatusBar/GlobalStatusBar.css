@@ -3,14 +3,24 @@
   z-index: 100;
 }
 
+.app-switcher-icon:focus {
+  outline-offset: -1px;
+}
+
 .Global-status-bar__status-indicators {
-  align-items: center;
   display: flex;
+  align-items: center;
   gap: var(--spacing-4);
 }
 
 rux-monitoring-icon {
   padding-right: var(--spacing-1);
+}
+
+.monitoring-icons:nth-of-type(1) {
+  border-left: var(--border-width-xs) solid
+    var(--color-background-interactive-muted);
+  padding-left: var(--spacing-8);
 }
 
 rux-monitoring-progress-icon::part(monitoring-label) {
@@ -21,14 +31,24 @@ rux-monitoring-progress-icon::part(radial-progress) {
   height: 2.5rem;
 }
 
+.software-popup-icon:hover {
+  background-color: var(--color-background-surface-hover);
+}
+
+.software-popup-icon::part(monitoring-label) {
+  color: var(--color-text-interactive-default);
+}
+
+.software-popup-icon::part(monitoring-label):hover {
+  color: var(--color-text-interactive-hover);
+}
+
 rux-monitoring-progress-icon {
   margin-bottom: 0.325rem;
 }
 
 .software-popup-icon {
-  border-right: var(--border-width-xs) solid
-    var(--color-background-interactive-muted);
-  padding-right: var(--spacing-6);
+  margin-right: var(--spacing-6);
 }
 
 #grm-popup-menu {
