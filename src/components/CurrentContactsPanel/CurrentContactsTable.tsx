@@ -1,25 +1,14 @@
 import { useState, useMemo, useCallback } from 'react';
-import {
-  RuxContainer,
-  RuxButton,
-  RuxSelect,
-  RuxOption,
-} from '@astrouxds/react';
+import { RuxContainer, RuxButton, RuxSegmentedButton } from '@astrouxds/react';
 import Table from '../../common/Table/Table';
 import type { Contact } from '@astrouxds/mock-data';
 import { determineTimeString, capitalize } from '../../util';
-import './CurrentContactsTable.css';
 import type { ColumnDef } from '../../common/Table/Table';
+import './CurrentContactsTable.css';
 
 type PropTypes = {
   filteredData: Contact[];
 };
-
-const statuses = [
-  { label: 'All', value: 'all' },
-  { label: 'Executing', value: 'executing' },
-  { label: 'Failed', value: 'failed' },
-];
 
 const columnDefs: ColumnDef[] = [
   { label: 'Status', property: 'status' },
@@ -64,6 +53,7 @@ const columnDefs: ColumnDef[] = [
 ];
 
 const CurrentContactsTable = ({ filteredData }: PropTypes) => {
+  const [filterValue, setFilterValue] = useState('All');
   const [stateSelection, setStateSelection] = useState<
     'executing' | 'failed' | 'all'
   >('all');
@@ -79,10 +69,6 @@ const CurrentContactsTable = ({ filteredData }: PropTypes) => {
     setStateSelection('all');
   };
 
-  const handleSelectState = (e: any) => {
-    setStateSelection(e.target.value as 'executing' | 'failed' | 'all');
-  };
-
   const filterContacts = useCallback(
     (contactsArray: Contact[], state: 'executing' | 'failed' | 'all') => {
       const filteredForStateContacts =
@@ -94,14 +80,26 @@ const CurrentContactsTable = ({ filteredData }: PropTypes) => {
     []
   );
 
+  const failedContacts = filteredData.filter((val) => val.state === 'failed');
+  const executingContacts = filteredData.filter(
+    (val) => val.state === 'executing'
+  );
+
+  const filteredState =
+    filterValue === 'Executing'
+      ? executingContacts
+      : filterValue === 'Failed'
+      ? failedContacts
+      : filteredData;
+
   const filteredContacts = useMemo(() => {
-    return filterContacts(filteredData, stateSelection);
-  }, [filteredData, filterContacts, stateSelection]);
+    return filterContacts(filteredState, stateSelection);
+  }, [filteredState, filterContacts, stateSelection]);
 
   return (
     <RuxContainer>
       <div slot='header'>Current Contacts</div>
-      <div className='Current-contacts-panel__group' slot='toolbar'>
+      <div className='Current-contacts-panel__group'>
         <div className='summary-data'>
           <span>{filteredData.length}</span>Contacts
         </div>
@@ -111,17 +109,16 @@ const CurrentContactsTable = ({ filteredData }: PropTypes) => {
         <div className='summary-data'>
           <span>{numExecuting}</span>Executing
         </div>
-        <div>
-          <RuxSelect
-            label='Status'
-            size='small'
-            value={stateSelection}
-            onRuxchange={handleSelectState}
-          >
-            {statuses.map(({ label, value }) => (
-              <RuxOption key={label} label={label} value={value} />
-            ))}
-          </RuxSelect>
+        <div className='filter-buttons'>
+          <RuxSegmentedButton
+            selected={filterValue}
+            onRuxchange={(e) => setFilterValue(e.target.selected)}
+            data={[
+              { label: 'All' },
+              { label: 'Executing' },
+              { label: 'Failed' },
+            ]}
+          />
         </div>
       </div>
       <div className='filter-notification' hidden={stateSelection === 'all'}>

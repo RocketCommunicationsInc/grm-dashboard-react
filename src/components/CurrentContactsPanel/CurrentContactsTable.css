@@ -1,19 +1,13 @@
 /* HEADER STYLES */
 
-.Current-contacts-panel__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: var(--spacing-4);
-  padding-top: var(--spacing-0);
-  background-color: var(--color-background-surface-header);
-}
-
 .Current-contacts-panel__group {
   display: flex;
   align-items: center;
   gap: var(--spacing-12);
   line-height: calc(28 / 24);
+  background-color: var(--color-background-base-header);
+  padding-inline: var(--spacing-4);
+  padding-bottom: var(--spacing-4);
 }
 
 .summary-data {
@@ -24,8 +18,12 @@
 }
 
 .summary-data > span {
-  font-size: var(--font-size-5xl);
+  font-size: var(--font-size-3xl);
   font-weight: var(--font-weights-bold);
+}
+
+.filter-buttons {
+  margin-left: auto;
 }
 
 .table-wrapper rux-table-header-row rux-icon {
