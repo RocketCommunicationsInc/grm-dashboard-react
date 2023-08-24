@@ -18,8 +18,7 @@ rux-monitoring-icon {
 }
 
 .monitoring-icons:nth-of-type(1) {
-  border-left: var(--border-width-xs) solid
-    var(--color-background-interactive-muted);
+  border-left: var(--border-width-xs) solid var(--color-text-placeholder);
   padding-left: var(--spacing-8);
 }
 
@@ -29,18 +28,6 @@ rux-monitoring-progress-icon::part(monitoring-label) {
 
 rux-monitoring-progress-icon::part(radial-progress) {
   height: 2.5rem;
-}
-
-.software-popup-icon:hover {
-  background-color: var(--color-background-surface-hover);
-}
-
-.software-popup-icon::part(monitoring-label) {
-  color: var(--color-text-interactive-default);
-}
-
-.software-popup-icon::part(monitoring-label):hover {
-  color: var(--color-text-interactive-hover);
 }
 
 rux-monitoring-progress-icon {

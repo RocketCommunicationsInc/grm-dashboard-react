@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@astrouxds/mock-data": "^0.5.3",
-    "@astrouxds/react": "^7.14.0",
+    "@astrouxds/mock-data": "^0.6.4",
+    "@astrouxds/react": "^7.16.0",
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
     "@types/react-dom": "^18.2.6",

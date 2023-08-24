@@ -106,7 +106,7 @@ const GlobalStatusBar = () => {
               icon='mission'
               status='caution'
               notifications={softwareAlerts.length}
-              label='SOFTWARE'
+              label='Software'
               className='software-popup-icon'
             />
           </RuxPopUp>
