@@ -6,19 +6,19 @@ const initialState = {
   statusIcons: {
     comms: {
       icon: 'antenna-receive',
-      label: 'COMMS',
+      label: 'Comms',
       status: 'normal',
       notifications: randInt(0, 1),
     },
     digital: {
       icon: 'processor-alt',
-      label: 'DIGITAL',
+      label: 'Digital',
       status: 'normal',
       notifications: randInt(0, 1),
     },
     facilities: {
       icon: 'antenna-off',
-      label: 'FACILITIES',
+      label: 'Facilities',
       status: 'normal',
       notifications: randInt(0, 1),
     },

@@ -30,18 +30,6 @@ rux-monitoring-progress-icon::part(radial-progress) {
   height: 2.5rem;
 }
 
-.software-popup-icon:hover::part(monitoring-label) {
-  color: var(--color-text-interactive-hover);
-}
-
-.software-popup-icon::part(monitoring-label) {
-  color: var(--color-text-interactive-default);
-}
-
-.software-popup-icon::part(monitoring-label):hover {
-  color: var(--color-text-interactive-hover);
-}
-
 rux-monitoring-progress-icon {
   margin-bottom: 0.325rem;
 }
