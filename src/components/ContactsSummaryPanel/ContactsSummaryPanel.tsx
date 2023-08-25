@@ -22,10 +22,10 @@ const initialPopup = {
 };
 
 const initialDataset = [
-  { name: 'Upcoming', backgroundColor: '#938bdb' },
-  { name: 'Executing', backgroundColor: '#4dacff' },
-  { name: 'Complete', backgroundColor: '#00c7cb' },
-  { name: 'Failed', backgroundColor: '#a1e9eb' },
+  { name: 'Upcoming', backgroundColor: 'var(--color-data-visualization-1)' },
+  { name: 'Executing', backgroundColor: 'var(--color-data-visualization-2)' },
+  { name: 'Complete', backgroundColor: 'var(--color-data-visualization-3)' },
+  { name: 'Failed', backgroundColor: 'var(--color-data-visualization-4)' },
 ];
 
 const labels = [
