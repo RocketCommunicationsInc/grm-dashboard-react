@@ -64,3 +64,8 @@
 .apexcharts-bar-area {
   cursor: pointer;
 }
+
+.legend {
+  display: flex;
+  margin-inline: var(--spacing-2);
+}
