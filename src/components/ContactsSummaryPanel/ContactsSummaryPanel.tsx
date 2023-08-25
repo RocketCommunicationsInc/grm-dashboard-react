@@ -223,10 +223,10 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     },
   };
 
-  const handleLegendClick = (seriesIndex: any) => {
+  const handleLegendClick = (index: number) => {
     const updatedDatasets = [...datasets];
-    updatedDatasets[seriesIndex].visible =
-      !updatedDatasets[seriesIndex].visible;
+    console.log(index);
+    updatedDatasets[index].visible = !updatedDatasets[index].visible;
     setInitialDatasets(updatedDatasets);
   };
 
@@ -238,22 +238,25 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       return getFilteredContacts(label, data.name).length;
     }),
   }));
-  console.log(newDataset);
+  //console.log(newDataset);
 
   return (
     <RuxContainer className='trending-equipment-panel'>
       <div slot='header'>Contacts Summary</div>
       <div className='trending-equipment-panel__select' id='chart-container'>
         <div className='legend'>
-          {datasets.map((dataset, seriesIndex) => (
-            <label>
-              <RuxCheckbox
-                key={seriesIndex}
-                onRuxchange={() => handleLegendClick(seriesIndex)}
-              />
-              {dataset.name}
-            </label>
-          ))}
+          {datasets.map((dataset, index) => {
+            console.log(index, '2nd');
+            return (
+              <label key={index}>
+                <RuxCheckbox
+                  onRuxchange={() => handleLegendClick(index)}
+                  checked={dataset.visible}
+                />
+                {dataset.name}
+              </label>
+            );
+          })}
           <div className='slider-wrapper'>
             <RuxIcon icon='search' size='extra-small' />
             <RuxSlider
