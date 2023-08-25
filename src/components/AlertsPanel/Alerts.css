@@ -58,14 +58,6 @@
 
 /* ACCORDION ITEM STYLES */
 
-/* .alerts rux-accordion-item::part(label-wrapper) {
-  flex-direction: row-reverse;
-}
-
-.alerts rux-accordion-item::part(indicator) {
-  transform: rotate(-90deg);
-} */
-
 .alert-list-label {
   display: flex;
   flex-flow: row nowrap;
