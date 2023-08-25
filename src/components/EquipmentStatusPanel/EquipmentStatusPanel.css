@@ -46,19 +46,19 @@
 }
 
 #busy-negative {
-  background: var(--color-palette-teal-200);
+  background: var(--color-data-visualization-1);
 }
 
 #busy {
-  background: var(--color-palette-purple-200);
+  background: var(--color-data-visualization-2);
 }
 
 #idle {
-  background: var(--color-palette-teal-500);
+  background: var(--color-data-visualization-3);
 }
 
 #inoperable {
-  background: var(--color-palette-brightblue-500);
+  background: var(--color-data-visualization-4);
 }
 
 .Equipment-status__parent .labels {

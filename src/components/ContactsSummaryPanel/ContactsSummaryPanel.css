@@ -60,3 +60,7 @@
 .slider-wrapper rux-icon {
   z-index: 1;
 }
+
+.apexcharts-bar-area {
+  cursor: pointer;
+}
