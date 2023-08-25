@@ -32,21 +32,25 @@ const initialDataset = [
     name: 'Upcoming',
     backgroundColor: 'var(--color-data-visualization-1)',
     visible: true,
+    index: 0,
   },
   {
     name: 'Executing',
     backgroundColor: 'var(--color-data-visualization-2)',
     visible: true,
+    index: 1,
   },
   {
     name: 'Complete',
     backgroundColor: 'var(--color-data-visualization-3)',
     visible: true,
+    index: 2,
   },
   {
     name: 'Failed',
     backgroundColor: 'var(--color-data-visualization-4)',
     visible: true,
+    index: 3,
   },
 ];
 
@@ -223,14 +227,28 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     },
   };
 
-  const handleLegendClick = (index: number) => {
-    const updatedDatasets = [...datasets];
-    console.log(index);
-    updatedDatasets[index].visible = !updatedDatasets[index].visible;
+  // const handleLegendClick = (index: number) => {
+  //   const updatedDatasets = [...datasets];
+  //   //console.log(index, 'click handler index val');
+  //   updatedDatasets[index].visible = !updatedDatasets[index].visible;
+  //   setInitialDatasets(updatedDatasets);
+  // };
+
+  const handleLegendClick = (e: any) => {
+    const updatedDatasets = datasets.map((dataset) => {
+      if (dataset.name === e.target.value) {
+        return {
+          ...dataset,
+          visible: !dataset.visible,
+        };
+      }
+      return dataset;
+    });
     setInitialDatasets(updatedDatasets);
   };
 
   const visibleData = datasets.filter((data) => data.visible);
+  console.log(visibleData, 'visible');
 
   const newDataset = visibleData.map((data) => ({
     name: data.name,
@@ -238,20 +256,21 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       return getFilteredContacts(label, data.name).length;
     }),
   }));
-  //console.log(newDataset);
+  console.log(newDataset, 'new dataset');
 
   return (
     <RuxContainer className='trending-equipment-panel'>
       <div slot='header'>Contacts Summary</div>
       <div className='trending-equipment-panel__select' id='chart-container'>
         <div className='legend'>
-          {datasets.map((dataset, index) => {
-            console.log(index, '2nd');
+          {datasets.map((dataset) => {
+            console.log(dataset.name, 'index');
             return (
-              <label key={index}>
+              <label key={dataset.index}>
                 <RuxCheckbox
-                  onRuxchange={() => handleLegendClick(index)}
+                  onRuxchange={handleLegendClick}
                   checked={dataset.visible}
+                  value={dataset.name}
                 />
                 {dataset.name}
               </label>
