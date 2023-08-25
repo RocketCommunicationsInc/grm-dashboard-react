@@ -232,17 +232,27 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
 
   const visibleData = datasets.filter((data) => data.visible);
 
+  const newDataset = visibleData.map((data) => ({
+    name: data.name,
+    data: labelsShown.map((label) => {
+      return getFilteredContacts(label, data.name).length;
+    }),
+  }));
+  console.log(newDataset);
+
   return (
     <RuxContainer className='trending-equipment-panel'>
       <div slot='header'>Contacts Summary</div>
       <div className='trending-equipment-panel__select' id='chart-container'>
         <div className='legend'>
           {datasets.map((dataset, seriesIndex) => (
-            <RuxCheckbox
-              key={seriesIndex}
-              label={dataset.name}
-              onRuxchange={() => handleLegendClick(seriesIndex)}
-            />
+            <label>
+              <RuxCheckbox
+                key={seriesIndex}
+                onRuxchange={() => handleLegendClick(seriesIndex)}
+              />
+              {dataset.name}
+            </label>
           ))}
           <div className='slider-wrapper'>
             <RuxIcon icon='search' size='extra-small' />
@@ -258,7 +268,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         <Chart
           type='bar'
           options={options as object}
-          series={visibleData}
+          series={newDataset}
           height='100%'
           id='contacts-summary-chart'
         />

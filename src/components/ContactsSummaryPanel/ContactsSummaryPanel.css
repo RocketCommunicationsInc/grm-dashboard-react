@@ -54,7 +54,7 @@
   width: 18rem;
   margin-left: calc(100% - 20.5rem);
   position: absolute;
-  padding-top: var(--spacing-2);
+  padding-top: var(--spacing-3);
 }
 
 .slider-wrapper {
@@ -68,4 +68,55 @@
 .legend {
   display: flex;
   margin-inline: var(--spacing-2);
+  align-items: center;
+}
+
+.legend label {
+  margin-inline: var(--spacing-2);
+  position: relative;
+}
+
+/* Upcoming Checkbox */
+.legend label:nth-of-type(1):after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1.575rem;
+  border-bottom: var(--spacing-1) solid var(--color-data-visualization-1);
+}
+
+/* Executing Checkbox */
+.legend label:nth-of-type(2):after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1.575rem;
+  border-bottom: var(--spacing-1) solid var(--color-data-visualization-2);
+}
+
+/* Complete Checkbox */
+.legend label:nth-of-type(3):after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1.575rem;
+  border-bottom: var(--spacing-1) solid var(--color-data-visualization-3);
+}
+
+/* Failed Checkbox */
+.legend label:nth-of-type(4):after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 1.575rem;
+  border-bottom: var(--spacing-1) solid var(--color-data-visualization-4);
+}
+
+.legend rux-checkbox {
+  margin-right: var(--spacing-2);
+  margin-top: var(--spacing-050);
 }
