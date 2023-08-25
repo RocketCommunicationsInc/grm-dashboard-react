@@ -19,7 +19,12 @@ rux-container.jobs-section {
   margin: var(--spacing-4);
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: var(--spacing-6);
+}
+
+.job-section-wrapper rux-button:nth-of-type(1) {
+  margin-right: var(--spacing-4);
 }
 
 .maintenance-history-panel {
