@@ -143,9 +143,13 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
         </span>
       </div>
       <ul className='alert-list'>
-        {displayAlertIds.map((id) => (
-          <AlertListItem alertItem={alerts[id]} key={id} />
-        ))}
+        {displayAlertIds.length > 0 ? (
+          displayAlertIds.map((id) => (
+            <AlertListItem alertItem={alerts[id]} key={id} />
+          ))
+        ) : (
+          <div className='alert-list_no-alerts'>No alerts at this time.</div>
+        )}
       </ul>
     </>
   );
