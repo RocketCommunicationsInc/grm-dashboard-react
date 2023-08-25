@@ -23,7 +23,7 @@ const TrendingEquipmentStatusPanel = () => {
   const series = [
     {
       data: labels.map(() => randInt(0, 100)),
-      name: 'Commns',
+      name: 'Comms',
     },
     {
       data: labels.map(() => randInt(0, 100)),
@@ -164,7 +164,12 @@ const TrendingEquipmentStatusPanel = () => {
         },
       ],
     },
-    colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
+    colors: [
+      'var(--color-data-visualization-1)',
+      'var(--color-data-visualization-2)',
+      'var(--color-data-visualization-3)',
+      'var(--color-data-visualization-4)',
+    ],
     legend: {
       position: 'top',
       offsetY: 7,

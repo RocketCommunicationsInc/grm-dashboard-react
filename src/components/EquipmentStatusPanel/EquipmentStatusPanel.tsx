@@ -67,11 +67,23 @@ const EquipmentStatus = () => {
         enabled: false,
       },
     },
+    states: {
+      hover: {
+        filter: {
+          type: 'none',
+        },
+      },
+      active: {
+        filter: {
+          type: 'none',
+        },
+      },
+    },
     dataLabels: {
       hideOverflowingLabels: true,
       enabled: true,
       style: {
-        colors: ['var(--color-text-primary)'],
+        colors: ['var(--color-text-inverse)'],
         fontWeight: 'var(--font-heading-1-bold-font-weight)',
       },
       dropShadow: {
@@ -83,7 +95,12 @@ const EquipmentStatus = () => {
         expandOnClick: false,
       },
     },
-    colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
+    colors: [
+      'var(--color-data-visualization-1)',
+      'var(--color-data-visualization-2)',
+      'var(--color-data-visualization-3)',
+      'var(--color-data-visualization-4)',
+    ],
     legend: {
       show: false,
     },

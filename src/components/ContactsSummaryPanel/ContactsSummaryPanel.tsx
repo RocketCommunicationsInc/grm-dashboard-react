@@ -22,10 +22,10 @@ const initialPopup = {
 };
 
 const initialDataset = [
-  { name: 'Upcoming', backgroundColor: '#938bdb' },
-  { name: 'Executing', backgroundColor: '#4dacff' },
-  { name: 'Complete', backgroundColor: '#00c7cb' },
-  { name: 'Failed', backgroundColor: '#a1e9eb' },
+  { name: 'Upcoming', backgroundColor: 'var(--color-data-visualization-1)' },
+  { name: 'Executing', backgroundColor: 'var(--color-data-visualization-2)' },
+  { name: 'Complete', backgroundColor: 'var(--color-data-visualization-3)' },
+  { name: 'Failed', backgroundColor: 'var(--color-data-visualization-4)' },
 ];
 
 const labels = [
@@ -160,7 +160,12 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     tooltip: {
       enabled: false,
     },
-    colors: ['#4dacff', '#c9c5ed', '#00c7cb', '#a1e9eb'],
+    colors: [
+      'var(--color-data-visualization-1)',
+      'var(--color-data-visualization-2)',
+      'var(--color-data-visualization-3)',
+      'var(--color-data-visualization-4)',
+    ],
     legend: {
       position: 'top',
       offsetY: 7,
@@ -173,6 +178,18 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     fill: {
       opacity: 5,
     },
+    dataLabels: {
+      style: {
+        colors: ['var(--color-text-inverse)'],
+      },
+    },
+    states: {
+      hover: {
+        filter: {
+          type: 'none',
+        },
+      },
+    },
     plotOptions: {
       bar: {
         dataLabels: {
@@ -180,7 +197,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
           hideOverflowingLabels: true,
           enabled: true,
           style: {
-            color: 'var(--color-text-primary)',
+            colors: 'var(--color-text-inverse)',
             whiteSpace: 'nowrap',
             overflow: 'hidden',
           },
