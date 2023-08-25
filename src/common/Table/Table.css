@@ -9,15 +9,10 @@
 
 .table-wrapper rux-table-header-row rux-icon {
   vertical-align: middle;
-  /* width: 32px; */
 }
 
 .table-wrapper rux-table-header-row .visible {
   visibility: visible;
-}
-
-.table-wrapper rux-table-header-cell:has(rux-icon.visible) {
-  color: var(--color-text-interactive-default);
 }
 
 .table-wrapper rux-table-header-row .hidden {
@@ -32,12 +27,31 @@
   text-overflow: ellipsis;
 }
 
-.table-wrapper rux-table-cell rux-status {
-  padding-right: var(--spacing-8);
+.table-wrapper rux-table-header-cell div {
+  display: grid;
+  align-items: center;
+  grid-template-columns: 100% 0%;
+}
+
+.table-wrapper rux-table-header-cell:has(rux-icon.visible) div {
+  grid-template-columns: auto 1fr;
+}
+
+.table-wrapper rux-table-header-cell span {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .table-wrapper rux-table-header-cell[data-sortprop='status'] {
   text-align: center;
+}
+
+.table-wrapper
+  rux-table-header-cell[data-sortprop='status']:has(rux-icon.visible)
+  div {
+  /* This is so the status header label doesn't move when selected. */
+  margin-inline-start: 34px;
 }
 
 rux-container .table-wrapper {
