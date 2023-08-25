@@ -27,7 +27,7 @@ rux-container.jobs-section {
 }
 
 .maintenance-wrapper {
-  height: 19rem;
+  height: 100%;
   margin-bottom: var(--spacing-6);
 }
 

@@ -1,6 +1,10 @@
+.schedule-job {
+  padding: var(--spacing-0) var(--spacing-3) var(--spacing-3) var(--spacing-3);
+}
+
 .schedule-job-wrapper {
   display: flex;
-  padding-right: var(--spacing-4);
+  overflow: auto;
 }
 
 .schedule-job-wrapper rux-textarea {
@@ -34,6 +38,7 @@
 .job-request-section {
   width: 44rem;
   padding-inline-end: var(--spacing-4);
+  height: 43.75rem;
 }
 
 .job-request-section rux-checkbox {
