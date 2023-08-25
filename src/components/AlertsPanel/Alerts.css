@@ -56,6 +56,10 @@
   visibility: hidden;
 }
 
+.alert-list-headers span[data-sortprop] {
+  cursor: pointer;
+}
+
 .alert-list_no-alerts {
   display: flex;
   justify-content: center;
