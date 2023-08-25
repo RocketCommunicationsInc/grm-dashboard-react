@@ -73,6 +73,11 @@ const EquipmentStatus = () => {
           type: 'none',
         },
       },
+      active: {
+        filter: {
+          type: 'none',
+        },
+      },
     },
     dataLabels: {
       hideOverflowingLabels: true,
