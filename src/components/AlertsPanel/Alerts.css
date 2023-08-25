@@ -52,6 +52,12 @@
   visibility: hidden;
 }
 
+.alert-list_no-alerts {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-24);
+}
+
 .table-wrapper.alert-list::-webkit-scrollbar-track {
   margin-top: 0;
 }
