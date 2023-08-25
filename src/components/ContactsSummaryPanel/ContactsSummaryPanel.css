@@ -57,7 +57,7 @@
   padding-top: var(--spacing-2);
 }
 
-.slider-wrapper rux-icon {
+.slider-wrapper {
   z-index: 1;
 }
 
