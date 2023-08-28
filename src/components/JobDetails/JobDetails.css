@@ -1,5 +1,6 @@
 .jobs-wrapper {
   display: flex;
+  overflow: auto;
 }
 
 .jobs-wrapper rux-textarea {
@@ -30,6 +31,7 @@
 
 .jobs-details-section {
   padding-inline-end: var(--spacing-6);
+  height: 52.5rem;
 }
 
 .jobs-details-section rux-checkbox {
