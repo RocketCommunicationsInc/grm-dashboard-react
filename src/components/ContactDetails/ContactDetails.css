@@ -6,6 +6,11 @@
   gap: var(--spacing-4);
 }
 
+.Contact-details-grid__equipment-string .config-grid-wrapper {
+  width: 50%;
+  padding-block-end: var(--spacing-2);
+}
+
 .Contact-details-grid__equipment-string .sub-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
