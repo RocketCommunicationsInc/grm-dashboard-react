@@ -12,6 +12,10 @@
   gap: var(--spacing-4);
 }
 
+rux-container.Contact-details-grid__equipment-string::part(footer) {
+  border-top: 1px solid var(--container-color-border);
+}
+
 .contact-details-sat {
   display: flex;
   gap: var(--spacing-2);
