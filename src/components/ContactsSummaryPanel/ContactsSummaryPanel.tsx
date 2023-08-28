@@ -292,7 +292,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
           type='bar'
           options={options as object}
           series={newDataset}
-          height='100%'
+          height='97.5%'
           id='contacts-summary-chart'
         />
         <RuxPopUp
