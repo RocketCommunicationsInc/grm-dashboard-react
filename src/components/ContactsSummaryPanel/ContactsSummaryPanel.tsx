@@ -72,12 +72,20 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     [filteredData]
   );
 
-  const datasets = initialDataset.map((dataset) => ({
-    ...dataset,
-    data: labelsShown.map((label) => {
-      return getFilteredContacts(label, dataset.name).length;
-    }),
-  }));
+  const getNumOfDesiredState = (desiredState: string) =>
+    filteredData.filter((contact) => contact.state === desiredState).length;
+
+  const datasets = initialDataset.map((dataset) => {
+    return {
+      ...dataset,
+      name: `${dataset.name} (${getNumOfDesiredState(
+        dataset.name.toLowerCase()
+      )})`,
+      data: labelsShown.map((label) => {
+        return getFilteredContacts(label, dataset.name).length;
+      }),
+    };
+  });
 
   const onClick = useCallback(
     (event: any, chartContext: any, config: any) => {
