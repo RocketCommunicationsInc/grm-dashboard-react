@@ -14,5 +14,6 @@ export const setHhMmSs = (time: number | string) => {
   const second = String(date.getSeconds()).padStart(2, '0');
   return `${hour}:${minute}:${second}`;
 };
-export const determineTimeString = (originalValue: Date) =>
+
+export const determineTimeString = (originalValue: Date | string) =>
   new Date(originalValue).toTimeString().slice(0, 8);
