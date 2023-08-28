@@ -19,7 +19,7 @@ rux-container.jobs-section::part(body) {
 
 rux-container.jobs-section::part(header) {
   padding: 0;
-  margin: var(--spacing-3);
+  padding-left: 16px;
   background-color: var(--color-background-surface-default);
 }
 
