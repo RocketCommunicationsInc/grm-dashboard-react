@@ -1,6 +1,7 @@
 .maintenance-panel {
   padding: var(--spacing-0) var(--spacing-3) var(--spacing-4);
   gap: var(--spacing-3);
+  height: 100%;
 }
 
 rux-container.jobs-section {
@@ -8,11 +9,9 @@ rux-container.jobs-section {
   flex-wrap: wrap;
   flex-direction: row;
   display: inline-block;
+  overflow: auto;
+  min-height: 22.5rem;
   padding: var(--spacing-3) var(--spacing-3) var(--spacing-0) var(--spacing-3);
-}
-
-.maintenance-panel rux-container:nth-of-type(1) {
-  flex-direction: row;
 }
 
 .job-section-wrapper {
@@ -21,6 +20,8 @@ rux-container.jobs-section {
   flex-wrap: wrap;
   justify-content: flex-start;
   gap: var(--spacing-6);
+  overflow: auto;
+  height: 100%;
 }
 
 .job-section-wrapper rux-button:nth-of-type(1) {
@@ -29,11 +30,6 @@ rux-container.jobs-section {
 
 .maintenance-history-panel {
   padding: var(--spacing-3);
-}
-
-.maintenance-wrapper {
-  height: 100%;
-  margin-bottom: var(--spacing-6);
 }
 
 .maintenance-wrapper h2,
