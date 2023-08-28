@@ -263,22 +263,20 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       <div slot='header'>Contacts Summary</div>
       <div className='trending-equipment-panel__select' id='chart-container'>
         <div className='legend'>
-          {datasets.map((dataset, index) => {
-            return (
-              <label key={index}>
-                <RuxCheckbox
-                  onRuxchange={handleLegendClick}
-                  checked={dataset.visible}
-                  value={dataset.name}
-                  style={{
-                    borderBottom: '4px solid',
-                    borderColor: dataset.backgroundColor,
-                  }}
-                />
-                {dataset.name}
-              </label>
-            );
-          })}
+          {datasets.map((dataset, index) => (
+            <label key={index}>
+              <RuxCheckbox
+                onRuxchange={handleLegendClick}
+                checked={dataset.visible}
+                value={dataset.name}
+                style={{
+                  borderBottom: '4px solid',
+                  borderColor: dataset.backgroundColor,
+                }}
+              />
+              {dataset.name}
+            </label>
+          ))}
           <div className='slider-wrapper'>
             <RuxIcon icon='search' size='extra-small' />
             <RuxSlider
