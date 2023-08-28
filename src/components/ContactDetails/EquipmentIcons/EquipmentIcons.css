@@ -5,3 +5,7 @@
   justify-content: flex-start;
   gap: 0.7rem;
 }
+
+.equipment-icons rux-icon {
+  color: var(--color-text-primary);
+}

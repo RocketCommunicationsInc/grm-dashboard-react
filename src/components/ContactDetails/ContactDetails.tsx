@@ -304,7 +304,9 @@ const ContactDetails = () => {
 
           <RuxContainer className='Contact-details-grid__equipment-string'>
             <header>Equipment String</header>
-            <DetailsGrid details={configDetails} />
+            <div className="config-grid-wrapper">
+              <DetailsGrid details={configDetails} />
+            </div>
 
             <span>{contact.equipment}</span>
 
