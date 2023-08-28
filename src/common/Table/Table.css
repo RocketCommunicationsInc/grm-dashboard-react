@@ -11,7 +11,12 @@
   vertical-align: middle;
 }
 
-.table-wrapper rux-table-header-row .visible {
+.table-wrapper rux-table-header-row rux-table-header-cell:hover {
+  cursor: pointer;
+}
+
+.table-wrapper rux-table-header-row .visible,
+.table-wrapper rux-table-header-row rux-table-header-cell:hover rux-icon {
   visibility: visible;
 }
 
@@ -33,7 +38,8 @@
   grid-template-columns: 100% 0%;
 }
 
-.table-wrapper rux-table-header-cell:has(rux-icon.visible) div {
+.table-wrapper rux-table-header-cell:has(rux-icon.visible) div,
+.table-wrapper rux-table-header-cell:hover div {
   grid-template-columns: auto 1fr;
 }
 
@@ -43,23 +49,9 @@
   text-overflow: ellipsis;
 }
 
-.table-wrapper rux-table-header-cell[data-sortprop='status'] {
-  text-align: center;
-}
-
-.table-wrapper
-  rux-table-header-cell[data-sortprop='status']:has(rux-icon.visible)
-  div {
-  /* This is so the status header label doesn't move when selected. */
-  margin-inline-start: 34px;
-}
-
-.Dashboard-page__right-top-panel
-  .table-wrapper
-  rux-table-header-cell[data-sortprop='status']:has(rux-icon.visible)
-  div {
-  /* This is so the status header label has room when selected on the smaller table in the Dashboard */
-  margin-inline-start: 0px;
+.table-wrapper rux-table-cell rux-status {
+  margin-inline-start: calc(var(--spacing-4) + var(--spacing-050));
+  width: fit-content;
 }
 
 rux-container .table-wrapper {
