@@ -54,6 +54,14 @@
   margin-inline-start: 34px;
 }
 
+.Dashboard-page__right-top-panel
+  .table-wrapper
+  rux-table-header-cell[data-sortprop='status']:has(rux-icon.visible)
+  div {
+  /* This is so the status header label has room when selected on the smaller table in the Dashboard */
+  margin-inline-start: 0px;
+}
+
 rux-container .table-wrapper {
   /* to color small space above scrollbar */
   background-color: var(--color-background-base-header);
