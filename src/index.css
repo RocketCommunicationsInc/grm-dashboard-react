@@ -7,12 +7,6 @@ ul {
 
 li {
   list-style-type: none;
-  border-bottom: 1px solid var(--color-background-base-default);
-}
-
-li:hover {
-  background-color: var(--color-background-surface-hover);
-  cursor: pointer;
 }
 
 h1 {
