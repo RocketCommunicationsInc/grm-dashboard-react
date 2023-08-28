@@ -22,3 +22,7 @@
   content: '';
   padding-right: var(--spacing-8);
 }
+
+.table-wrapper.jobs-table {
+  max-height: 12rem;
+}

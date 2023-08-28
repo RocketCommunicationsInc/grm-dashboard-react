@@ -41,12 +41,14 @@ const MaintenancePanel = () => {
         />
       </header>
       <RuxContainer className='jobs-section'>
-        <h2>Jobs</h2>
-        <div className='job-section-wrapper'>
+        <h2 slot='header'>Jobs</h2>
+        <div className='schedule-job-section'>
           <RuxButton onClick={() => navigate('schedule-job')}>
             Schedule Job
           </RuxButton>
-          {filteredJobs.map((job: any) => (
+        </div>
+        <div className='job-section-wrapper'>
+          {filteredJobs.reverse().map((job: any) => (
             <JobIDCard
               key={job.jobId}
               type={job.jobType}
