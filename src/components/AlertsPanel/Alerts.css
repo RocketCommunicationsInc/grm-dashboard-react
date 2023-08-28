@@ -42,14 +42,28 @@
 
 .alert-list-headers rux-icon {
   vertical-align: middle;
-  width: 32px;
+  width: 24px;
+  height: 24px;
 }
 
-.alert-list-headers rux-icon.visible {
+.alert-list-headers rux-icon.visible,
+.alert-list-headers span[data-sortprop]:hover rux-icon {
   visibility: visible;
+  position: absolute;
 }
+
 .alert-list-headers rux-icon.hidden {
   visibility: hidden;
+}
+
+.alert-list-headers span[data-sortprop] {
+  cursor: pointer;
+}
+
+.alert-list_no-alerts {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-24);
 }
 
 .table-wrapper.alert-list::-webkit-scrollbar-track {
@@ -57,14 +71,6 @@
 }
 
 /* ACCORDION ITEM STYLES */
-
-/* .alerts rux-accordion-item::part(label-wrapper) {
-  flex-direction: row-reverse;
-}
-
-.alerts rux-accordion-item::part(indicator) {
-  transform: rotate(-90deg);
-} */
 
 .alert-list-label {
   display: flex;

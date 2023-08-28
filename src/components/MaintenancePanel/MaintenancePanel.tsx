@@ -38,7 +38,7 @@ const MaintenancePanel = () => {
           placeholder='Search jobs...'
           searchValue={searchValue}
           setSearchValue={setSearchValue}
-        />{' '}
+        />
       </header>
       <RuxContainer className='jobs-section'>
         <h2>Jobs</h2>
