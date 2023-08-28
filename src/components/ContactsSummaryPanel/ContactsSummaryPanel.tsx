@@ -32,25 +32,21 @@ const initialDataset = [
     name: 'Upcoming',
     backgroundColor: 'var(--color-data-visualization-1)',
     visible: true,
-    index: 0,
   },
   {
     name: 'Executing',
     backgroundColor: 'var(--color-data-visualization-2)',
     visible: true,
-    index: 1,
   },
   {
     name: 'Complete',
     backgroundColor: 'var(--color-data-visualization-3)',
     visible: true,
-    index: 2,
   },
   {
     name: 'Failed',
     backgroundColor: 'var(--color-data-visualization-4)',
     visible: true,
-    index: 3,
   },
 ];
 
@@ -78,6 +74,12 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
   const [zoomLevel, setZoomLevel] = useState(6);
   const [popup, setPopup] = useState(initialPopup);
   const [initialDatasets, setInitialDatasets] = useState(initialDataset);
+  const [chartColors, setChartColors] = useState([
+    'var(--color-data-visualization-1)',
+    'var(--color-data-visualization-2)',
+    'var(--color-data-visualization-3)',
+    'var(--color-data-visualization-4)',
+  ]);
   const { title, open, height, left, top, width, filterLabel, filterState } =
     popup;
 
@@ -187,12 +189,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     tooltip: {
       enabled: false,
     },
-    colors: [
-      'var(--color-data-visualization-1)',
-      'var(--color-data-visualization-2)',
-      'var(--color-data-visualization-3)',
-      'var(--color-data-visualization-4)',
-    ],
+    colors: chartColors,
     legend: {
       show: false,
     },
@@ -227,12 +224,15 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     },
   };
 
-  // const handleLegendClick = (index: number) => {
-  //   const updatedDatasets = [...datasets];
-  //   //console.log(index, 'click handler index val');
-  //   updatedDatasets[index].visible = !updatedDatasets[index].visible;
-  //   setInitialDatasets(updatedDatasets);
-  // };
+  const getColors = (updatedSet: any) => {
+    let datasetColors: string[] = [];
+    for (const data of updatedSet) {
+      if (data.visible) {
+        datasetColors = [...datasetColors, data.backgroundColor];
+      }
+    }
+    setChartColors([...datasetColors]);
+  };
 
   const handleLegendClick = (e: any) => {
     const updatedDatasets = datasets.map((dataset) => {
@@ -245,32 +245,35 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       return dataset;
     });
     setInitialDatasets(updatedDatasets);
+    getColors(updatedDatasets);
   };
 
   const visibleData = datasets.filter((data) => data.visible);
-  console.log(visibleData, 'visible');
 
   const newDataset = visibleData.map((data) => ({
     name: data.name,
+    backgroundColor: data.backgroundColor,
     data: labelsShown.map((label) => {
       return getFilteredContacts(label, data.name).length;
     }),
   }));
-  console.log(newDataset, 'new dataset');
 
   return (
     <RuxContainer className='trending-equipment-panel'>
       <div slot='header'>Contacts Summary</div>
       <div className='trending-equipment-panel__select' id='chart-container'>
         <div className='legend'>
-          {datasets.map((dataset) => {
-            console.log(dataset.name, 'index');
+          {datasets.map((dataset, index) => {
             return (
-              <label key={dataset.index}>
+              <label key={index}>
                 <RuxCheckbox
                   onRuxchange={handleLegendClick}
                   checked={dataset.visible}
                   value={dataset.name}
+                  style={{
+                    borderBottom: '4px solid',
+                    borderColor: dataset.backgroundColor,
+                  }}
                 />
                 {dataset.name}
               </label>

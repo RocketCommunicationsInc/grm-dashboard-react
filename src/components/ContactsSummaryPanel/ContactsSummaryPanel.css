@@ -73,35 +73,6 @@
 
 .legend label {
   margin-inline: var(--spacing-2);
-  position: relative;
-}
-
-.legend label:after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 1.575rem;
-}
-
-/* Upcoming Checkbox */
-.legend label:nth-of-type(1):after {
-  border-bottom: var(--spacing-1) solid var(--color-data-visualization-1);
-}
-
-/* Executing Checkbox */
-.legend label:nth-of-type(2):after {
-  border-bottom: var(--spacing-1) solid var(--color-data-visualization-2);
-}
-
-/* Complete Checkbox */
-.legend label:nth-of-type(3):after {
-  border-bottom: var(--spacing-1) solid var(--color-data-visualization-3);
-}
-
-/* Failed Checkbox */
-.legend label:nth-of-type(4):after {
-  border-bottom: var(--spacing-1) solid var(--color-data-visualization-4);
 }
 
 .legend rux-checkbox {
