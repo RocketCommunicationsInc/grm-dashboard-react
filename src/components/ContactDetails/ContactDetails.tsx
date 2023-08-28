@@ -138,10 +138,10 @@ const ContactDetails = () => {
       label: 'Start Time',
       node: isEditing ? (
         <RuxInput
-          value={contact.beginTimestamp.toString()}
+          value={formatReadableTime(contact.beginTimestamp).toString()}
           readonly={!isEditing}
           size='small'
-          type='datetime-local'
+          type='time'
           name='beginTimestamp'
           onRuxinput={handleChange}
         />
@@ -157,10 +157,10 @@ const ContactDetails = () => {
       label: 'AOS',
       node: isEditing ? (
         <RuxInput
-          value={contact.aos.toString()}
+          value={formatReadableTime(contact.aos).toString()}
           readonly={!isEditing}
           size='small'
-          type='datetime-local'
+          type='time'
           name='aos'
           onRuxinput={handleChange}
         />
@@ -176,10 +176,10 @@ const ContactDetails = () => {
       label: 'LOS',
       node: isEditing ? (
         <RuxInput
-          value={contact.los.toString()}
+          value={formatReadableTime(contact.los).toString()}
           readonly={!isEditing}
           size='small'
-          type='datetime-local'
+          type='time'
           name='los'
           onRuxinput={handleChange}
         />
@@ -195,10 +195,10 @@ const ContactDetails = () => {
       label: 'Stop Time',
       node: isEditing ? (
         <RuxInput
-          value={contact.endTimestamp.toString()}
+          value={formatReadableTime(contact.endTimestamp).toString()}
           readonly={!isEditing}
           size='small'
-          type='datetime-local'
+          type='time'
           name='endTimestamp'
           onRuxinput={handleChange}
         />
