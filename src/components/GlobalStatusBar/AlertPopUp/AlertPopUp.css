@@ -20,7 +20,17 @@
 }
 
 .popup-wrapper div span:nth-of-type(1) {
-  width: 3.5rem;
+  width: 4rem;
+  cursor: pointer;
+}
+
+.popup-wrapper div span:nth-of-type(2) {
+  width: 4.9rem;
+}
+
+.popup-wrapper div span:nth-of-type(3) {
+  text-align: right;
+  width: 1rem;
 }
 
 .popup-wrapper rux-icon {
@@ -31,6 +41,15 @@
   height: 9.75rem;
   width: 18.75rem;
   overflow-y: scroll;
+}
+
+.popup-table-wrapper rux-table-cell rux-status {
+  float: left;
+}
+
+.popup-table-wrapper rux-table-cell:nth-of-type(3),
+.popup-table-wrapper rux-table-cell:nth-of-type(4) {
+  text-align: right;
 }
 
 .popup-table-wrapper rux-table-body rux-table-row rux-table-cell {
@@ -44,12 +63,9 @@
   padding-right: var(--spacing-4);
 }
 
+.popup-wrapper div span:nth-of-type(1):hover rux-icon,
 .popup-wrapper div span .visible {
   visibility: visible;
-}
-
-.popup-wrapper div span:nth-of-type(1):has(rux-icon.visible) {
-  color: var(--color-text-interactive-default);
 }
 
 .popup-wrapper div span .hidden {

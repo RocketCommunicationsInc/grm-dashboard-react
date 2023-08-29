@@ -52,8 +52,8 @@
   display: flex;
   align-items: center;
   width: 18rem;
-  margin-left: calc(100% - 20.5rem);
-  position: absolute;
+  justify-content: flex-end;
+  margin-left: auto;
 }
 
 .slider-wrapper {
