@@ -54,7 +54,6 @@
   width: 18rem;
   margin-left: calc(100% - 20.5rem);
   position: absolute;
-  padding-top: var(--spacing-2);
 }
 
 .slider-wrapper {
@@ -63,4 +62,20 @@
 
 .apexcharts-bar-area {
   cursor: pointer;
+}
+
+.legend {
+  display: flex;
+  margin-inline: var(--spacing-2);
+  align-items: center;
+  padding-top: var(--spacing-2);
+}
+
+.legend label {
+  margin-inline: var(--spacing-2);
+}
+
+.legend rux-checkbox {
+  margin-right: var(--spacing-2);
+  margin-top: var(--spacing-050);
 }

@@ -1,7 +1,13 @@
 import { useState, useCallback } from 'react';
 import ContactsSummaryTable from './ContactsSummaryTable';
 import Chart from 'react-apexcharts';
-import { RuxPopUp, RuxSlider, RuxIcon, RuxContainer } from '@astrouxds/react';
+import {
+  RuxPopUp,
+  RuxSlider,
+  RuxIcon,
+  RuxContainer,
+  RuxCheckbox,
+} from '@astrouxds/react';
 import './ContactsSummaryPanel.css';
 import { Contact } from '@astrouxds/mock-data';
 
@@ -22,10 +28,26 @@ const initialPopup = {
 };
 
 const initialDataset = [
-  { name: 'Upcoming', backgroundColor: 'var(--color-data-visualization-1)' },
-  { name: 'Executing', backgroundColor: 'var(--color-data-visualization-2)' },
-  { name: 'Complete', backgroundColor: 'var(--color-data-visualization-3)' },
-  { name: 'Failed', backgroundColor: 'var(--color-data-visualization-4)' },
+  {
+    name: 'Upcoming',
+    backgroundColor: 'var(--color-data-visualization-1)',
+    visible: true,
+  },
+  {
+    name: 'Executing',
+    backgroundColor: 'var(--color-data-visualization-2)',
+    visible: true,
+  },
+  {
+    name: 'Complete',
+    backgroundColor: 'var(--color-data-visualization-3)',
+    visible: true,
+  },
+  {
+    name: 'Failed',
+    backgroundColor: 'var(--color-data-visualization-4)',
+    visible: true,
+  },
 ];
 
 const labels = [
@@ -51,6 +73,13 @@ const labels = [
 const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
   const [zoomLevel, setZoomLevel] = useState(6);
   const [popup, setPopup] = useState(initialPopup);
+  const [datasets, setDatasets] = useState(initialDataset);
+  const [chartColors, setChartColors] = useState([
+    'var(--color-data-visualization-1)',
+    'var(--color-data-visualization-2)',
+    'var(--color-data-visualization-3)',
+    'var(--color-data-visualization-4)',
+  ]);
   const { title, open, height, left, top, width, filterLabel, filterState } =
     popup;
 
@@ -74,18 +103,6 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
 
   const getNumOfDesiredState = (desiredState: string) =>
     filteredData.filter((contact) => contact.state === desiredState).length;
-
-  const datasets = initialDataset.map((dataset) => {
-    return {
-      ...dataset,
-      name: `${dataset.name} (${getNumOfDesiredState(
-        dataset.name.toLowerCase()
-      )})`,
-      data: labelsShown.map((label) => {
-        return getFilteredContacts(label, dataset.name).length;
-      }),
-    };
-  });
 
   const onClick = useCallback(
     (event: any, chartContext: any, config: any) => {
@@ -168,20 +185,9 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     tooltip: {
       enabled: false,
     },
-    colors: [
-      'var(--color-data-visualization-1)',
-      'var(--color-data-visualization-2)',
-      'var(--color-data-visualization-3)',
-      'var(--color-data-visualization-4)',
-    ],
+    colors: chartColors,
     legend: {
-      position: 'top',
-      offsetY: 7,
-      horizontalAlign: 'left',
-      fontSize: 'var(--font-size-lg)',
-      labels: {
-        colors: 'var(--color-text-interactive-default)',
-      },
+      show: false,
     },
     fill: {
       opacity: 5,
@@ -214,25 +220,76 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     },
   };
 
+  const getColors = (updatedSet: any) => {
+    let datasetColors: string[] = [];
+    for (const data of updatedSet) {
+      if (data.visible) {
+        datasetColors = [...datasetColors, data.backgroundColor];
+      }
+    }
+    setChartColors([...datasetColors]);
+  };
+
+  const handleLegendClick = (e: any) => {
+    const updatedDatasets = datasets.map((dataset) => {
+      if (dataset.name.split(' ')[0] === e.target.value.split(' ')[0]) {
+        return {
+          ...dataset,
+          visible: !dataset.visible,
+        };
+      }
+      return dataset;
+    });
+    setDatasets(updatedDatasets);
+    getColors(updatedDatasets);
+  };
+
+  // Represents the all data visible and not visible to get summary values
+  const legendData = datasets.map((data) => ({
+    ...data,
+    name: `${data.name} (${getNumOfDesiredState(data.name.toLowerCase())})`,
+    data: labelsShown.map((label) => {
+      return getFilteredContacts(label, data.name).length;
+    }),
+  }));
+
+  const visibleData = legendData.filter((data) => data.visible);
+
   return (
     <RuxContainer className='trending-equipment-panel'>
       <div slot='header'>Contacts Summary</div>
       <div className='trending-equipment-panel__select' id='chart-container'>
-        <div className='slider-wrapper'>
-          <RuxIcon icon='search' size='extra-small' />
-          <RuxSlider
-            value={zoomLevel}
-            onRuxinput={handleZoom}
-            min={1}
-            max={15}
-          />
-          <RuxIcon icon='search' size='1.5rem' />
+        <div className='legend'>
+          {legendData.map((dataset, index) => (
+            <label key={index}>
+              <RuxCheckbox
+                onRuxchange={handleLegendClick}
+                checked={dataset.visible}
+                value={dataset.name}
+                style={{
+                  borderBottom: '4px solid',
+                  borderColor: dataset.backgroundColor,
+                }}
+              />
+              {dataset.name}
+            </label>
+          ))}
+          <div className='slider-wrapper'>
+            <RuxIcon icon='search' size='extra-small' />
+            <RuxSlider
+              value={zoomLevel}
+              onRuxinput={handleZoom}
+              min={1}
+              max={15}
+            />
+            <RuxIcon icon='search' size='1.5rem' />
+          </div>
         </div>
         <Chart
           type='bar'
           options={options as object}
-          series={datasets}
-          height='100%'
+          series={visibleData}
+          height='97.5%'
           id='contacts-summary-chart'
         />
         <RuxPopUp
