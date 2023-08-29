@@ -223,11 +223,6 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         },
       },
     },
-    stroke: {
-      colors: ['var(--color-text-inverse)'],
-      width: 1,
-      lineCap: 'round',
-    },
   };
 
   const getColors = (updatedSet: any) => {
@@ -299,12 +294,12 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
           type='bar'
           options={options as object}
           series={visibleData}
-          height='97.5%'
+          height='89.5%'
           id='contacts-summary-chart'
         />
         <RuxPopUp
           open={open}
-          placement='left'
+          placement='left-start'
           className='Contacts-summary-panel__pop-up'
           onRuxpopupclosed={() => setPopup(initialPopup)}
           style={{ top, left }}
