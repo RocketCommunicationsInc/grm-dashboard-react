@@ -1,12 +1,12 @@
-import { Fragment, useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Chart from 'react-apexcharts';
 import './EquipmentStatusPanel.css';
 import { RuxContainer } from '@astrouxds/react';
 
 const initialDonuts = [
-  { data: [37, 22, 21, 20], label: 'COMMS' },
-  { data: [43, 17, 25, 15], label: 'DIGITAL' },
-  { data: [26, 34, 30, 10], label: 'FACILITIES' },
+  { data: [37, 22, 21, 20], label: 'Comms' },
+  { data: [43, 17, 25, 15], label: 'Digital' },
+  { data: [26, 34, 30, 10], label: 'Facilities' },
   { data: [27, 20, 33, 20], label: 'RF' },
 ];
 
@@ -92,6 +92,7 @@ const EquipmentStatus = () => {
     },
     plotOptions: {
       pie: {
+        offsetY: 10,
         expandOnClick: false,
       },
     },
@@ -113,59 +114,36 @@ const EquipmentStatus = () => {
     tooltip: {
       enabled: false,
     },
-    responsive: [
-      {
-        breakpoint: 250,
-        options: {
-          chart: {
-            width: 200,
-          },
-        },
-      },
-    ],
   };
 
   return (
     <RuxContainer>
       <div slot='header'>Current Equipment Status</div>
-      <div className='Equipment-status__parent'>
-        <div className='Equipment-status__chart-container'>
-          {chart.map(({ data, label }) => (
-            <Fragment key={label}>
-              <div className='Equipment-status__pie-container'>
-                <span>{label}</span>
-                <Chart
-                  type='pie'
-                  width={250}
-                  height={250}
-                  series={data}
-                  options={options as object}
-                  key={label}
-                />
-              </div>
-            </Fragment>
-          ))}
-          <div className='Equipment-status__legend'>
-            <ul>
-              <li>
-                <span id='busy-negative' />
-                Busy ( - Thresh )
-              </li>
-              <li>
-                <span id='busy' />
-                Busy ( + Thresh )
-              </li>
-              <li>
-                <span id='idle' />
-                Idle
-              </li>
-              <li>
-                <span id='inoperable' />
-                Inoperable
-              </li>
-            </ul>
+      <div className='Equipment-status__chart-container'>
+        {chart.map(({ data, label }) => (
+          <div className='Equipment-status__pie-container' key={label}>
+            <span>{label}</span>
+            <Chart type='pie' series={data} options={options as object} />
           </div>
-        </div>
+        ))}
+        <ul className='Equipment-status__legend'>
+          <li>
+            <span id='busy-negative' />
+            Busy ( - Thresh )
+          </li>
+          <li>
+            <span id='busy' />
+            Busy ( + Thresh )
+          </li>
+          <li>
+            <span id='idle' />
+            Idle
+          </li>
+          <li>
+            <span id='inoperable' />
+            Inoperable
+          </li>
+        </ul>
       </div>
     </RuxContainer>
   );

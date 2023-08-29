@@ -22,19 +22,16 @@ const TableHeaderCell = ({
       className={columnDefinition.property === 'status' ? 'status-align' : ''}
     >
       <div>
-        <span>
-        {columnDefinition.label}
-        </span>
-      
-      <RuxIcon
-        icon={sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'}
-        size='32px'
-        className={
-          sortProp === columnDefinition.property ? 'visible' : 'hidden'
-        }
-      />
+        <span>{columnDefinition.label}</span>
+
+        <RuxIcon
+          icon={sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'}
+          size='32px'
+          className={
+            sortProp === columnDefinition.property ? 'visible' : 'hidden'
+          }
+        />
       </div>
-      
     </RuxTableHeaderCell>
   );
 };
