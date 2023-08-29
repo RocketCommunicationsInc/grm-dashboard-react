@@ -51,10 +51,20 @@ const AlertPopUp = ({ softwareAlerts }: PropTypes) => {
   const sortAlerts = useCallback(
     (softwareAlerts: Alert[], sortDirection: SortDirection) => {
       const newSortedAlerts = [...softwareAlerts].sort((a, b) => {
+        const statusOrder = [
+          'off',
+          'standby',
+          'normal',
+          'caution',
+          'serious',
+          'critical',
+        ];
+        const statusAsc = statusOrder.indexOf(a.status);
+        const statusDesc = statusOrder.indexOf(b.status);
         if (sortDirection !== 'ASC') {
-          return a.status > b.status ? -1 : 1;
+          return statusAsc - statusDesc;
         } else {
-          return a.status > b.status ? 1 : -1;
+          return statusDesc - statusAsc;
         }
       });
       return newSortedAlerts;
