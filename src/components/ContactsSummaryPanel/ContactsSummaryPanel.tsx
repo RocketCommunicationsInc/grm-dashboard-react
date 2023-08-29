@@ -144,6 +144,12 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         dataPointSelection: onClick,
       },
     },
+    stroke: {
+      show: true,
+      lineCap: 'square',
+      colors: ['#000'],
+      width: 1,
+    },
     xaxis: {
       categories: labelsShown,
       labels: {
