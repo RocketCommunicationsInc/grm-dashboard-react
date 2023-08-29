@@ -219,8 +219,9 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       },
     },
     stroke: {
-      width: 1,
       colors: ['var(--color-text-inverse)'],
+      width: 1,
+      lineCap: 'round',
     },
   };
 
