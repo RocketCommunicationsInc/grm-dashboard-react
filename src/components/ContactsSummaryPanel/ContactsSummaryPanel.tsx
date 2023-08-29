@@ -219,7 +219,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       },
     },
     stroke: {
-      width: 0.75,
+      width: 1,
       colors: ['var(--color-text-inverse)'],
     },
   };
