@@ -153,13 +153,9 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         const { seriesIndex, dataPointIndex } = config;
         const chart = document.getElementById('chart-container');
         const rect = chart?.getBoundingClientRect();
-        const contactsLength = getFilteredContacts(
-          labelsShown[dataPointIndex],
-          datasets[seriesIndex].name
-        ).length;
 
         setPopup({
-          title: `${datasets[seriesIndex].name} ${contactsLength}`,
+          title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
           open: true,
           top: event.pageY - (rect as any).top,
           left: event.pageX - (rect as any).left,
@@ -170,7 +166,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         } as any);
       });
     },
-    [datasets, getFilteredContacts, height, labelsShown, width]
+    [datasets, height, labelsShown, width]
   );
 
   const handleZoom = (e: any) => {
