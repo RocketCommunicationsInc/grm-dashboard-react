@@ -136,7 +136,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     getColors(updatedDatasets);
   };
 
-  // Represents the all data visible and not visible to get summary values
+  // Represents the all data visible and not visible to get summary value
   const legendData = datasets.map((data) => ({
     ...data,
     name: `${data.name} (${getNumOfDesiredState(data.name.toLowerCase())})`,
