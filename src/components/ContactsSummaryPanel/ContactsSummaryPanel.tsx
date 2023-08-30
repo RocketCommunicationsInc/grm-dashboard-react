@@ -51,6 +51,9 @@ const initialDataset = [
 ];
 
 const labels = [
+  '0000',
+  '0100',
+  '0200',
   '0300',
   '0400',
   '0500',
@@ -68,6 +71,11 @@ const labels = [
   '1700',
   '1800',
   '1900',
+  '2000',
+  '2100',
+  '2200',
+  '2300',
+  '2400',
 ];
 
 const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
@@ -104,15 +112,54 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
   const getNumOfDesiredState = (desiredState: string) =>
     filteredData.filter((contact) => contact.state === desiredState).length;
 
+  const getColors = (updatedSet: any) => {
+    let datasetColors: string[] = [];
+    for (const data of updatedSet) {
+      if (data.visible) {
+        datasetColors = [...datasetColors, data.backgroundColor];
+      }
+    }
+    setChartColors([...datasetColors]);
+  };
+
+  const handleLegendClick = (e: any) => {
+    const updatedDatasets = datasets.map((dataset) => {
+      if (dataset.name.split(' ')[0] === e.target.value.split(' ')[0]) {
+        return {
+          ...dataset,
+          visible: !dataset.visible,
+        };
+      }
+      return dataset;
+    });
+    setDatasets(updatedDatasets);
+    getColors(updatedDatasets);
+  };
+
+  // Represents the all data visible and not visible to get summary values
+  const legendData = datasets.map((data) => ({
+    ...data,
+    name: `${data.name} (${getNumOfDesiredState(data.name.toLowerCase())})`,
+    data: labelsShown.map((label) => {
+      return getFilteredContacts(label, data.name).length;
+    }),
+  }));
+
+  const visibleData = legendData.filter((data) => data.visible);
+
   const onClick = useCallback(
     (event: any, chartContext: any, config: any) => {
       setTimeout(() => {
         const { seriesIndex, dataPointIndex } = config;
         const chart = document.getElementById('chart-container');
         const rect = chart?.getBoundingClientRect();
+        const contactsLength = getFilteredContacts(
+          labelsShown[dataPointIndex],
+          datasets[seriesIndex].name
+        ).length;
 
         setPopup({
-          title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
+          title: `${datasets[seriesIndex].name} ${contactsLength}`,
           open: true,
           top: event.pageY - (rect as any).top,
           left: event.pageX - (rect as any).left,
@@ -123,7 +170,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         } as any);
       });
     },
-    [datasets, height, labelsShown, width]
+    [datasets, getFilteredContacts, height, labelsShown, width]
   );
 
   const handleZoom = (e: any) => {
@@ -201,6 +248,9 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       style: {
         colors: ['var(--color-text-inverse)'],
       },
+      formatter: function (val: any) {
+        return val;
+      },
     },
     states: {
       hover: {
@@ -224,41 +274,6 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       },
     },
   };
-
-  const getColors = (updatedSet: any) => {
-    let datasetColors: string[] = [];
-    for (const data of updatedSet) {
-      if (data.visible) {
-        datasetColors = [...datasetColors, data.backgroundColor];
-      }
-    }
-    setChartColors([...datasetColors]);
-  };
-
-  const handleLegendClick = (e: any) => {
-    const updatedDatasets = datasets.map((dataset) => {
-      if (dataset.name.split(' ')[0] === e.target.value.split(' ')[0]) {
-        return {
-          ...dataset,
-          visible: !dataset.visible,
-        };
-      }
-      return dataset;
-    });
-    setDatasets(updatedDatasets);
-    getColors(updatedDatasets);
-  };
-
-  // Represents the all data visible and not visible to get summary values
-  const legendData = datasets.map((data) => ({
-    ...data,
-    name: `${data.name} (${getNumOfDesiredState(data.name.toLowerCase())})`,
-    data: labelsShown.map((label) => {
-      return getFilteredContacts(label, data.name).length;
-    }),
-  }));
-
-  const visibleData = legendData.filter((data) => data.visible);
 
   return (
     <RuxContainer className='trending-equipment-panel'>
