@@ -244,9 +244,6 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
       style: {
         colors: ['var(--color-text-inverse)'],
       },
-      formatter: function (val: any) {
-        return val;
-      },
     },
     states: {
       hover: {
