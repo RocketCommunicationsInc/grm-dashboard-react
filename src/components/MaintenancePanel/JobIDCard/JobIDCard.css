@@ -17,11 +17,11 @@
   flex-direction: row;
   align-items: center;
   padding-top: var(--spacing-3);
+  width: 80%;
 }
 
 .job-id-card rux-input::part(label) {
-  margin-right: var(--spacing-2);
-  width: 90%;
+  width: 65%;
 }
 
 .job-id-card rux-button {
