@@ -155,7 +155,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         const rect = chart?.getBoundingClientRect();
 
         setPopup({
-          title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
+          title: `${datasets[seriesIndex].name}`,
           open: true,
           top: event.pageY - (rect as any).top,
           left: event.pageX - (rect as any).left,
@@ -314,7 +314,9 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         >
           <div slot='trigger' style={{ width, height }} />
           <ContactsSummaryTable
-            title={title}
+            title={`${title} ${
+              getFilteredContacts(filterLabel, filterState).length
+            }`}
             filteredContacts={getFilteredContacts(filterLabel, filterState)}
           />
         </RuxPopUp>
