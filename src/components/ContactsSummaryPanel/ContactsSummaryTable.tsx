@@ -7,8 +7,18 @@ import { Link } from 'react-router-dom';
 const columnDefs: ColumnDef[] = [
   { label: '', property: 'status' },
   { label: 'Contact', property: 'satellite' },
-  { label: 'AOS', property: 'aos', valueFn: determineTimeString },
-  { label: 'LOS', property: 'los', valueFn: determineTimeString },
+  {
+    label: 'AOS',
+    property: 'aos',
+    valueFn: determineTimeString,
+    isRightAligned: true,
+  },
+  {
+    label: 'LOS',
+    property: 'los',
+    valueFn: determineTimeString,
+    isRightAligned: true,
+  },
 ];
 
 type PropTypes = {
