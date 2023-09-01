@@ -14,26 +14,6 @@
   position: absolute;
 }
 
-.Contacts-summary-panel__pop-up .table-wrapper {
-  max-height: 7.5rem;
-  overflow-y: auto;
-}
-
-.Contacts-summary-panel__pop-up
-  .table-wrapper
-  rux-table-header-row
-  rux-table-header-cell {
-  max-width: none;
-}
-
-.Contacts-summary-panel__pop-up .table-wrapper rux-table-row {
-  cursor: pointer;
-}
-
-.Contacts-summary-panel__pop-up .table-wrapper rux-table-cell rux-status {
-  padding-right: var(--spacing-0);
-}
-
 .Contacts-summary-panel__pop-up::part(popup-content) {
   background-color: var(--color-background-surface-header);
 }

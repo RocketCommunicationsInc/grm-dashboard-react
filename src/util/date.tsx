@@ -15,5 +15,5 @@ export const setHhMmSs = (time: number | string) => {
   return `${hour}:${minute}:${second}`;
 };
 
-export const determineTimeString = (originalValue: Date | string) =>
+export const determineTimeString = (originalValue: Date | string | number) =>
   new Date(originalValue).toTimeString().slice(0, 8);

@@ -68,3 +68,7 @@ rux-container .table-wrapper {
   content: '';
   padding-right: var(--spacing-8);
 }
+
+rux-table rux-table-row {
+  cursor: pointer;
+}
