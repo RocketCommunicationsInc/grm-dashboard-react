@@ -21,6 +21,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   const anySelected = anyAlertsHaveProp('selected', true);
   const [sortDirection, setSortDirection] = useState<SortDirection>('ASC');
   const [sortProp, setSortProp] = useState<keyof Alert>('id');
+  const [activeHeader, setActiveHeader] = useState<keyof Alert>();
 
   const filterAlerts = useCallback(
     (
@@ -103,11 +104,11 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
     } else {
       // clicked new column
       setSortProp(sortProperty);
+      setActiveHeader(sortProperty);
       sortAlerts(filteredAlertIds, sortProperty, 'ASC');
       setSortDirection('ASC');
     }
   };
-
   return (
     <>
       <div className='alert-list-headers'>
@@ -117,39 +118,59 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
           checked={allSelected}
           indeterminate={anySelected && !allSelected}
         />
-        <span data-sortprop='message' onClick={handleClick}>
-          Message
+        <span
+          className='header-label-wrapper'
+          data-sortprop='message'
+          onClick={handleClick}
+        >
+          <span>Message</span>
           <RuxIcon
-            icon={sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'}
+            icon={
+              (sortDirection === 'ASC' || activeHeader !== sortProp)
+                ? 'arrow-drop-down'
+                : 'arrow-drop-up'
+            }
             size='small'
             className={sortProp === 'message' ? 'visible' : 'hidden'}
           />
         </span>
-        <span data-sortprop='category' onClick={handleClick}>
-          Category
+        <span
+          className='header-label-wrapper'
+          data-sortprop='category'
+          onClick={handleClick}
+        >
+          <span>Category</span>
           <RuxIcon
-            icon={sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'}
+            icon={
+              (sortDirection === 'ASC' || activeHeader !== sortProp)
+                ? 'arrow-drop-down'
+                : 'arrow-drop-up'
+            }
             size='small'
             className={sortProp === 'category' ? 'visible' : 'hidden'}
           />
         </span>
-        <span data-sortprop='timestamp' onClick={handleClick}>
-          Time
+        <span
+          className='header-label-wrapper'
+          data-sortprop='timestamp'
+          onClick={handleClick}
+        >
+          <span>Time</span>
           <RuxIcon
-            icon={sortDirection === 'ASC' ? 'arrow-drop-down' : 'arrow-drop-up'}
+            icon={
+              (sortDirection === 'ASC' || activeHeader !== sortProp)
+                ? 'arrow-drop-down'
+                : 'arrow-drop-up'
+            }
             size='small'
             className={sortProp === 'timestamp' ? 'visible' : 'hidden'}
           />
         </span>
       </div>
       <ul className='alert-list'>
-        {displayAlertIds.length > 0 ? (
-          displayAlertIds.map((id) => (
-            <AlertListItem alertItem={alerts[id]} key={id} />
-          ))
-        ) : (
-          <div className='alert-list_no-alerts'>No alerts at this time.</div>
-        )}
+        {displayAlertIds.map((id) => (
+          <AlertListItem alertItem={alerts[id]} key={id} />
+        ))}
       </ul>
     </>
   );
