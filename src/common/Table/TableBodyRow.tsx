@@ -12,17 +12,22 @@ type PropTypes = {
 const ContactsTable = ({ columnDefs, rowData, handleRowClick }: PropTypes) => {
   return (
     <RuxTableRow key={rowData.id} onClick={handleRowClick}>
-      {columnDefs.map((colDef, index) => {
+      {columnDefs.map((colDef) => {
         const property = colDef.property;
         const cellValue = colDef.valueFn
           ? colDef.valueFn(rowData[property])
           : rowData[property];
         return (
-          <RuxTableCell key={colDef.label}>
+          <RuxTableCell
+            key={colDef.label}
+            className={colDef.isRightAligned ? 'right-align' : ''}
+          >
             {property === 'status' ? (
               <RuxStatus status={cellValue}></RuxStatus>
             ) : (
-              cellValue
+              <span className={colDef.isRightAligned ? 'right-align' : ''}>
+                {cellValue}
+              </span>
             )}
           </RuxTableCell>
         );
