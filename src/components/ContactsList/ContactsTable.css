@@ -8,7 +8,3 @@
 .contacts-table::part(body) {
   padding: 0;
 }
-
-.contacts-table rux-table-row {
-  cursor: pointer;
-}
