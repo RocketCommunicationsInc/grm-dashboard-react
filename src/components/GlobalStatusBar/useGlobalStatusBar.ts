@@ -20,7 +20,7 @@ const initialState = {
       icon: 'antenna-off',
       label: 'Facilities',
       status: 'normal',
-      notifications: randInt(0, 99),
+      notifications: randInt(0, 1),
     },
     rf: {
       icon: 'antenna',
