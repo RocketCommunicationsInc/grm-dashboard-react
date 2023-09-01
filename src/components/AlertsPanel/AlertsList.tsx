@@ -92,6 +92,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
   const handleClick = (event: any) => {
     const target = event.currentTarget as HTMLElement;
     const sortProperty = target.dataset.sortprop as keyof Alert;
+    setSortProp(sortProperty);
     if (sortProperty === sortProp) {
       // clicked same currently sorted column
       if (sortDirection === 'ASC') {
@@ -103,7 +104,6 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
       }
     } else {
       // clicked new column
-      setSortProp(sortProperty);
       setActiveHeader(sortProperty);
       sortAlerts(filteredAlertIds, sortProperty, 'ASC');
       setSortDirection('ASC');
@@ -126,7 +126,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
           <span>Message</span>
           <RuxIcon
             icon={
-              (sortDirection === 'ASC' || activeHeader !== sortProp)
+              (sortDirection === 'ASC' || activeHeader !== 'message')
                 ? 'arrow-drop-down'
                 : 'arrow-drop-up'
             }
@@ -142,7 +142,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
           <span>Category</span>
           <RuxIcon
             icon={
-              (sortDirection === 'ASC' || activeHeader !== sortProp)
+              (sortDirection === 'ASC' || activeHeader !== 'category')
                 ? 'arrow-drop-down'
                 : 'arrow-drop-up'
             }
@@ -158,7 +158,7 @@ const AlertsList = ({ severitySelection, categorySelection }: PropTypes) => {
           <span>Time</span>
           <RuxIcon
             icon={
-              (sortDirection === 'ASC' || activeHeader !== sortProp)
+              (sortDirection === 'ASC' || activeHeader !== 'timestamp')
                 ? 'arrow-drop-down'
                 : 'arrow-drop-up'
             }
