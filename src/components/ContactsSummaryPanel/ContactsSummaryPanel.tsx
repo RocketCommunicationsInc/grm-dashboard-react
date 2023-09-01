@@ -51,6 +51,9 @@ const initialDataset = [
 ];
 
 const labels = [
+  '0000',
+  '0100',
+  '0200',
   '0300',
   '0400',
   '0500',
@@ -68,6 +71,11 @@ const labels = [
   '1700',
   '1800',
   '1900',
+  '2000',
+  '2100',
+  '2200',
+  '2300',
+  '2400',
 ];
 
 const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
@@ -104,6 +112,41 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
   const getNumOfDesiredState = (desiredState: string) =>
     filteredData.filter((contact) => contact.state === desiredState).length;
 
+  const getColors = (updatedSet: any) => {
+    let datasetColors: string[] = [];
+    for (const data of updatedSet) {
+      if (data.visible) {
+        datasetColors = [...datasetColors, data.backgroundColor];
+      }
+    }
+    setChartColors([...datasetColors]);
+  };
+
+  const handleLegendClick = (e: any) => {
+    const updatedDatasets = datasets.map((dataset) => {
+      if (dataset.name.split(' ')[0] === e.target.value.split(' ')[0]) {
+        return {
+          ...dataset,
+          visible: !dataset.visible,
+        };
+      }
+      return dataset;
+    });
+    setDatasets(updatedDatasets);
+    getColors(updatedDatasets);
+  };
+
+  // Represents the all data visible and not visible to get summary value
+  const legendData = datasets.map((data) => ({
+    ...data,
+    name: `${data.name} (${getNumOfDesiredState(data.name.toLowerCase())})`,
+    data: labelsShown.map((label) => {
+      return getFilteredContacts(label, data.name).length;
+    }),
+  }));
+
+  const visibleData = legendData.filter((data) => data.visible);
+
   const onClick = useCallback(
     (event: any, chartContext: any, config: any) => {
       setTimeout(() => {
@@ -112,7 +155,7 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
         const rect = chart?.getBoundingClientRect();
 
         setPopup({
-          title: `${datasets[seriesIndex].name} ${config.dataPointIndex}`,
+          title: `${datasets[seriesIndex].name}`,
           open: true,
           top: event.pageY - (rect as any).top,
           left: event.pageX - (rect as any).left,
@@ -225,41 +268,6 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
     },
   };
 
-  const getColors = (updatedSet: any) => {
-    let datasetColors: string[] = [];
-    for (const data of updatedSet) {
-      if (data.visible) {
-        datasetColors = [...datasetColors, data.backgroundColor];
-      }
-    }
-    setChartColors([...datasetColors]);
-  };
-
-  const handleLegendClick = (e: any) => {
-    const updatedDatasets = datasets.map((dataset) => {
-      if (dataset.name.split(' ')[0] === e.target.value.split(' ')[0]) {
-        return {
-          ...dataset,
-          visible: !dataset.visible,
-        };
-      }
-      return dataset;
-    });
-    setDatasets(updatedDatasets);
-    getColors(updatedDatasets);
-  };
-
-  // Represents the all data visible and not visible to get summary values
-  const legendData = datasets.map((data) => ({
-    ...data,
-    name: `${data.name} (${getNumOfDesiredState(data.name.toLowerCase())})`,
-    data: labelsShown.map((label) => {
-      return getFilteredContacts(label, data.name).length;
-    }),
-  }));
-
-  const visibleData = legendData.filter((data) => data.visible);
-
   return (
     <RuxContainer className='trending-equipment-panel'>
       <div slot='header'>Contacts Summary</div>
@@ -294,19 +302,21 @@ const ContactsSummaryPanel = ({ filteredData }: PropTypes) => {
           type='bar'
           options={options as object}
           series={visibleData}
-          height='97.5%'
+          height='89.5%'
           id='contacts-summary-chart'
         />
         <RuxPopUp
           open={open}
-          placement='left'
+          placement='left-start'
           className='Contacts-summary-panel__pop-up'
           onRuxpopupclosed={() => setPopup(initialPopup)}
           style={{ top, left }}
         >
           <div slot='trigger' style={{ width, height }} />
           <ContactsSummaryTable
-            title={title}
+            title={`${title} ${
+              getFilteredContacts(filterLabel, filterState).length
+            }`}
             filteredContacts={getFilteredContacts(filterLabel, filterState)}
           />
         </RuxPopUp>
