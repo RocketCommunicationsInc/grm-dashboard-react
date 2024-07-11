@@ -11,7 +11,7 @@ import {
   RuxTable,
   RuxTableHeaderRow,
 } from '@astrouxds/react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../../../providers/AppProvider';
 import ConflictsTable from '../../JobDetails/ConflictsTable';
@@ -54,6 +54,10 @@ const ScheduleJob = () => {
     equpiment: equipmentValues[randomEqupiment],
   });
 
+  useEffect(() => {
+    if (newJob.startTime !== '' && newJob.stopTime !== '' && newJob.jobType !== '' && newJob.technician !== '') setInputsFilledOut(true);
+      }, [newJob]);
+
   const handleCancel = () => {
     navigate(`/alerts/${params.alertId}`);
   };
@@ -69,7 +73,6 @@ const ScheduleJob = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }));
-    setInputsFilledOut(true);
   };
 
   const filteredContacts = useMemo(() => {
