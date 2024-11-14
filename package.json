@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@astrouxds/mock-data": "^0.6.5",
-    "@astrouxds/react": "^7.22.1",
+    "@astrouxds/react": "^7.24.1",
     "@types/node": "^20.14.9",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
